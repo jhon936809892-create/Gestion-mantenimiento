@@ -1286,3 +1286,7 @@ textarea {
     }
 
 }
+/* SEPARACIÓN ENTRE LISTA Y CALENDARIO */
+#mantenimiento .calendario-panel {
+    margin-top: 50px !important;
+}
