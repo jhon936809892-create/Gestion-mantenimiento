@@ -778,7 +778,11 @@ textarea {
 ======================================== */
 
 @media (max-width: 768px) {
-
+.topbar {
+    padding: 15px 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
     /* ================================
        MENÚ LATERAL
     ================================ */
