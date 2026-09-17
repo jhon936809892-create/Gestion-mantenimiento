@@ -11,8 +11,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #000;
-    color: #000;
+    background: #020;
+    color: #020;
     display: flex;
     min-height: 100vh;
     overflow-x: hidden;
