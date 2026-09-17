@@ -38,6 +38,10 @@ body {
 }
 
 
+.btn-menu-mobile {
+    display: none;
+}
+
 /* ========================================
    LOGO EMPRESA - ESQUINA SUPERIOR IZQUIERDA
 ======================================== */
