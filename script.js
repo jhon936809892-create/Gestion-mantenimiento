@@ -1974,3 +1974,13 @@ setInterval(function () {
 
 }, 60000);
 cargarMantenimientos();
+
+// MENÚ MÓVIL
+const btnMenu = document.getElementById("btnMenuMobile");
+const sidebar = document.querySelector(".sidebar");
+
+if (btnMenu && sidebar) {
+    btnMenu.addEventListener("click", function () {
+        sidebar.classList.toggle("menu-abierto");
+    });
+}
