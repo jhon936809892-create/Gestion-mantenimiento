@@ -24,6 +24,7 @@
     ======================================== -->
 
     <aside class="sidebar">
+        <button id="btnMenuMobile" class="btn-menu-mobile">☰</button>
 
         <div class="logo">
 
@@ -39,54 +40,55 @@
 
             <button
                 class="menu active"
-                onclick="mostrarSeccion('dashboard', this)"
-            >
-                🏠 Dashboard
+                onclick="mostrarSeccion('dashboard', this)">
+                <span class="menu-icono">🏠</span>
+                <span class="menu-texto">Dashboard</span>
             </button>
 
 
             <button
                 class="menu"
-                onclick="mostrarSeccion('personal', this)"
-            >
-                👷 Personal
+                onclick="mostrarSeccion('personal', this)">
+                <span class="menu-icono">👷</span>
+                <span class="menu-texto">Personal</span>
             </button>
 
 
             <button
                 class="menu"
-                onclick="mostrarSeccion('cuadrillas', this)"
-            >
-                👥 Cuadrillas
+                onclick="mostrarSeccion('cuadrillas', this)">
+                <span class="menu-icono">👥</span>
+                <span class="menu-texto">Cuadrillas</span>
             </button>
 
 
             <button
                 class="menu"
-                onclick="mostrarSeccion('proyectos', this)"
-            >
-                📁 Proyectos
+                onclick="mostrarSeccion('proyectos', this)">
+                <span class="menu-icono">📁</span>
+                <span class="menu-texto">Proyectos</span>
             </button>
 
 
             <button
                 class="menu"
-                onclick="mostrarSeccion('mantenimiento', this)"
-            >
-                🔧 Mantenimiento
+                onclick="mostrarSeccion('mantenimiento', this)">
+                <span class="menu-icono">🔧</span>
+                <span class="menu-texto">Mantenimiento</span>
             </button>
 
 
             <button
                 class="menu"
                 onclick="mostrarSeccion('materiales', this)">
-                📦 Materiales
+                <span class="menu-icono">📦</span>
+                <span class="menu-texto">Materiales</span>
             </button>
 
             <button class="menu" onclick="cerrarSesion()">
-                🚪 Cerrar sesión
+                <span class="menu-icono">🚪</span>
+                <span class="menu-texto">Cerrar sesión</span>
             </button>
-
         </nav>
 
     </aside>
