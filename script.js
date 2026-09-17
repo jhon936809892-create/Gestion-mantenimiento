@@ -1980,7 +1980,30 @@ const btnMenu = document.getElementById("btnMenuMobile");
 const sidebar = document.querySelector(".sidebar");
 
 if (btnMenu && sidebar) {
-    btnMenu.addEventListener("click", function () {
+
+    // Abrir / cerrar con el botón ☰
+    btnMenu.addEventListener("click", function (e) {
+        e.stopPropagation();
         sidebar.classList.toggle("menu-abierto");
+    });
+
+    // Al seleccionar un módulo, cerrar el menú
+    sidebar.querySelectorAll(".menu").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            sidebar.classList.remove("menu-abierto");
+        });
+    });
+
+    // Al tocar fuera del menú, cerrarlo
+    document.addEventListener("click", function (e) {
+
+        if (
+            sidebar.classList.contains("menu-abierto") &&
+            !sidebar.contains(e.target) &&
+            e.target !== btnMenu
+        ) {
+            sidebar.classList.remove("menu-abierto");
+        }
+
     });
 }
