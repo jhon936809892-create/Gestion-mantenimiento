@@ -562,8 +562,7 @@ app.get(
                         GOOGLE_SHEET_ID,
 
                     range:
-                        `${GOOGLE_SHEET_NAME}!A1:ZZ10`
-
+                        range: `'${GOOGLE_SHEET_NAME}'!A1:ZZ10`
                 });
 
 
