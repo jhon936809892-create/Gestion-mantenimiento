@@ -42,6 +42,29 @@ const pool = process.env.DATABASE_URL
 
 
 // =====================================================
+// CONEXIÓN POSTGRESQL
+// =====================================================
+
+const pool = process.env.DATABASE_URL
+    ? new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: process.env.NODE_ENV === "production"
+            ? { rejectUnauthorized: false }
+            : false
+    })
+    : new Pool({
+        host: process.env.DB_HOST || "localhost",
+        port: Number(process.env.DB_PORT) || 5432,
+        user: process.env.DB_USER || "postgres",
+        password: process.env.DB_PASSWORD || "",
+        database: process.env.DB_NAME || "gestion_cuadrillas"
+    });
+
+
+// =====================================================
+// SESIONES
+// ====================================================
+// =====================================================
 // SESIONES
 // =====================================================
 
@@ -2163,6 +2186,37 @@ app.listen(
         console.log("");
 
     }
+
+    app.get("/api/prueba-google", async (req, res) => {
+
+    try {
+
+        const respuesta =
+            await sheets.spreadsheets.values.get({
+                spreadsheetId: GOOGLE_SHEET_ID,
+                range: `${GOOGLE_SHEET_NAME}!A1:ZZ10`
+            });
+
+        res.json({
+            ok: true,
+            datos: respuesta.data.values || []
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Error leyendo Google Sheets:",
+            error
+        );
+
+        res.status(500).json({
+            ok: false,
+            error: error.message
+        });
+
+    }
+
+});
 );
 
 
