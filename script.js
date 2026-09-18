@@ -1123,6 +1123,10 @@ async function registrarProyecto(event) {
 // CARGAR PROYECTOS
 // ========================================
 
+// ========================================
+// CARGAR PROYECTOS
+// ========================================
+
 async function cargarProyectos() {
 
     try {
@@ -1164,23 +1168,23 @@ async function cargarProyectos() {
                 fila.innerHTML = `
 
                     <td>
+                        ${proyecto.codigo || ""}
+                    </td>
+
+                    <td>
                         ${proyecto.nombre || ""}
                     </td>
 
                     <td>
-                        Cuadrilla ${proyecto.cuadrilla || ""}
+                        ${proyecto.tipo || ""}
                     </td>
 
                     <td>
-                        ${proyecto.responsable || ""}
+                        ${proyecto.sede || ""}
                     </td>
 
                     <td>
-                        ${proyecto.fecha || ""}
-                    </td>
-
-                    <td>
-                        ${proyecto.estado || ""}
+                        ${proyecto.tipo_cable || ""}
                     </td>
 
                 `;
@@ -1210,6 +1214,7 @@ async function cargarProyectos() {
         cargarSelectProyectos();
 
     }
+
     catch (error) {
 
         console.error(
