@@ -955,27 +955,18 @@ app.get(
                 await pool.query(`
 
                     SELECT
-
                         p.id,
+                        p.codigo,
                         p.nombre,
-                        p.cuadrilla_id,
-
-                        c.nombre AS cuadrilla,
-
-                        p.responsable,
-                        p.fecha,
-                        p.estado
+                        p.tipo,
+                        p.sede,
+                        p.tipo_cable
 
                     FROM proyectos p
 
-                    LEFT JOIN cuadrillas c
-                        ON p.cuadrilla_id = c.id
-
-                    ORDER BY
-                        p.id DESC
+                    ORDER BY p.id DESC
 
                 `);
-
 
             res.json(
                 resultado.rows
@@ -991,17 +982,14 @@ app.get(
             );
 
             res.status(500).json({
-
                 error:
                     "No se pudieron obtener los proyectos"
-
             });
 
         }
 
     }
 );
-
 
 // -----------------------------------------------------
 // OBTENER UN PROYECTO
