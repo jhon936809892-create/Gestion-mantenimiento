@@ -1,4 +1,3 @@
-js
 // =====================================================
 // SERVER.JS
 // SISTEMA DE GESTIÓN DE CUADRILLAS
@@ -322,7 +321,7 @@ app.post("/api/login", async (req, res) => {
         }
 
 
-        const resultado = await pool.query(
+        const resultado = await pool.query(`
 
             SELECT
                 id,
@@ -336,7 +335,7 @@ app.post("/api/login", async (req, res) => {
 
             WHERE usuario = $1
 
-        , [usuario]);
+        `, [usuario]);
 
 
         if (resultado.rows.length === 0) {
@@ -563,7 +562,7 @@ app.get(
                         GOOGLE_SHEET_ID,
 
                     range:
-                        ${GOOGLE_SHEET_NAME}!A1:ZZ10
+                        `${GOOGLE_SHEET_NAME}!A1:ZZ10`
 
                 });
 
@@ -619,7 +618,7 @@ app.get(
         try {
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
                         id,
@@ -629,7 +628,7 @@ app.get(
 
                     ORDER BY id
 
-                );
+                `);
 
 
             res.json(
@@ -674,7 +673,7 @@ app.get(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -694,7 +693,7 @@ app.get(
                         p.apellidos,
                         p.nombres
 
-                , [id]);
+                `, [id]);
 
 
             res.json(
@@ -740,7 +739,7 @@ app.get(
         try {
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -763,7 +762,7 @@ app.get(
                     ORDER BY
                         p.id DESC
 
-                );
+                `);
 
 
             res.json(
@@ -808,7 +807,7 @@ app.get(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -823,7 +822,7 @@ app.get(
 
                     WHERE p.id = $1
 
-                , [id]);
+                `, [id]);
 
 
             if (
@@ -936,7 +935,7 @@ app.post(
 
 
             const dniExistente =
-                await pool.query(
+                await pool.query(`
 
                     SELECT id
 
@@ -944,7 +943,7 @@ app.post(
 
                     WHERE documento = $1
 
-                , [documento]);
+                `, [documento]);
 
 
             if (
@@ -962,7 +961,7 @@ app.post(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     INSERT INTO personal
 
@@ -988,7 +987,7 @@ app.post(
 
                     RETURNING *
 
-                , [
+                `, [
 
                     nombres.trim(),
 
@@ -1056,7 +1055,7 @@ app.get(
         try {
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
                         p.id,
@@ -1070,7 +1069,7 @@ app.get(
 
                     ORDER BY p.id DESC
 
-                );
+                `);
 
 
             res.json(
@@ -1115,7 +1114,7 @@ app.get(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -1136,7 +1135,7 @@ app.get(
 
                     WHERE p.id = $1
 
-                , [id]);
+                `, [id]);
 
 
             if (
@@ -1214,7 +1213,7 @@ app.post(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     INSERT INTO proyectos
 
@@ -1238,7 +1237,7 @@ app.post(
 
                     RETURNING *
 
-                , [
+                `, [
 
                     nombre.trim(),
 
@@ -1304,7 +1303,7 @@ app.get(
         try {
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -1332,7 +1331,7 @@ app.get(
                     ORDER BY
                         m.id DESC
 
-                );
+                `);
 
 
             res.json(
@@ -1409,7 +1408,7 @@ app.post(
             ) {
 
                 const proyectoEncontrado =
-                    await pool.query(
+                    await pool.query(`
 
                         SELECT id
 
@@ -1419,7 +1418,7 @@ app.post(
 
                         LIMIT 1
 
-                    , [proyecto]);
+                    `, [proyecto]);
 
 
                 if (
@@ -1435,7 +1434,7 @@ app.post(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     INSERT INTO mantenimientos
 
@@ -1459,7 +1458,7 @@ app.post(
 
                     RETURNING *
 
-                , [
+                `, [
 
                     fecha,
 
@@ -1523,7 +1522,7 @@ app.get(
         try {
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -1543,7 +1542,7 @@ app.get(
                     ORDER BY
                         m.id DESC
 
-                );
+                `);
 
 
             res.json(
@@ -1588,7 +1587,7 @@ app.get(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -1605,7 +1604,7 @@ app.get(
                     ORDER BY
                         id DESC
 
-                , [id]);
+                `, [id]);
 
 
             res.json(
@@ -1708,7 +1707,7 @@ app.post(
 
 
             const proyecto =
-                await pool.query(
+                await pool.query(`
 
                     SELECT id
 
@@ -1716,7 +1715,7 @@ app.post(
 
                     WHERE id = $1
 
-                , [proyecto_id]);
+                `, [proyecto_id]);
 
 
             if (
@@ -1753,7 +1752,7 @@ app.post(
 
 
             const resultado =
-                await pool.query(
+                await pool.query(`
 
                     INSERT INTO materiales
 
@@ -1775,7 +1774,7 @@ app.post(
 
                     RETURNING *
 
-                , [
+                `, [
 
                     material.trim(),
 
@@ -1875,7 +1874,7 @@ app.post(
 
 
             const proyecto =
-                await client.query(
+                await client.query(`
 
                     SELECT id
 
@@ -1883,7 +1882,7 @@ app.post(
 
                     WHERE id = $1
 
-                , [proyecto_id]);
+                `, [proyecto_id]);
 
 
             if (
@@ -1962,7 +1961,7 @@ app.post(
 
 
                 const resultado =
-                    await client.query(
+                    await client.query(`
 
                         INSERT INTO materiales
 
@@ -1984,7 +1983,7 @@ app.post(
 
                         RETURNING *
 
-                    , [
+                    `, [
 
                         nombreMaterial,
 
@@ -2106,7 +2105,7 @@ app.get(
 
 
             const personalCuadrillas =
-                await pool.query(
+                await pool.query(`
 
                     SELECT
 
@@ -2129,7 +2128,7 @@ app.get(
                     ORDER BY
                         c.id
 
-                );
+                `);
 
 
             res.json({
