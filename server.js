@@ -1,3 +1,4 @@
+```js
 // =====================================================
 // SERVER.JS
 // SISTEMA DE GESTIÓN DE CUADRILLAS
@@ -42,28 +43,51 @@ const pool = process.env.DATABASE_URL
 
 
 // =====================================================
-// CONEXIÓN POSTGRESQL
+// CONEXIÓN GOOGLE SHEETS
 // =====================================================
 
-const pool = process.env.DATABASE_URL
-    ? new Pool({
-        connectionString: process.env.DATABASE_URL,
-        ssl: process.env.NODE_ENV === "production"
-            ? { rejectUnauthorized: false }
-            : false
-    })
-    : new Pool({
-        host: process.env.DB_HOST || "localhost",
-        port: Number(process.env.DB_PORT) || 5432,
-        user: process.env.DB_USER || "postgres",
-        password: process.env.DB_PASSWORD || "",
-        database: process.env.DB_NAME || "gestion_cuadrillas"
-    });
+const authGoogle = new google.auth.GoogleAuth({
+
+    credentials: {
+
+        project_id:
+            process.env.GOOGLE_PROJECT_ID,
+
+        client_email:
+            process.env.GOOGLE_CLIENT_EMAIL,
+
+        private_key:
+            process.env.GOOGLE_PRIVATE_KEY
+                .replace(/\\n/g, "\n")
+
+    },
+
+    scopes: [
+
+        "https://www.googleapis.com/auth/spreadsheets.readonly"
+
+    ]
+
+});
 
 
-// =====================================================
-// SESIONES
-// ====================================================
+const sheets = google.sheets({
+
+    version: "v4",
+
+    auth: authGoogle
+
+});
+
+
+const GOOGLE_SHEET_ID =
+    process.env.GOOGLE_SHEET_ID;
+
+
+const GOOGLE_SHEET_NAME =
+    "AC FORM";
+
+
 // =====================================================
 // SESIONES
 // =====================================================
@@ -71,15 +95,29 @@ const pool = process.env.DATABASE_URL
 app.set("trust proxy", 1);
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || "dev-only-change-this-secret",
+
+    secret:
+        process.env.SESSION_SECRET ||
+        "dev-only-change-this-secret",
+
     resave: false,
+
     saveUninitialized: false,
+
     cookie: {
-        secure: process.env.NODE_ENV === "production",
+
+        secure:
+            process.env.NODE_ENV === "production",
+
         httpOnly: true,
+
         sameSite: "lax",
-        maxAge: 1000 * 60 * 60 * 8
+
+        maxAge:
+            1000 * 60 * 60 * 8
+
     }
+
 }));
 
 
@@ -226,8 +264,15 @@ pool.connect()
     .then(client => {
 
         console.log("----------------------------------------");
-        console.log("PostgreSQL conectado correctamente");
-        console.log("Base de datos: gestion_cuadrillas");
+
+        console.log(
+            "PostgreSQL conectado correctamente"
+        );
+
+        console.log(
+            "Base de datos: gestion_cuadrillas"
+        );
+
         console.log("----------------------------------------");
 
         client.release();
@@ -237,8 +282,15 @@ pool.connect()
     .catch(error => {
 
         console.error("----------------------------------------");
-        console.error("ERROR AL CONECTAR CON POSTGRESQL");
-        console.error(error.message);
+
+        console.error(
+            "ERROR AL CONECTAR CON POSTGRESQL"
+        );
+
+        console.error(
+            error.message
+        );
+
         console.error("----------------------------------------");
 
     });
@@ -470,8 +522,6 @@ app.get(
 // =====================================================
 
 
-
-
 // =====================================================
 // PRUEBA DEL SERVIDOR
 // =====================================================
@@ -496,9 +546,64 @@ app.get(
 
 
 // =====================================================
+// PRUEBA GOOGLE SHEETS
+// =====================================================
+
+app.get(
+    "/api/prueba-google",
+    requiereSesion,
+    async (req, res) => {
+
+        try {
+
+            const respuesta =
+                await sheets.spreadsheets.values.get({
+
+                    spreadsheetId:
+                        GOOGLE_SHEET_ID,
+
+                    range:
+                        `${GOOGLE_SHEET_NAME}!A1:ZZ10`
+
+                });
+
+
+            res.json({
+
+                ok: true,
+
+                datos:
+                    respuesta.data.values || []
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error leyendo Google Sheets:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                ok: false,
+
+                error:
+                    error.message
+
+            });
+
+        }
+
+    }
+);
+
+
 // =====================================================
 // CUADRILLAS
-// =====================================================
 // =====================================================
 
 
@@ -619,15 +724,12 @@ app.get(
 
 
 // =====================================================
-// =====================================================
 // PERSONAL
-// =====================================================
 // =====================================================
 
 
 // -----------------------------------------------------
 // OBTENER TODO EL PERSONAL
-// COORDINADOR Y SUPERVISOR PUEDEN VER
 // -----------------------------------------------------
 
 app.get(
@@ -788,10 +890,6 @@ app.post(
             } = req.body;
 
 
-            // -----------------------------------------
-            // VALIDAR CAMPOS
-            // -----------------------------------------
-
             if (
                 !nombres ||
                 !apellidos ||
@@ -808,10 +906,6 @@ app.post(
             }
 
 
-            // -----------------------------------------
-            // VALIDAR DNI
-            // -----------------------------------------
-
             if (
                 !/^[0-9]{8}$/.test(documento)
             ) {
@@ -825,10 +919,6 @@ app.post(
 
             }
 
-
-            // -----------------------------------------
-            // VALIDAR CELULAR
-            // -----------------------------------------
 
             if (
                 celular &&
@@ -844,10 +934,6 @@ app.post(
 
             }
 
-
-            // -----------------------------------------
-            // DNI DUPLICADO
-            // -----------------------------------------
 
             const dniExistente =
                 await pool.query(`
@@ -874,10 +960,6 @@ app.post(
 
             }
 
-
-            // -----------------------------------------
-            // INSERTAR
-            // -----------------------------------------
 
             const resultado =
                 await pool.query(`
@@ -958,9 +1040,7 @@ app.post(
 
 
 // =====================================================
-// =====================================================
 // PROYECTOS
-// =====================================================
 // =====================================================
 
 
@@ -992,6 +1072,7 @@ app.get(
 
                 `);
 
+
             res.json(
                 resultado.rows
             );
@@ -1006,14 +1087,17 @@ app.get(
             );
 
             res.status(500).json({
+
                 error:
                     "No se pudieron obtener los proyectos"
+
             });
 
         }
 
     }
 );
+
 
 // -----------------------------------------------------
 // OBTENER UN PROYECTO
@@ -1204,9 +1288,7 @@ app.post(
 
 
 // =====================================================
-// =====================================================
 // MANTENIMIENTOS
-// =====================================================
 // =====================================================
 
 
@@ -1425,9 +1507,7 @@ app.post(
 
 
 // =====================================================
-// =====================================================
 // MATERIALES
-// =====================================================
 // =====================================================
 
 
@@ -1975,9 +2055,7 @@ app.post(
 
 
 // =====================================================
-// =====================================================
 // DASHBOARD
-// =====================================================
 // =====================================================
 
 app.get(
@@ -2150,7 +2228,11 @@ app.use(
 // =====================================================
 
 app.listen(
-    PORT, "0.0.0.0",
+
+    PORT,
+
+    "0.0.0.0",
+
     () => {
 
         console.log("");
@@ -2187,36 +2269,6 @@ app.listen(
 
     }
 
-    app.get("/api/prueba-google", async (req, res) => {
-
-    try {
-
-        const respuesta =
-            await sheets.spreadsheets.values.get({
-                spreadsheetId: GOOGLE_SHEET_ID,
-                range: `${GOOGLE_SHEET_NAME}!A1:ZZ10`
-            });
-
-        res.json({
-            ok: true,
-            datos: respuesta.data.values || []
-        });
-
-    } catch (error) {
-
-        console.error(
-            "Error leyendo Google Sheets:",
-            error
-        );
-
-        res.status(500).json({
-            ok: false,
-            error: error.message
-        });
-
-    }
-
-});
 );
 
 
@@ -2225,3 +2277,4 @@ app.listen(
 // =====================================================
 
 process.stdin.resume();
+```
