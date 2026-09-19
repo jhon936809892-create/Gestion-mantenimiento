@@ -678,7 +678,7 @@ app.get(
 
             const indiceTipoCable =
                 encabezados.indexOf(
-                    "TIPO DE CABLE"
+                    "CAPACIDAD DE CABLE DE FO"
                 );
 
 
