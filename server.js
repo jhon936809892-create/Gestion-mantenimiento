@@ -562,7 +562,7 @@ app.get(
                         GOOGLE_SHEET_ID,
 
                     range:
-                        range: `'${GOOGLE_SHEET_NAME}'!A1:ZZ10`
+                        `'${GOOGLE_SHEET_NAME}'!A1:ZZ10`
                 });
 
 
@@ -598,7 +598,6 @@ app.get(
 
     }
 );
-
 
 // =====================================================
 // CUADRILLAS
