@@ -556,42 +556,35 @@ app.get(
         try {
 
             const respuesta =
-                await sheets.spreadsheets.values.get({
-
+                await sheets.spreadsheets.get({
                     spreadsheetId:
-                        GOOGLE_SHEET_ID,
-
-                    range:
-                        `'${GOOGLE_SHEET_NAME}'!A1:ZZ10`
+                        GOOGLE_SHEET_ID
                 });
 
+            const hojas =
+                respuesta.data.sheets.map(
+                    hoja => ({
+                        id: hoja.properties.sheetId,
+                        nombre: hoja.properties.title
+                    })
+                );
 
             res.json({
-
                 ok: true,
-
-                datos:
-                    respuesta.data.values || []
-
+                hojas: hojas
             });
 
         }
-
         catch (error) {
 
             console.error(
-                "Error leyendo Google Sheets:",
+                "Error obteniendo hojas:",
                 error
             );
 
-
             res.status(500).json({
-
                 ok: false,
-
-                error:
-                    error.message
-
+                error: error.message
             });
 
         }
