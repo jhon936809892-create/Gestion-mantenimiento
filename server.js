@@ -84,7 +84,7 @@ const GOOGLE_SHEET_ID =
 
 
 const GOOGLE_SHEET_NAME =
-    "AC FORM";
+    "Hoja 1";
 
 
 // =====================================================
@@ -582,6 +582,334 @@ app.get(
                 "Error leyendo Google Sheets:",
                 error
             );
+
+            res.status(500).json({
+
+                ok: false,
+
+                error:
+                    error.message
+
+            });
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// SINCRONIZAR PROYECTOS DESDE GOOGLE SHEETS
+// =====================================================
+
+app.get(
+    "/api/sincronizar-proyectos",
+    requiereSesion,
+    async (req, res) => {
+
+        try {
+
+            // -------------------------------------------------
+            // LEER GOOGLE SHEETS
+            // -------------------------------------------------
+
+            const respuesta =
+                await sheets.spreadsheets.values.get({
+
+                    spreadsheetId:
+                        GOOGLE_SHEET_ID,
+
+                    range:
+                        "'Hoja 1'!A1:ZZ1000"
+
+                });
+
+
+            const filas =
+                respuesta.data.values || [];
+
+
+            if (filas.length < 4) {
+
+                return res.json({
+
+                    ok: false,
+
+                    mensaje:
+                        "No hay suficientes datos en Google Sheets."
+
+                });
+
+            }
+
+
+            // -------------------------------------------------
+            // ENCABEZADOS
+            // La fila 3 de Google Sheets es filas[2]
+            // -------------------------------------------------
+
+            const encabezados =
+                filas[2];
+
+
+            const indiceCodigo =
+                encabezados.indexOf(
+                    "CODIGO DE PROYECTO"
+                );
+
+
+            const indiceProyecto =
+                encabezados.indexOf(
+                    "PROYECTOS"
+                );
+
+
+            const indiceTipo =
+                encabezados.indexOf(
+                    "TIPO DE PROYECTO"
+                );
+
+
+            const indiceSede =
+                encabezados.indexOf(
+                    "SEDE\n"
+                );
+
+
+            const indiceTipoCable =
+                encabezados.indexOf(
+                    "TIPO DE CABLE"
+                );
+
+
+            // -------------------------------------------------
+            // COMPROBAR COLUMNAS
+            // -------------------------------------------------
+
+            if (
+                indiceCodigo === -1 ||
+                indiceProyecto === -1 ||
+                indiceTipo === -1 ||
+                indiceSede === -1 ||
+                indiceTipoCable === -1
+            ) {
+
+                return res.status(400).json({
+
+                    ok: false,
+
+                    mensaje:
+                        "No se encontraron todas las columnas necesarias en Google Sheets.",
+
+                    columnasEncontradas:
+                        encabezados
+
+                });
+
+            }
+
+
+            // -------------------------------------------------
+            // CONTADORES
+            // -------------------------------------------------
+
+            let creados = 0;
+
+            let actualizados = 0;
+
+            let ignorados = 0;
+
+
+            // -------------------------------------------------
+            // RECORRER FILAS
+            // Los datos empiezan en la fila 4
+            // -------------------------------------------------
+
+            for (
+                let i = 3;
+                i < filas.length;
+                i++
+            ) {
+
+                const fila =
+                    filas[i];
+
+
+                const codigo =
+                    (fila[indiceCodigo] || "")
+                        .trim();
+
+
+                const nombre =
+                    (fila[indiceProyecto] || "")
+                        .trim();
+
+
+                const tipo =
+                    (fila[indiceTipo] || "")
+                        .trim();
+
+
+                const sede =
+                    (fila[indiceSede] || "")
+                        .trim();
+
+
+                const tipoCable =
+                    (fila[indiceTipoCable] || "")
+                        .trim();
+
+
+                // -------------------------------------------------
+                // SI NO HAY CÓDIGO, IGNORAR
+                // -------------------------------------------------
+
+                if (!codigo) {
+
+                    ignorados++;
+
+                    continue;
+
+                }
+
+
+                // -------------------------------------------------
+                // BUSCAR SI EL PROYECTO YA EXISTE
+                // -------------------------------------------------
+
+                const existente =
+                    await pool.query(
+
+                        `
+                        SELECT id
+
+                        FROM proyectos
+
+                        WHERE codigo = $1
+
+                        LIMIT 1
+                        `,
+
+                        [codigo]
+
+                    );
+
+
+                // -------------------------------------------------
+                // ACTUALIZAR
+                // -------------------------------------------------
+
+                if (
+                    existente.rows.length > 0
+                ) {
+
+                    await pool.query(
+
+                        `
+                        UPDATE proyectos
+
+                        SET
+                            nombre = $1,
+                            tipo = $2,
+                            sede = $3,
+                            tipo_cable = $4
+
+                        WHERE codigo = $5
+                        `,
+
+                        [
+                            nombre,
+                            tipo,
+                            sede,
+                            tipoCable,
+                            codigo
+                        ]
+
+                    );
+
+
+                    actualizados++;
+
+                }
+
+
+                // -------------------------------------------------
+                // CREAR
+                // -------------------------------------------------
+
+                else {
+
+                    await pool.query(
+
+                        `
+                        INSERT INTO proyectos
+                        (
+                            codigo,
+                            nombre,
+                            tipo,
+                            sede,
+                            tipo_cable
+                        )
+
+                        VALUES
+                        (
+                            $1,
+                            $2,
+                            $3,
+                            $4,
+                            $5
+                        )
+                        `,
+
+                        [
+                            codigo,
+                            nombre,
+                            tipo,
+                            sede,
+                            tipoCable
+                        ]
+
+                    );
+
+
+                    creados++;
+
+                }
+
+            }
+
+
+            // -------------------------------------------------
+            // RESPUESTA
+            // -------------------------------------------------
+
+            res.json({
+
+                ok: true,
+
+                mensaje:
+                    "Proyectos sincronizados correctamente.",
+
+                creados:
+                    creados,
+
+                actualizados:
+                    actualizados,
+
+                ignorados:
+                    ignorados
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error sincronizando proyectos:",
+                error
+            );
+
 
             res.status(500).json({
 
