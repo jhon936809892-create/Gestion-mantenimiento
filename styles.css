@@ -383,20 +383,13 @@ table {
 
 th {
     text-align: left;
-
-    background: #f9fafb;
-
+    background: #cbd5e1;
     padding: 13px;
-
-    color: #4b5563;
-
+    color: #111827;
     font-size: 14px;
-
     font-weight: 600;
-
     white-space: nowrap;
 }
-
 
 td {
     padding: 14px 13px;
