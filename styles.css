@@ -1297,17 +1297,16 @@ textarea {
    ========================= */
 
 #proyectos .panel {
+    overflow-x: scroll;
     width: 100%;
-    overflow-x: auto;
 }
 
 #proyectos table {
-    width: 100%;
-    min-width: 900px;
+    width: 1200px;
+    min-width: 1200px;
     border-collapse: collapse;
     table-layout: fixed;
 }
-
 
 #proyectos .panel {
     overflow-x: auto;
