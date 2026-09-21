@@ -1293,7 +1293,7 @@ textarea {
     max-width: 100%;
     
     /* Scroll vertical */
-    max-height: 1000px;
+    max-height: 900px;
     overflow-y: auto;
 
     /* Scroll horizontal */
