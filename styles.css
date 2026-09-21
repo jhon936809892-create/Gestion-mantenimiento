@@ -1290,16 +1290,25 @@ textarea {
 
 #proyectos .panel {
     width: 100%;
+    max-width: 100%;
+    
+    /* Scroll vertical */
+    max-height: 700px;
+    overflow-y: auto;
+
+    /* Scroll horizontal */
     overflow-x: auto;
 }
 
+/* Tabla */
 #proyectos table {
-    width: 1200px;
-    min-width: 1200px;
+    width: 100%;
+    min-width: 900px;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
+/* Celdas */
 #proyectos th,
 #proyectos td {
     padding: 10px 12px;
@@ -1338,4 +1347,5 @@ textarea {
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
     width: 18%;
-} 
+}
+
