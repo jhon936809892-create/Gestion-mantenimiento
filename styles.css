@@ -1523,14 +1523,18 @@ table {
 
 }
 
-/* Encabezado fijo de la tabla de proyectos */
+#proyectos thead {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
 #proyectos thead th {
     position: sticky;
     top: 0;
-    z-index: 10;
-    background: #f9fafb;
-}
+    z-index: 21;
 
-#proyectos tbody td {
-    background: #ffffff;
+    background: #f9fafb;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
