@@ -1348,126 +1348,6 @@ textarea {
 /* =========================================
    DISEÑO RESPONSIVE
    ========================================= */
-
-/* Evitar que el contenido provoque
-   desplazamiento horizontal de toda la página */
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-
-/* Los elementos respetan el tamaño
-   disponible de su contenedor */
-* {
-    box-sizing: border-box;
-}
-
-
-/* Contenedores principales */
-.container,
-main,
-section,
-.panel {
-    max-width: 100%;
-}
-
-
-/* =========================================
-   PANTALLAS GRANDES
-   ========================================= */
-
-@media (min-width: 1400px) {
-
-    .container {
-        width: 100%;
-        max-width: 1600px;
-        margin: 0 auto;
-    }
-
-}
-
-
-/* =========================================
-   LAPTOP / PANTALLAS MEDIANAS
-   ========================================= */
-
-@media (max-width: 1200px) {
-
-    .container {
-        width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-}
-
-
-/* =========================================
-   TABLET
-   ========================================= */
-
-@media (max-width: 900px) {
-
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .panel {
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================
-   CELULAR
-   ========================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        font-size: 14px;
-    }
-
-    .container {
-        width: 100%;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .panel {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    h1 {
-        font-size: 22px;
-    }
-
-    h2 {
-        font-size: 19px;
-    }
-
-    h3 {
-        font-size: 17px;
-    }
-
-    button {
-        max-width: 100%;
-    }
-
-    input,
-    select,
-    textarea {
-        max-width: 100%;
-    }
-
-}
-
 /* =====================================================
    DISEÑO RESPONSIVE GENERAL
    ===================================================== */
@@ -1486,18 +1366,20 @@ body {
 }
 
 
-/* Contenedor principal */
+/* Contenido principal */
 
 main,
 .main-content,
 .contenido-principal {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
 }
 
 
-/* Paneles */
+/* Contenedores */
 
+.container,
+section,
 .panel {
     width: 100%;
     max-width: 100%;
@@ -1525,18 +1407,40 @@ table {
 
 @media (min-width: 1400px) {
 
-    .panel {
+    .container {
         width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
     }
 
 }
 
 
 /* =====================================================
-   TABLETS
+   LAPTOP
    ===================================================== */
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
+
+    .container {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
     .panel {
         width: 100%;
@@ -1550,13 +1454,19 @@ table {
 
 
 /* =====================================================
-   CELULARES
+   CELULAR
    ===================================================== */
 
 @media (max-width: 600px) {
 
     body {
         font-size: 14px;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .panel {
@@ -1573,6 +1483,28 @@ table {
     td {
         padding: 9px 10px;
         font-size: 13px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+
+    h3 {
+        font-size: 17px;
+    }
+
+    button {
+        max-width: 100%;
+    }
+
+    input,
+    select,
+    textarea {
+        max-width: 100%;
     }
 
 }
