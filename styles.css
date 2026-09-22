@@ -1737,24 +1737,19 @@ section {
    PROYECTOS EN CELULAR
 ===================================================== */
 
-@media (max-width: 768px) {
+#proyectos .panel {
+    position: relative;
+    z-index: 1;
 
-    #proyectos .panel {
-        max-height: 650px;
+    width: 100%;
+    max-width: 100%;
 
-        overflow-x: auto;
+    overflow-x: auto;
+    overflow-y: auto;
 
-        overflow-y: auto;
-    }
+    max-height: 650px;
 
-    #proyectos table {
-        min-width: 1000px;
-    }
-
-    #proyectos thead th {
-        top: 0;
-    }
-
+    background: white;
 }
 
 
@@ -1764,16 +1759,25 @@ section {
 
 @media (max-width: 480px) {
 
-    #proyectos .panel {
-        max-height: 600px;
+/* ENCABEZADO DE PROYECTOS */
+#proyectos thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #cbd5e1 !important;
+}
 
-        overflow-x: auto;
+#proyectos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+    background: #cbd5e1 !important;
+    color: #111827;
+}
 
-        overflow-y: auto;
-    }
-
-    #proyectos table {
-        min-width: 1000px;
-    }
-
+/* EL ENCABEZADO PRINCIPAL SIEMPRE ESTÁ ENCIMA */
+.topbar {
+    position: relative;
+    z-index: 1000;
+    background: white !important;
 }
