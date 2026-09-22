@@ -1293,25 +1293,25 @@ textarea {
 
 #proyectos .panel {
     width: 100%;
-    max-height: 680px;
-    overflow: auto;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* La tabla ocupa todo el ancho disponible */
 #proyectos table {
     width: 100%;
-    min-width: 1200px;
+    min-width: 1000px;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
-/* Encabezados y datos */
 #proyectos th,
 #proyectos td {
-    padding: 13px 18px;
+    padding: 11px 14px;
     text-align: left;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
+
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
@@ -1319,7 +1319,7 @@ textarea {
 /* Código */
 #proyectos th:nth-child(1),
 #proyectos td:nth-child(1) {
-    width: 24%;
+    width: 26%;
 }
 
 /* Proyecto */
@@ -1337,15 +1337,14 @@ textarea {
 /* Sede */
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
-    width: 24%;
+    width: 23%;
 }
 
 /* Tipo de cable */
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
-    width: 18%;
+    width: 17%;
 }
-
 /* =========================================
    DISEÑO RESPONSIVE
    ========================================= */
@@ -1465,6 +1464,115 @@ section,
     select,
     textarea {
         max-width: 100%;
+    }
+
+}
+
+/* =====================================================
+   DISEÑO RESPONSIVE GENERAL
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+/* Contenedor principal */
+
+main,
+.main-content,
+.contenido-principal {
+    width: 100%;
+    max-width: none;
+}
+
+
+/* Paneles */
+
+.panel {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+/* =====================================================
+   TABLAS
+   ===================================================== */
+
+.panel {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+/* =====================================================
+   PANTALLAS GRANDES
+   ===================================================== */
+
+@media (min-width: 1400px) {
+
+    .panel {
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   TABLETS
+   ===================================================== */
+
+@media (max-width: 1000px) {
+
+    .panel {
+        width: 100%;
+    }
+
+    table {
+        min-width: 800px;
+    }
+
+}
+
+
+/* =====================================================
+   CELULARES
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .panel {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 800px;
+    }
+
+    th,
+    td {
+        padding: 9px 10px;
+        font-size: 13px;
     }
 
 }
