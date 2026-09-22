@@ -1550,22 +1550,19 @@ table {
 }
 
 /* Encabezado */
+#proyectos thead {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #cbd5e1;
+}
+
 #proyectos thead th {
     position: sticky;
     top: 0;
-    z-index: 100;
-
+    z-index: 1001;
     background: #cbd5e1 !important;
-
     color: #111827;
-
-    box-shadow:
-        0 2px 0 #cbd5e1;
-}
-
-/* Cuerpo de la tabla */
-#proyectos tbody td {
-    background: #ffffff;
 }
 
 /* =========================================
