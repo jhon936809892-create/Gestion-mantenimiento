@@ -1522,3 +1522,15 @@ table {
     }
 
 }
+
+/* Encabezado fijo de la tabla de proyectos */
+#proyectos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f9fafb;
+}
+
+#proyectos tbody td {
+    background: #ffffff;
+}
