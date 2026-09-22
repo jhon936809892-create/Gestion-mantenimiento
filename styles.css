@@ -1353,6 +1353,15 @@ textarea {
 /* =========================================
    DISEÑO RESPONSIVE
    ========================================= */
+/* Centrar Tipo, Sede y Tipo de cable */
+#proyectos th:nth-child(3),
+#proyectos td:nth-child(3),
+#proyectos th:nth-child(4),
+#proyectos td:nth-child(4),
+#proyectos th:nth-child(5),
+#proyectos td:nth-child(5) {
+    text-align: center;
+}
 /* =====================================================
    DISEÑO RESPONSIVE GENERAL
    ===================================================== */
