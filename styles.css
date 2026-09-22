@@ -1293,7 +1293,7 @@ textarea {
     max-width: 100%;
 
     /* Altura para mostrar aproximadamente 15 proyectos */
-    height: 620px;
+    height: 800px;
 
     /* Scroll vertical y horizontal */
     overflow-y: auto;
