@@ -8,6 +8,14 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -38,9 +46,8 @@ body {
 }
 
 
-
 /* ========================================
-   LOGO EMPRESA - ESQUINA SUPERIOR IZQUIERDA
+   LOGO EMPRESA
 ======================================== */
 
 .logo {
@@ -60,7 +67,6 @@ body {
     overflow: hidden;
 }
 
-
 .logo img {
     width: 210px !important;
     height: 90px !important;
@@ -69,11 +75,11 @@ body {
     padding: 0 !important;
 
     object-fit: contain;
-
     object-position: left top;
 
     display: block !important;
 }
+
 
 /* ========================================
    MENÚ
@@ -82,7 +88,6 @@ body {
 nav {
     padding: 20px 12px;
 }
-
 
 .menu {
     width: 100%;
@@ -108,12 +113,10 @@ nav {
     transition: 0.2s;
 }
 
-
 .menu:hover {
     background: #1f2937;
     color: white;
 }
-
 
 .menu.active {
     background: #2563eb;
@@ -131,6 +134,8 @@ nav {
     width: calc(100% - 240px);
 
     min-height: 100vh;
+
+    position: relative;
 }
 
 
@@ -154,13 +159,20 @@ nav {
     justify-content: space-between;
 
     gap: 20px;
-}
 
+    /*
+       IMPORTANTE:
+       El encabezado principal queda por encima
+       de cualquier encabezado sticky de una tabla.
+    */
+    position: relative;
+
+    z-index: 100;
+}
 
 .topbar h1 {
     font-size: 23px;
 }
-
 
 .topbar p {
     color: #6b7280;
@@ -169,7 +181,6 @@ nav {
 
     font-size: 14px;
 }
-
 
 .usuario {
     background: #eff6ff;
@@ -192,9 +203,12 @@ nav {
 
 .seccion {
     display: none;
-    padding: 30px;
-}
 
+    padding: 30px;
+
+    width: 100%;
+    max-width: 100%;
+}
 
 .seccion.activa {
     display: block;
@@ -216,7 +230,6 @@ nav {
     margin-bottom: 25px;
 }
 
-
 .card {
     background: white;
 
@@ -236,14 +249,12 @@ nav {
     transition: 0.2s;
 }
 
-
 .card:hover {
     transform: translateY(-2px);
 
     box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.08);
 }
-
 
 .card-icon {
     width: 50px;
@@ -262,7 +273,6 @@ nav {
     flex-shrink: 0;
 }
 
-
 .card p {
     color: #6b7280;
 
@@ -270,7 +280,6 @@ nav {
 
     font-size: 14px;
 }
-
 
 .card h2 {
     font-size: 25px;
@@ -292,8 +301,10 @@ nav {
         0 2px 8px rgba(0, 0, 0, 0.05);
 
     overflow-x: auto;
-}
 
+    width: 100%;
+    max-width: 100%;
+}
 
 .panel h2 {
     margin-bottom: 20px;
@@ -316,11 +327,9 @@ nav {
     margin-bottom: 20px;
 }
 
-
 .section-header h2 {
     margin-bottom: 5px;
 }
-
 
 .section-header p {
     color: #6b7280;
@@ -351,16 +360,13 @@ nav {
     white-space: nowrap;
 }
 
-
 .btn-primary:hover {
     background: #1d4ed8;
 }
 
-
 .btn-primary:active {
     transform: scale(0.98);
 }
-
 
 .full {
     width: 100%;
@@ -369,7 +375,7 @@ nav {
 
 
 /* ========================================
-   TABLAS
+   TABLAS GENERALES
 ======================================== */
 
 table {
@@ -380,14 +386,19 @@ table {
     min-width: 650px;
 }
 
-
 th {
     text-align: left;
+
     background: #cbd5e1;
+
     padding: 13px;
+
     color: #111827;
+
     font-size: 14px;
+
     font-weight: 600;
+
     white-space: nowrap;
 }
 
@@ -400,7 +411,6 @@ td {
 
     vertical-align: middle;
 }
-
 
 tbody tr:hover {
     background: #f9fafb;
@@ -420,7 +430,6 @@ tbody tr:hover {
     gap: 20px;
 }
 
-
 .cuadrilla {
     background: white;
 
@@ -434,13 +443,11 @@ tbody tr:hover {
     min-width: 0;
 }
 
-
 .cuadrilla h3 {
     margin-bottom: 15px;
 
     font-size: 18px;
 }
-
 
 .tecnico {
     padding: 12px;
@@ -456,13 +463,11 @@ tbody tr:hover {
     line-height: 1.5;
 }
 
-
 .tecnico strong {
     display: block;
 
     font-size: 14px;
 }
-
 
 .tecnico small {
     color: #6b7280;
@@ -484,7 +489,6 @@ tbody tr:hover {
     gap: 15px;
 }
 
-
 .resumen div {
     background: #f9fafb;
 
@@ -495,11 +499,9 @@ tbody tr:hover {
     border: 1px solid #eef0f3;
 }
 
-
 .resumen strong {
     display: block;
 }
-
 
 .resumen span {
     display: block;
@@ -532,11 +534,9 @@ tbody tr:hover {
     padding: 20px;
 }
 
-
 .modal.active {
     display: flex;
 }
-
 
 .modal-content {
     width: 600px;
@@ -558,7 +558,6 @@ tbody tr:hover {
 
     animation: aparecerModal 0.2s ease;
 }
-
 
 @keyframes aparecerModal {
 
@@ -591,11 +590,9 @@ tbody tr:hover {
     gap: 15px;
 }
 
-
 .modal-header h2 {
     font-size: 21px;
 }
-
 
 .modal-header button {
     border: none;
@@ -610,7 +607,6 @@ tbody tr:hover {
 
     line-height: 1;
 }
-
 
 .modal-header button:hover {
     color: #111827;
@@ -632,7 +628,6 @@ form label {
 
     font-size: 14px;
 }
-
 
 input,
 select,
@@ -656,7 +651,6 @@ textarea {
     transition: 0.2s;
 }
 
-
 input:focus,
 select:focus,
 textarea:focus {
@@ -666,13 +660,11 @@ textarea:focus {
         0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-
 textarea {
     min-height: 100px;
 
     resize: vertical;
 }
-
 
 .form-grid {
     display: grid;
@@ -681,7 +673,6 @@ textarea {
 
     gap: 15px;
 }
-
 
 .form-grid label {
     margin-top: 0;
@@ -704,13 +695,11 @@ textarea {
     min-height: 18px;
 }
 
-
 .input-error {
     border: 1px solid #dc2626 !important;
 
     background: #fff5f5;
 }
-
 
 .input-correcto {
     border: 1px solid #16a34a !important;
@@ -726,18 +715,15 @@ textarea {
     height: 8px;
 }
 
-
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
-
 
 ::-webkit-scrollbar-thumb {
     background: #cbd5e1;
 
     border-radius: 10px;
 }
-
 
 ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
@@ -755,7 +741,6 @@ textarea {
             repeat(2, minmax(0, 1fr));
     }
 
-
     .cuadrillas-grid {
         grid-template-columns: 1fr;
     }
@@ -768,31 +753,40 @@ textarea {
 ======================================== */
 
 @media (max-width: 768px) {
-.topbar {
-    padding: 15px 15px;
-    width: 100%;
-    box-sizing: border-box;
-}
+
+    .topbar {
+        padding: 15px 15px;
+
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
     /* ================================
        MENÚ LATERAL
     ================================ */
 
     .sidebar {
         width: 68px;
+
         padding: 0 7px;
     }
 
     .logo {
         width: 68px !important;
         height: 65px !important;
+
         padding: 5px !important;
     }
 
     .logo img {
         width: 58px !important;
         height: 58px !important;
+
         max-width: 58px;
         max-height: 58px;
+
         object-fit: contain;
     }
 
@@ -802,16 +796,23 @@ textarea {
 
     .menu {
         width: 100%;
+
         height: 48px;
+
         padding: 0;
+
         margin: 0 0 8px 0;
 
         display: flex;
+
         align-items: center;
+
         justify-content: center;
 
         border-radius: 8px;
+
         font-size: 21px;
+
         color: #d1d5db;
     }
 
@@ -820,21 +821,33 @@ textarea {
     }
 
 
+    /* MENÚ MÓVIL */
 
-       /* MENÚ MÓVIL */
     .btn-menu-mobile {
         display: block;
+
         position: fixed;
+
         top: 15px;
+
         left: 15px;
+
         z-index: 2000;
+
         width: 45px;
+
         height: 45px;
+
         border: none;
+
         border-radius: 8px;
+
         background: #111;
+
         color: white;
+
         font-size: 24px;
+
         cursor: pointer;
     }
 
@@ -844,6 +857,7 @@ textarea {
 
     .menu-icono {
         display: inline-flex;
+
         align-items: center;
         justify-content: center;
     }
@@ -854,7 +868,9 @@ textarea {
 
     .sidebar.menu-abierto .menu {
         justify-content: flex-start;
+
         padding: 0 15px;
+
         font-size: 15px;
     }
 
@@ -873,6 +889,7 @@ textarea {
 
     .main {
         margin-left: 68px;
+
         width: calc(100% - 68px);
     }
 
@@ -887,10 +904,13 @@ textarea {
 
     .topbar {
         min-height: auto;
+
         padding: 14px 15px;
 
         flex-direction: column;
+
         align-items: flex-start;
+
         justify-content: center;
 
         gap: 7px;
@@ -898,42 +918,55 @@ textarea {
 
     .topbar h1 {
         font-size: 20px;
+
         line-height: 1.2;
     }
 
     .topbar p {
         font-size: 12px;
+
         line-height: 1.4;
     }
 
     .usuario {
         font-size: 12px;
+
         padding: 8px 11px;
+
         max-width: 100%;
+
         overflow: hidden;
+
         text-overflow: ellipsis;
     }
 
 
     /* ================================
-       TARJETAS DEL DASHBOARD
+       TARJETAS
     ================================ */
 
     .cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
         gap: 10px;
+
         margin-bottom: 18px;
     }
 
     .card {
         padding: 13px;
+
         gap: 9px;
+
         min-width: 0;
     }
 
     .card-icon {
         width: 38px;
+
         height: 38px;
+
         font-size: 19px;
     }
 
@@ -943,6 +976,7 @@ textarea {
 
     .card p {
         font-size: 11px;
+
         line-height: 1.3;
     }
 
@@ -953,6 +987,7 @@ textarea {
 
     .resumen {
         grid-template-columns: 1fr;
+
         gap: 10px;
     }
 
@@ -963,8 +998,11 @@ textarea {
 
     .section-header {
         flex-direction: column;
+
         align-items: stretch;
+
         gap: 10px;
+
         margin-bottom: 15px;
     }
 
@@ -979,19 +1017,23 @@ textarea {
 
     .panel {
         padding: 15px;
+
         border-radius: 9px;
+
+        width: 100%;
+
+        max-width: 100%;
     }
 
     .panel h2 {
         font-size: 18px;
+
         margin-bottom: 15px;
     }
 
 
     /* ================================
        TABLAS
-       Se mantienen completas y
-       permiten desplazamiento horizontal
     ================================ */
 
     .panel {
@@ -1005,6 +1047,7 @@ textarea {
     th,
     td {
         padding: 9px;
+
         font-size: 12px;
     }
 
@@ -1019,14 +1062,19 @@ textarea {
 
     .modal-content {
         width: 100%;
+
         max-width: 100%;
+
         max-height: 92vh;
+
         padding: 18px;
+
         border-radius: 9px;
     }
 
     .modal-header {
         margin-bottom: 18px;
+
         gap: 10px;
     }
 
@@ -1045,12 +1093,15 @@ textarea {
 
     .form-grid {
         grid-template-columns: 1fr;
+
         gap: 8px;
     }
 
     form label {
         font-size: 13px;
+
         margin-top: 12px;
+
         margin-bottom: 6px;
     }
 
@@ -1058,6 +1109,7 @@ textarea {
     select,
     textarea {
         font-size: 16px;
+
         padding: 10px;
     }
 
@@ -1066,6 +1118,7 @@ textarea {
     }
 
 }
+
 
 /* ========================================
    CELULARES PEQUEÑOS
@@ -1079,13 +1132,11 @@ textarea {
         padding: 0 6px;
     }
 
-
     .logo {
         height: 55px;
 
         padding: 6px;
     }
-
 
     .logo img {
         max-width: 42px;
@@ -1093,72 +1144,74 @@ textarea {
         max-height: 38px;
     }
 
-
     .main {
         margin-left: 60px;
 
         width: calc(100% - 60px);
     }
 
-
     .menu {
         height: 46px;
+
         font-size: 20px;
     }
-
 
     .menu::first-letter {
         font-size: 20px;
     }
 
-
     .cards {
         grid-template-columns: 1fr;
     }
-
 
     .seccion {
         padding: 15px 10px;
     }
 
-
     .topbar {
         padding: 15px;
     }
-
 
     .topbar h1 {
         font-size: 20px;
     }
 
-
     .panel {
         padding: 15px;
     }
-
 
     .card {
         padding: 18px;
     }
 
 }
+
+
 /* ========================================
    CALENDARIO DE MANTENIMIENTO
 ======================================== */
 
 .calendario-panel {
     margin-top: 30px;
+
     width: 100%;
+
     max-width: 100%;
+
     min-width: 0;
+
     overflow: hidden;
 }
 
 .calendario-header {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     gap: 15px;
+
     margin-bottom: 20px;
 }
 
@@ -1168,23 +1221,30 @@ textarea {
 
 .calendario-header p {
     margin: 0;
+
     color: #777;
+
     font-size: 14px;
 }
 
 
-/* CONTENEDOR DEL CALENDARIO */
+/* CONTENEDOR CALENDARIO */
 
 #calendarioMantenimiento {
     width: 100%;
+
     max-width: 100%;
+
     min-width: 0;
+
     box-sizing: border-box;
+
     overflow: hidden;
 }
 
 #calendarioMantenimiento .fc {
     width: 100%;
+
     max-width: 100%;
 }
 
@@ -1193,6 +1253,7 @@ textarea {
 
 #calendarioMantenimiento .fc .fc-button {
     border-radius: 6px;
+
     font-weight: 500;
 }
 
@@ -1202,7 +1263,9 @@ textarea {
 
 #calendarioMantenimiento .fc .fc-event {
     cursor: pointer;
+
     padding: 2px 4px;
+
     border-radius: 4px;
 }
 
@@ -1216,13 +1279,14 @@ textarea {
 
 
 /* ========================================
-   TABLET
+   CALENDARIO TABLET
 ======================================== */
 
 @media (max-width: 768px) {
 
     .calendario-panel {
         padding: 15px;
+
         overflow: hidden;
     }
 
@@ -1236,11 +1300,13 @@ textarea {
 
     #calendarioMantenimiento {
         width: 100%;
+
         max-width: 100%;
     }
 
     #calendarioMantenimiento .fc .fc-toolbar {
         flex-wrap: wrap;
+
         gap: 10px;
     }
 
@@ -1250,29 +1316,34 @@ textarea {
 
     #calendarioMantenimiento .fc .fc-button {
         font-size: 12px;
+
         padding: 5px 8px;
     }
 
     #calendarioMantenimiento .fc .fc-toolbar-chunk {
         margin-bottom: 5px;
     }
+
 }
 
 
 /* ========================================
-   CELULAR PEQUEÑO
+   CALENDARIO CELULAR PEQUEÑO
 ======================================== */
 
 @media (max-width: 480px) {
 
     #calendarioMantenimiento .fc .fc-toolbar {
         display: flex;
+
         flex-direction: column;
+
         align-items: stretch;
     }
 
     #calendarioMantenimiento .fc .fc-toolbar-chunk {
         display: flex;
+
         justify-content: center;
     }
 
@@ -1282,154 +1353,53 @@ textarea {
 
     #calendarioMantenimiento .fc .fc-button {
         font-size: 11px;
+
         padding: 5px 7px;
     }
+
 }
-/* SEPARACIÓN ENTRE LISTA Y CALENDARIO */
+
+
+/* ========================================
+   SEPARACIÓN LISTA / CALENDARIO
+======================================== */
+
 #mantenimiento .calendario-panel {
     margin-top: 20px !important;
 }
 
-/* =========================
-   TABLA DE PROYECTOS
-   ========================= */
-/* =========================
-   TABLA DE PROYECTOS
-   ========================= */
 
-#proyectos .panel {
-    width: 100%;
-    max-width: 100%;
-
-    overflow-x: auto;
-    overflow-y: auto;
-
-    max-height: 650px;
-
-    -webkit-overflow-scrolling: touch;
-}
-
-#proyectos table {
-    width: 100%;
-    min-width: 1000px;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-#proyectos th,
-#proyectos td {
-    padding: 11px 14px;
-    text-align: left;
-    vertical-align: middle;
-    border-bottom: 1px solid #ddd;
-
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-/* Código */
-#proyectos th:nth-child(1),
-#proyectos td:nth-child(1) {
-    width: 26%;
-}
-
-/* Proyecto */
-#proyectos th:nth-child(2),
-#proyectos td:nth-child(2) {
-    width: 16%;
-}
-
-/* Tipo */
-#proyectos th:nth-child(3),
-#proyectos td:nth-child(3) {
-    width: 18%;
-}
-
-/* Sede */
-#proyectos th:nth-child(4),
-#proyectos td:nth-child(4) {
-    width: 23%;
-}
-
-/* Tipo de cable */
-#proyectos th:nth-child(5),
-#proyectos td:nth-child(5) {
-    width: 17%;
-}
-/* =========================================
-   DISEÑO RESPONSIVE
-   ========================================= */
-/* Centrar Tipo, Sede y Tipo de cable */
-#proyectos th:nth-child(3),
-#proyectos td:nth-child(3),
-#proyectos th:nth-child(4),
-#proyectos td:nth-child(4),
-#proyectos th:nth-child(5),
-#proyectos td:nth-child(5) {
-    text-align: center;
-}
 /* =====================================================
    DISEÑO RESPONSIVE GENERAL
-   ===================================================== */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-
-/* Contenido principal */
+===================================================== */
 
 main,
 .main-content,
 .contenido-principal {
     width: 100%;
+
     max-width: 100%;
 }
-
-
-/* Contenedores */
 
 .container,
-section,
-.panel {
+section {
     width: 100%;
+
     max-width: 100%;
-}
-
-
-/* =====================================================
-   TABLAS
-   ===================================================== */
-
-.panel {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
 }
 
 
 /* =====================================================
    PANTALLAS GRANDES
-   ===================================================== */
+===================================================== */
 
 @media (min-width: 1400px) {
 
     .container {
         width: 100%;
+
         max-width: 1600px;
+
         margin: 0 auto;
     }
 
@@ -1438,13 +1408,15 @@ table {
 
 /* =====================================================
    LAPTOP
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 1200px) {
 
     .container {
         width: 100%;
+
         padding-left: 20px;
+
         padding-right: 20px;
     }
 
@@ -1453,12 +1425,13 @@ table {
 
 /* =====================================================
    TABLET
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 900px) {
 
     .container {
         padding-left: 15px;
+
         padding-right: 15px;
     }
 
@@ -1475,7 +1448,7 @@ table {
 
 /* =====================================================
    CELULAR
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 600px) {
 
@@ -1485,13 +1458,17 @@ table {
 
     .container {
         width: 100%;
+
         padding-left: 10px;
+
         padding-right: 10px;
     }
 
     .panel {
         width: 100%;
+
         max-width: 100%;
+
         overflow-x: auto;
     }
 
@@ -1502,6 +1479,7 @@ table {
     th,
     td {
         padding: 9px 10px;
+
         font-size: 13px;
     }
 
@@ -1529,100 +1507,177 @@ table {
 
 }
 
-/* =========================================
-   ENCABEZADO FIJO DE TABLA PROYECTOS
-========================================= */
+
+/* =====================================================
+   TABLA DE PROYECTOS
+===================================================== */
 
 #proyectos .panel {
-    position: relative;
+    width: 100%;
+
+    max-width: 100%;
+
+    max-height: 650px;
+
+    /*
+       Este contenedor controla el scroll
+       de la tabla.
+    */
     overflow-x: auto;
+
     overflow-y: auto;
+
+    /*
+       Crea un contexto independiente para
+       el encabezado de la tabla.
+    */
+    isolation: isolate;
+
+    position: relative;
 }
 
-/* =========================================
-   ENCABEZADO FIJO - PROYECTOS
-========================================= */
 
-#proyectos .panel {
-    position: relative;
-    overflow-x: auto;
-    overflow-y: auto;
+#proyectos table {
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
 }
 
-/* Encabezado */
+
+/* =====================================================
+   ENCABEZADO DE PROYECTOS
+===================================================== */
+
 #proyectos thead {
     position: sticky;
+
     top: 0;
-    z-index: 1000;
+
+    z-index: 10;
+
     background: #cbd5e1;
 }
 
+
 #proyectos thead th {
     position: sticky;
+
     top: 0;
-    z-index: 1001;
+
+    z-index: 11;
+
     background: #cbd5e1 !important;
+
     color: #111827;
+
+    /*
+       Evita que el contenido que está
+       debajo se vea a través del encabezado.
+    */
+    box-shadow:
+        0 1px 0 #cbd5e1;
 }
 
-/* =========================================
-   CALENDARIO RESPONSIVO
-   ========================================= */
 
-#calendarioMantenimiento {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
+/* =====================================================
+   CELDAS PROYECTOS
+===================================================== */
+
+#proyectos th,
+#proyectos td {
+    padding: 11px 14px;
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    border-bottom: 1px solid #ddd;
+
+    word-wrap: break-word;
+
+    overflow-wrap: break-word;
 }
 
-/* El calendario de FullCalendar ocupa todo
-   el espacio disponible */
-#calendarioMantenimiento .fc {
-    width: 100%;
-    max-width: 100%;
+
+/* =====================================================
+   ANCHO DE COLUMNAS
+===================================================== */
+
+/* Nombre del proyecto */
+
+#proyectos th:nth-child(1),
+#proyectos td:nth-child(1) {
+    width: 26%;
 }
 
-/* Celular */
-@media (max-width: 600px) {
 
-    #calendarioMantenimiento {
-        font-size: 12px;
-    }
+/* Proyecto */
 
-    #calendarioMantenimiento .fc-toolbar {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    #calendarioMantenimiento .fc-toolbar-title {
-        font-size: 18px;
-    }
-
+#proyectos th:nth-child(2),
+#proyectos td:nth-child(2) {
+    width: 16%;
 }
 
-/* Pantallas grandes */
-@media (min-width: 1400px) {
 
-    #calendarioMantenimiento {
-        width: 100%;
-        max-width: 100%;
-    }
+/* Tipo */
 
+#proyectos th:nth-child(3),
+#proyectos td:nth-child(3) {
+    width: 18%;
 }
 
-/* =========================================
-   FULLCALENDAR - OCUPAR TODO EL ANCHO
-   ========================================= */
+
+/* Sede */
+
+#proyectos th:nth-child(4),
+#proyectos td:nth-child(4) {
+    width: 23%;
+}
+
+
+/* Tipo de cable */
+
+#proyectos th:nth-child(5),
+#proyectos td:nth-child(5) {
+    width: 17%;
+}
+
+
+/* =====================================================
+   CENTRAR COLUMNAS
+===================================================== */
+
+#proyectos th:nth-child(3),
+#proyectos td:nth-child(3),
+
+#proyectos th:nth-child(4),
+#proyectos td:nth-child(4),
+
+#proyectos th:nth-child(5),
+#proyectos td:nth-child(5) {
+    text-align: center;
+}
+
+
+/* =====================================================
+   FULLCALENDAR - ANCHO
+===================================================== */
 
 #calendarioMantenimiento {
     width: 100% !important;
+
     max-width: 100% !important;
+
     min-width: 0 !important;
 }
 
 #calendarioMantenimiento .fc {
     width: 100% !important;
+
     max-width: 100% !important;
 }
 
@@ -1652,4 +1707,73 @@ table {
 
 #calendarioMantenimiento .fc-col-header table {
     width: 100% !important;
+}
+
+
+/* =====================================================
+   CALENDARIO RESPONSIVO
+===================================================== */
+
+@media (max-width: 600px) {
+
+    #calendarioMantenimiento {
+        font-size: 12px;
+    }
+
+    #calendarioMantenimiento .fc-toolbar {
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+    #calendarioMantenimiento .fc-toolbar-title {
+        font-size: 18px;
+    }
+
+}
+
+
+/* =====================================================
+   PROYECTOS EN CELULAR
+===================================================== */
+
+@media (max-width: 768px) {
+
+    #proyectos .panel {
+        max-height: 650px;
+
+        overflow-x: auto;
+
+        overflow-y: auto;
+    }
+
+    #proyectos table {
+        min-width: 1000px;
+    }
+
+    #proyectos thead th {
+        top: 0;
+    }
+
+}
+
+
+/* =====================================================
+   PROYECTOS EN CELULAR PEQUEÑO
+===================================================== */
+
+@media (max-width: 480px) {
+
+    #proyectos .panel {
+        max-height: 600px;
+
+        overflow-x: auto;
+
+        overflow-y: auto;
+    }
+
+    #proyectos table {
+        min-width: 1000px;
+    }
+
 }
