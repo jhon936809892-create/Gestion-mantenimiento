@@ -221,6 +221,15 @@ function inicializarCalendarioMantenimiento() {
 
 
     calendarioMantenimiento.render();
+    window.addEventListener("resize", function () {
+
+    if (calendarioMantenimiento) {
+
+        calendarioMantenimiento.updateSize();
+
+    }
+
+});
 
 }
 
