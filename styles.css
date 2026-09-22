@@ -1539,20 +1539,23 @@ table {
     overflow-y: auto;
 }
 
-#proyectos thead {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* =========================================
+   ENCABEZADO FIJO - PROYECTOS
+========================================= */
+
+#proyectos .panel {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
-/* Cada encabezado es completamente opaco */
+/* Encabezado */
 #proyectos thead th {
     position: sticky;
     top: 0;
+    z-index: 100;
 
-    z-index: 101;
-
-    background-color: #cbd5e1 !important;
+    background: #cbd5e1 !important;
 
     color: #111827;
 
@@ -1560,14 +1563,9 @@ table {
         0 2px 0 #cbd5e1;
 }
 
-/* Los datos quedan debajo del encabezado */
-#proyectos tbody {
-    position: relative;
-    z-index: 1;
-}
-
+/* Cuerpo de la tabla */
 #proyectos tbody td {
-    background-color: #ffffff;
+    background: #ffffff;
 }
 
 /* =========================================
