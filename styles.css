@@ -1294,7 +1294,12 @@ textarea {
 #proyectos .panel {
     width: 100%;
     max-width: 100%;
+
     overflow-x: auto;
+    overflow-y: auto;
+
+    max-height: 650px;
+
     -webkit-overflow-scrolling: touch;
 }
 
