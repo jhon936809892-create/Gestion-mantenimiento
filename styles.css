@@ -1538,3 +1538,49 @@ table {
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
+
+/* =========================================
+   CALENDARIO RESPONSIVO
+   ========================================= */
+
+#calendarioMantenimiento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* El calendario de FullCalendar ocupa todo
+   el espacio disponible */
+#calendarioMantenimiento .fc {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Celular */
+@media (max-width: 600px) {
+
+    #calendarioMantenimiento {
+        font-size: 12px;
+    }
+
+    #calendarioMantenimiento .fc-toolbar {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #calendarioMantenimiento .fc-toolbar-title {
+        font-size: 18px;
+    }
+
+}
+
+/* Pantallas grandes */
+@media (min-width: 1400px) {
+
+    #calendarioMantenimiento {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}
