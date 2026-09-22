@@ -1291,61 +1291,97 @@ textarea {
 #proyectos .panel {
     width: 100%;
     max-width: 100%;
-    
-    /* Scroll vertical */
-    max-height: 900px;
-    overflow-y: auto;
 
-    /* Scroll horizontal */
+    /* Altura para mostrar aproximadamente 15 proyectos */
+    height: 620px;
+
+    /* Scroll vertical y horizontal */
+    overflow-y: auto;
     overflow-x: auto;
+
+    /* Cuadro */
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
 }
 
-/* Tabla */
+
+/* TABLA */
+
 #proyectos table {
     width: 100%;
-    min-width: 900px;
+    min-width: 1000px;
+
     border-collapse: collapse;
     table-layout: fixed;
 }
 
-/* Celdas */
+
+/* ENCABEZADOS Y CELDAS */
+
 #proyectos th,
 #proyectos td {
     padding: 10px 12px;
+
     text-align: left;
     vertical-align: middle;
+
     border-bottom: 1px solid #ddd;
+
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
-/* Código */
+
+/* ENCABEZADO FIJO */
+
+#proyectos th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    background: #cbd5e1;
+    color: #111827;
+
+    font-weight: 600;
+}
+
+
+/* CÓDIGO */
+
 #proyectos th:nth-child(1),
 #proyectos td:nth-child(1) {
     width: 24%;
 }
 
-/* Proyecto */
+
+/* PROYECTO */
+
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
 
-/* Tipo */
+
+/* TIPO */
+
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
     width: 18%;
 }
 
-/* Sede */
+
+/* SEDE */
+
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 24%;
 }
 
-/* Tipo de cable */
+
+/* TIPO DE CABLE */
+
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
     width: 18%;
 }
-
