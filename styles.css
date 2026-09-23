@@ -1535,8 +1535,6 @@ section {
     border-spacing: 0;
 
     table-layout: fixed;
-
-    position: relative;
 }
 
 
@@ -1545,29 +1543,15 @@ section {
 ===================================================== */
 
 #proyectos thead {
-    position: static;
-}
-
-#proyectos thead th {
     position: sticky;
     top: 0;
-    z-index: 20;
-
-    background: #cbd5e1 !important;
-    color: #111827;
+    z-index: 100;
 }
 
-/*
-   ESTA ES LA PARTE IMPORTANTE.
 
-   El encabezado tiene su propio fondo
-   para tapar completamente las filas
-   que suben durante el scroll.
-*/
-
+/* Cada celda del encabezado */
 #proyectos thead th {
     position: sticky;
-
     top: 0;
 
     z-index: 101;
@@ -1586,11 +1570,24 @@ section {
 
     border-bottom: 2px solid #b7c0cc;
 
-    /*
-       Evita que se vea contenido de las filas
-       por detrás del encabezado.
-    */
+    /* IMPORTANTE */
+    box-shadow: 0 2px 0 #b7c0cc;
+
     background-clip: padding-box;
+}
+
+
+/* =====================================================
+   CUERPO DE LA TABLA
+===================================================== */
+
+#proyectos tbody {
+    position: relative;
+    z-index: 1;
+}
+
+#proyectos tbody td {
+    background: white;
 }
 
 
@@ -1614,10 +1611,9 @@ section {
 }
 
 
-#proyectos tbody td {
-    background: white;
-}
-
+/* =====================================================
+   EFECTO AL PASAR EL MOUSE
+===================================================== */
 
 #proyectos tbody tr:hover td {
     background: #f9fafb;
@@ -1633,33 +1629,26 @@ section {
     width: 26%;
 }
 
-
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
 
-
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
     width: 18%;
-
     text-align: center;
 }
-
 
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
-
     text-align: center;
 }
-
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
     width: 17%;
-
     text-align: center;
 }
 
@@ -1682,26 +1671,19 @@ section {
         overflow-y: auto;
     }
 
-
     #proyectos table {
         min-width: 900px;
     }
 
-
     #proyectos thead {
         position: sticky;
-
         top: 0;
-
         z-index: 100;
     }
 
-
     #proyectos thead th {
         position: sticky;
-
         top: 0;
-
         z-index: 101;
 
         background: #cbd5e1 !important;
@@ -1711,15 +1693,14 @@ section {
         padding: 9px 10px;
 
         font-size: 12px;
-    }
 
+        box-shadow: 0 2px 0 #b7c0cc;
+    }
 
     #proyectos td {
         padding: 9px 10px;
-
         font-size: 12px;
     }
-
 }
 
 
@@ -1741,26 +1722,19 @@ section {
         overflow-y: auto;
     }
 
-
     #proyectos table {
         min-width: 850px;
     }
 
-
     #proyectos thead {
         position: sticky;
-
         top: 0;
-
         z-index: 100;
     }
 
-
     #proyectos thead th {
         position: sticky;
-
         top: 0;
-
         z-index: 101;
 
         background: #cbd5e1 !important;
@@ -1771,14 +1745,13 @@ section {
 
         font-size: 12px;
 
+        box-shadow: 0 2px 0 #b7c0cc;
+
         background-clip: padding-box;
     }
 
-
     #proyectos td {
         padding: 9px 10px;
-
         font-size: 12px;
     }
-
 }
