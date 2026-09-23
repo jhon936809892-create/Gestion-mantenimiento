@@ -1545,12 +1545,17 @@ section {
 ===================================================== */
 
 #proyectos thead {
-    position: sticky;
-    top: 0;
-
-    z-index: 100;
+    position: static;
 }
 
+#proyectos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    background: #cbd5e1 !important;
+    color: #111827;
+}
 
 /*
    ESTA ES LA PARTE IMPORTANTE.
