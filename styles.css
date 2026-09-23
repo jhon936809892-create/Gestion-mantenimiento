@@ -1533,7 +1533,28 @@ section {
    TABLA DE PROYECTOS
 ===================================================== */
 
-#proyectos .panel {
+.proyectos-panel {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 0;
+
+    background: white;
+
+    overflow: hidden;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   CONTENEDOR DEL SCROLL
+===================================================== */
+
+.tabla-proyectos-scroll {
+
     width: 100%;
     max-width: 100%;
 
@@ -1544,18 +1565,7 @@ section {
 
     position: relative;
 
-    /*
-       NO usar isolation: isolate aquí.
-    */
-    isolation: auto;
-
     background: white;
-
-    /*
-       El panel NO debe estar por encima
-       del encabezado principal.
-    */
-    z-index: 1;
 }
 
 
@@ -1563,7 +1573,8 @@ section {
    TABLA
 ===================================================== */
 
-#proyectos table {
+.tabla-proyectos {
+
     width: 100%;
 
     min-width: 1000px;
@@ -1580,23 +1591,13 @@ section {
    ENCABEZADO DE LA TABLA
 ===================================================== */
 
-#proyectos thead {
+.tabla-proyectos thead th {
+
     position: sticky;
 
     top: 0;
 
-    z-index: 5;
-
-    background: #cbd5e1;
-}
-
-
-#proyectos thead th {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 5;
+    z-index: 10;
 
     background: #cbd5e1 !important;
 
@@ -1621,8 +1622,9 @@ section {
    CELDAS
 ===================================================== */
 
-#proyectos th,
-#proyectos td {
+.tabla-proyectos th,
+.tabla-proyectos td {
+
     padding: 11px 14px;
 
     text-align: left;
@@ -1637,12 +1639,22 @@ section {
 }
 
 
-#proyectos tbody td {
+/* =====================================================
+   FONDO DE LAS FILAS
+===================================================== */
+
+.tabla-proyectos tbody td {
+
     background: white;
 }
 
 
-#proyectos tbody tr:hover td {
+/* =====================================================
+   HOVER
+===================================================== */
+
+.tabla-proyectos tbody tr:hover td {
+
     background: #f9fafb;
 }
 
@@ -1651,126 +1663,158 @@ section {
    ANCHO DE COLUMNAS
 ===================================================== */
 
-#proyectos th:nth-child(1),
-#proyectos td:nth-child(1) {
+.tabla-proyectos th:nth-child(1),
+.tabla-proyectos td:nth-child(1) {
+
     width: 26%;
 }
 
 
-#proyectos th:nth-child(2),
-#proyectos td:nth-child(2) {
+.tabla-proyectos th:nth-child(2),
+.tabla-proyectos td:nth-child(2) {
+
     width: 16%;
 }
 
 
-#proyectos th:nth-child(3),
-#proyectos td:nth-child(3) {
+.tabla-proyectos th:nth-child(3),
+.tabla-proyectos td:nth-child(3) {
+
     width: 18%;
+
+    text-align: center;
 }
 
 
-#proyectos th:nth-child(4),
-#proyectos td:nth-child(4) {
+.tabla-proyectos th:nth-child(4),
+.tabla-proyectos td:nth-child(4) {
+
     width: 23%;
+
+    text-align: center;
 }
 
 
-#proyectos th:nth-child(5),
-#proyectos td:nth-child(5) {
+.tabla-proyectos th:nth-child(5),
+.tabla-proyectos td:nth-child(5) {
+
     width: 17%;
-}
 
-
-/* =====================================================
-   CENTRAR COLUMNAS
-===================================================== */
-
-#proyectos th:nth-child(3),
-#proyectos td:nth-child(3),
-
-#proyectos th:nth-child(4),
-#proyectos td:nth-child(4),
-
-#proyectos th:nth-child(5),
-#proyectos td:nth-child(5) {
     text-align: center;
 }
 
 
 /* =====================================================
-   FULLCALENDAR - ANCHO
+   TOPBAR
 ===================================================== */
 
-#calendarioMantenimiento {
-    width: 100% !important;
+.topbar {
 
-    max-width: 100% !important;
+    position: relative;
 
-    min-width: 0 !important;
-}
+    z-index: 1000;
 
-
-#calendarioMantenimiento .fc {
-    width: 100% !important;
-
-    max-width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-view-harness {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-scrollgrid {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-scrollgrid-sync-table {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-daygrid-body {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-daygrid-body table {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-col-header {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-col-header table {
-    width: 100% !important;
+    background: white;
 }
 
 
 /* =====================================================
-   CALENDARIO RESPONSIVO
+   PROYECTOS - TABLET
 ===================================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
-    #calendarioMantenimiento {
+    .proyectos-panel {
+
+        padding: 0;
+
+        overflow: hidden;
+    }
+
+
+    .tabla-proyectos-scroll {
+
+        max-height: 600px;
+
+        overflow-x: auto;
+
+        overflow-y: auto;
+    }
+
+
+    .tabla-proyectos {
+
+        min-width: 900px;
+    }
+
+
+    .tabla-proyectos th,
+    .tabla-proyectos td {
+
+        padding: 9px 10px;
+
         font-size: 12px;
     }
 
-    #calendarioMantenimiento .fc-toolbar {
-        flex-wrap: wrap;
 
-        gap: 8px;
+    .tabla-proyectos thead th {
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 10;
+
+        background: #cbd5e1 !important;
     }
 
-    #calendarioMantenimiento .fc-toolbar-title {
-        font-size: 18px;
+}
+
+
+/* =====================================================
+   PROYECTOS - CELULAR PEQUEÑO
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .tabla-proyectos-scroll {
+
+        max-height: 550px;
+
+        overflow-x: auto;
+
+        overflow-y: auto;
     }
+
+
+    .tabla-proyectos {
+
+        min-width: 850px;
+    }
+
+
+    .tabla-proyectos th,
+    .tabla-proyectos td {
+
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
+
+    .tabla-proyectos thead th {
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 10;
+
+        background: #cbd5e1 !important;
+
+        color: #111827;
+    }
+
 }
 
 
