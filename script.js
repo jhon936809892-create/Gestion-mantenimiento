@@ -1997,3 +1997,24 @@ window.addEventListener("resize", function () {
     });
 
 });
+// ========================================
+// OBSERVAR CAMBIOS DE TAMAÑO DEL CALENDARIO
+// ========================================
+
+const elementoCalendario =
+    document.getElementById("calendarioMantenimiento");
+
+if (elementoCalendario) {
+
+    const observadorCalendario =
+        new ResizeObserver(function () {
+
+            if (calendarioMantenimiento) {
+                calendarioMantenimiento.updateSize();
+            }
+
+        });
+
+    observadorCalendario.observe(elementoCalendario);
+
+}
