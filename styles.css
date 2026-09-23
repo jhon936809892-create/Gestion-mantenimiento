@@ -1542,40 +1542,31 @@ section {
    ENCABEZADO FIJO
 ===================================================== */
 
-#proyectos thead {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+/* =====================================================
+   ENCABEZADO FIJO
+===================================================== */
 
-
-/* Cada celda del encabezado */
 #proyectos thead th {
     position: sticky;
     top: 0;
+    z-index: 1000;
 
-    z-index: 101;
-
-    background: #cbd5e1 !important;
-
+    background-color: #cbd5e1 !important;
     color: #111827;
 
     padding: 11px 14px;
 
     text-align: left;
-
     vertical-align: middle;
 
     white-space: nowrap;
 
     border-bottom: 2px solid #b7c0cc;
 
-    /* IMPORTANTE */
-    box-shadow: 0 2px 0 #b7c0cc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 
     background-clip: padding-box;
 }
-
 
 /* =====================================================
    CUERPO DE LA TABLA
