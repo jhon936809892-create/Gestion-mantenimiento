@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css" rel="stylesheet">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Gestión de Cuadrillas</title>
@@ -15,100 +11,87 @@
 
     <link rel="stylesheet" href="styles.css">
 
+    <link
+        href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css"
+        rel="stylesheet"
+    >
 </head>
-
 
 <body>
 
-
-    <!-- ========================================
-         SIDEBAR
-    ======================================== -->
-
     <aside class="sidebar">
-        <button id="btnMenuMobile" class="btn-menu-mobile">☰</button>
+
+        <button id="btnMenuMobile" class="btn-menu-mobile">
+            ☰
+        </button>
 
         <div class="logo">
-
-         <img
-                src="img/bantel.png"
-                alt="Logo">
-
+            <img src="img/bantel.png" alt="Logo">
         </div>
 
+        <button
+            class="menu active"
+            onclick="mostrarSeccion('dashboard', this)"
+        >
+            <span class="menu-icono">🏠</span>
+            <span class="menu-texto">Dashboard</span>
+        </button>
 
-            <button
-                class="menu active"
-                onclick="mostrarSeccion('dashboard', this)">
-                <span class="menu-icono">🏠</span>
-                <span class="menu-texto">Dashboard</span>
-            </button>
+        <button
+            class="menu"
+            onclick="mostrarSeccion('personal', this)"
+        >
+            <span class="menu-icono">👷</span>
+            <span class="menu-texto">Personal</span>
+        </button>
 
+        <button
+            class="menu"
+            onclick="mostrarSeccion('cuadrillas', this)"
+        >
+            <span class="menu-icono">👥</span>
+            <span class="menu-texto">Cuadrillas</span>
+        </button>
 
-            <button
-                class="menu"
-                onclick="mostrarSeccion('personal', this)">
-                <span class="menu-icono">👷</span>
-                <span class="menu-texto">Personal</span>
-            </button>
+        <button
+            class="menu"
+            onclick="mostrarSeccion('proyectos', this)"
+        >
+            <span class="menu-icono">📁</span>
+            <span class="menu-texto">Proyectos</span>
+        </button>
 
+        <button
+            class="menu"
+            onclick="mostrarSeccion('mantenimiento', this)"
+        >
+            <span class="menu-icono">🔧</span>
+            <span class="menu-texto">Mantenimiento</span>
+        </button>
 
-            <button
-                class="menu"
-                onclick="mostrarSeccion('cuadrillas', this)">
-                <span class="menu-icono">👥</span>
-                <span class="menu-texto">Cuadrillas</span>
-            </button>
+        <button
+            class="menu"
+            onclick="mostrarSeccion('materiales', this)"
+        >
+            <span class="menu-icono">📦</span>
+            <span class="menu-texto">Materiales</span>
+        </button>
 
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('proyectos', this)">
-                <span class="menu-icono">📁</span>
-                <span class="menu-texto">Proyectos</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('mantenimiento', this)">
-                <span class="menu-icono">🔧</span>
-                <span class="menu-texto">Mantenimiento</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('materiales', this)">
-                <span class="menu-icono">📦</span>
-                <span class="menu-texto">Materiales</span>
-            </button>
-
-            <button class="menu" onclick="cerrarSesion()">
-                <span class="menu-icono">🚪</span>
-                <span class="menu-texto">Cerrar sesión</span>
-            </button>
-        </nav>
+        <button
+            class="menu"
+            onclick="cerrarSesion()"
+        >
+            <span class="menu-icono">🚪</span>
+            <span class="menu-texto">Cerrar sesión</span>
+        </button>
 
     </aside>
 
-
-
-    <!-- ========================================
-         CONTENIDO PRINCIPAL
-    ======================================== -->
-
     <main class="main">
-
-
-        <!-- ========================================
-             TOPBAR
-        ======================================== -->
 
         <header class="topbar">
 
             <div>
-
                 <h1 id="titulo">
                     Dashboard
                 </h1>
@@ -116,39 +99,13 @@
                 <p>
                     Sistema de gestión de personal y mantenimiento
                 </p>
-
             </div>
 
-
-            <!-- ========================================
-                 USUARIO Y BOTONES DE SECCIÓN
-            ======================================== -->
-
             <div class="topbar-right">
-
-                <!-- Información del usuario -->
-
-                
-
-
-                <!-- Botón dinámico -->
-
                 <div id="botonTopbar"></div>
-
-
-                <!-- Cerrar sesión -->
-
-                
-
             </div>
 
         </header>
-
-
-
-        <!-- ========================================
-             DASHBOARD
-        ======================================== -->
 
         <section
             id="dashboard"
@@ -157,7 +114,6 @@
 
             <div class="cards">
 
-
                 <div class="card">
 
                     <div class="card-icon">
@@ -165,20 +121,14 @@
                     </div>
 
                     <div>
-
-                        <p>
-                            Personal
-                        </p>
+                        <p>Personal</p>
 
                         <h2 id="totalPersonal">
                             0
                         </h2>
-
                     </div>
 
                 </div>
-
-
 
                 <div class="card">
 
@@ -187,20 +137,14 @@
                     </div>
 
                     <div>
-
-                        <p>
-                            Cuadrillas
-                        </p>
+                        <p>Cuadrillas</p>
 
                         <h2>
                             3
                         </h2>
-
                     </div>
 
                 </div>
-
-
 
                 <div class="card">
 
@@ -209,20 +153,14 @@
                     </div>
 
                     <div>
-
-                        <p>
-                            Proyectos
-                        </p>
+                        <p>Proyectos</p>
 
                         <h2 id="totalProyectos">
                             0
                         </h2>
-
                     </div>
 
                 </div>
-
-
 
                 <div class="card">
 
@@ -231,23 +169,16 @@
                     </div>
 
                     <div>
-
-                        <p>
-                            Mantenimientos
-                        </p>
+                        <p>Mantenimientos</p>
 
                         <h2 id="totalMantenimientos">
                             0
                         </h2>
-
                     </div>
 
                 </div>
 
-
             </div>
-
-
 
             <div class="panel">
 
@@ -255,12 +186,9 @@
                     Resumen
                 </h2>
 
-
                 <div class="resumen">
 
-
                     <div>
-
                         <strong>
                             Cuadrilla 1
                         </strong>
@@ -268,13 +196,9 @@
                         <span id="cantidadC1">
                             0 técnicos
                         </span>
-
                     </div>
 
-
-
                     <div>
-
                         <strong>
                             Cuadrilla 2
                         </strong>
@@ -282,13 +206,9 @@
                         <span id="cantidadC2">
                             0 técnicos
                         </span>
-
                     </div>
 
-
-
                     <div>
-
                         <strong>
                             Cuadrilla 3
                         </strong>
@@ -296,22 +216,13 @@
                         <span id="cantidadC3">
                             0 técnicos
                         </span>
-
                     </div>
-
 
                 </div>
 
             </div>
 
-
         </section>
-
-
-
-        <!-- ========================================
-             PERSONAL
-        ======================================== -->
 
         <section
             id="personal"
@@ -325,35 +236,15 @@
                     <thead>
 
                         <tr>
-
-                            <th>
-                                Nombres
-                            </th>
-
-                            <th>
-                                Apellidos
-                            </th>
-
-                            <th>
-                                DNI / CE
-                            </th>
-
-                            <th>
-                                Celular
-                            </th>
-
-                            <th>
-                                Cargo
-                            </th>
-
-                            <th>
-                                Cuadrilla
-                            </th>
-
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>DNI / CE</th>
+                            <th>Celular</th>
+                            <th>Cargo</th>
+                            <th>Cuadrilla</th>
                         </tr>
 
                     </thead>
-
 
                     <tbody id="tablaPersonal"></tbody>
 
@@ -361,14 +252,7 @@
 
             </div>
 
-
         </section>
-
-
-
-        <!-- ========================================
-             CUADRILLAS
-        ======================================== -->
 
         <section
             id="cuadrillas"
@@ -376,7 +260,6 @@
         >
 
             <div class="cuadrillas-grid">
-
 
                 <div class="cuadrilla">
 
@@ -388,8 +271,6 @@
 
                 </div>
 
-
-
                 <div class="cuadrilla">
 
                     <h3>
@@ -399,8 +280,6 @@
                     <div id="cuadrilla2"></div>
 
                 </div>
-
-
 
                 <div class="cuadrilla">
 
@@ -412,315 +291,12 @@
 
                 </div>
 
-
             </div>
-
 
         </section>
 
-
-
-        <!-- ========================================
-             PROYECTOS
-        ======================================== -->
-
-      <section id="proyectos" class="seccion">
-
-
-    <!-- ========================================
-         SIDEBAR
-    ======================================== -->
-
-    <aside class="sidebar">
-        <button id="btnMenuMobile" class="btn-menu-mobile">☰</button>
-
-        <div class="logo">
-
-         <img
-                src="img/bantel.png"
-                alt="Logo">
-
-        </div>
-
-
-            <button
-                class="menu active"
-                onclick="mostrarSeccion('dashboard', this)">
-                <span class="menu-icono">🏠</span>
-                <span class="menu-texto">Dashboard</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('personal', this)">
-                <span class="menu-icono">👷</span>
-                <span class="menu-texto">Personal</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('cuadrillas', this)">
-                <span class="menu-icono">👥</span>
-                <span class="menu-texto">Cuadrillas</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('proyectos', this)">
-                <span class="menu-icono">📁</span>
-                <span class="menu-texto">Proyectos</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('mantenimiento', this)">
-                <span class="menu-icono">🔧</span>
-                <span class="menu-texto">Mantenimiento</span>
-            </button>
-
-
-            <button
-                class="menu"
-                onclick="mostrarSeccion('materiales', this)">
-                <span class="menu-icono">📦</span>
-                <span class="menu-texto">Materiales</span>
-            </button>
-
-            <button class="menu" onclick="cerrarSesion()">
-                <span class="menu-icono">🚪</span>
-                <span class="menu-texto">Cerrar sesión</span>
-            </button>
-        </nav>
-
-    </aside>
-
-
-
-    <!-- ========================================
-         CONTENIDO PRINCIPAL
-    ======================================== -->
-
-    <main class="main">
-
-
-        <!-- ========================================
-             TOPBAR
-        ======================================== -->
-
-        <header class="topbar">
-
-            <div>
-
-                <h1 id="titulo">
-                    Dashboard
-                </h1>
-
-                <p>
-                    Sistema de gestión de personal y mantenimiento
-                </p>
-
-            </div>
-
-
-            <!-- ========================================
-                 USUARIO Y BOTONES DE SECCIÓN
-            ======================================== -->
-
-            <div class="topbar-right">
-
-                <!-- Información del usuario -->
-
-                
-
-
-                <!-- Botón dinámico -->
-
-                <div id="botonTopbar"></div>
-
-
-                <!-- Cerrar sesión -->
-
-                
-
-            </div>
-
-        </header>
-
-
-
-        <!-- ========================================
-             DASHBOARD
-        ======================================== -->
-
         <section
-            id="dashboard"
-            class="seccion activa"
-        >
-
-            <div class="cards">
-
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        👷
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Personal
-                        </p>
-
-                        <h2 id="totalPersonal">
-                            0
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        👥
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Cuadrillas
-                        </p>
-
-                        <h2>
-                            3
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        📁
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Proyectos
-                        </p>
-
-                        <h2 id="totalProyectos">
-                            0
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        🔧
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Mantenimientos
-                        </p>
-
-                        <h2 id="totalMantenimientos">
-                            0
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="panel">
-
-                <h2>
-                    Resumen
-                </h2>
-
-
-                <div class="resumen">
-
-
-                    <div>
-
-                        <strong>
-                            Cuadrilla 1
-                        </strong>
-
-                        <span id="cantidadC1">
-                            0 técnicos
-                        </span>
-
-                    </div>
-
-
-
-                    <div>
-
-                        <strong>
-                            Cuadrilla 2
-                        </strong>
-
-                        <span id="cantidadC2">
-                            0 técnicos
-                        </span>
-
-                    </div>
-
-
-
-                    <div>
-
-                        <strong>
-                            Cuadrilla 3
-                        </strong>
-
-                        <span id="cantidadC3">
-                            0 técnicos
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ========================================
-             PERSONAL
-        ======================================== -->
-
-        <section
-            id="personal"
+            id="proyectos"
             class="seccion"
         >
 
@@ -731,211 +307,85 @@
                     <thead>
 
                         <tr>
-
-                            <th>
-                                Nombres
-                            </th>
-
-                            <th>
-                                Apellidos
-                            </th>
-
-                            <th>
-                                DNI / CE
-                            </th>
-
-                            <th>
-                                Celular
-                            </th>
-
-                            <th>
-                                Cargo
-                            </th>
-
-                            <th>
-                                Cuadrilla
-                            </th>
-
+                            <th>Nombre de Proyecto</th>
+                            <th>Proyecto</th>
+                            <th>Tipo</th>
+                            <th>Sede</th>
+                            <th>Tipo de cable</th>
                         </tr>
 
                     </thead>
 
-
-                    <tbody id="tablaPersonal"></tbody>
+                    <tbody id="tablaProyectos"></tbody>
 
                 </table>
 
             </div>
 
-
         </section>
 
-
-
-        <!-- ========================================
-             CUADRILLAS
-        ======================================== -->
-
         <section
-            id="cuadrillas"
+            id="mantenimiento"
             class="seccion"
         >
 
-            <div class="cuadrillas-grid">
+            <div class="panel">
 
+                <div class="panel-header">
 
-                <div class="cuadrilla">
-
-                    <h3>
-                        Cuadrilla 1
-                    </h3>
-
-                    <div id="cuadrilla1"></div>
+                    <h2>
+                        Lista de mantenimientos
+                    </h2>
 
                 </div>
 
+                <div class="tabla-responsive">
 
+                    <table>
 
-                <div class="cuadrilla">
+                        <thead>
 
-                    <h3>
-                        Cuadrilla 2
-                    </h3>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Proyecto</th>
+                                <th>Cuadrilla</th>
+                                <th>Trabajo</th>
+                                <th>Estado</th>
+                            </tr>
 
-                    <div id="cuadrilla2"></div>
+                        </thead>
 
-                </div>
+                        <tbody id="tablaMantenimiento"></tbody>
 
-
-
-                <div class="cuadrilla">
-
-                    <h3>
-                        Cuadrilla 3
-                    </h3>
-
-                    <div id="cuadrilla3"></div>
+                    </table>
 
                 </div>
-
 
             </div>
 
+            <div class="panel calendario-panel">
+
+                <div class="calendario-header">
+
+                    <div>
+
+                        <h2>
+                            Calendario de mantenimientos
+                        </h2>
+
+                        <p>
+                            Consulta los mantenimientos por mes, semana o día.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div id="calendarioMantenimiento"></div>
+
+            </div>
 
         </section>
-
-
-
-        <!-- ========================================
-             PROYECTOS
-        ======================================== -->
-
-      <section id="proyectos" class="seccion">
-
-    <div class="panel">
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>Nombre de Proyecto</th>
-                    <th>Proyecto</th>
-                    <th>Tipo</th>
-                    <th>Sede</th>
-                    <th>Tipo de cable</th>
-                </tr>
-            </thead>
-
-            <tbody id="tablaProyectos"></tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
-
-<!-- ========================================
-     MANTENIMIENTO
-======================================== -->
-
-<section id="mantenimiento" class="seccion">
-
-    <!-- CALENDARIO -->
-     <!-- TABLA DE MANTENIMIENTOS -->
-
-    <div class="panel">
-
-        <div class="panel-header">
-
-            <h2>
-                Lista de mantenimientos
-            </h2>
-
-        </div>
-
-
-        <div class="tabla-responsive">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Fecha</th>
-
-                        <th>Proyecto</th>
-
-                        <th>Cuadrilla</th>
-
-                        <th>Trabajo</th>
-
-                        <th>Estado</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="tablaMantenimiento">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <div class="panel calendario-panel">
-
-        <div class="calendario-header">
-
-            <div>
-                <h2>Calendario de mantenimientos</h2>
-
-                <p>
-                    Consulta los mantenimientos por mes, semana o día.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div id="calendarioMantenimiento"></div>
-
-    </div>
-
-
-    
-
-</section>
-
-
-
-        <!-- ========================================
-             MATERIALES
-        ======================================== -->
 
         <section
             id="materiales"
@@ -949,27 +399,13 @@
                     <thead>
 
                         <tr>
-
-                            <th>
-                                Material
-                            </th>
-
-                            <th>
-                                Cantidad
-                            </th>
-
-                            <th>
-                                Unidad
-                            </th>
-
-                            <th>
-                                Proyecto
-                            </th>
-
+                            <th>Material</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>Proyecto</th>
                         </tr>
 
                     </thead>
-
 
                     <tbody id="tablaMateriales"></tbody>
 
@@ -977,17 +413,9 @@
 
             </div>
 
-
         </section>
 
-
     </main>
-
-
-
-    <!-- ========================================
-         MODAL PERSONAL
-    ======================================== -->
 
     <div
         id="modalPersonal"
@@ -995,7 +423,6 @@
     >
 
         <div class="modal-content">
-
 
             <div class="modal-header">
 
@@ -1012,15 +439,11 @@
 
             </div>
 
-
-
             <form
                 onsubmit="registrarPersonal(event)"
             >
 
-
                 <div class="form-grid">
-
 
                     <div>
 
@@ -1036,8 +459,6 @@
 
                     </div>
 
-
-
                     <div>
 
                         <label>
@@ -1051,8 +472,6 @@
                         >
 
                     </div>
-
-
 
                     <div>
 
@@ -1077,8 +496,6 @@
 
                     </div>
 
-
-
                     <div>
 
                         <label>
@@ -1101,8 +518,6 @@
 
                     </div>
 
-
-
                     <div>
 
                         <label>
@@ -1115,8 +530,6 @@
                         >
 
                     </div>
-
-
 
                     <div>
 
@@ -1142,10 +555,7 @@
 
                     </div>
 
-
                 </div>
-
-
 
                 <button
                     class="btn-primary full"
@@ -1154,19 +564,11 @@
                     Guardar personal
                 </button>
 
-
             </form>
-
 
         </div>
 
     </div>
-
-
-
-    <!-- ========================================
-         MODAL PROYECTO
-    ======================================== -->
 
     <div
         id="modalProyecto"
@@ -1174,7 +576,6 @@
     >
 
         <div class="modal-content">
-
 
             <div class="modal-header">
 
@@ -1191,12 +592,9 @@
 
             </div>
 
-
-
             <form
                 onsubmit="registrarProyecto(event)"
             >
-
 
                 <label>
                     Nombre del proyecto
@@ -1207,8 +605,6 @@
                     id="nombreProyecto"
                     required
                 >
-
-
 
                 <label>
                     Cuadrilla
@@ -1230,8 +626,6 @@
 
                 </select>
 
-
-
                 <label>
                     Responsable
                 </label>
@@ -1241,8 +635,6 @@
                     id="responsableProyecto"
                 >
 
-
-
                 <label>
                     Fecha
                 </label>
@@ -1251,8 +643,6 @@
                     type="date"
                     id="fechaProyecto"
                 >
-
-
 
                 <label>
                     Estado
@@ -1274,8 +664,6 @@
 
                 </select>
 
-
-
                 <button
                     class="btn-primary full"
                     type="submit"
@@ -1283,19 +671,11 @@
                     Guardar proyecto
                 </button>
 
-
             </form>
-
 
         </div>
 
     </div>
-
-
-
-    <!-- ========================================
-         MODAL MANTENIMIENTO
-    ======================================== -->
 
     <div
         id="modalMantenimiento"
@@ -1303,7 +683,6 @@
     >
 
         <div class="modal-content">
-
 
             <div class="modal-header">
 
@@ -1320,12 +699,9 @@
 
             </div>
 
-
-
             <form
                 onsubmit="registrarMantenimiento(event)"
             >
-
 
                 <label>
                     Fecha
@@ -1336,8 +712,6 @@
                     id="fechaMantenimiento"
                     required
                 >
-
-
 
                 <label>
                     Proyecto
@@ -1353,8 +727,6 @@
                     </option>
 
                 </select>
-
-
 
                 <label>
                     Cuadrilla
@@ -1376,8 +748,6 @@
 
                 </select>
 
-
-
                 <label>
                     Descripción del trabajo
                 </label>
@@ -1386,8 +756,6 @@
                     id="trabajoMantenimiento"
                     required
                 ></textarea>
-
-
 
                 <label>
                     Estado
@@ -1409,8 +777,6 @@
 
                 </select>
 
-
-
                 <button
                     class="btn-primary full"
                     type="submit"
@@ -1418,19 +784,11 @@
                     Guardar mantenimiento
                 </button>
 
-
             </form>
-
 
         </div>
 
     </div>
-
-
-
-    <!-- ========================================
-         MODAL MATERIAL
-    ======================================== -->
 
     <div
         id="modalMaterial"
@@ -1438,7 +796,6 @@
     >
 
         <div class="modal-content">
-
 
             <div class="modal-header">
 
@@ -1455,12 +812,9 @@
 
             </div>
 
-
-
             <form
                 onsubmit="registrarMaterial(event)"
             >
-
 
                 <label>
                     Proyecto
@@ -1477,8 +831,6 @@
 
                 </select>
 
-
-
                 <label>
                     Material
                 </label>
@@ -1489,8 +841,6 @@
                     required
                     placeholder="Ej. Cable de fibra óptica"
                 >
-
-
 
                 <label>
                     Cantidad
@@ -1503,8 +853,6 @@
                     step="0.01"
                     required
                 >
-
-
 
                 <label>
                     Unidad
@@ -1549,8 +897,6 @@
 
                 </select>
 
-
-
                 <button
                     class="btn-primary full"
                     type="submit"
@@ -1558,751 +904,15 @@
                     Guardar material
                 </button>
 
-
             </form>
-
 
         </div>
 
     </div>
 
-
-
-    <!-- ========================================
-         JAVASCRIPT
-    ======================================== -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
 
     <script src="script.js"></script>
-
-
-</body>
-
-</html>
-
-
-<!-- ========================================
-     MANTENIMIENTO
-======================================== -->
-
-<section id="mantenimiento" class="seccion">
-
-    <!-- CALENDARIO -->
-     <!-- TABLA DE MANTENIMIENTOS -->
-
-    <div class="panel">
-
-        <div class="panel-header">
-
-            <h2>
-                Lista de mantenimientos
-            </h2>
-
-        </div>
-
-
-        <div class="tabla-responsive">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Fecha</th>
-
-                        <th>Proyecto</th>
-
-                        <th>Cuadrilla</th>
-
-                        <th>Trabajo</th>
-
-                        <th>Estado</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="tablaMantenimiento">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <div class="panel calendario-panel">
-
-        <div class="calendario-header">
-
-            <div>
-                <h2>Calendario de mantenimientos</h2>
-
-                <p>
-                    Consulta los mantenimientos por mes, semana o día.
-                </p>
-            </div>
-
-        </div>
-
-
-        <div id="calendarioMantenimiento"></div>
-
-    </div>
-
-
-    
-
-</section>
-
-
-
-        <!-- ========================================
-             MATERIALES
-        ======================================== -->
-
-        <section
-            id="materiales"
-            class="seccion"
-        >
-
-            <div class="panel">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Material
-                            </th>
-
-                            <th>
-                                Cantidad
-                            </th>
-
-                            <th>
-                                Unidad
-                            </th>
-
-                            <th>
-                                Proyecto
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="tablaMateriales"></tbody>
-
-                </table>
-
-            </div>
-
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- ========================================
-         MODAL PERSONAL
-    ======================================== -->
-
-    <div
-        id="modalPersonal"
-        class="modal"
-    >
-
-        <div class="modal-content">
-
-
-            <div class="modal-header">
-
-                <h2>
-                    Registrar personal
-                </h2>
-
-                <button
-                    type="button"
-                    onclick="cerrarModal('modalPersonal')"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-
-            <form
-                onsubmit="registrarPersonal(event)"
-            >
-
-
-                <div class="form-grid">
-
-
-                    <div>
-
-                        <label>
-                            Nombres
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nombres"
-                            required
-                        >
-
-                    </div>
-
-
-
-                    <div>
-
-                        <label>
-                            Apellidos
-                        </label>
-
-                        <input
-                            type="text"
-                            id="apellidos"
-                            required
-                        >
-
-                    </div>
-
-
-
-                    <div>
-
-                        <label>
-                            DNI / CE
-                        </label>
-
-                        <input
-                            type="text"
-                            id="documento"
-                            required
-                            inputmode="numeric"
-                            maxlength="8"
-                            placeholder="Ingrese 8 dígitos"
-                            oninput="validarDNI()"
-                        >
-
-                        <small
-                            id="errorDNI"
-                            class="error-campo"
-                        ></small>
-
-                    </div>
-
-
-
-                    <div>
-
-                        <label>
-                            Celular
-                        </label>
-
-                        <input
-                            type="text"
-                            id="celular"
-                            inputmode="numeric"
-                            maxlength="9"
-                            placeholder="Ingrese 9 dígitos"
-                            oninput="validarCelular()"
-                        >
-
-                        <small
-                            id="errorCelular"
-                            class="error-campo"
-                        ></small>
-
-                    </div>
-
-
-
-                    <div>
-
-                        <label>
-                            Cargo
-                        </label>
-
-                        <input
-                            type="text"
-                            id="cargo"
-                        >
-
-                    </div>
-
-
-
-                    <div>
-
-                        <label>
-                            Cuadrilla
-                        </label>
-
-                        <select id="cuadrilla">
-
-                            <option value="1">
-                                Cuadrilla 1
-                            </option>
-
-                            <option value="2">
-                                Cuadrilla 2
-                            </option>
-
-                            <option value="3">
-                                Cuadrilla 3
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <button
-                    class="btn-primary full"
-                    type="submit"
-                >
-                    Guardar personal
-                </button>
-
-
-            </form>
-
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ========================================
-         MODAL PROYECTO
-    ======================================== -->
-
-    <div
-        id="modalProyecto"
-        class="modal"
-    >
-
-        <div class="modal-content">
-
-
-            <div class="modal-header">
-
-                <h2>
-                    Nuevo proyecto
-                </h2>
-
-                <button
-                    type="button"
-                    onclick="cerrarModal('modalProyecto')"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-
-            <form
-                onsubmit="registrarProyecto(event)"
-            >
-
-
-                <label>
-                    Nombre del proyecto
-                </label>
-
-                <input
-                    type="text"
-                    id="nombreProyecto"
-                    required
-                >
-
-
-
-                <label>
-                    Cuadrilla
-                </label>
-
-                <select id="cuadrillaProyecto">
-
-                    <option value="1">
-                        Cuadrilla 1
-                    </option>
-
-                    <option value="2">
-                        Cuadrilla 2
-                    </option>
-
-                    <option value="3">
-                        Cuadrilla 3
-                    </option>
-
-                </select>
-
-
-
-                <label>
-                    Responsable
-                </label>
-
-                <input
-                    type="text"
-                    id="responsableProyecto"
-                >
-
-
-
-                <label>
-                    Fecha
-                </label>
-
-                <input
-                    type="date"
-                    id="fechaProyecto"
-                >
-
-
-
-                <label>
-                    Estado
-                </label>
-
-                <select id="estadoProyecto">
-
-                    <option>
-                        Pendiente
-                    </option>
-
-                    <option>
-                        En proceso
-                    </option>
-
-                    <option>
-                        Terminado
-                    </option>
-
-                </select>
-
-
-
-                <button
-                    class="btn-primary full"
-                    type="submit"
-                >
-                    Guardar proyecto
-                </button>
-
-
-            </form>
-
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ========================================
-         MODAL MANTENIMIENTO
-    ======================================== -->
-
-    <div
-        id="modalMantenimiento"
-        class="modal"
-    >
-
-        <div class="modal-content">
-
-
-            <div class="modal-header">
-
-                <h2>
-                    Nuevo mantenimiento
-                </h2>
-
-                <button
-                    type="button"
-                    onclick="cerrarModal('modalMantenimiento')"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-
-            <form
-                onsubmit="registrarMantenimiento(event)"
-            >
-
-
-                <label>
-                    Fecha
-                </label>
-
-                <input
-                    type="date"
-                    id="fechaMantenimiento"
-                    required
-                >
-
-
-
-                <label>
-                    Proyecto
-                </label>
-
-                <select
-                    id="proyectoMantenimiento"
-                    required
-                >
-
-                    <option value="">
-                        Seleccione un proyecto
-                    </option>
-
-                </select>
-
-
-
-                <label>
-                    Cuadrilla
-                </label>
-
-                <select id="cuadrillaMantenimiento">
-
-                    <option value="1">
-                        Cuadrilla 1
-                    </option>
-
-                    <option value="2">
-                        Cuadrilla 2
-                    </option>
-
-                    <option value="3">
-                        Cuadrilla 3
-                    </option>
-
-                </select>
-
-
-
-                <label>
-                    Descripción del trabajo
-                </label>
-
-                <textarea
-                    id="trabajoMantenimiento"
-                    required
-                ></textarea>
-
-
-
-                <label>
-                    Estado
-                </label>
-
-                <select id="estadoMantenimiento">
-
-                    <option>
-                        Pendiente
-                    </option>
-
-                    <option>
-                        En proceso
-                    </option>
-
-                    <option>
-                        Terminado
-                    </option>
-
-                </select>
-
-
-
-                <button
-                    class="btn-primary full"
-                    type="submit"
-                >
-                    Guardar mantenimiento
-                </button>
-
-
-            </form>
-
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ========================================
-         MODAL MATERIAL
-    ======================================== -->
-
-    <div
-        id="modalMaterial"
-        class="modal"
-    >
-
-        <div class="modal-content">
-
-
-            <div class="modal-header">
-
-                <h2>
-                    Registrar material
-                </h2>
-
-                <button
-                    type="button"
-                    onclick="cerrarModal('modalMaterial')"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-
-            <form
-                onsubmit="registrarMaterial(event)"
-            >
-
-
-                <label>
-                    Proyecto
-                </label>
-
-                <select
-                    id="proyectoMaterial"
-                    required
-                >
-
-                    <option value="">
-                        Seleccione un proyecto
-                    </option>
-
-                </select>
-
-
-
-                <label>
-                    Material
-                </label>
-
-                <input
-                    type="text"
-                    id="nombreMaterial"
-                    required
-                    placeholder="Ej. Cable de fibra óptica"
-                >
-
-
-
-                <label>
-                    Cantidad
-                </label>
-
-                <input
-                    type="number"
-                    id="cantidadMaterial"
-                    min="0.01"
-                    step="0.01"
-                    required
-                >
-
-
-
-                <label>
-                    Unidad
-                </label>
-
-                <select
-                    id="unidadMaterial"
-                    required
-                >
-
-                    <option value="">
-                        Seleccione una unidad
-                    </option>
-
-                    <option value="Unidad">
-                        Unidad
-                    </option>
-
-                    <option value="Metro">
-                        Metro
-                    </option>
-
-                    <option value="Kg">
-                        Kg
-                    </option>
-
-                    <option value="Caja">
-                        Caja
-                    </option>
-
-                    <option value="Rollo">
-                        Rollo
-                    </option>
-
-                    <option value="Litro">
-                        Litro
-                    </option>
-
-                    <option value="Otro">
-                        Otro
-                    </option>
-
-                </select>
-
-
-
-                <button
-                    class="btn-primary full"
-                    type="submit"
-                >
-                    Guardar material
-                </button>
-
-
-            </form>
-
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ========================================
-         JAVASCRIPT
-    ======================================== -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
-
-
-    <script src="script.js"></script>
-
 
 </body>
 
