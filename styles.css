@@ -23,7 +23,6 @@ body {
     color: #000000;
     display: flex;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
 
@@ -136,6 +135,8 @@ nav {
     min-height: 100vh;
 
     position: relative;
+
+    overflow-x: hidden;
 }
 
 
@@ -160,14 +161,9 @@ nav {
 
     gap: 20px;
 
-    /*
-       IMPORTANTE:
-       El encabezado principal queda por encima
-       de cualquier encabezado sticky de una tabla.
-    */
     position: relative;
 
-    z-index: 100;
+    z-index: 1000;
 }
 
 .topbar h1 {
@@ -208,6 +204,8 @@ nav {
 
     width: 100%;
     max-width: 100%;
+
+    overflow-x: hidden;
 }
 
 .seccion.activa {
@@ -242,6 +240,8 @@ nav {
     gap: 15px;
 
     align-items: center;
+
+    min-width: 0;
 
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.05);
@@ -287,7 +287,7 @@ nav {
 
 
 /* ========================================
-   PANEL
+   PANEL GENERAL
 ======================================== */
 
 .panel {
@@ -300,10 +300,12 @@ nav {
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.05);
 
-    overflow-x: auto;
-
     width: 100%;
     max-width: 100%;
+
+    position: relative;
+
+    overflow-x: auto;
 }
 
 .panel h2 {
@@ -754,23 +756,16 @@ textarea {
 
 @media (max-width: 768px) {
 
-    .topbar {
-        padding: 15px 15px;
-
-        width: 100%;
-
-        box-sizing: border-box;
-    }
-
-
-    /* ================================
-       MENÚ LATERAL
-    ================================ */
+    /* ====================================
+       SIDEBAR
+    ==================================== */
 
     .sidebar {
         width: 68px;
 
         padding: 0 7px;
+
+        z-index: 1500;
     }
 
     .logo {
@@ -821,7 +816,9 @@ textarea {
     }
 
 
-    /* MENÚ MÓVIL */
+    /* ====================================
+       BOTÓN MENÚ
+    ==================================== */
 
     .btn-menu-mobile {
         display: block;
@@ -883,27 +880,40 @@ textarea {
     }
 
 
-    /* ================================
-       CONTENIDO PRINCIPAL
-    ================================ */
+    /* ====================================
+       MAIN
+    ==================================== */
 
     .main {
         margin-left: 68px;
 
         width: calc(100% - 68px);
+
+        overflow-x: hidden;
     }
+
+
+    /* ====================================
+       SECCIONES
+    ==================================== */
 
     .seccion {
         padding: 18px 12px;
+
+        width: 100%;
+
+        overflow-x: hidden;
     }
 
 
-    /* ================================
-       BARRA SUPERIOR
-    ================================ */
+    /* ====================================
+       TOPBAR
+    ==================================== */
 
     .topbar {
         min-height: auto;
+
+        width: 100%;
 
         padding: 14px 15px;
 
@@ -914,6 +924,12 @@ textarea {
         justify-content: center;
 
         gap: 7px;
+
+        position: relative;
+
+        z-index: 1000;
+
+        background: white;
     }
 
     .topbar h1 {
@@ -941,9 +957,9 @@ textarea {
     }
 
 
-    /* ================================
+    /* ====================================
        TARJETAS
-    ================================ */
+    ==================================== */
 
     .cards {
         grid-template-columns:
@@ -981,9 +997,9 @@ textarea {
     }
 
 
-    /* ================================
+    /* ====================================
        RESUMEN
-    ================================ */
+    ==================================== */
 
     .resumen {
         grid-template-columns: 1fr;
@@ -992,9 +1008,9 @@ textarea {
     }
 
 
-    /* ================================
-       BOTÓN + ENCABEZADO
-    ================================ */
+    /* ====================================
+       HEADER + BOTÓN
+    ==================================== */
 
     .section-header {
         flex-direction: column;
@@ -1011,9 +1027,9 @@ textarea {
     }
 
 
-    /* ================================
-       PANELES
-    ================================ */
+    /* ====================================
+       PANEL
+    ==================================== */
 
     .panel {
         padding: 15px;
@@ -1023,6 +1039,10 @@ textarea {
         width: 100%;
 
         max-width: 100%;
+
+        overflow-x: auto;
+
+        position: relative;
     }
 
     .panel h2 {
@@ -1032,13 +1052,9 @@ textarea {
     }
 
 
-    /* ================================
+    /* ====================================
        TABLAS
-    ================================ */
-
-    .panel {
-        overflow-x: auto;
-    }
+    ==================================== */
 
     table {
         min-width: 650px;
@@ -1052,9 +1068,9 @@ textarea {
     }
 
 
-    /* ================================
+    /* ====================================
        MODALES
-    ================================ */
+    ==================================== */
 
     .modal {
         padding: 10px;
@@ -1087,9 +1103,9 @@ textarea {
     }
 
 
-    /* ================================
+    /* ====================================
        FORMULARIOS
-    ================================ */
+    ==================================== */
 
     .form-grid {
         grid-template-columns: 1fr;
@@ -1133,14 +1149,17 @@ textarea {
     }
 
     .logo {
-        height: 55px;
+        width: 60px !important;
+        height: 55px !important;
 
-        padding: 6px;
+        padding: 6px !important;
     }
 
     .logo img {
-        max-width: 42px;
+        width: 42px !important;
+        height: 38px !important;
 
+        max-width: 42px;
         max-height: 38px;
     }
 
@@ -1170,6 +1189,8 @@ textarea {
 
     .topbar {
         padding: 15px;
+
+        z-index: 1000;
     }
 
     .topbar h1 {
@@ -1228,14 +1249,16 @@ textarea {
 }
 
 
-/* CONTENEDOR CALENDARIO */
+/* ========================================
+   CONTENEDOR CALENDARIO
+======================================== */
 
 #calendarioMantenimiento {
-    width: 100%;
+    width: 100% !important;
 
-    max-width: 100%;
+    max-width: 100% !important;
 
-    min-width: 0;
+    min-width: 0 !important;
 
     box-sizing: border-box;
 
@@ -1243,13 +1266,15 @@ textarea {
 }
 
 #calendarioMantenimiento .fc {
-    width: 100%;
+    width: 100% !important;
 
-    max-width: 100%;
+    max-width: 100% !important;
 }
 
 
-/* BOTONES FULLCALENDAR */
+/* ========================================
+   BOTONES FULLCALENDAR
+======================================== */
 
 #calendarioMantenimiento .fc .fc-button {
     border-radius: 6px;
@@ -1299,9 +1324,9 @@ textarea {
     }
 
     #calendarioMantenimiento {
-        width: 100%;
+        width: 100% !important;
 
-        max-width: 100%;
+        max-width: 100% !important;
     }
 
     #calendarioMantenimiento .fc .fc-toolbar {
@@ -1369,9 +1394,9 @@ textarea {
 }
 
 
-/* =====================================================
+/* ========================================
    DISEÑO RESPONSIVE GENERAL
-===================================================== */
+======================================== */
 
 main,
 .main-content,
@@ -1389,9 +1414,9 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    PANTALLAS GRANDES
-===================================================== */
+======================================== */
 
 @media (min-width: 1400px) {
 
@@ -1406,9 +1431,9 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    LAPTOP
-===================================================== */
+======================================== */
 
 @media (max-width: 1200px) {
 
@@ -1423,9 +1448,9 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    TABLET
-===================================================== */
+======================================== */
 
 @media (max-width: 900px) {
 
@@ -1439,16 +1464,12 @@ section {
         width: 100%;
     }
 
-    table {
-        min-width: 800px;
-    }
-
 }
 
 
-/* =====================================================
+/* ========================================
    CELULAR
-===================================================== */
+======================================== */
 
 @media (max-width: 600px) {
 
@@ -1473,7 +1494,7 @@ section {
     }
 
     table {
-        min-width: 800px;
+        min-width: 650px;
     }
 
     th,
@@ -1512,6 +1533,16 @@ section {
    TABLA DE PROYECTOS
 ===================================================== */
 
+/*
+   IMPORTANTE:
+
+   El scroll vertical pertenece SOLAMENTE
+   al panel de proyectos.
+
+   Así el encabezado de la tabla no se
+   mezcla con el TOPBAR.
+*/
+
 #proyectos .panel {
     width: 100%;
 
@@ -1519,73 +1550,98 @@ section {
 
     max-height: 650px;
 
-    /*
-       Este contenedor controla el scroll
-       de la tabla.
-    */
     overflow-x: auto;
 
     overflow-y: auto;
 
-    /*
-       Crea un contexto independiente para
-       el encabezado de la tabla.
-    */
+    position: relative;
+
     isolation: isolate;
 
-    position: relative;
+    background: white;
+
+    /*
+       El panel crea su propio contexto.
+    */
+    z-index: 1;
 }
 
+
+/* ========================================
+   TABLA PROYECTOS
+======================================== */
 
 #proyectos table {
     width: 100%;
 
     min-width: 1000px;
 
-    border-collapse: collapse;
+    border-collapse: separate;
+
+    border-spacing: 0;
 
     table-layout: fixed;
 }
 
 
-/* =====================================================
-   ENCABEZADO DE PROYECTOS
-===================================================== */
+/* ========================================
+   ENCABEZADO PROYECTOS
+======================================== */
+
+/*
+   EL ENCABEZADO SOLO SE PEGA
+   DENTRO DEL PANEL.
+
+   No debe atravesar el TOPBAR.
+*/
 
 #proyectos thead {
     position: sticky;
 
     top: 0;
 
-    z-index: 10;
+    z-index: 20;
 
     background: #cbd5e1;
 }
 
+
+/*
+   Cada TH tiene fondo sólido.
+
+   Esto evita que se vea el contenido
+   de las filas por debajo.
+*/
 
 #proyectos thead th {
     position: sticky;
 
     top: 0;
 
-    z-index: 11;
+    z-index: 21;
 
     background: #cbd5e1 !important;
 
     color: #111827;
 
-    /*
-       Evita que el contenido que está
-       debajo se vea a través del encabezado.
-    */
+    padding: 11px 14px;
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid #b7c0cc;
+
     box-shadow:
-        0 1px 0 #cbd5e1;
+        inset 0 -1px 0 #b7c0cc;
 }
 
 
-/* =====================================================
+/* ========================================
    CELDAS PROYECTOS
-===================================================== */
+======================================== */
 
 #proyectos th,
 #proyectos td {
@@ -1602,44 +1658,46 @@ section {
     overflow-wrap: break-word;
 }
 
+#proyectos tbody td {
+    background: white;
+}
 
-/* =====================================================
-   ANCHO DE COLUMNAS
-===================================================== */
 
-/* Nombre del proyecto */
+/*
+   Importante:
+
+   El hover no cambia el fondo
+   del encabezado.
+*/
+
+#proyectos tbody tr:hover td {
+    background: #f9fafb;
+}
+
+
+/* ========================================
+   ANCHO COLUMNAS
+======================================== */
 
 #proyectos th:nth-child(1),
 #proyectos td:nth-child(1) {
     width: 26%;
 }
 
-
-/* Proyecto */
-
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
-
-
-/* Tipo */
 
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
     width: 18%;
 }
 
-
-/* Sede */
-
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
 }
-
-
-/* Tipo de cable */
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
@@ -1647,9 +1705,9 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    CENTRAR COLUMNAS
-===================================================== */
+======================================== */
 
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3),
@@ -1663,9 +1721,9 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    FULLCALENDAR - ANCHO
-===================================================== */
+======================================== */
 
 #calendarioMantenimiento {
     width: 100% !important;
@@ -1710,9 +1768,9 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    CALENDARIO RESPONSIVO
-===================================================== */
+======================================== */
 
 @media (max-width: 600px) {
 
@@ -1733,51 +1791,125 @@ section {
 }
 
 
-/* =====================================================
+/* ========================================
    PROYECTOS EN CELULAR
-===================================================== */
+======================================== */
 
-#proyectos .panel {
-    position: relative;
-    z-index: 1;
+@media (max-width: 768px) {
 
-    width: 100%;
-    max-width: 100%;
+    #proyectos .panel {
+        width: 100%;
 
-    overflow-x: auto;
-    overflow-y: auto;
+        max-width: 100%;
 
-    max-height: 650px;
+        max-height: 600px;
 
-    background: white;
+        overflow-x: auto;
+
+        overflow-y: auto;
+
+        position: relative;
+
+        z-index: 1;
+
+        isolation: isolate;
+
+        background: white;
+    }
+
+    #proyectos table {
+        min-width: 900px;
+    }
+
+    #proyectos thead {
+        position: sticky;
+
+        top: 0;
+
+        z-index: 20;
+
+        background: #cbd5e1 !important;
+    }
+
+    #proyectos thead th {
+        position: sticky;
+
+        top: 0;
+
+        z-index: 21;
+
+        background: #cbd5e1 !important;
+
+        color: #111827;
+    }
+
 }
 
 
-/* =====================================================
-   PROYECTOS EN CELULAR PEQUEÑO
-===================================================== */
+/* ========================================
+   PROYECTOS CELULAR PEQUEÑO
+======================================== */
 
 @media (max-width: 480px) {
 
-/* ENCABEZADO DE PROYECTOS */
-#proyectos thead {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: #cbd5e1 !important;
-}
+    #proyectos .panel {
+        max-height: 550px;
 
-#proyectos thead th {
-    position: sticky;
-    top: 0;
-    z-index: 11;
-    background: #cbd5e1 !important;
-    color: #111827;
-}
+        overflow-x: auto;
 
-/* EL ENCABEZADO PRINCIPAL SIEMPRE ESTÁ ENCIMA */
-.topbar {
-    position: relative;
-    z-index: 1000;
-    background: white !important;
+        overflow-y: auto;
+
+        padding: 12px;
+    }
+
+    #proyectos table {
+        min-width: 850px;
+    }
+
+    #proyectos thead {
+        position: sticky;
+
+        top: 0;
+
+        z-index: 20;
+
+        background: #cbd5e1 !important;
+    }
+
+    #proyectos thead th {
+        position: sticky;
+
+        top: 0;
+
+        z-index: 21;
+
+        background: #cbd5e1 !important;
+
+        color: #111827;
+
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
+    #proyectos td {
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
+
+    /*
+       TOPBAR SIEMPRE POR ENCIMA
+       DEL CONTENIDO DE LA TABLA.
+    */
+
+    .topbar {
+        position: relative;
+
+        z-index: 1000;
+
+        background: white !important;
+    }
+
 }
