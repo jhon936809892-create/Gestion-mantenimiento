@@ -220,14 +220,7 @@ function inicializarCalendarioMantenimiento() {
         );
 
 
-    calendarioMantenimiento.render();
-    window.addEventListener("resize", function () {
-
-    if (calendarioMantenimiento) {
-
-        calendarioMantenimiento.updateSize();
-
-    }
+    calendarioMantenimiento.render(); 
 
 });
 
@@ -390,18 +383,19 @@ function mostrarSeccion(seccion, boton) {
     cargarMantenimientos();
 
     // Esperar a que la sección sea visible
-    setTimeout(function () {
+ setTimeout(function () {
 
-        inicializarCalendarioMantenimiento();
+    inicializarCalendarioMantenimiento();
 
-        if (calendarioMantenimiento) {
+    if (calendarioMantenimiento) {
 
-            calendarioMantenimiento.refetchEvents();
+        calendarioMantenimiento.updateSize();
 
-        }
+        calendarioMantenimiento.refetchEvents();
 
-    }, 100);
+    }
 
+}, 150);
 }
 
 
@@ -2021,3 +2015,17 @@ if (btnMenu && sidebar) {
 
     });
 }
+
+window.addEventListener("resize", function () {
+
+    if (calendarioMantenimiento) {
+
+        setTimeout(function () {
+
+            calendarioMantenimiento.updateSize();
+
+        }, 100);
+
+    }
+
+});
