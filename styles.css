@@ -1523,34 +1523,30 @@ section {
     max-height: 650px;
 }
 
+
 /* TABLA */
 
 #proyectos table {
     width: 100%;
+
     min-width: 1000px;
 
     border-collapse: separate;
+
     border-spacing: 0;
 
     table-layout: fixed;
 }
 
-/* ENCABEZADO FIJO */
 
-#proyectos thead {
-    position: sticky;
-    top: 0;
-
-    z-index: 20;
-
-    background: #cbd5e1;
-}
+/* ENCABEZADO */
 
 #proyectos thead th {
     position: sticky;
+
     top: 0;
 
-    z-index: 20;
+    z-index: 10;
 
     background: #cbd5e1 !important;
 
@@ -1566,6 +1562,7 @@ section {
 
     border-bottom: 2px solid #b7c0cc;
 }
+
 
 /* CELDAS */
 
@@ -1584,15 +1581,23 @@ section {
     overflow-wrap: break-word;
 }
 
+
+/* FILAS */
+
 #proyectos tbody td {
     background: white;
+
+    position: relative;
+
+    z-index: 1;
 }
 
 #proyectos tbody tr:hover td {
     background: #f9fafb;
 }
 
-/* ANCHO DE COLUMNAS */
+
+/* COLUMNAS */
 
 #proyectos th:nth-child(1),
 #proyectos td:nth-child(1) {
@@ -1633,9 +1638,6 @@ section {
 @media (max-width: 768px) {
 
     #proyectos .panel {
-        width: 100%;
-        max-width: 100%;
-
         max-height: 600px;
 
         padding: 15px;
@@ -1648,22 +1650,14 @@ section {
         min-width: 900px;
     }
 
-    #proyectos thead {
-        position: sticky;
-        top: 0;
-
-        z-index: 20;
-    }
-
     #proyectos thead th {
         position: sticky;
+
         top: 0;
 
-        z-index: 20;
+        z-index: 10;
 
         background: #cbd5e1 !important;
-
-        color: #111827;
 
         padding: 9px 10px;
 
@@ -1685,9 +1679,6 @@ section {
 @media (max-width: 480px) {
 
     #proyectos .panel {
-        width: 100%;
-        max-width: 100%;
-
         max-height: 550px;
 
         padding: 12px;
@@ -1700,22 +1691,14 @@ section {
         min-width: 850px;
     }
 
-    #proyectos thead {
-        position: sticky;
-        top: 0;
-
-        z-index: 20;
-    }
-
     #proyectos thead th {
         position: sticky;
+
         top: 0;
 
-        z-index: 20;
+        z-index: 10;
 
         background: #cbd5e1 !important;
-
-        color: #111827;
 
         padding: 9px 10px;
 
@@ -1729,38 +1712,71 @@ section {
     }
 }
 
+
 /* =====================================================
    TOPBAR
-   SIEMPRE POR ENCIMA DE LAS TABLAS
 ===================================================== */
 
 .topbar {
-    position: relative;
+    position: sticky !important;
 
-    z-index: 1000;
+    top: 0 !important;
+
+    z-index: 1000 !important;
 
     background: white !important;
 }
-/* ========================================
-   PROYECTOS - ENCABEZADO FIJO
-   ======================================== */
 
+/* =====================================================
+   CORRECCIÓN FINAL - TABLA PROYECTOS
+===================================================== */
+
+/* El topbar queda por encima de todo el contenido */
+.topbar {
+    position: sticky !important;
+    top: 0 !important;
+
+    z-index: 1000 !important;
+
+    background: white !important;
+}
+
+
+/* El panel de proyectos NO crea una capa por encima */
 #proyectos .panel {
     position: relative;
+
     overflow-x: auto;
     overflow-y: auto;
+
+    isolation: auto;
 }
 
-#proyectos table {
-    position: relative;
-    border-collapse: separate;
-    border-spacing: 0;
-}
 
-/* Encabezado fijo */
+/* Encabezado de la tabla */
 #proyectos thead th {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    position: sticky !important;
+
+    top: 0 !important;
+
+    z-index: 10 !important;
+
     background: #cbd5e1 !important;
+}
+
+
+/* Las filas quedan por debajo del encabezado */
+#proyectos tbody {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+#proyectos tbody td {
+    position: relative;
+
+    z-index: 1;
+
+    background: white;
 }
