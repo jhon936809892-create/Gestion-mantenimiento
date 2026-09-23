@@ -222,7 +222,7 @@ function inicializarCalendarioMantenimiento() {
 
     calendarioMantenimiento.render(); 
 
-});
+}
 
 
 
