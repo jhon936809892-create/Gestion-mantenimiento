@@ -1492,7 +1492,6 @@ section {
     }
 }
 
-
 /* =====================================================
    PROYECTOS
 ===================================================== */
@@ -1524,29 +1523,49 @@ section {
 }
 
 
-/* TABLA */
+/* =====================================================
+   TABLA DE PROYECTOS
+===================================================== */
 
 #proyectos table {
     width: 100%;
-
     min-width: 1000px;
 
     border-collapse: separate;
-
     border-spacing: 0;
 
     table-layout: fixed;
+
+    position: relative;
 }
 
 
-/* ENCABEZADO */
+/* =====================================================
+   ENCABEZADO FIJO
+===================================================== */
+
+#proyectos thead {
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/*
+   ESTA ES LA PARTE IMPORTANTE.
+
+   El encabezado tiene su propio fondo
+   para tapar completamente las filas
+   que suben durante el scroll.
+*/
 
 #proyectos thead th {
     position: sticky;
 
     top: 0;
 
-    z-index: 10;
+    z-index: 101;
 
     background: #cbd5e1 !important;
 
@@ -1561,10 +1580,18 @@ section {
     white-space: nowrap;
 
     border-bottom: 2px solid #b7c0cc;
+
+    /*
+       Evita que se vea contenido de las filas
+       por detrás del encabezado.
+    */
+    background-clip: padding-box;
 }
 
 
-/* CELDAS */
+/* =====================================================
+   CELDAS
+===================================================== */
 
 #proyectos th,
 #proyectos td {
@@ -1582,32 +1609,31 @@ section {
 }
 
 
-/* FILAS */
-
 #proyectos tbody td {
     background: white;
-
-    position: relative;
-
-    z-index: 1;
 }
+
 
 #proyectos tbody tr:hover td {
     background: #f9fafb;
 }
 
 
-/* COLUMNAS */
+/* =====================================================
+   ANCHO DE COLUMNAS
+===================================================== */
 
 #proyectos th:nth-child(1),
 #proyectos td:nth-child(1) {
     width: 26%;
 }
 
+
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
+
 
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
@@ -1616,12 +1642,14 @@ section {
     text-align: center;
 }
 
+
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
 
     text-align: center;
 }
+
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
@@ -1632,12 +1660,15 @@ section {
 
 
 /* =====================================================
-   PROYECTOS - TABLET
+   TABLET
 ===================================================== */
 
 @media (max-width: 768px) {
 
     #proyectos .panel {
+        width: 100%;
+        max-width: 100%;
+
         max-height: 600px;
 
         padding: 15px;
@@ -1646,39 +1677,57 @@ section {
         overflow-y: auto;
     }
 
+
     #proyectos table {
         min-width: 900px;
     }
+
+
+    #proyectos thead {
+        position: sticky;
+
+        top: 0;
+
+        z-index: 100;
+    }
+
 
     #proyectos thead th {
         position: sticky;
 
         top: 0;
 
-        z-index: 10;
+        z-index: 101;
 
         background: #cbd5e1 !important;
+
+        color: #111827;
 
         padding: 9px 10px;
 
         font-size: 12px;
     }
+
 
     #proyectos td {
         padding: 9px 10px;
 
         font-size: 12px;
     }
+
 }
 
 
 /* =====================================================
-   PROYECTOS - CELULAR
+   CELULAR
 ===================================================== */
 
 @media (max-width: 480px) {
 
     #proyectos .panel {
+        width: 100%;
+        max-width: 100%;
+
         max-height: 550px;
 
         padding: 12px;
@@ -1687,96 +1736,44 @@ section {
         overflow-y: auto;
     }
 
+
     #proyectos table {
         min-width: 850px;
     }
+
+
+    #proyectos thead {
+        position: sticky;
+
+        top: 0;
+
+        z-index: 100;
+    }
+
 
     #proyectos thead th {
         position: sticky;
 
         top: 0;
 
-        z-index: 10;
+        z-index: 101;
 
         background: #cbd5e1 !important;
+
+        color: #111827;
 
         padding: 9px 10px;
 
         font-size: 12px;
+
+        background-clip: padding-box;
     }
+
 
     #proyectos td {
         padding: 9px 10px;
 
         font-size: 12px;
     }
-}
 
-
-/* =====================================================
-   TOPBAR
-===================================================== */
-
-.topbar {
-    position: sticky !important;
-
-    top: 0 !important;
-
-    z-index: 1000 !important;
-
-    background: white !important;
-}
-
-/* =====================================================
-   CORRECCIÓN FINAL - TABLA PROYECTOS
-===================================================== */
-
-/* El topbar queda por encima de todo el contenido */
-.topbar {
-    position: sticky !important;
-    top: 0 !important;
-
-    z-index: 1000 !important;
-
-    background: white !important;
-}
-
-
-/* El panel de proyectos NO crea una capa por encima */
-#proyectos .panel {
-    position: relative;
-
-    overflow-x: auto;
-    overflow-y: auto;
-
-    isolation: auto;
-}
-
-
-/* Encabezado de la tabla */
-#proyectos thead th {
-    position: sticky !important;
-
-    top: 0 !important;
-
-    z-index: 10 !important;
-
-    background: #cbd5e1 !important;
-}
-
-
-/* Las filas quedan por debajo del encabezado */
-#proyectos tbody {
-    position: relative;
-
-    z-index: 1;
-}
-
-
-#proyectos tbody td {
-    position: relative;
-
-    z-index: 1;
-
-    background: white;
 }
