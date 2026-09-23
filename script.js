@@ -2019,13 +2019,7 @@ if (btnMenu && sidebar) {
 window.addEventListener("resize", function () {
 
     if (calendarioMantenimiento) {
-
-        setTimeout(function () {
-
-            calendarioMantenimiento.updateSize();
-
-        }, 100);
-
+        calendarioMantenimiento.updateSize();
     }
 
 });
