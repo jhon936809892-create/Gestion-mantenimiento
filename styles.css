@@ -147,7 +147,7 @@ nav {
 .topbar {
     min-height: 80px;
 
-    background: white;
+    background: white !important;
 
     border-bottom: 1px solid #e5e7eb;
 
@@ -265,6 +265,7 @@ nav {
     border-radius: 8px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -372,6 +373,7 @@ nav {
 
 .full {
     width: 100%;
+
     margin-top: 20px;
 }
 
@@ -770,6 +772,7 @@ textarea {
 
     .logo {
         width: 68px !important;
+
         height: 65px !important;
 
         padding: 5px !important;
@@ -777,9 +780,11 @@ textarea {
 
     .logo img {
         width: 58px !important;
+
         height: 58px !important;
 
         max-width: 58px;
+
         max-height: 58px;
 
         object-fit: contain;
@@ -856,6 +861,7 @@ textarea {
         display: inline-flex;
 
         align-items: center;
+
         justify-content: center;
     }
 
@@ -929,7 +935,7 @@ textarea {
 
         z-index: 1000;
 
-        background: white;
+        background: white !important;
     }
 
     .topbar h1 {
@@ -1150,6 +1156,7 @@ textarea {
 
     .logo {
         width: 60px !important;
+
         height: 55px !important;
 
         padding: 6px !important;
@@ -1157,9 +1164,11 @@ textarea {
 
     .logo img {
         width: 42px !important;
+
         height: 38px !important;
 
         max-width: 42px;
+
         max-height: 38px;
     }
 
@@ -1531,6 +1540,7 @@ section {
 
 /* =====================================================
    TABLA DE PROYECTOS
+   VERSIÓN CORREGIDA
 ===================================================== */
 
 #proyectos .panel {
@@ -1544,23 +1554,16 @@ section {
 
     position: relative;
 
-    /*
-       NO usar isolation: isolate aquí.
-    */
     isolation: auto;
 
     background: white;
 
-    /*
-       El panel NO debe estar por encima
-       del encabezado principal.
-    */
     z-index: 1;
 }
 
 
 /* =====================================================
-   TABLA
+   TABLA DE PROYECTOS
 ===================================================== */
 
 #proyectos table {
@@ -1577,26 +1580,23 @@ section {
 
 
 /* =====================================================
-   ENCABEZADO DE LA TABLA
+   ENCABEZADO PROYECTOS
 ===================================================== */
 
 #proyectos thead {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 5;
-
     background: #cbd5e1;
 }
 
 
+/*
+   IMPORTANTE:
+   No usamos position: sticky aquí.
+   Así evitamos que el encabezado de proyectos
+   se superponga al topbar.
+*/
+
 #proyectos thead th {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 5;
+    position: static;
 
     background: #cbd5e1 !important;
 
@@ -1618,7 +1618,7 @@ section {
 
 
 /* =====================================================
-   CELDAS
+   CELDAS PROYECTOS
 ===================================================== */
 
 #proyectos th,
@@ -1636,11 +1636,9 @@ section {
     overflow-wrap: break-word;
 }
 
-
 #proyectos tbody td {
     background: white;
 }
-
 
 #proyectos tbody tr:hover td {
     background: #f9fafb;
@@ -1656,24 +1654,20 @@ section {
     width: 26%;
 }
 
-
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
-
 
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
     width: 18%;
 }
 
-
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
 }
-
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
@@ -1698,184 +1692,7 @@ section {
 
 
 /* =====================================================
-   FULLCALENDAR - ANCHO
-===================================================== */
-
-#calendarioMantenimiento {
-    width: 100% !important;
-
-    max-width: 100% !important;
-
-    min-width: 0 !important;
-}
-
-
-#calendarioMantenimiento .fc {
-    width: 100% !important;
-
-    max-width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-view-harness {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-scrollgrid {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-scrollgrid-sync-table {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-daygrid-body {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-daygrid-body table {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-col-header {
-    width: 100% !important;
-}
-
-
-#calendarioMantenimiento .fc-col-header table {
-    width: 100% !important;
-}
-
-
-/* =====================================================
-   CALENDARIO RESPONSIVO
-===================================================== */
-
-@media (max-width: 600px) {
-
-    #calendarioMantenimiento {
-        font-size: 12px;
-    }
-
-    #calendarioMantenimiento .fc-toolbar {
-        flex-wrap: wrap;
-
-        gap: 8px;
-    }
-
-    #calendarioMantenimiento .fc-toolbar-title {
-        font-size: 18px;
-    }
-}
-entonces reemplazo todo eso 
-
-/* =====================================================
    PROYECTOS - TABLET
-===================================================== */
-
-@media (max-width: 768px) {
-
-    .proyectos-panel {
-
-        padding: 0;
-
-        overflow: hidden;
-    }
-
-
-    .tabla-proyectos-scroll {
-
-        max-height: 600px;
-
-        overflow-x: auto;
-
-        overflow-y: auto;
-    }
-
-
-    .tabla-proyectos {
-
-        min-width: 900px;
-    }
-
-
-    .tabla-proyectos th,
-    .tabla-proyectos td {
-
-        padding: 9px 10px;
-
-        font-size: 12px;
-    }
-
-
-    .tabla-proyectos thead th {
-
-        position: sticky;
-
-        top: 0;
-
-        z-index: 10;
-
-        background: #cbd5e1 !important;
-    }
-
-}
-
-
-/* =====================================================
-   PROYECTOS - CELULAR PEQUEÑO
-===================================================== */
-
-@media (max-width: 480px) {
-
-    .tabla-proyectos-scroll {
-
-        max-height: 550px;
-
-        overflow-x: auto;
-
-        overflow-y: auto;
-    }
-
-
-    .tabla-proyectos {
-
-        min-width: 850px;
-    }
-
-
-    .tabla-proyectos th,
-    .tabla-proyectos td {
-
-        padding: 9px 10px;
-
-        font-size: 12px;
-    }
-
-
-    .tabla-proyectos thead th {
-
-        position: sticky;
-
-        top: 0;
-
-        z-index: 10;
-
-        background: #cbd5e1 !important;
-
-        color: #111827;
-    }
-
-}
-
-
-/* =====================================================
-   PROYECTOS EN TABLET / CELULAR
 ===================================================== */
 
 @media (max-width: 768px) {
@@ -1898,46 +1715,52 @@ entonces reemplazo todo eso
         background: white;
 
         z-index: 1;
-    }
 
+        padding: 15px;
+    }
 
     #proyectos table {
         min-width: 900px;
     }
 
-
     #proyectos thead {
-        position: sticky;
+        position: static;
 
-        top: 0;
-
-        z-index: 5;
-
-        background: #cbd5e1 !important;
+        background: #cbd5e1;
     }
 
-
     #proyectos thead th {
-        position: sticky;
-
-        top: 0;
-
-        z-index: 5;
+        position: static;
 
         background: #cbd5e1 !important;
 
         color: #111827;
+
+        padding: 9px 10px;
+
+        font-size: 12px;
     }
+
+    #proyectos td {
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
 }
 
 
 /* =====================================================
-   PROYECTOS CELULAR PEQUEÑO
+   PROYECTOS - CELULAR PEQUEÑO
 ===================================================== */
 
 @media (max-width: 480px) {
 
     #proyectos .panel {
+        width: 100%;
+
+        max-width: 100%;
+
         max-height: 550px;
 
         overflow-x: auto;
@@ -1946,36 +1769,25 @@ entonces reemplazo todo eso
 
         padding: 12px;
 
-        isolation: auto;
-
         position: relative;
+
+        isolation: auto;
 
         z-index: 1;
     }
-
 
     #proyectos table {
         min-width: 850px;
     }
 
-
     #proyectos thead {
-        position: sticky;
+        position: static;
 
-        top: 0;
-
-        z-index: 5;
-
-        background: #cbd5e1 !important;
+        background: #cbd5e1;
     }
 
-
     #proyectos thead th {
-        position: sticky;
-
-        top: 0;
-
-        z-index: 5;
+        position: static;
 
         background: #cbd5e1 !important;
 
@@ -1986,24 +1798,18 @@ entonces reemplazo todo eso
         font-size: 12px;
     }
 
-
     #proyectos td {
         padding: 9px 10px;
 
         font-size: 12px;
     }
+
 }
 
 
 /* =====================================================
-   TOPBAR
+   TOPBAR - SIEMPRE POR ENCIMA
 ===================================================== */
-
-/*
-   El encabezado blanco de la página
-   siempre debe estar por encima de
-   cualquier contenido de proyectos.
-*/
 
 .topbar {
     position: relative;
