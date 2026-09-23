@@ -1741,3 +1741,31 @@ section {
 
     background: white !important;
 }
+/* ========================================
+   PROTEGER EL ENCABEZADO AL HACER SCROLL
+   ======================================== */
+
+.main {
+    position: relative;
+}
+
+/* El encabezado queda por encima del contenido */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+}
+
+/* Crea una zona que tapa el contenido que
+   intenta aparecer por encima del encabezado */
+.topbar::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 30px;
+    background: #ffffff;
+    z-index: -1;
+}
