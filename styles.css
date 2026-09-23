@@ -1520,7 +1520,6 @@ section {
 
     position: relative;
 
-    /* EL SCROLL ES SOLO AQUÍ */
     overflow-x: auto;
     overflow-y: auto;
 
@@ -1529,14 +1528,16 @@ section {
 
 
 /* =====================================================
-   TABLA
+   TABLA DE PROYECTOS
 ===================================================== */
 
 #proyectos table {
     width: 100%;
+
     min-width: 1000px;
 
     border-collapse: separate;
+
     border-spacing: 0;
 
     table-layout: fixed;
@@ -1554,7 +1555,7 @@ section {
 
     z-index: 1000;
 
-    background-color: #cbd5e1 !important;
+    background: #cbd5e1 !important;
 
     color: #111827;
 
@@ -1566,16 +1567,10 @@ section {
 
     white-space: nowrap;
 
-    border-bottom: 2px solid #b7c0cc;
+    /* Sin separadores */
+    border: none !important;
 
-    /*
-       CREA UNA CAPA SÓLIDA DEBAJO
-       DEL ENCABEZADO PARA QUE
-       NINGUNA FILA SE VEA ATRAVESARLO.
-    */
-    box-shadow:
-        0 3px 0 #cbd5e1,
-        0 4px 5px rgba(0, 0, 0, 0.12);
+    box-shadow: none !important;
 
     background-clip: padding-box;
 }
@@ -1605,7 +1600,8 @@ section {
 
     vertical-align: middle;
 
-    border-bottom: 1px solid #ddd;
+    /* Sin líneas entre filas */
+    border: none !important;
 
     word-wrap: break-word;
 
@@ -1693,7 +1689,7 @@ section {
 
         z-index: 1000;
 
-        background-color: #cbd5e1 !important;
+        background: #cbd5e1 !important;
 
         color: #111827;
 
@@ -1701,9 +1697,10 @@ section {
 
         font-size: 12px;
 
-        box-shadow:
-            0 3px 0 #cbd5e1,
-            0 4px 5px rgba(0, 0, 0, 0.12);
+        /* Sin separadores */
+        border: none !important;
+
+        box-shadow: none !important;
     }
 
 
@@ -1711,6 +1708,8 @@ section {
         padding: 9px 10px;
 
         font-size: 12px;
+
+        border: none !important;
     }
 
 }
@@ -1747,7 +1746,7 @@ section {
 
         z-index: 1000;
 
-        background-color: #cbd5e1 !important;
+        background: #cbd5e1 !important;
 
         color: #111827;
 
@@ -1755,9 +1754,10 @@ section {
 
         font-size: 12px;
 
-        box-shadow:
-            0 3px 0 #cbd5e1,
-            0 4px 5px rgba(0, 0, 0, 0.12);
+        /* Sin separadores */
+        border: none !important;
+
+        box-shadow: none !important;
 
         background-clip: padding-box;
     }
@@ -1767,6 +1767,8 @@ section {
         padding: 9px 10px;
 
         font-size: 12px;
+
+        border: none !important;
     }
 
 }
