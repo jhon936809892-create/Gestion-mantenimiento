@@ -1969,57 +1969,31 @@ async function cerrarSesion() {
 
 }
 // ========================================
-// ACTUALIZAR CALENDARIO AUTOMÁTICAMENTE
+// ACTUALIZAR CALENDARIO AL CAMBIAR TAMAÑO
 // ========================================
 
-setInterval(function () {
-
-    if (calendarioMantenimiento) {
-
-        calendarioMantenimiento.refetchEvents();
-
-    }
-
-}, 60000);
-cargarMantenimientos();
-
-// MENÚ MÓVIL
-const btnMenu = document.getElementById("btnMenuMobile");
-const sidebar = document.querySelector(".sidebar");
-
-if (btnMenu && sidebar) {
-
-    // Abrir / cerrar con el botón ☰
-    btnMenu.addEventListener("click", function (e) {
-        e.stopPropagation();
-        sidebar.classList.toggle("menu-abierto");
-    });
-
-    // Al seleccionar un módulo, cerrar el menú
-    sidebar.querySelectorAll(".menu").forEach(function (boton) {
-        boton.addEventListener("click", function () {
-            sidebar.classList.remove("menu-abierto");
-        });
-    });
-
-    // Al tocar fuera del menú, cerrarlo
-    document.addEventListener("click", function (e) {
-
-        if (
-            sidebar.classList.contains("menu-abierto") &&
-            !sidebar.contains(e.target) &&
-            e.target !== btnMenu
-        ) {
-            sidebar.classList.remove("menu-abierto");
-        }
-
-    });
-}
+let resizeCalendarioPendiente = false;
 
 window.addEventListener("resize", function () {
 
-    if (calendarioMantenimiento) {
-        calendarioMantenimiento.updateSize();
+    if (!calendarioMantenimiento) {
+        return;
     }
+
+    if (resizeCalendarioPendiente) {
+        return;
+    }
+
+    resizeCalendarioPendiente = true;
+
+    requestAnimationFrame(function () {
+
+        resizeCalendarioPendiente = false;
+
+        if (calendarioMantenimiento) {
+            calendarioMantenimiento.updateSize();
+        }
+
+    });
 
 });
