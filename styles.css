@@ -41,12 +41,12 @@ body {
     left: 0;
     top: 0;
 
-    z-index: 1000;
+    z-index: 1500;
 }
 
 
 /* ========================================
-   LOGO EMPRESA
+   LOGO
 ======================================== */
 
 .logo {
@@ -54,7 +54,6 @@ body {
     height: 90px !important;
 
     display: flex !important;
-
     align-items: flex-start !important;
     justify-content: flex-start !important;
 
@@ -146,6 +145,8 @@ nav {
 
 .topbar {
     min-height: 80px;
+
+    width: 100%;
 
     background: white !important;
 
@@ -323,7 +324,7 @@ nav {
 
     align-items: center;
 
-    justify-content: flex-end;
+    justify-content: space-between;
 
     gap: 20px;
 
@@ -373,7 +374,6 @@ nav {
 
 .full {
     width: 100%;
-
     margin-top: 20px;
 }
 
@@ -748,7 +748,6 @@ textarea {
     .cuadrillas-grid {
         grid-template-columns: 1fr;
     }
-
 }
 
 
@@ -758,9 +757,7 @@ textarea {
 
 @media (max-width: 768px) {
 
-    /* ====================================
-       SIDEBAR
-    ==================================== */
+    /* SIDEBAR */
 
     .sidebar {
         width: 68px;
@@ -821,9 +818,7 @@ textarea {
     }
 
 
-    /* ====================================
-       BOTÓN MENÚ
-    ==================================== */
+    /* BOTÓN MENÚ */
 
     .btn-menu-mobile {
         display: block;
@@ -886,9 +881,7 @@ textarea {
     }
 
 
-    /* ====================================
-       MAIN
-    ==================================== */
+    /* MAIN */
 
     .main {
         margin-left: 68px;
@@ -899,9 +892,7 @@ textarea {
     }
 
 
-    /* ====================================
-       SECCIONES
-    ==================================== */
+    /* SECCIONES */
 
     .seccion {
         padding: 18px 12px;
@@ -912,9 +903,7 @@ textarea {
     }
 
 
-    /* ====================================
-       TOPBAR
-    ==================================== */
+    /* TOPBAR */
 
     .topbar {
         min-height: auto;
@@ -963,9 +952,7 @@ textarea {
     }
 
 
-    /* ====================================
-       TARJETAS
-    ==================================== */
+    /* TARJETAS */
 
     .cards {
         grid-template-columns:
@@ -1003,9 +990,7 @@ textarea {
     }
 
 
-    /* ====================================
-       RESUMEN
-    ==================================== */
+    /* RESUMEN */
 
     .resumen {
         grid-template-columns: 1fr;
@@ -1014,9 +999,7 @@ textarea {
     }
 
 
-    /* ====================================
-       HEADER + BOTÓN
-    ==================================== */
+    /* HEADER */
 
     .section-header {
         flex-direction: column;
@@ -1033,9 +1016,7 @@ textarea {
     }
 
 
-    /* ====================================
-       PANEL
-    ==================================== */
+    /* PANEL */
 
     .panel {
         padding: 15px;
@@ -1058,9 +1039,7 @@ textarea {
     }
 
 
-    /* ====================================
-       TABLAS
-    ==================================== */
+    /* TABLAS */
 
     table {
         min-width: 650px;
@@ -1074,9 +1053,7 @@ textarea {
     }
 
 
-    /* ====================================
-       MODALES
-    ==================================== */
+    /* MODALES */
 
     .modal {
         padding: 10px;
@@ -1109,9 +1086,7 @@ textarea {
     }
 
 
-    /* ====================================
-       FORMULARIOS
-    ==================================== */
+    /* FORMULARIOS */
 
     .form-grid {
         grid-template-columns: 1fr;
@@ -1138,7 +1113,6 @@ textarea {
     textarea {
         min-height: 90px;
     }
-
 }
 
 
@@ -1213,7 +1187,6 @@ textarea {
     .card {
         padding: 18px;
     }
-
 }
 
 
@@ -1258,9 +1231,7 @@ textarea {
 }
 
 
-/* ========================================
-   CONTENEDOR CALENDARIO
-======================================== */
+/* CONTENEDOR CALENDARIO */
 
 #calendarioMantenimiento {
     width: 100% !important;
@@ -1281,9 +1252,7 @@ textarea {
 }
 
 
-/* ========================================
-   BOTONES FULLCALENDAR
-======================================== */
+/* BOTONES FULLCALENDAR */
 
 #calendarioMantenimiento .fc .fc-button {
     border-radius: 6px;
@@ -1312,9 +1281,7 @@ textarea {
 }
 
 
-/* ========================================
-   CALENDARIO TABLET
-======================================== */
+/* CALENDARIO TABLET */
 
 @media (max-width: 768px) {
 
@@ -1357,13 +1324,10 @@ textarea {
     #calendarioMantenimiento .fc .fc-toolbar-chunk {
         margin-bottom: 5px;
     }
-
 }
 
 
-/* ========================================
-   CALENDARIO CELULAR PEQUEÑO
-======================================== */
+/* CALENDARIO CELULAR */
 
 @media (max-width: 480px) {
 
@@ -1390,13 +1354,10 @@ textarea {
 
         padding: 5px 7px;
     }
-
 }
 
 
-/* ========================================
-   SEPARACIÓN LISTA / CALENDARIO
-======================================== */
+/* SEPARACIÓN LISTA / CALENDARIO */
 
 #mantenimiento .calendario-panel {
     margin-top: 20px !important;
@@ -1404,21 +1365,19 @@ textarea {
 
 
 /* ========================================
-   DISEÑO RESPONSIVE GENERAL
+   RESPONSIVE GENERAL
 ======================================== */
 
 main,
 .main-content,
 .contenido-principal {
     width: 100%;
-
     max-width: 100%;
 }
 
 .container,
 section {
     width: 100%;
-
     max-width: 100%;
 }
 
@@ -1436,7 +1395,6 @@ section {
 
         margin: 0 auto;
     }
-
 }
 
 
@@ -1453,7 +1411,6 @@ section {
 
         padding-right: 20px;
     }
-
 }
 
 
@@ -1472,7 +1429,6 @@ section {
     .panel {
         width: 100%;
     }
-
 }
 
 
@@ -1534,66 +1490,63 @@ section {
     textarea {
         max-width: 100%;
     }
-
 }
 
 
 /* =====================================================
-   TABLA DE PROYECTOS
-   VERSIÓN CORREGIDA
-===================================================== */
+   PROYECTOS
+   ===================================================== */
+
+#proyectos {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+/* PANEL DE PROYECTOS */
 
 #proyectos .panel {
     width: 100%;
     max-width: 100%;
 
-    max-height: 650px;
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.05);
+
+    position: relative;
 
     overflow-x: auto;
     overflow-y: auto;
 
-    position: relative;
-
-    isolation: auto;
-
-    background: white;
+    max-height: 650px;
 
     z-index: 1;
 }
 
 
-/* =====================================================
-   TABLA DE PROYECTOS
-===================================================== */
+/* TABLA DE PROYECTOS */
 
 #proyectos table {
     width: 100%;
 
     min-width: 1000px;
 
-    border-collapse: separate;
-
-    border-spacing: 0;
+    border-collapse: collapse;
 
     table-layout: fixed;
 }
 
 
-/* =====================================================
-   ENCABEZADO PROYECTOS
-===================================================== */
+/* ENCABEZADO DE TABLA */
 
 #proyectos thead {
     background: #cbd5e1;
 }
-
-
-/*
-   IMPORTANTE:
-   No usamos position: sticky aquí.
-   Así evitamos que el encabezado de proyectos
-   se superponga al topbar.
-*/
 
 #proyectos thead th {
     position: static;
@@ -1611,15 +1564,10 @@ section {
     white-space: nowrap;
 
     border-bottom: 1px solid #b7c0cc;
-
-    box-shadow:
-        inset 0 -1px 0 #b7c0cc;
 }
 
 
-/* =====================================================
-   CELDAS PROYECTOS
-===================================================== */
+/* CELDAS */
 
 #proyectos th,
 #proyectos td {
@@ -1645,9 +1593,7 @@ section {
 }
 
 
-/* =====================================================
-   ANCHO DE COLUMNAS
-===================================================== */
+/* ANCHO COLUMNAS */
 
 #proyectos th:nth-child(1),
 #proyectos td:nth-child(1) {
@@ -1662,31 +1608,21 @@ section {
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
     width: 18%;
+
+    text-align: center;
 }
 
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
+
+    text-align: center;
 }
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
     width: 17%;
-}
 
-
-/* =====================================================
-   CENTRAR COLUMNAS
-===================================================== */
-
-#proyectos th:nth-child(3),
-#proyectos td:nth-child(3),
-
-#proyectos th:nth-child(4),
-#proyectos td:nth-child(4),
-
-#proyectos th:nth-child(5),
-#proyectos td:nth-child(5) {
     text-align: center;
 }
 
@@ -1704,19 +1640,14 @@ section {
 
         max-height: 600px;
 
-        overflow-x: auto;
+        padding: 15px;
 
+        overflow-x: auto;
         overflow-y: auto;
 
         position: relative;
 
-        isolation: auto;
-
-        background: white;
-
         z-index: 1;
-
-        padding: 15px;
     }
 
     #proyectos table {
@@ -1746,7 +1677,6 @@ section {
 
         font-size: 12px;
     }
-
 }
 
 
@@ -1763,15 +1693,12 @@ section {
 
         max-height: 550px;
 
-        overflow-x: auto;
-
-        overflow-y: auto;
-
         padding: 12px;
 
-        position: relative;
+        overflow-x: auto;
+        overflow-y: auto;
 
-        isolation: auto;
+        position: relative;
 
         z-index: 1;
     }
@@ -1803,12 +1730,12 @@ section {
 
         font-size: 12px;
     }
-
 }
 
 
 /* =====================================================
-   TOPBAR - SIEMPRE POR ENCIMA
+   TOPBAR
+   SIEMPRE POR ENCIMA DE LAS TABLAS
 ===================================================== */
 
 .topbar {
