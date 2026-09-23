@@ -1742,48 +1742,25 @@ section {
     background: white !important;
 }
 /* ========================================
-   PROYECTOS - ENCABEZADO SOBRE EL CONTENIDO
+   PROYECTOS - ENCABEZADO FIJO
    ======================================== */
-
-#proyectos {
-    position: relative;
-}
 
 #proyectos .panel {
     position: relative;
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
-/* La tabla */
 #proyectos table {
     position: relative;
     border-collapse: separate;
     border-spacing: 0;
 }
 
-/* Encabezado */
-#proyectos thead {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-}
-
-/* Celdas del encabezado */
+/* Encabezado fijo */
 #proyectos thead th {
     position: sticky;
     top: 0;
-    z-index: 51;
-    background: #cbd5e1;
-}
-
-/* Capa que tapa lo que sube por encima */
-#proyectos thead::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 100%;
-    height: 50px;
-    background: white;
-    z-index: 49;
+    z-index: 50;
+    background: #cbd5e1 !important;
 }
