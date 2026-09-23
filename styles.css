@@ -1491,7 +1491,6 @@ section {
         max-width: 100%;
     }
 }
-
 /* =====================================================
    PROYECTOS
 ===================================================== */
@@ -1500,6 +1499,11 @@ section {
     width: 100%;
     max-width: 100%;
 }
+
+
+/* =====================================================
+   PANEL DE PROYECTOS
+===================================================== */
 
 #proyectos .panel {
     width: 100%;
@@ -1516,6 +1520,7 @@ section {
 
     position: relative;
 
+    /* EL SCROLL ES SOLO AQUÍ */
     overflow-x: auto;
     overflow-y: auto;
 
@@ -1524,7 +1529,7 @@ section {
 
 
 /* =====================================================
-   TABLA DE PROYECTOS
+   TABLA
 ===================================================== */
 
 #proyectos table {
@@ -1542,31 +1547,39 @@ section {
    ENCABEZADO FIJO
 ===================================================== */
 
-/* =====================================================
-   ENCABEZADO FIJO
-===================================================== */
-
 #proyectos thead th {
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
 
     background-color: #cbd5e1 !important;
+
     color: #111827;
 
     padding: 11px 14px;
 
     text-align: left;
+
     vertical-align: middle;
 
     white-space: nowrap;
 
     border-bottom: 2px solid #b7c0cc;
 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    /*
+       CREA UNA CAPA SÓLIDA DEBAJO
+       DEL ENCABEZADO PARA QUE
+       NINGUNA FILA SE VEA ATRAVESARLO.
+    */
+    box-shadow:
+        0 3px 0 #cbd5e1,
+        0 4px 5px rgba(0, 0, 0, 0.12);
 
     background-clip: padding-box;
 }
+
 
 /* =====================================================
    CUERPO DE LA TABLA
@@ -1574,20 +1587,18 @@ section {
 
 #proyectos tbody {
     position: relative;
+
     z-index: 1;
 }
 
+
 #proyectos tbody td {
-    background: white;
-}
+    position: relative;
 
+    z-index: 1;
 
-/* =====================================================
-   CELDAS
-===================================================== */
+    background-color: white !important;
 
-#proyectos th,
-#proyectos td {
     padding: 11px 14px;
 
     text-align: left;
@@ -1603,11 +1614,11 @@ section {
 
 
 /* =====================================================
-   EFECTO AL PASAR EL MOUSE
+   HOVER
 ===================================================== */
 
 #proyectos tbody tr:hover td {
-    background: #f9fafb;
+    background-color: #f9fafb !important;
 }
 
 
@@ -1620,26 +1631,33 @@ section {
     width: 26%;
 }
 
+
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
 
+
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
     width: 18%;
+
     text-align: center;
 }
+
 
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
+
     text-align: center;
 }
+
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
     width: 17%;
+
     text-align: center;
 }
 
@@ -1662,22 +1680,20 @@ section {
         overflow-y: auto;
     }
 
+
     #proyectos table {
         min-width: 900px;
     }
 
-    #proyectos thead {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
 
     #proyectos thead th {
         position: sticky;
-        top: 0;
-        z-index: 101;
 
-        background: #cbd5e1 !important;
+        top: 0;
+
+        z-index: 1000;
+
+        background-color: #cbd5e1 !important;
 
         color: #111827;
 
@@ -1685,13 +1701,18 @@ section {
 
         font-size: 12px;
 
-        box-shadow: 0 2px 0 #b7c0cc;
+        box-shadow:
+            0 3px 0 #cbd5e1,
+            0 4px 5px rgba(0, 0, 0, 0.12);
     }
+
 
     #proyectos td {
         padding: 9px 10px;
+
         font-size: 12px;
     }
+
 }
 
 
@@ -1713,22 +1734,20 @@ section {
         overflow-y: auto;
     }
 
+
     #proyectos table {
         min-width: 850px;
     }
 
-    #proyectos thead {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
 
     #proyectos thead th {
         position: sticky;
-        top: 0;
-        z-index: 101;
 
-        background: #cbd5e1 !important;
+        top: 0;
+
+        z-index: 1000;
+
+        background-color: #cbd5e1 !important;
 
         color: #111827;
 
@@ -1736,13 +1755,18 @@ section {
 
         font-size: 12px;
 
-        box-shadow: 0 2px 0 #b7c0cc;
+        box-shadow:
+            0 3px 0 #cbd5e1,
+            0 4px 5px rgba(0, 0, 0, 0.12);
 
         background-clip: padding-box;
     }
 
+
     #proyectos td {
         padding: 9px 10px;
+
         font-size: 12px;
     }
+
 }
