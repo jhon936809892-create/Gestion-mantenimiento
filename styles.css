@@ -1742,30 +1742,48 @@ section {
     background: white !important;
 }
 /* ========================================
-   PROTEGER EL ENCABEZADO AL HACER SCROLL
+   PROYECTOS - ENCABEZADO SOBRE EL CONTENIDO
    ======================================== */
 
-.main {
+#proyectos {
     position: relative;
 }
 
-/* El encabezado queda por encima del contenido */
-.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: #ffffff;
+#proyectos .panel {
+    position: relative;
+    overflow: visible;
 }
 
-/* Crea una zona que tapa el contenido que
-   intenta aparecer por encima del encabezado */
-.topbar::before {
+/* La tabla */
+#proyectos table {
+    position: relative;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Encabezado */
+#proyectos thead {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+/* Celdas del encabezado */
+#proyectos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 51;
+    background: #cbd5e1;
+}
+
+/* Capa que tapa lo que sube por encima */
+#proyectos thead::after {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
     bottom: 100%;
-    height: 30px;
-    background: #ffffff;
-    z-index: -1;
+    height: 50px;
+    background: white;
+    z-index: 49;
 }
