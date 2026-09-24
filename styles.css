@@ -139,7 +139,6 @@ nav {
 }
 
 
-
 /* ========================================
    TOPBAR FIJO
 ======================================== */
@@ -147,7 +146,7 @@ nav {
 .topbar {
     min-height: 80px;
 
-    width: 100%;
+    width: calc(100% - 240px);
 
     background: white !important;
 
@@ -163,18 +162,16 @@ nav {
 
     gap: 20px;
 
-    /* FIJO */
+    /* FIJO AL HACER SCROLL */
     position: fixed;
 
     top: 0;
-    right: 0;
-
-    /* deja libre el sidebar */
     left: 240px;
+    right: 0;
 
     z-index: 1400;
 
-    /* evita que el contenido se vea atravesándolo */
+    /* capa blanca para que nada se vea detrás */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -203,27 +200,6 @@ nav {
 
     white-space: nowrap;
 }
-/* ========================================
-   SECCIONES
-======================================== */
-
-.seccion {
-    display: none;
-
-    padding: 30px;
-
-    padding-top: 25px;
-
-    width: 100%;
-    max-width: 100%;
-
-    overflow-x: hidden;
-}
-
-.seccion.activa {
-    display: block;
-}
-
 
 /* ========================================
    CARDS
