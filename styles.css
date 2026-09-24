@@ -1526,6 +1526,7 @@ section {
     max-height: 650px;
 }
 
+
 /* =====================================================
    TABLA DE PROYECTOS
 ===================================================== */
@@ -1544,12 +1545,14 @@ section {
 
 
 /* =====================================================
-   ENCABEZADO FIJO
+   ENCABEZADO
 ===================================================== */
 
 #proyectos thead th {
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
 
     background: #cbd5e1 !important;
@@ -1566,10 +1569,13 @@ section {
 
     white-space: nowrap;
 
-    border: none;
+    border: none !important;
 
-    box-shadow: none;
+    box-shadow: none !important;
+
+    background-clip: padding-box;
 }
+
 
 /* =====================================================
    CUERPO DE LA TABLA
@@ -1580,7 +1586,6 @@ section {
 
     z-index: 1;
 }
-
 
 #proyectos tbody td {
     position: relative;
@@ -1595,7 +1600,6 @@ section {
 
     vertical-align: middle;
 
-    /* Sin líneas entre filas */
     border: none !important;
 
     word-wrap: break-word;
@@ -1622,12 +1626,10 @@ section {
     width: 26%;
 }
 
-
 #proyectos th:nth-child(2),
 #proyectos td:nth-child(2) {
     width: 16%;
 }
-
 
 #proyectos th:nth-child(3),
 #proyectos td:nth-child(3) {
@@ -1636,14 +1638,12 @@ section {
     text-align: center;
 }
 
-
 #proyectos th:nth-child(4),
 #proyectos td:nth-child(4) {
     width: 23%;
 
     text-align: center;
 }
-
 
 #proyectos th:nth-child(5),
 #proyectos td:nth-child(5) {
@@ -1657,28 +1657,59 @@ section {
    TABLET
 ===================================================== */
 
-#proyectos thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+@media (max-width: 768px) {
 
-    background: #cbd5e1 !important;
+    #proyectos .panel {
+        width: 100%;
+        max-width: 100%;
 
-    color: #111827;
+        max-height: 600px;
 
-    padding: 9px 10px;
+        padding: 15px;
 
-    font-size: 12px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
 
-    font-weight: 600;
+    #proyectos table {
+        min-width: 900px;
+    }
 
-    text-align: left;
+    #proyectos thead th {
+        position: sticky;
 
-    white-space: nowrap;
+        top: 0;
 
-    border: none;
+        z-index: 1000;
 
-    box-shadow: none;
+        background: #cbd5e1 !important;
+
+        color: #111827;
+
+        padding: 9px 10px;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        text-align: left;
+
+        white-space: nowrap;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        background-clip: padding-box;
+    }
+
+    #proyectos tbody td {
+        padding: 9px 10px;
+
+        font-size: 12px;
+
+        border: none !important;
+    }
 }
 
 
@@ -1686,26 +1717,57 @@ section {
    CELULAR
 ===================================================== */
 
-#proyectos thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+@media (max-width: 480px) {
 
-    background: #cbd5e1 !important;
+    #proyectos .panel {
+        width: 100%;
+        max-width: 100%;
 
-    color: #111827;
+        max-height: 550px;
 
-    padding: 9px 10px;
+        padding: 12px;
 
-    font-size: 12px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
 
-    font-weight: 600;
+    #proyectos table {
+        min-width: 850px;
+    }
 
-    text-align: left;
+    #proyectos thead th {
+        position: sticky;
 
-    white-space: nowrap;
+        top: 0;
 
-    border: none;
+        z-index: 1000;
 
-    box-shadow: none;
+        background: #cbd5e1 !important;
+
+        color: #111827;
+
+        padding: 9px 10px;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        text-align: left;
+
+        white-space: nowrap;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        background-clip: padding-box;
+    }
+
+    #proyectos tbody td {
+        padding: 9px 10px;
+
+        font-size: 12px;
+
+        border: none !important;
+    }
 }
