@@ -1526,326 +1526,43 @@ section {
     max-height: 650px;
 }
 
+/* PROTEGE EL ESPACIO BLANCO SOBRE EL ENCABEZADO */
 
-/* =====================================================
-   TABLA DE PROYECTOS
-===================================================== */
-
-#proyectos table {
-    width: 100%;
-
-    min-width: 1000px;
-
-    border-collapse: separate;
-
-    border-spacing: 0;
-
-    table-layout: fixed;
-}
-
-
-/* =====================================================
-   ENCABEZADO
-===================================================== */
-
-#proyectos thead th {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-
-    background: #cbd5e1 !important;
-
-    color: #111827;
-
-    padding: 13px;
-
-    text-align: left;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-    border: none !important;
-
-    box-shadow: none !important;
-
-    background-clip: padding-box;
-}
-
-
-/* CUBRE EL ESPACIO SUPERIOR DEL ENCABEZADO */
-
-#proyectos thead {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 999;
-
-    background: white;
-
-    box-shadow: none;
-}
-
-/* =====================================================
-   CUERPO DE LA TABLA
-===================================================== */
-
-#proyectos tbody {
-    position: relative;
-
-    z-index: 1;
-}
-
-#proyectos tbody td {
-    position: relative;
-
-    z-index: 1;
-
-    background-color: white !important;
-
-    padding: 11px 14px;
-
-    text-align: left;
-
-    vertical-align: middle;
-
-    border: none !important;
-
-    word-wrap: break-word;
-
-    overflow-wrap: break-word;
-}
-
-
-/* =====================================================
-   HOVER
-===================================================== */
-
-#proyectos tbody tr:hover td {
-    background-color: #f9fafb !important;
-}
-
-
-/* =====================================================
-   ANCHO DE COLUMNAS
-===================================================== */
-
-#proyectos th:nth-child(1),
-#proyectos td:nth-child(1) {
-    width: 26%;
-}
-
-#proyectos th:nth-child(2),
-#proyectos td:nth-child(2) {
-    width: 16%;
-}
-
-#proyectos th:nth-child(3),
-#proyectos td:nth-child(3) {
-    width: 18%;
-
-    text-align: center;
-}
-
-#proyectos th:nth-child(4),
-#proyectos td:nth-child(4) {
-    width: 23%;
-
-    text-align: center;
-}
-
-#proyectos th:nth-child(5),
-#proyectos td:nth-child(5) {
-    width: 17%;
-
-    text-align: center;
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 768px) {
-
-    #proyectos .panel {
-        width: 100%;
-        max-width: 100%;
-
-        max-height: 600px;
-
-        padding: 15px;
-
-        overflow-x: auto;
-        overflow-y: auto;
-    }
-
-    #proyectos table {
-        min-width: 900px;
-    }
-
-    #proyectos thead th {
-        position: sticky;
-
-        top: 0;
-
-        z-index: 1000;
-
-        background: #cbd5e1 !important;
-
-        color: #111827;
-
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        font-weight: 600;
-
-        text-align: left;
-
-        white-space: nowrap;
-
-        border: none !important;
-
-        box-shadow: none !important;
-
-        background-clip: padding-box;
-    }
-
-    #proyectos tbody td {
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        border: none !important;
-    }
-}
-
-
-/* =====================================================
-   CELULAR
-===================================================== */
-
-@media (max-width: 480px) {
-
-    #proyectos .panel {
-        width: 100%;
-        max-width: 100%;
-
-        max-height: 550px;
-
-        padding: 12px;
-
-        overflow-x: auto;
-        overflow-y: auto;
-    }
-
-    #proyectos table {
-        min-width: 850px;
-    }
-
-    #proyectos thead th {
-        position: sticky;
-
-        top: 0;
-
-        z-index: 1000;
-
-        background: #cbd5e1 !important;
-
-        color: #111827;
-
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        font-weight: 600;
-
-        text-align: left;
-
-        white-space: nowrap;
-
-        border: none !important;
-
-        box-shadow: none !important;
-
-        background-clip: padding-box;
-    }
-
-    #proyectos tbody td {
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        border: none !important;
-    }
-}
 #proyectos .panel {
-    width: 100%;
-    max-width: 100%;
-
-    background: white;
-
-    border-radius: 10px;
-
-    padding: 25px;
-
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.05);
-
     position: relative;
-
-    overflow-x: auto;
-    overflow-y: auto;
-
-    max-height: 650px;
 }
-
-
-/* CAPA BLANCA SOBRE EL ESPACIO SUPERIOR */
 
 #proyectos .panel::before {
     content: "";
 
-    position: sticky;
-
-    display: block;
+    position: absolute;
 
     top: 0;
+    left: 0;
+    right: 0;
 
-    height: 0;
-
-    z-index: 900;
+    height: 25px;
 
     background: white;
+
+    z-index: 999;
+
+    pointer-events: none;
 }
 
+#proyectos thead {
+    position: relative;
+    z-index: 1000;
+}
 
 #proyectos thead th {
     position: sticky;
 
     top: 0;
 
-    z-index: 1000;
+    z-index: 1001;
 
     background: #cbd5e1 !important;
-
-    color: #111827;
-
-    padding: 13px;
-
-    text-align: left;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
 
     border: none !important;
 
