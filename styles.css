@@ -1513,7 +1513,7 @@ section {
 
     border-radius: 10px;
 
-    padding: 0;
+    padding: 25px;
 
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.05);
@@ -1525,7 +1525,6 @@ section {
 
     max-height: 650px;
 }
-
 
 /* =====================================================
    TABLA DE PROYECTOS
@@ -1553,26 +1552,24 @@ section {
     top: 0;
     z-index: 1000;
 
-    background-color: #cbd5e1 !important;
-    background-image: none !important;
+    background: #cbd5e1 !important;
 
     color: #111827;
 
-    padding: 11px 14px;
+    padding: 13px;
 
     text-align: left;
-    vertical-align: middle;
+
+    font-size: 14px;
+
+    font-weight: 600;
 
     white-space: nowrap;
 
-    border: none !important;
-    box-shadow: none !important;
+    border: none;
 
-    opacity: 1 !important;
-
-    background-clip: border-box;
+    box-shadow: none;
 }
-
 
 /* =====================================================
    CUERPO DE LA TABLA
@@ -1660,56 +1657,28 @@ section {
    TABLET
 ===================================================== */
 
-@media (max-width: 768px) {
+#proyectos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    #proyectos .panel {
-        width: 100%;
-        max-width: 100%;
+    background: #cbd5e1 !important;
 
-        max-height: 600px;
+    color: #111827;
 
-        padding: 15px;
+    padding: 9px 10px;
 
-        overflow-x: auto;
-        overflow-y: auto;
-    }
+    font-size: 12px;
 
+    font-weight: 600;
 
-    #proyectos table {
-        min-width: 900px;
-    }
+    text-align: left;
 
+    white-space: nowrap;
 
-    #proyectos thead th {
-        position: sticky;
+    border: none;
 
-        top: 0;
-
-        z-index: 1000;
-
-        background: #cbd5e1 !important;
-
-        color: #111827;
-
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        /* Sin separadores */
-        border: none !important;
-
-        box-shadow: none !important;
-    }
-
-
-    #proyectos td {
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        border: none !important;
-    }
-
+    box-shadow: none;
 }
 
 
@@ -1717,56 +1686,26 @@ section {
    CELULAR
 ===================================================== */
 
-@media (max-width: 480px) {
+#proyectos thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    #proyectos .panel {
-        width: 100%;
-        max-width: 100%;
+    background: #cbd5e1 !important;
 
-        max-height: 550px;
+    color: #111827;
 
-        padding: 12px;
+    padding: 9px 10px;
 
-        overflow-x: auto;
-        overflow-y: auto;
-    }
+    font-size: 12px;
 
+    font-weight: 600;
 
-    #proyectos table {
-        min-width: 850px;
-    }
+    text-align: left;
 
+    white-space: nowrap;
 
-    #proyectos thead th {
-        position: sticky;
+    border: none;
 
-        top: 0;
-
-        z-index: 1000;
-
-        background: #cbd5e1 !important;
-
-        color: #111827;
-
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        /* Sin separadores */
-        border: none !important;
-
-        box-shadow: none !important;
-
-        background-clip: padding-box;
-    }
-
-
-    #proyectos td {
-        padding: 9px 10px;
-
-        font-size: 12px;
-
-        border: none !important;
-    }
-
+    box-shadow: none;
 }
