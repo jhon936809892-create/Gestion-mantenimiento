@@ -1577,6 +1577,20 @@ section {
 }
 
 
+/* CUBRE EL ESPACIO SUPERIOR DEL ENCABEZADO */
+
+#proyectos thead {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 999;
+
+    background: white;
+
+    box-shadow: none;
+}
+
 /* =====================================================
    CUERPO DE LA TABLA
 ===================================================== */
@@ -1770,4 +1784,70 @@ section {
 
         border: none !important;
     }
+}
+#proyectos .panel {
+    width: 100%;
+    max-width: 100%;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.05);
+
+    position: relative;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    max-height: 650px;
+}
+
+
+/* CAPA BLANCA SOBRE EL ESPACIO SUPERIOR */
+
+#proyectos .panel::before {
+    content: "";
+
+    position: sticky;
+
+    display: block;
+
+    top: 0;
+
+    height: 0;
+
+    z-index: 900;
+
+    background: white;
+}
+
+
+#proyectos thead th {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background: #cbd5e1 !important;
+
+    color: #111827;
+
+    padding: 13px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    border: none !important;
+
+    box-shadow: none !important;
 }
