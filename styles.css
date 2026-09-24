@@ -1558,7 +1558,6 @@ section {
     }
 }
 
-
 /* =====================================================
    PROYECTOS
 ===================================================== */
@@ -1591,6 +1590,34 @@ section {
     overflow: hidden;
 }
 
+
+/* =====================================================
+   ENCABEZADO DEL MÓDULO PROYECTOS
+   SE MANTIENE FIJO DENTRO DEL PANEL
+===================================================== */
+
+#proyectos .section-header {
+    position: relative;
+
+    background: white;
+
+    z-index: 20;
+
+    margin: 0 0 20px 0;
+
+    padding: 0;
+
+    width: 100%;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   CONTENEDOR SCROLL DE PROYECTOS
+   SOLO ESTA PARTE SE DESPLAZA
+===================================================== */
+
 #proyectos .proyectos-scroll {
     width: 100%;
     max-width: 100%;
@@ -1601,4 +1628,76 @@ section {
     overflow-y: auto;
 
     position: relative;
+
+    /* evita que el contenido se salga */
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   ENCABEZADO DE LA TABLA DENTRO DEL SCROLL
+===================================================== */
+
+#proyectos .proyectos-scroll thead th {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+
+    background: #cbd5e1;
+}
+
+
+/* =====================================================
+   EVITAR QUE EL SCROLL AFECTE EL DISEÑO
+===================================================== */
+
+#proyectos .proyectos-scroll table {
+    width: 100%;
+
+    min-width: 650px;
+}
+
+
+/* =====================================================
+   MÓVIL
+===================================================== */
+
+@media (max-width: 768px) {
+
+    #proyectos .panel {
+        padding: 15px;
+    }
+
+    #proyectos .section-header {
+        margin-bottom: 15px;
+    }
+
+    #proyectos .proyectos-scroll {
+        max-height: 600px;
+
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+}
+
+
+/* =====================================================
+   CELULARES PEQUEÑOS
+===================================================== */
+
+@media (max-width: 480px) {
+
+    #proyectos .panel {
+        padding: 15px;
+    }
+
+    #proyectos .section-header {
+        margin-bottom: 15px;
+    }
+
+    #proyectos .proyectos-scroll {
+        max-height: 550px;
+    }
 }
