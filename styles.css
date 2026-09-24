@@ -139,8 +139,9 @@ nav {
 }
 
 
+
 /* ========================================
-   TOPBAR
+   TOPBAR FIJO
 ======================================== */
 
 .topbar {
@@ -162,27 +163,19 @@ nav {
 
     gap: 20px;
 
-    position: relative;
+    /* FIJO */
+    position: fixed;
 
-    z-index: 1000;
-
-    isolation: isolate;
-}
-
-.topbar::before {
-    content: "";
-
-    position: absolute;
-
-    top: -100px;
-    left: 0;
+    top: 0;
     right: 0;
 
-    height: 100px;
+    /* deja libre el sidebar */
+    left: 240px;
 
-    background: white;
+    z-index: 1400;
 
-    z-index: -1;
+    /* evita que el contenido se vea atravesándolo */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .topbar h1 {
@@ -210,8 +203,6 @@ nav {
 
     white-space: nowrap;
 }
-
-
 /* ========================================
    SECCIONES
 ======================================== */
@@ -220,6 +211,8 @@ nav {
     display: none;
 
     padding: 30px;
+
+    padding-top: 25px;
 
     width: 100%;
     max-width: 100%;
@@ -776,14 +769,35 @@ textarea {
 @media (max-width: 768px) {
 
     /* SIDEBAR */
+.topbar {
+    min-height: auto;
 
-    .sidebar {
-        width: 68px;
+    width: calc(100% - 68px);
 
-        padding: 0 7px;
+    padding: 14px 15px;
 
-        z-index: 1500;
-    }
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 68px;
+
+    right: 0;
+
+    z-index: 1400;
+
+    background: white !important;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
 
     .logo {
         width: 68px !important;
@@ -900,14 +914,15 @@ textarea {
 
 
     /* MAIN */
+.main {
+    margin-left: 68px;
 
-    .main {
-        margin-left: 68px;
+    width: calc(100% - 68px);
 
-        width: calc(100% - 68px);
+    overflow-x: hidden;
 
-        overflow-x: hidden;
-    }
+    padding-top: 100px;
+}
 
 
     /* SECCIONES */
@@ -1164,11 +1179,13 @@ textarea {
         max-height: 38px;
     }
 
-    .main {
-        margin-left: 60px;
+    ..main {
+    margin-left: 60px;
 
-        width: calc(100% - 60px);
-    }
+    width: calc(100% - 60px);
+
+    padding-top: 100px;
+}
 
     .menu {
         height: 46px;
@@ -1205,6 +1222,15 @@ textarea {
     .card {
         padding: 18px;
     }
+   .topbar {
+    left: 60px;
+
+    width: calc(100% - 60px);
+
+    padding: 15px;
+
+    z-index: 1400;
+}
 }
 
 
@@ -1551,4 +1577,18 @@ section {
     overflow-y: auto;
 
     position: relative;
+}
+.main {
+    margin-left: 240px;
+
+    width: calc(100% - 240px);
+
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow-x: hidden;
+
+    /* espacio para el encabezado fijo */
+    padding-top: 80px;
 }
