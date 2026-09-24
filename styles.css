@@ -1524,8 +1524,10 @@ section {
     overflow-y: auto;
 
     max-height: 650px;
+    
+    /* El contenido que hace scroll queda recortado */
+    isolation: isolate;
 }
-
 /* PROTEGE EL ESPACIO BLANCO SOBRE EL ENCABEZADO */
 
 #proyectos .panel {
@@ -1555,7 +1557,31 @@ section {
     z-index: 1000;
 }
 
-#proyectos thead th {
+##proyectos thead th {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background: #cbd5e1 !important;
+
+    color: #111827;
+
+    padding: 13px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    border: none !important;
+
+    box-shadow: none !important;
+} {
     position: sticky;
 
     top: 0;
