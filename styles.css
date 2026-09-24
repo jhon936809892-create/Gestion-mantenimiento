@@ -1522,3 +1522,15 @@ section {
 
     overflow: hidden;
 }
+
+#proyectos .proyectos-scroll {
+    width: 100%;
+    max-width: 100%;
+
+    max-height: 600px;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    position: relative;
+}
