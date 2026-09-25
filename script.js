@@ -218,23 +218,25 @@ function activarEdicionPersonal() {
 
             botones.innerHTML = `
 
-                <button
-                    type="button"
-                    title="Editar"
-                    class="btn-editar-personal"
-                >
-                    ✏️
-                </button>
+    <button
+        type="button"
+        title="Editar"
+        class="btn-editar-personal"
+        onclick="editarPersonal(${fila.dataset.id})"
+    >
+        ✏️
+    </button>
 
-                <button
-                    type="button"
-                    title="Borrar"
-                    class="btn-eliminar-personal"
-                >
-                    🗑️
-                </button>
+    <button
+        type="button"
+        title="Borrar"
+        class="btn-eliminar-personal"
+        onclick="eliminarPersonal(${fila.dataset.id})"
+    >
+        🗑️
+    </button>
 
-            `;
+`;
 
 
             fila.lastElementChild.appendChild(
@@ -1068,6 +1070,7 @@ async function cargarPersonal() {
 
                 const fila =
                     document.createElement("tr");
+                fila.dataset.id = persona.id;
 
                 fila.innerHTML = `
 
