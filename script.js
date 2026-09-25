@@ -1314,7 +1314,115 @@ async function editarPersonal(id) {
 
 }
 
+// ========================================
+// CANCELAR EDICIÓN DE PERSONAL
+// ========================================
 
+function cancelarEdicionPersonal() {
+
+    const idPersonal =
+        document.getElementById(
+            "idPersonal"
+        );
+
+
+    // Solo preguntar si realmente estamos editando
+
+    if (
+        !idPersonal ||
+        idPersonal.value.trim() === ""
+    ) {
+
+        cerrarModal("modalPersonal");
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+            "¿Está seguro de que desea cancelar?\n\n" +
+            "Se perderán los cambios realizados."
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    // ----------------------------------------
+    // CERRAR MODAL
+    // ----------------------------------------
+
+    cerrarModal(
+        "modalPersonal"
+    );
+
+
+    // ----------------------------------------
+    // LIMPIAR FORMULARIO
+    // ----------------------------------------
+
+    const formulario =
+        document.getElementById(
+            "formPersonal"
+        );
+
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    // ----------------------------------------
+    // LIMPIAR ID
+    // ----------------------------------------
+
+    idPersonal.value = "";
+
+
+    // ----------------------------------------
+    // RESTAURAR TÍTULO
+    // ----------------------------------------
+
+    const titulo =
+        document.getElementById(
+            "tituloModalPersonal"
+        );
+
+
+    if (titulo) {
+
+        titulo.textContent =
+            "Registrar personal";
+
+    }
+
+
+    // ----------------------------------------
+    // RESTAURAR BOTÓN
+    // ----------------------------------------
+
+    const boton =
+        document.getElementById(
+            "btnGuardarPersonal"
+        );
+
+
+    if (boton) {
+
+        boton.textContent =
+            "Guardar personal";
+
+    }
+
+}
 // ========================================
 // ELIMINAR PERSONAL
 // ========================================
