@@ -421,182 +421,56 @@
 
     </main>
 
-    <div
-        id="modalPersonal"
-        class="modal"
-    >
 
-        <div class="modal-content">
-
-         <div class="modal-header">
-
-    <h2 id="tituloModalPersonal">
-        Registrar personal
-    </h2>
-
-    <button
-        type="button"
-        onclick="cerrarModal('modalPersonal')">
-        ×
-    </button>
-
-</div>
-
-            <form
-    id="formPersonal"
-    onsubmit="registrarPersonal(event)"
+<div
+    id="modalPersonal"
+    class="modal"
 >
-    
-    <input
-        type="hidden"
-        id="idPersonal"
-    >
 
-                <div class="form-grid">
+    <div class="modal-content">
 
-                    <div>
+        <div class="modal-header">
 
-                        <label>
-                            Nombres
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nombres"
-                            required
-                        >
-
-                    </div>
-
-                    <div>
-
-                        <label>
-                            Apellidos
-                        </label>
-
-                        <input
-                            type="text"
-                            id="apellidos"
-                            required
-                        >
-
-                    </div>
-
-                    <div>
-
-                        <label>
-                            DNI / CE
-                        </label>
-
-                        <input
-                            type="text"
-                            id="documento"
-                            required
-                            inputmode="numeric"
-                            maxlength="8"
-                            placeholder="Ingrese 8 dígitos"
-                            oninput="validarDNI()"
-                        >
-
-                        <small
-                            id="errorDNI"
-                            class="error-campo"
-                        ></small>
-
-                    </div>
-
-                    <div>
-
-                        <label>
-                            Celular
-                        </label>
-
-                        <input
-                            type="text"
-                            id="celular"
-                            inputmode="numeric"
-                            maxlength="9"
-                            placeholder="Ingrese 9 dígitos"
-                            oninput="validarCelular()"
-                        >
-
-                        <small
-                            id="errorCelular"
-                            class="error-campo"
-                        ></small>
-
-                    </div>
-
-                    <div>
-
-                        <label>
-                            Cargo
-                        </label>
-
-                        <input
-                            type="text"
-                            id="cargo"
-                        >
-
-                    </div>
-
-                    <div>
-
-                        <label>
-                            Cuadrilla
-                        </label>
-
-                        <select id="cuadrilla">
-
-                            <option value="1">
-                                Cuadrilla 1
-                            </option>
-
-                            <option value="2">
-                                Cuadrilla 2
-                            </option>
-
-                            <option value="3">
-                                Cuadrilla 3
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-               <button
-    type="button"
-    id="btnCancelarPersonal"
-    class="btn-cancelar-personal"
-    onclick="cancelarEdicionPersonal()"
->
-    Cancelar
-</button>
-
-<button
-    type="submit"
-    id="btnGuardarPersonal"
->
-    Guardar personal
-</button>
-
-                <button
-    type="button"
-    id="btnCancelarPersonal"
-    class="btn-cancelar-personal"
-    onclick="cancelarEdicionPersonal()"
->
-    Cancelar
-</button>
-
-            </form>
+            <h2 id="tituloModalPersonal">
+                Registrar personal
+            </h2>
 
         </div>
 
+        <form
+            id="formPersonal"
+            onsubmit="registrarPersonal(event)"
+        >
+
+            <input
+                type="hidden"
+                id="idPersonal"
+            >
+
+            <!-- aquí siguen todos tus campos -->
+
+            <button
+                type="submit"
+                id="btnGuardarPersonal"
+            >
+                Guardar personal
+            </button>
+
+            <button
+                type="button"
+                id="btnCancelarPersonal"
+                class="btn-cancelar-personal"
+                onclick="cancelarEdicionPersonal()"
+            >
+                Cancelar
+            </button>
+
+        </form>
+
     </div>
 
+</div>
+    
     <div
         id="modalProyecto"
         class="modal"
@@ -712,12 +586,7 @@
                     Nuevo mantenimiento
                 </h2>
 
-                <button
-                    type="button"
-                    onclick="cerrarModal('modalMantenimiento')"
-                >
-                    ×
-                </button>
+                
 
             </div>
 
