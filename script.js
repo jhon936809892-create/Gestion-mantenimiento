@@ -1318,15 +1318,14 @@ async function editarPersonal(id) {
 // CANCELAR EDICIÓN DE PERSONAL
 // ========================================
 
+// ========================================
+// CANCELAR EDICIÓN DE PERSONAL
+// ========================================
+
 function cancelarEdicionPersonal() {
 
     const idPersonal =
-        document.getElementById(
-            "idPersonal"
-        );
-
-
-    // Solo preguntar si realmente estamos editando
+        document.getElementById("idPersonal");
 
     if (
         !idPersonal ||
@@ -1339,19 +1338,19 @@ function cancelarEdicionPersonal() {
 
     }
 
-
-    const confirmar =
-        confirm(
-            "¿Está seguro de que desea cancelar?\n\n" +
-            "Se perderán los cambios realizados."
+    // Mostrar cuadro de confirmación personalizado
+    const modalConfirmacion =
+        document.getElementById(
+            "modalConfirmarCancelar"
         );
 
+    if (modalConfirmacion) {
 
-    if (!confirmar) {
-
-        return;
+        modalConfirmacion.classList.add("active");
 
     }
+
+}
 
 
     // ----------------------------------------
