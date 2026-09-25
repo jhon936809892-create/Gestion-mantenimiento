@@ -644,9 +644,9 @@ document.addEventListener(
         }
 
 
-        // -----------------------------------------
-        // MODAL DE PERSONAL
-        // -----------------------------------------
+        // ----------------------------------------
+        // MODAL DE EDICIÓN
+        // ----------------------------------------
 
         if (
             event.target.id === "modalPersonal"
@@ -657,9 +657,8 @@ document.addEventListener(
                     "idPersonal"
                 );
 
-
             // Si estamos editando,
-            // NO permitir cerrar haciendo clic afuera
+            // no permitir cerrar haciendo clic afuera
 
             if (
                 idPersonal &&
@@ -673,9 +672,23 @@ document.addEventListener(
         }
 
 
-        // -----------------------------------------
+        // ----------------------------------------
+        // MODAL DE CONFIRMACIÓN
+        // ----------------------------------------
+
+        if (
+            event.target.id ===
+            "modalConfirmarCancelar"
+        ) {
+
+            return;
+
+        }
+
+
+        // ----------------------------------------
         // OTROS MODALES
-        // -----------------------------------------
+        // ----------------------------------------
 
         event.target.classList.remove(
             "active"
