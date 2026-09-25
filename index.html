@@ -436,8 +436,7 @@
 
     <button
         type="button"
-        onclick="cerrarModal('modalPersonal')"
-    >
+        onclick="cerrarModal('modalPersonal')">
         ×
     </button>
 
@@ -567,12 +566,21 @@
 
                 </div>
 
-                <button
-                        class="btn-primary full"
-                        type="submit"
-                        id="btnGuardarPersonal">
-                        Guardar personal
-                </button>
+               <button
+    type="button"
+    id="btnCancelarPersonal"
+    class="btn-cancelar-personal"
+    onclick="cancelarEdicionPersonal()"
+>
+    Cancelar
+</button>
+
+<button
+    type="submit"
+    id="btnGuardarPersonal"
+>
+    Guardar personal
+</button>
 
             </form>
 
