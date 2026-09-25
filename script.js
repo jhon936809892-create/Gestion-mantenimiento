@@ -4,6 +4,7 @@
 
 let proyectos = [];
 let calendarioMantenimiento = null;
+let resizeCalendarioPendiente = false;
 
 
 // ========================================
@@ -123,7 +124,7 @@ function inicializarCalendarioMantenimiento() {
                                         }
 
                                     };
-                                                                
+
                                 }
                             );
 
@@ -178,10 +179,17 @@ function inicializarCalendarioMantenimiento() {
 
 }
 
+
+// ========================================
+// ACTIVAR / DESACTIVAR EDICIÓN DE PERSONAL
+// ========================================
+
 function activarEdicionPersonal() {
 
     const filas =
-        document.querySelectorAll("#tablaPersonal tr");
+        document.querySelectorAll(
+            "#tablaPersonal tr"
+        );
 
     const modoEdicion =
         document.querySelector(
@@ -197,6 +205,8 @@ function activarEdicionPersonal() {
             );
 
 
+        // Si ya estamos en modo edición,
+        // quitar los botones
         if (modoEdicion) {
 
             if (botonesExistentes) {
@@ -207,10 +217,13 @@ function activarEdicionPersonal() {
 
         }
 
+        // Activar modo edición
         else {
 
             const botones =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
 
             botones.className =
                 "botones-edicion-personal";
@@ -218,36 +231,42 @@ function activarEdicionPersonal() {
 
             botones.innerHTML = `
 
-    <button
-        type="button"
-        title="Editar"
-        class="btn-editar-personal"
-        onclick="editarPersonal(${fila.dataset.id})"
-    >
-        ✏️
-    </button>
+                <button
+                    type="button"
+                    title="Editar"
+                    class="btn-editar-personal"
+                    onclick="editarPersonal(${fila.dataset.id})"
+                >
+                    ✏️
+                </button>
 
-    <button
-        type="button"
-        title="Borrar"
-        class="btn-eliminar-personal"
-        onclick="eliminarPersonal(${fila.dataset.id})"
-    >
-        🗑️
-    </button>
+                <button
+                    type="button"
+                    title="Borrar"
+                    class="btn-eliminar-personal"
+                    onclick="eliminarPersonal(${fila.dataset.id})"
+                >
+                    🗑️
+                </button>
 
-`;
+            `;
 
 
-            fila.lastElementChild.appendChild(
-                botones
-            );
+            if (fila.lastElementChild) {
+
+                fila.lastElementChild.appendChild(
+                    botones
+                );
+
+            }
 
         }
 
     });
 
 }
+
+
 // ========================================
 // CAMBIAR SECCIÓN
 // ========================================
@@ -255,61 +274,93 @@ function activarEdicionPersonal() {
 function mostrarSeccion(seccion, boton) {
 
     const secciones =
-        document.querySelectorAll(".seccion");
+        document.querySelectorAll(
+            ".seccion"
+        );
+
 
     secciones.forEach(function(item) {
 
-        item.classList.remove("activa");
+        item.classList.remove(
+            "activa"
+        );
 
     });
 
 
     const seleccionada =
-        document.getElementById(seccion);
+        document.getElementById(
+            seccion
+        );
+
 
     if (seleccionada) {
 
-        seleccionada.classList.add("activa");
+        seleccionada.classList.add(
+            "activa"
+        );
 
     }
 
 
     const botones =
-        document.querySelectorAll(".menu");
+        document.querySelectorAll(
+            ".menu"
+        );
+
 
     botones.forEach(function(item) {
 
-        item.classList.remove("active");
+        item.classList.remove(
+            "active"
+        );
 
     });
 
 
     if (boton) {
 
-        boton.classList.add("active");
+        boton.classList.add(
+            "active"
+        );
 
     }
 
 
     const titulos = {
 
-        dashboard: "Dashboard",
-        personal: "Personal",
-        cuadrillas: "Cuadrillas",
-        proyectos: "Proyectos",
-        mantenimiento: "Mantenimiento",
-        materiales: "Materiales"
+        dashboard:
+            "Dashboard",
+
+        personal:
+            "Personal",
+
+        cuadrillas:
+            "Cuadrillas",
+
+        proyectos:
+            "Proyectos",
+
+        mantenimiento:
+            "Mantenimiento",
+
+        materiales:
+            "Materiales"
 
     };
 
 
     const titulo =
-        document.getElementById("titulo");
+        document.getElementById(
+            "titulo"
+        );
+
 
     if (titulo) {
 
         titulo.textContent =
-            titulos[seccion] || "Dashboard";
+            titulos[seccion] ||
+            "Dashboard";
 
     }
 
@@ -319,70 +370,84 @@ function mostrarSeccion(seccion, boton) {
     // ========================================
 
     const botonTopbar =
-        document.getElementById("botonTopbar");
+        document.getElementById(
+            "botonTopbar"
+        );
+
 
     if (botonTopbar) {
 
         botonTopbar.innerHTML = "";
 
 
-     if (seccion === "personal") {
+        if (seccion === "personal") {
 
-    botonTopbar.innerHTML = `
-        <button
-            class="btn-primary"
-            onclick="abrirModalPersonal()"
-        >
-            + Registrar personal
-        </button>
+            botonTopbar.innerHTML = `
 
-        <button
-            class="btn-primary"
-            onclick="activarEdicionPersonal()"
-        >
-            ✏️ Editar
-        </button>
-    `;
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="abrirModalPersonal()"
+                >
+                    + Registrar personal
+                </button>
 
-}
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="activarEdicionPersonal()"
+                >
+                    ✏️ Editar
+                </button>
+
+            `;
+
+        }
 
         else if (seccion === "proyectos") {
 
             botonTopbar.innerHTML = `
+
                 <button
+                    type="button"
                     class="btn-primary"
                     onclick="abrirModalProyecto()"
                 >
                     + Nuevo proyecto
                 </button>
+
             `;
 
         }
 
-
         else if (seccion === "mantenimiento") {
 
             botonTopbar.innerHTML = `
+
                 <button
+                    type="button"
                     class="btn-primary"
                     onclick="abrirModalMantenimiento()"
                 >
                     + Nuevo mantenimiento
                 </button>
+
             `;
 
         }
 
-
         else if (seccion === "materiales") {
 
             botonTopbar.innerHTML = `
+
                 <button
+                    type="button"
                     class="btn-primary"
                     onclick="abrirModalMaterial()"
                 >
                     + Registrar material
                 </button>
+
             `;
 
         }
@@ -426,6 +491,7 @@ function mostrarSeccion(seccion, boton) {
 
             inicializarCalendarioMantenimiento();
 
+
             if (calendarioMantenimiento) {
 
                 calendarioMantenimiento.updateSize();
@@ -451,29 +517,39 @@ function mostrarSeccion(seccion, boton) {
 
 
 // ========================================
-// MODALES
+// MODAL PERSONAL
 // ========================================
 
 function abrirModalPersonal() {
 
     const modal =
-        document.getElementById("modalPersonal");
+        document.getElementById(
+            "modalPersonal"
+        );
+
 
     const titulo =
         document.getElementById(
             "tituloModalPersonal"
         );
 
+
     const boton =
         document.getElementById(
             "btnGuardarPersonal"
         );
 
+
     const id =
-        document.getElementById("idPersonal");
+        document.getElementById(
+            "idPersonal"
+        );
+
 
     const formulario =
-        document.getElementById("formPersonal");
+        document.getElementById(
+            "formPersonal"
+        );
 
 
     if (formulario) {
@@ -507,10 +583,15 @@ function abrirModalPersonal() {
 
 
     const errorDNI =
-        document.getElementById("errorDNI");
+        document.getElementById(
+            "errorDNI"
+        );
+
 
     const errorCelular =
-        document.getElementById("errorCelular");
+        document.getElementById(
+            "errorCelular"
+        );
 
 
     if (errorDNI) {
@@ -528,10 +609,15 @@ function abrirModalPersonal() {
 
 
     const documento =
-        document.getElementById("documento");
+        document.getElementById(
+            "documento"
+        );
+
 
     const celular =
-        document.getElementById("celular");
+        document.getElementById(
+            "celular"
+        );
 
 
     if (documento) {
@@ -556,81 +642,111 @@ function abrirModalPersonal() {
 
     if (modal) {
 
-        modal.classList.add("active");
+        modal.classList.add(
+            "active"
+        );
 
     }
 
 }
 
+
+// ========================================
+// MODAL PROYECTO
+// ========================================
 
 async function abrirModalProyecto() {
 
     const modal =
-        document.getElementById("modalProyecto");
+        document.getElementById(
+            "modalProyecto"
+        );
+
 
     if (modal) {
 
-        modal.classList.add("active");
+        modal.classList.add(
+            "active"
+        );
 
     }
 
 }
 
 
+// ========================================
+// MODAL MANTENIMIENTO
+// ========================================
+
 async function abrirModalMantenimiento() {
 
     await cargarProyectos();
+
 
     const modal =
         document.getElementById(
             "modalMantenimiento"
         );
 
+
     if (modal) {
 
-        modal.classList.add("active");
+        modal.classList.add(
+            "active"
+        );
 
     }
 
 }
 
 
+// ========================================
+// MODAL MATERIAL
+// ========================================
+
 async function abrirModalMaterial() {
 
     await cargarProyectos();
+
 
     const modal =
         document.getElementById(
             "modalMaterial"
         );
 
+
     if (modal) {
 
-        modal.classList.add("active");
+        modal.classList.add(
+            "active"
+        );
 
     }
 
 }
 
+
+// ========================================
+// CERRAR MODAL
+// ========================================
 
 function cerrarModal(id) {
 
     const modal =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
+
 
     if (modal) {
 
-        modal.classList.remove("active");
+        modal.classList.remove(
+            "active"
+        );
 
     }
 
 }
-
-
-// ========================================
-// CERRAR MODAL AL HACER CLIC AFUERA
-// ========================================
-
 
 
 // ========================================
@@ -640,10 +756,15 @@ function cerrarModal(id) {
 function validarDNI() {
 
     const input =
-        document.getElementById("documento");
+        document.getElementById(
+            "documento"
+        );
+
 
     const mensaje =
-        document.getElementById("errorDNI");
+        document.getElementById(
+            "errorDNI"
+        );
 
 
     if (!input || !mensaje) {
@@ -654,10 +775,17 @@ function validarDNI() {
 
 
     input.value =
-        input.value.replace(/[^0-9]/g, "");
+        input.value.replace(
+            /[^0-9]/g,
+            ""
+        );
+
 
     input.value =
-        input.value.slice(0, 8);
+        input.value.slice(
+            0,
+            8
+        );
 
 
     if (input.value.length === 0) {
@@ -702,6 +830,7 @@ function validarDNI() {
         "input-correcto"
     );
 
+
     return true;
 
 }
@@ -714,7 +843,10 @@ function validarDNI() {
 function validarCelular() {
 
     const input =
-        document.getElementById("celular");
+        document.getElementById(
+            "celular"
+        );
+
 
     const mensaje =
         document.getElementById(
@@ -730,10 +862,17 @@ function validarCelular() {
 
 
     input.value =
-        input.value.replace(/[^0-9]/g, "");
+        input.value.replace(
+            /[^0-9]/g,
+            ""
+        );
+
 
     input.value =
-        input.value.slice(0, 9);
+        input.value.slice(
+            0,
+            9
+        );
 
 
     if (input.value.length === 0) {
@@ -778,6 +917,7 @@ function validarCelular() {
         "input-correcto"
     );
 
+
     return true;
 
 }
@@ -816,7 +956,9 @@ async function registrarPersonal(event) {
 
     const idPersonal =
         document
-            .getElementById("idPersonal")
+            .getElementById(
+                "idPersonal"
+            )
             .value
             .trim();
 
@@ -825,37 +967,49 @@ async function registrarPersonal(event) {
 
         nombres:
             document
-                .getElementById("nombres")
+                .getElementById(
+                    "nombres"
+                )
                 .value
                 .trim(),
 
         apellidos:
             document
-                .getElementById("apellidos")
+                .getElementById(
+                    "apellidos"
+                )
                 .value
                 .trim(),
 
         documento:
             document
-                .getElementById("documento")
+                .getElementById(
+                    "documento"
+                )
                 .value
                 .trim(),
 
         celular:
             document
-                .getElementById("celular")
+                .getElementById(
+                    "celular"
+                )
                 .value
                 .trim(),
 
         cargo:
             document
-                .getElementById("cargo")
+                .getElementById(
+                    "cargo"
+                )
                 .value
                 .trim(),
 
         cuadrilla:
             document
-                .getElementById("cuadrilla")
+                .getElementById(
+                    "cuadrilla"
+                )
                 .value
 
     };
@@ -885,7 +1039,9 @@ async function registrarPersonal(event) {
                         },
 
                         body:
-                            JSON.stringify(datos)
+                            JSON.stringify(
+                                datos
+                            )
 
                     }
                 );
@@ -907,7 +1063,9 @@ async function registrarPersonal(event) {
                         },
 
                         body:
-                            JSON.stringify(datos)
+                            JSON.stringify(
+                                datos
+                            )
 
                     }
                 );
@@ -1011,6 +1169,7 @@ async function registrarPersonal(event) {
             error
         );
 
+
         alert(
             "No se pudo conectar con el servidor."
         );
@@ -1018,6 +1177,7 @@ async function registrarPersonal(event) {
     }
 
 }
+
 
 // ========================================
 // CARGAR PERSONAL
@@ -1028,7 +1188,10 @@ async function cargarPersonal() {
     try {
 
         const respuesta =
-            await fetch("/api/personal");
+            await fetch(
+                "/api/personal"
+            );
+
 
         if (!respuesta.ok) {
 
@@ -1038,58 +1201,79 @@ async function cargarPersonal() {
 
         }
 
+
         const personal =
             await respuesta.json();
 
+
         const tabla =
-            document.getElementById("tablaPersonal");
+            document.getElementById(
+                "tablaPersonal"
+            );
+
 
         if (tabla) {
 
             tabla.innerHTML = "";
 
-            personal.forEach(function(persona) {
 
-                const fila =
-                    document.createElement("tr");
-                fila.dataset.id = persona.id;
+            personal.forEach(
+                function(persona) {
 
-                fila.innerHTML = `
+                    const fila =
+                        document.createElement(
+                            "tr"
+                        );
 
-                    <td>
-                        ${persona.nombres || ""}
-                    </td>
 
-                    <td>
-                        ${persona.apellidos || ""}
-                    </td>
+                    fila.dataset.id =
+                        persona.id;
 
-                    <td>
-                        ${persona.documento || ""}
-                    </td>
 
-                    <td>
-                        ${persona.celular || ""}
-                    </td>
+                    fila.innerHTML = `
 
-                    <td>
-                        ${persona.cargo || ""}
-                    </td>
+                        <td>
+                            ${persona.nombres || ""}
+                        </td>
 
-                    <td>
-                        ${persona.cuadrilla || persona.cuadrilla_id || ""}
-                    </td>
+                        <td>
+                            ${persona.apellidos || ""}
+                        </td>
 
-                `;
+                        <td>
+                            ${persona.documento || ""}
+                        </td>
 
-                tabla.appendChild(fila);
+                        <td>
+                            ${persona.celular || ""}
+                        </td>
 
-            });
+                        <td>
+                            ${persona.cargo || ""}
+                        </td>
+
+                        <td>
+                            ${persona.cuadrilla || persona.cuadrilla_id || ""}
+                        </td>
+
+                    `;
+
+
+                    tabla.appendChild(
+                        fila
+                    );
+
+                }
+            );
 
         }
 
+
         const totalPersonal =
-            document.getElementById("totalPersonal");
+            document.getElementById(
+                "totalPersonal"
+            );
+
 
         if (totalPersonal) {
 
@@ -1098,7 +1282,10 @@ async function cargarPersonal() {
 
         }
 
-        actualizarCuadrillas(personal);
+
+        actualizarCuadrillas(
+            personal
+        );
 
     }
     catch (error) {
@@ -1111,6 +1298,7 @@ async function cargarPersonal() {
     }
 
 }
+
 
 // ========================================
 // EDITAR PERSONAL
@@ -1161,48 +1349,104 @@ async function editarPersonal(id) {
         }
 
 
-        document
-            .getElementById("idPersonal")
-            .value =
+        const idPersonal =
+            document.getElementById(
+                "idPersonal"
+            );
+
+
+        if (idPersonal) {
+
+            idPersonal.value =
                 persona.id || "";
 
+        }
 
-        document
-            .getElementById("nombres")
-            .value =
+
+        const nombres =
+            document.getElementById(
+                "nombres"
+            );
+
+
+        if (nombres) {
+
+            nombres.value =
                 persona.nombres || "";
 
+        }
 
-        document
-            .getElementById("apellidos")
-            .value =
+
+        const apellidos =
+            document.getElementById(
+                "apellidos"
+            );
+
+
+        if (apellidos) {
+
+            apellidos.value =
                 persona.apellidos || "";
 
+        }
 
-        document
-            .getElementById("documento")
-            .value =
+
+        const documento =
+            document.getElementById(
+                "documento"
+            );
+
+
+        if (documento) {
+
+            documento.value =
                 persona.documento || "";
 
+        }
 
-        document
-            .getElementById("celular")
-            .value =
+
+        const celular =
+            document.getElementById(
+                "celular"
+            );
+
+
+        if (celular) {
+
+            celular.value =
                 persona.celular || "";
 
+        }
 
-        document
-            .getElementById("cargo")
-            .value =
+
+        const cargo =
+            document.getElementById(
+                "cargo"
+            );
+
+
+        if (cargo) {
+
+            cargo.value =
                 persona.cargo || "";
 
+        }
 
-        document
-            .getElementById("cuadrilla")
-            .value =
+
+        const cuadrilla =
+            document.getElementById(
+                "cuadrilla"
+            );
+
+
+        if (cuadrilla) {
+
+            cuadrilla.value =
                 persona.cuadrilla_id ||
                 persona.cuadrilla ||
                 "1";
+
+        }
 
 
         const titulo =
@@ -1255,6 +1499,7 @@ async function editarPersonal(id) {
             error
         );
 
+
         alert(
             "No se pudo cargar la información del personal."
         );
@@ -1263,9 +1508,6 @@ async function editarPersonal(id) {
 
 }
 
-// ========================================
-// CANCELAR EDICIÓN DE PERSONAL
-// ========================================
 
 // ========================================
 // CANCELAR EDICIÓN DE PERSONAL
@@ -1274,83 +1516,185 @@ async function editarPersonal(id) {
 function cancelarEdicionPersonal() {
 
     const idPersonal =
-        document.getElementById("idPersonal");
+        document.getElementById(
+            "idPersonal"
+        );
 
+
+    // Si no estamos editando,
+    // cerrar directamente
     if (
         !idPersonal ||
         idPersonal.value.trim() === ""
     ) {
 
-        cerrarModal("modalPersonal");
+        cerrarModal(
+            "modalPersonal"
+        );
 
         return;
 
     }
 
-    // Mostrar cuadro de confirmación personalizado
+
+    mostrarConfirmacionCancelar();
+
+}
+
+
+// ========================================
+// MOSTRAR CONFIRMACIÓN DE CANCELACIÓN
+// ========================================
+
+function mostrarConfirmacionCancelar() {
+
+    // Si ya existe, no crear otro
+    if (
+        document.getElementById(
+            "modalConfirmarCancelar"
+        )
+    ) {
+
+        return;
+
+    }
+
+
     const modalConfirmacion =
-        document.getElementById(
-            "modalConfirmarCancelar"
+        document.createElement(
+            "div"
         );
 
-    if (modalConfirmacion) {
 
-        modalConfirmacion.classList.add("active");
-
-    }
-
-}
-
-// ========================================
-// CERRAR CONFIRMACIÓN DE CANCELACIÓN
-// ========================================
-
-function cerrarConfirmacionCancelar() {
-
-    const modal =
-        document.getElementById(
-            "modalConfirmarCancelar"
-        );
-
-    if (modal) {
-
-        modal.classList.remove("active");
-
-    }
-
-}
+    modalConfirmacion.id =
+        "modalConfirmarCancelar";
 
 
-// ========================================
-// CONFIRMAR CANCELACIÓN
-// ========================================
-
-function confirmarCancelacionPersonal() {
-
-    // ----------------------------------------
-    // Cerrar cuadro de confirmación
-    // ----------------------------------------
-
-    cerrarConfirmacionCancelar();
+    modalConfirmacion.className =
+        "modal-confirmacion";
 
 
-    // ----------------------------------------
-    // Cerrar modal de edición
-    // ----------------------------------------
+    modalConfirmacion.innerHTML = `
 
-    cerrarModal(
-        "modalPersonal"
+        <div class="cuadro-confirmacion">
+
+            <h3>
+                ¿Cancelar edición?
+            </h3>
+
+            <p>
+                Los cambios que hayas realizado
+                no se guardarán.
+            </p>
+
+            <div class="botones-confirmacion">
+
+                <button
+                    type="button"
+                    class="btn-confirmar-no"
+                    id="btnNoCancelar"
+                >
+                    No, continuar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-confirmar-si"
+                    id="btnSiCancelar"
+                >
+                    Sí, cancelar
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        modalConfirmacion
     );
 
 
-    // ----------------------------------------
-    // Limpiar formulario
-    // ----------------------------------------
+    // ========================================
+    // NO CANCELAR
+    // ========================================
+
+    const btnNo =
+        document.getElementById(
+            "btnNoCancelar"
+        );
+
+
+    if (btnNo) {
+
+        btnNo.addEventListener(
+            "click",
+            function() {
+
+                modalConfirmacion.remove();
+
+            }
+        );
+
+    }
+
+
+    // ========================================
+    // SÍ CANCELAR
+    // ========================================
+
+    const btnSi =
+        document.getElementById(
+            "btnSiCancelar"
+        );
+
+
+    if (btnSi) {
+
+        btnSi.addEventListener(
+            "click",
+            function() {
+
+                modalConfirmacion.remove();
+
+                cerrarModalPersonal();
+
+            }
+        );
+
+    }
+
+}
+
+
+// ========================================
+// CERRAR MODAL PERSONAL
+// ========================================
+
+function cerrarModalPersonal() {
+
+    const modal =
+        document.getElementById(
+            "modalPersonal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
 
     const formulario =
         document.getElementById(
             "formPersonal"
         );
+
 
     if (formulario) {
 
@@ -1359,14 +1703,11 @@ function confirmarCancelacionPersonal() {
     }
 
 
-    // ----------------------------------------
-    // Limpiar ID
-    // ----------------------------------------
-
     const id =
         document.getElementById(
             "idPersonal"
         );
+
 
     if (id) {
 
@@ -1375,77 +1716,6 @@ function confirmarCancelacionPersonal() {
     }
 
 
-    // ----------------------------------------
-    // Restaurar título
-    // ----------------------------------------
-
-    const titulo =
-        document.getElementById(
-            "tituloModalPersonal"
-        );
-
-    if (titulo) {
-
-        titulo.textContent =
-            "Registrar personal";
-
-    }
-
-
-    // ----------------------------------------
-    // Restaurar botón guardar
-    // ----------------------------------------
-
-    const boton =
-        document.getElementById(
-            "btnGuardarPersonal"
-        );
-
-    if (boton) {
-
-        boton.textContent =
-            "Guardar personal";
-
-    }
-
-}
-    // ----------------------------------------
-    // CERRAR MODAL
-    // ----------------------------------------
-
-    cerrarModal(
-        "modalPersonal"
-    );
-
-
-    // ----------------------------------------
-    // LIMPIAR FORMULARIO
-    // ----------------------------------------
-
-    const formulario =
-        document.getElementById(
-            "formPersonal"
-        );
-
-
-    if (formulario) {
-
-        formulario.reset();
-
-    }
-
-
-    // ----------------------------------------
-    // LIMPIAR ID
-    // ----------------------------------------
-
-    idPersonal.value = "";
-
-
-    // ----------------------------------------
-    // RESTAURAR TÍTULO
-    // ----------------------------------------
-
     const titulo =
         document.getElementById(
             "tituloModalPersonal"
@@ -1459,10 +1729,6 @@ function confirmarCancelacionPersonal() {
 
     }
 
-
-    // ----------------------------------------
-    // RESTAURAR BOTÓN
-    // ----------------------------------------
 
     const boton =
         document.getElementById(
@@ -1478,6 +1744,8 @@ function confirmarCancelacionPersonal() {
     }
 
 }
+
+
 // ========================================
 // ELIMINAR PERSONAL
 // ========================================
@@ -1541,6 +1809,7 @@ async function eliminarPersonal(id) {
             error
         );
 
+
         alert(
             "No se pudo conectar con el servidor."
         );
@@ -1557,13 +1826,21 @@ async function eliminarPersonal(id) {
 function actualizarCuadrillas(personal) {
 
     const c1 =
-        document.getElementById("cuadrilla1");
+        document.getElementById(
+            "cuadrilla1"
+        );
+
 
     const c2 =
-        document.getElementById("cuadrilla2");
+        document.getElementById(
+            "cuadrilla2"
+        );
+
 
     const c3 =
-        document.getElementById("cuadrilla3");
+        document.getElementById(
+            "cuadrilla3"
+        );
 
 
     if (!c1 || !c2 || !c3) {
@@ -1583,63 +1860,77 @@ function actualizarCuadrillas(personal) {
     let cantidad3 = 0;
 
 
-    personal.forEach(function(persona) {
+    personal.forEach(
+        function(persona) {
 
-        const div =
-            document.createElement(
-                "div"
-            );
-
-
-        div.className =
-            "tecnico";
+            const div =
+                document.createElement(
+                    "div"
+                );
 
 
-        div.innerHTML = `
-
-            <strong>
-                ${persona.nombres || ""}
-                ${persona.apellidos || ""}
-            </strong>
-
-            <small>
-                ${persona.cargo || "Sin cargo"}
-            </small>
-
-        `;
+            div.className =
+                "tecnico";
 
 
-        if (
-            String(persona.cuadrilla_id) === "1"
-        ) {
+            div.innerHTML = `
 
-            c1.appendChild(div);
+                <strong>
+                    ${persona.nombres || ""}
+                    ${persona.apellidos || ""}
+                </strong>
 
-            cantidad1++;
+                <small>
+                    ${persona.cargo || "Sin cargo"}
+                </small>
+
+            `;
+
+
+            if (
+                String(
+                    persona.cuadrilla_id
+                ) === "1"
+            ) {
+
+                c1.appendChild(
+                    div
+                );
+
+                cantidad1++;
+
+            }
+
+            else if (
+                String(
+                    persona.cuadrilla_id
+                ) === "2"
+            ) {
+
+                c2.appendChild(
+                    div
+                );
+
+                cantidad2++;
+
+            }
+
+            else if (
+                String(
+                    persona.cuadrilla_id
+                ) === "3"
+            ) {
+
+                c3.appendChild(
+                    div
+                );
+
+                cantidad3++;
+
+            }
 
         }
-
-        else if (
-            String(persona.cuadrilla_id) === "2"
-        ) {
-
-            c2.appendChild(div);
-
-            cantidad2++;
-
-        }
-
-        else if (
-            String(persona.cuadrilla_id) === "3"
-        ) {
-
-            c3.appendChild(div);
-
-            cantidad3++;
-
-        }
-
-    });
+    );
 
 
     const cantidadC1 =
@@ -1647,10 +1938,12 @@ function actualizarCuadrillas(personal) {
             "cantidadC1"
         );
 
+
     const cantidadC2 =
         document.getElementById(
             "cantidadC2"
         );
+
 
     const cantidadC3 =
         document.getElementById(
@@ -1761,7 +2054,9 @@ async function registrarProyecto(event) {
                     },
 
                     body:
-                        JSON.stringify(datos)
+                        JSON.stringify(
+                            datos
+                        )
 
                 }
             );
@@ -1815,6 +2110,7 @@ async function registrarProyecto(event) {
             "Error registrando proyecto:",
             error
         );
+
 
         alert(
             "No se pudo conectar con el servidor."
@@ -1897,7 +2193,9 @@ async function cargarProyectos() {
                     `;
 
 
-                    tabla.appendChild(fila);
+                    tabla.appendChild(
+                        fila
+                    );
 
                 }
             );
@@ -1953,61 +2251,63 @@ function cargarSelectProyectos() {
     ];
 
 
-    selects.forEach(function(select) {
+    selects.forEach(
+        function(select) {
 
-        if (!select) {
+            if (!select) {
 
-            return;
-
-        }
-
-
-        const valorActual =
-            select.value;
-
-
-        select.innerHTML = `
-
-            <option value="">
-                Seleccione un proyecto
-            </option>
-
-        `;
-
-
-        proyectos.forEach(
-            function(proyecto) {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-
-                option.value =
-                    proyecto.id;
-
-
-                option.textContent =
-                    proyecto.nombre;
-
-
-                select.appendChild(
-                    option
-                );
+                return;
 
             }
-        );
 
 
-        if (valorActual) {
+            const valorActual =
+                select.value;
 
-            select.value =
-                valorActual;
+
+            select.innerHTML = `
+
+                <option value="">
+                    Seleccione un proyecto
+                </option>
+
+            `;
+
+
+            proyectos.forEach(
+                function(proyecto) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        proyecto.id;
+
+
+                    option.textContent =
+                        proyecto.nombre;
+
+
+                    select.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            if (valorActual) {
+
+                select.value =
+                    valorActual;
+
+            }
 
         }
-
-    });
+    );
 
 }
 
@@ -2133,7 +2433,9 @@ async function registrarMaterial(event) {
                     },
 
                     body:
-                        JSON.stringify(datos)
+                        JSON.stringify(
+                            datos
+                        )
 
                 }
             );
@@ -2187,6 +2489,7 @@ async function registrarMaterial(event) {
             "Error registrando material:",
             error
         );
+
 
         alert(
             "No se pudo conectar con el servidor."
@@ -2270,7 +2573,9 @@ async function cargarMateriales() {
                 `;
 
 
-                tabla.appendChild(fila);
+                tabla.appendChild(
+                    fila
+                );
 
             }
         );
@@ -2388,7 +2693,9 @@ async function registrarMantenimiento(event) {
                     },
 
                     body:
-                        JSON.stringify(datos)
+                        JSON.stringify(
+                            datos
+                        )
 
                 }
             );
@@ -2450,6 +2757,7 @@ async function registrarMantenimiento(event) {
             error
         );
 
+
         alert(
             "No se pudo conectar con el servidor."
         );
@@ -2495,6 +2803,7 @@ async function cargarMantenimientos() {
         if (tabla) {
 
             tabla.innerHTML = "";
+
 
             mantenimientos.forEach(
                 function(mantenimiento) {
@@ -2699,10 +3008,13 @@ async function cerrarSesion() {
     }
     catch (error) {
 
-        console.error(error);
+        console.error(
+            error
+        );
+
 
         alert(
-            "Error al cerrar sesión."
+            "Error al cerrar la sesión."
         );
 
     }
@@ -2713,9 +3025,6 @@ async function cerrarSesion() {
 // ========================================
 // ACTUALIZAR CALENDARIO AL CAMBIAR TAMAÑO
 // ========================================
-
-let resizeCalendarioPendiente = false;
-
 
 window.addEventListener(
     "resize",
@@ -2760,39 +3069,6 @@ window.addEventListener(
 
 
 // ========================================
-// OBSERVAR CAMBIOS DE TAMAÑO
-// ========================================
-
-const elementoCalendario =
-    document.getElementById(
-        "calendarioMantenimiento"
-    );
-
-
-if (elementoCalendario) {
-
-    const observadorCalendario =
-        new ResizeObserver(
-            function() {
-
-                if (calendarioMantenimiento) {
-
-                    calendarioMantenimiento.updateSize();
-
-                }
-
-            }
-        );
-
-
-    observadorCalendario.observe(
-        elementoCalendario
-    );
-
-}
-
-
-// ========================================
 // INICIO
 // ========================================
 
@@ -2811,254 +3087,67 @@ document.addEventListener(
         await cargarUsuarioActual();
 
 
-        if (calendarioMantenimiento) {
-
-            calendarioMantenimiento.refetchEvents();
-
-        }
-
-
         mostrarSeccion(
             "dashboard",
             document.querySelector(
                 ".menu.active"
             )
-            
         );
-        function activarEdicionPersonal() {
-
-    console.log("Modo edición activado");
-
-}
 
     }
 );
 
-// =====================================================
-// CONFIRMACIÓN PARA CANCELAR EDICIÓN
-// =====================================================
 
-function mostrarConfirmacionCancelar() {
+// ========================================
+// OBSERVAR CAMBIOS DE TAMAÑO DEL CALENDARIO
+// ========================================
 
-    // Evitar crear varios cuadros
-    if (
-        document.getElementById(
-            "modalConfirmarCancelar"
-        )
-    ) {
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-        return;
-
-    }
+        const elementoCalendario =
+            document.getElementById(
+                "calendarioMantenimiento"
+            );
 
 
-    const modalConfirmacion =
-        document.createElement("div");
+        if (!elementoCalendario) {
+
+            return;
+
+        }
 
 
-    modalConfirmacion.id =
-        "modalConfirmarCancelar";
+        if (
+            typeof ResizeObserver ===
+            "undefined"
+        ) {
+
+            return;
+
+        }
 
 
-    modalConfirmacion.className =
-        "modal-confirmacion";
+        const observadorCalendario =
+            new ResizeObserver(
+                function() {
+
+                    if (
+                        calendarioMantenimiento
+                    ) {
+
+                        calendarioMantenimiento.updateSize();
+
+                    }
+
+                }
+            );
 
 
-    modalConfirmacion.innerHTML = `
-
-        <div class="cuadro-confirmacion">
-
-            <h3>¿Cancelar edición?</h3>
-
-            <p>
-                Los cambios que hayas realizado
-                no se guardarán.
-            </p>
-
-            <div class="botones-confirmacion">
-
-                <button
-                    type="button"
-                    class="btn-confirmar-no"
-                    id="btnNoCancelar"
-                >
-                    No, continuar
-                </button>
-
-                <button
-                    type="button"
-                    class="btn-confirmar-si"
-                    id="btnSiCancelar"
-                >
-                    Sí, cancelar
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    document.body.appendChild(
-        modalConfirmacion
-    );
-
-
-    // NO CANCELAR
-
-    const btnNo =
-        document.getElementById(
-            "btnNoCancelar"
-        );
-
-
-    if (btnNo) {
-
-        btnNo.addEventListener(
-            "click",
-            function() {
-
-                modalConfirmacion.remove();
-
-            }
+        observadorCalendario.observe(
+            elementoCalendario
         );
 
     }
-
-
-    // SÍ CANCELAR
-
-    const btnSi =
-        document.getElementById(
-            "btnSiCancelar"
-        );
-
-
-    if (btnSi) {
-
-        btnSi.addEventListener(
-            "click",
-            function() {
-
-                modalConfirmacion.remove();
-
-                cerrarModalPersonal();
-
-            }
-        );
-
-    }
-
-}
-
-
-// =====================================================
-// CERRAR MODAL PERSONAL
-// =====================================================
-
-function cerrarModalPersonal() {
-
-    const modal =
-        document.getElementById(
-            "modalPersonal"
-        );
-
-
-    if (modal) {
-
-        modal.classList.remove(
-            "active"
-        );
-
-    }
-
-
-    const formulario =
-        document.getElementById(
-            "formPersonal"
-        );
-
-
-    if (formulario) {
-
-        formulario.reset();
-
-    }
-
-
-    const id =
-        document.getElementById(
-            "idPersonal"
-        );
-
-
-    if (id) {
-
-        id.value = "";
-
-    }
-
-
-    const titulo =
-        document.getElementById(
-            "tituloModalPersonal"
-        );
-
-
-    if (titulo) {
-
-        titulo.textContent =
-            "Registrar personal";
-
-    }
-
-
-    const boton =
-        document.getElementById(
-            "btnGuardarPersonal"
-        );
-
-
-    if (boton) {
-
-        boton.textContent =
-            "Guardar personal";
-
-    }
-
-}
-
-
-// =====================================================
-// CANCELAR EDICIÓN DE PERSONAL
-// =====================================================
-
-function cancelarEdicionPersonal() {
-
-    const idPersonal =
-        document.getElementById(
-            "idPersonal"
-        );
-
-
-    // Si no estamos editando
-    if (
-        !idPersonal ||
-        idPersonal.value.trim() === ""
-    ) {
-
-        cerrarModal(
-            "modalPersonal"
-        );
-
-        return;
-
-    }
-
-
-    // Si estamos editando
-    mostrarConfirmacionCancelar();
-
-}
-
+);
