@@ -2834,7 +2834,6 @@ document.addEventListener(
     }
 );
 
-
 // =====================================================
 // CONFIRMACIÓN PARA CANCELAR EDICIÓN
 // =====================================================
@@ -2842,18 +2841,28 @@ document.addEventListener(
 function mostrarConfirmacionCancelar() {
 
     // Evitar crear varios cuadros
-    if (document.getElementById("modalConfirmarCancelar")) {
+    if (
+        document.getElementById(
+            "modalConfirmarCancelar"
+        )
+    ) {
+
         return;
+
     }
+
 
     const modalConfirmacion =
         document.createElement("div");
 
+
     modalConfirmacion.id =
         "modalConfirmarCancelar";
 
+
     modalConfirmacion.className =
         "modal-confirmacion";
+
 
     modalConfirmacion.innerHTML = `
 
@@ -2890,15 +2899,23 @@ function mostrarConfirmacionCancelar() {
 
     `;
 
+
     document.body.appendChild(
         modalConfirmacion
     );
 
 
     // NO CANCELAR
-    document
-        .getElementById("btnNoCancelar")
-        .addEventListener(
+
+    const btnNo =
+        document.getElementById(
+            "btnNoCancelar"
+        );
+
+
+    if (btnNo) {
+
+        btnNo.addEventListener(
             "click",
             function() {
 
@@ -2907,11 +2924,20 @@ function mostrarConfirmacionCancelar() {
             }
         );
 
+    }
+
 
     // SÍ CANCELAR
-    document
-        .getElementById("btnSiCancelar")
-        .addEventListener(
+
+    const btnSi =
+        document.getElementById(
+            "btnSiCancelar"
+        );
+
+
+    if (btnSi) {
+
+        btnSi.addEventListener(
             "click",
             function() {
 
@@ -2921,6 +2947,8 @@ function mostrarConfirmacionCancelar() {
 
             }
         );
+
+    }
 
 }
 
@@ -2936,6 +2964,7 @@ function cerrarModalPersonal() {
             "modalPersonal"
         );
 
+
     if (modal) {
 
         modal.classList.remove(
@@ -2950,6 +2979,7 @@ function cerrarModalPersonal() {
             "formPersonal"
         );
 
+
     if (formulario) {
 
         formulario.reset();
@@ -2962,6 +2992,7 @@ function cerrarModalPersonal() {
             "idPersonal"
         );
 
+
     if (id) {
 
         id.value = "";
@@ -2973,6 +3004,7 @@ function cerrarModalPersonal() {
         document.getElementById(
             "tituloModalPersonal"
         );
+
 
     if (titulo) {
 
@@ -2987,6 +3019,7 @@ function cerrarModalPersonal() {
             "btnGuardarPersonal"
         );
 
+
     if (boton) {
 
         boton.textContent =
@@ -2998,11 +3031,34 @@ function cerrarModalPersonal() {
 
 
 // =====================================================
-// CANCELAR DESDE EL BOTÓN
+// CANCELAR EDICIÓN DE PERSONAL
 // =====================================================
 
 function cancelarEdicionPersonal() {
 
+    const idPersonal =
+        document.getElementById(
+            "idPersonal"
+        );
+
+
+    // Si no estamos editando
+    if (
+        !idPersonal ||
+        idPersonal.value.trim() === ""
+    ) {
+
+        cerrarModal(
+            "modalPersonal"
+        );
+
+        return;
+
+    }
+
+
+    // Si estamos editando
     mostrarConfirmacionCancelar();
 
 }
+
