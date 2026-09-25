@@ -178,49 +178,68 @@ function inicializarCalendarioMantenimiento() {
 
 }
 
-
 function activarEdicionPersonal() {
 
     const filas =
         document.querySelectorAll("#tablaPersonal tr");
 
+    const modoEdicion =
+        document.querySelector(
+            ".botones-edicion-personal"
+        ) !== null;
+
     filas.forEach(function(fila) {
 
-        if (
-            fila.querySelector(".botones-edicion-personal")
-        ) {
-            return;
+        const botonesExistentes =
+            fila.querySelector(
+                ".botones-edicion-personal"
+            );
+
+        if (modoEdicion) {
+
+            // Ocultar y eliminar los botones
+            if (botonesExistentes) {
+
+                botonesExistentes.remove();
+
+            }
+
+        } else {
+
+            // Crear los botones
+            const botones =
+                document.createElement("span");
+
+            botones.className =
+                "botones-edicion-personal";
+
+            botones.style.marginLeft = "10px";
+
+            botones.innerHTML = `
+
+                <button
+                    type="button"
+                    title="Editar"
+                    class="btn-editar-personal"
+                >
+                    ✏️
+                </button>
+
+                <button
+                    type="button"
+                    title="Borrar"
+                    class="btn-eliminar-personal"
+                >
+                    🗑️
+                </button>
+
+            `;
+
+            fila.lastElementChild.appendChild(
+                botones
+            );
+
         }
-
-        const botones =
-            document.createElement("span");
-
-        botones.className =
-            "botones-edicion-personal";
-
-        botones.style.marginLeft = "10px";
-
-        botones.innerHTML = `
-
-            <button
-                type="button"
-                title="Editar"
-                class="btn-editar-personal"
-            >
-                ✏️
-            </button>
-
-            <button
-                type="button"
-                title="Borrar"
-                class="btn-eliminar-personal"
-            >
-                🗑️
-            </button>
-
-        `;
-
-        fila.lastElementChild.appendChild(botones);
 
     });
 
