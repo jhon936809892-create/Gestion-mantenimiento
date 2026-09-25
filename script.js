@@ -8,172 +8,632 @@ let resizeCalendarioPendiente = false;
 
 
 // ========================================
+// ESTILOS AUTOMÁTICOS PARA MODAL PERSONAL
+// ========================================
+
+function aplicarEstilosModalPersonal() {
+
+    if (document.getElementById("estilosModalPersonal")) {
+        return;
+    }
+
+    const estilos = document.createElement("style");
+
+    estilos.id = "estilosModalPersonal";
+
+    estilos.textContent = `
+
+        /* ========================================
+           BOTONES DEL MODAL PERSONAL
+        ======================================== */
+
+        #modalPersonal .botones-modal-personal,
+        #modalPersonal .modal-footer,
+        #modalPersonal .botones-formulario,
+        #modalPersonal .form-buttons,
+        #modalPersonal .modal-botones,
+        #modalPersonal .botones-modal {
+
+            display: flex !important;
+
+            justify-content: flex-end !important;
+
+            align-items: center !important;
+
+            gap: 10px !important;
+
+            width: 100% !important;
+
+            margin-top: 20px !important;
+
+        }
+
+
+        /* ========================================
+           BOTÓN GUARDAR - AZUL
+        ======================================== */
+
+        #modalPersonal #btnGuardarPersonal,
+        #modalPersonal .btn-guardar-personal {
+
+            background-color: #2563eb !important;
+
+            background: #2563eb !important;
+
+            color: white !important;
+
+            border: 1px solid #2563eb !important;
+
+            border-radius: 6px !important;
+
+            padding: 10px 18px !important;
+
+            cursor: pointer !important;
+
+            font-weight: 600 !important;
+
+            transition: background-color 0.2s ease,
+                        transform 0.1s ease !important;
+
+        }
+
+
+        #modalPersonal #btnGuardarPersonal:hover,
+        #modalPersonal .btn-guardar-personal:hover {
+
+            background-color: #1d4ed8 !important;
+
+        }
+
+
+        #modalPersonal #btnGuardarPersonal:active,
+        #modalPersonal .btn-guardar-personal:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        /* ========================================
+           BOTÓN CANCELAR
+        ======================================== */
+
+        #modalPersonal #btnCancelarPersonal,
+        #modalPersonal .btn-cancelar-personal {
+
+            background-color: #ffffff !important;
+
+            background: #ffffff !important;
+
+            color: #333333 !important;
+
+            border: 1px solid #cccccc !important;
+
+            border-radius: 6px !important;
+
+            padding: 10px 18px !important;
+
+            cursor: pointer !important;
+
+            font-weight: 600 !important;
+
+            transition: background-color 0.2s ease,
+                        border-color 0.2s ease !important;
+
+        }
+
+
+        #modalPersonal #btnCancelarPersonal:hover,
+        #modalPersonal .btn-cancelar-personal:hover {
+
+            background-color: #f3f4f6 !important;
+
+            border-color: #999999 !important;
+
+        }
+
+
+        /* ========================================
+           CONFIRMACIÓN DE CANCELACIÓN
+        ======================================== */
+
+        #modalConfirmarCancelar {
+
+            position: fixed !important;
+
+            inset: 0 !important;
+
+            background: rgba(0, 0, 0, 0.45) !important;
+
+            display: flex !important;
+
+            justify-content: center !important;
+
+            align-items: center !important;
+
+            z-index: 99999 !important;
+
+        }
+
+
+        #modalConfirmarCancelar .cuadro-confirmacion {
+
+            background: white !important;
+
+            width: min(420px, 90%) !important;
+
+            padding: 25px !important;
+
+            border-radius: 10px !important;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.25) !important;
+
+        }
+
+
+        #modalConfirmarCancelar h3 {
+
+            margin-top: 0 !important;
+
+            margin-bottom: 10px !important;
+
+        }
+
+
+        #modalConfirmarCancelar p {
+
+            margin-bottom: 20px !important;
+
+        }
+
+
+        #modalConfirmarCancelar .botones-confirmacion {
+
+            display: flex !important;
+
+            justify-content: flex-end !important;
+
+            gap: 10px !important;
+
+            margin-top: 20px !important;
+
+        }
+
+
+        #modalConfirmarCancelar button {
+
+            padding: 9px 16px !important;
+
+            border-radius: 6px !important;
+
+            cursor: pointer !important;
+
+            font-weight: 600 !important;
+
+        }
+
+
+        #modalConfirmarCancelar .btn-confirmar-no {
+
+            background: white !important;
+
+            color: #333 !important;
+
+            border: 1px solid #ccc !important;
+
+        }
+
+
+        #modalConfirmarCancelar .btn-confirmar-si {
+
+            background: #dc2626 !important;
+
+            color: white !important;
+
+            border: 1px solid #dc2626 !important;
+
+        }
+
+    `;
+
+    document.head.appendChild(estilos);
+}
+
+
+// ========================================
+// CONFIGURAR BOTONES DEL MODAL PERSONAL
+// ========================================
+
+function configurarBotonesModalPersonal() {
+
+    aplicarEstilosModalPersonal();
+
+
+    const modal =
+        document.getElementById(
+            "modalPersonal"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    // ========================================
+    // BOTÓN GUARDAR
+    // ========================================
+
+    const botonGuardar =
+        document.getElementById(
+            "btnGuardarPersonal"
+        );
+
+
+    if (botonGuardar) {
+
+        botonGuardar.classList.add(
+            "btn-guardar-personal"
+        );
+
+        botonGuardar.type =
+            "submit";
+
+    }
+
+
+    // ========================================
+    // BUSCAR BOTÓN CANCELAR
+    // ========================================
+
+    let botonCancelar =
+        document.getElementById(
+            "btnCancelarPersonal"
+        );
+
+
+    if (!botonCancelar) {
+
+        botonCancelar =
+            modal.querySelector(
+                ".btn-cancelar-personal"
+            );
+
+    }
+
+
+    if (!botonCancelar) {
+
+        const botones =
+            modal.querySelectorAll(
+                "button"
+            );
+
+
+        botones.forEach(
+            function(boton) {
+
+                const texto =
+                    (
+                        boton.textContent ||
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                if (
+                    texto.includes(
+                        "cancelar"
+                    )
+                ) {
+
+                    botonCancelar =
+                        boton;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (botonCancelar) {
+
+        botonCancelar.id =
+            botonCancelar.id ||
+            "btnCancelarPersonal";
+
+        botonCancelar.type =
+            "button";
+
+        botonCancelar.classList.add(
+            "btn-cancelar-personal"
+        );
+
+
+        // Evitar múltiples eventos
+        botonCancelar.onclick = null;
+
+
+        botonCancelar.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                cancelarEdicionPersonal();
+
+            }
+        );
+
+    }
+
+
+    // ========================================
+    // COLOCAR BOTONES A LA DERECHA
+    // ========================================
+
+    if (botonGuardar && botonCancelar) {
+
+        let contenedor =
+            botonGuardar.parentElement;
+
+
+        if (
+            contenedor &&
+            contenedor !== botonCancelar.parentElement
+        ) {
+
+            contenedor =
+                botonCancelar.parentElement;
+
+        }
+
+
+        if (contenedor) {
+
+            contenedor.classList.add(
+                "botones-modal-personal"
+            );
+
+        }
+
+    }
+
+}
+
+
+// ========================================
 // INICIALIZAR CALENDARIO
 // ========================================
 
 function inicializarCalendarioMantenimiento() {
 
-    const elemento = document.getElementById(
-        "calendarioMantenimiento"
-    );
+    const elemento =
+        document.getElementById(
+            "calendarioMantenimiento"
+        );
+
 
     if (!elemento) {
         return;
     }
 
+
     if (calendarioMantenimiento) {
         return;
     }
 
-    if (typeof FullCalendar === "undefined") {
+
+    if (
+        typeof FullCalendar ===
+        "undefined"
+    ) {
 
         console.error(
             "FullCalendar no está cargado."
         );
 
         return;
+
     }
+
 
     calendarioMantenimiento =
         new FullCalendar.Calendar(
             elemento,
             {
 
-                initialView: "dayGridMonth",
+                initialView:
+                    "dayGridMonth",
 
-                locale: "es",
+                locale:
+                    "es",
 
-                height: "auto",
+                height:
+                    "auto",
 
                 headerToolbar: {
-                    left: "prev,next today",
-                    center: "title",
+
+                    left:
+                        "prev,next today",
+
+                    center:
+                        "title",
+
                     right:
                         "dayGridMonth,timeGridWeek,timeGridDay"
+
                 },
 
                 buttonText: {
-                    today: "Hoy",
-                    month: "Mes",
-                    week: "Semana",
-                    day: "Día"
+
+                    today:
+                        "Hoy",
+
+                    month:
+                        "Mes",
+
+                    week:
+                        "Semana",
+
+                    day:
+                        "Día"
+
                 },
 
-                scrollTime: "08:00:00",
+                scrollTime:
+                    "08:00:00",
 
-                allDaySlot: true,
+                allDaySlot:
+                    true,
 
-                events: async function (
-                    info,
-                    successCallback,
-                    failureCallback
-                ) {
 
-                    try {
+                events:
+                    async function(
+                        info,
+                        successCallback,
+                        failureCallback
+                    ) {
 
-                        const respuesta =
-                            await fetch(
-                                "/api/mantenimientos"
+                        try {
+
+                            const respuesta =
+                                await fetch(
+                                    "/api/mantenimientos"
+                                );
+
+
+                            if (!respuesta.ok) {
+
+                                throw new Error(
+                                    "No se pudieron obtener los mantenimientos."
+                                );
+
+                            }
+
+
+                            const mantenimientos =
+                                await respuesta.json();
+
+
+                            const eventos =
+                                mantenimientos.map(
+                                    function(
+                                        mantenimiento
+                                    ) {
+
+                                        return {
+
+                                            id:
+                                                String(
+                                                    mantenimiento.id
+                                                ),
+
+                                            title:
+                                                `${mantenimiento.proyecto || "Sin proyecto"} - Cuadrilla ${mantenimiento.cuadrilla || ""}`,
+
+                                            start:
+                                                mantenimiento.fecha,
+
+                                            allDay:
+                                                true,
+
+                                            extendedProps: {
+
+                                                proyecto:
+                                                    mantenimiento.proyecto || "",
+
+                                                cuadrilla:
+                                                    mantenimiento.cuadrilla || "",
+
+                                                trabajo:
+                                                    mantenimiento.trabajo || "",
+
+                                                estado:
+                                                    mantenimiento.estado || ""
+
+                                            }
+
+                                        };
+
+                                    }
+                                );
+
+
+                            successCallback(
+                                eventos
                             );
 
-                        if (!respuesta.ok) {
+                        }
+                        catch (error) {
 
-                            throw new Error(
-                                "No se pudieron obtener los mantenimientos."
+                            console.error(
+                                "Error cargando eventos:",
+                                error
+                            );
+
+
+                            failureCallback(
+                                error
                             );
 
                         }
 
-                        const mantenimientos =
-                            await respuesta.json();
+                    },
 
-                        const eventos =
-                            mantenimientos.map(
-                                function (mantenimiento) {
 
-                                    return {
+                eventClick:
+                    function(info) {
 
-                                        id:
-                                            String(
-                                                mantenimiento.id
-                                            ),
+                        const evento =
+                            info.event;
 
-                                        title:
-                                            `${mantenimiento.proyecto || "Sin proyecto"} - Cuadrilla ${mantenimiento.cuadrilla || ""}`,
 
-                                        start:
-                                            mantenimiento.fecha,
+                        const datos =
+                            evento.extendedProps;
 
-                                        allDay:
-                                            true,
 
-                                        extendedProps: {
+                        alert(
 
-                                            proyecto:
-                                                mantenimiento.proyecto || "",
+                            "DETALLE DEL MANTENIMIENTO\n\n" +
 
-                                            cuadrilla:
-                                                mantenimiento.cuadrilla || "",
+                            "Proyecto: " +
+                            (
+                                datos.proyecto ||
+                                "Sin proyecto"
+                            ) +
 
-                                            trabajo:
-                                                mantenimiento.trabajo || "",
+                            "\n\nCuadrilla: " +
+                            (
+                                datos.cuadrilla ||
+                                "Sin cuadrilla"
+                            ) +
 
-                                            estado:
-                                                mantenimiento.estado || ""
+                            "\n\nTrabajo: " +
+                            (
+                                datos.trabajo ||
+                                "Sin descripción"
+                            ) +
 
-                                        }
+                            "\n\nEstado: " +
+                            (
+                                datos.estado ||
+                                "Sin estado"
+                            )
 
-                                    };
-
-                                }
-                            );
-
-                        successCallback(eventos);
-
-                    }
-                    catch (error) {
-
-                        console.error(
-                            "Error cargando eventos:",
-                            error
                         );
 
-                        failureCallback(error);
-
                     }
-
-                },
-
-                eventClick: function(info) {
-
-                    const evento =
-                        info.event;
-
-                    const datos =
-                        evento.extendedProps;
-
-                    alert(
-
-                        "DETALLE DEL MANTENIMIENTO\n\n" +
-
-                        "Proyecto: " +
-                        (datos.proyecto || "Sin proyecto") +
-
-                        "\n\nCuadrilla: " +
-                        (datos.cuadrilla || "Sin cuadrilla") +
-
-                        "\n\nTrabajo: " +
-                        (datos.trabajo || "Sin descripción") +
-
-                        "\n\nEstado: " +
-                        (datos.estado || "Sin estado")
-
-                    );
-
-                }
 
             }
         );
+
 
     calendarioMantenimiento.render();
 
@@ -191,78 +651,123 @@ function activarEdicionPersonal() {
             "#tablaPersonal tr"
         );
 
+
     const modoEdicion =
         document.querySelector(
             ".botones-edicion-personal"
         ) !== null;
 
 
-    filas.forEach(function(fila) {
+    filas.forEach(
+        function(fila) {
 
-        const botonesExistentes =
-            fila.querySelector(
-                ".botones-edicion-personal"
-            );
+            const botonesExistentes =
+                fila.querySelector(
+                    ".botones-edicion-personal"
+                );
 
 
-        // Si ya estamos en modo edición,
-        // quitar los botones
-        if (modoEdicion) {
+            if (modoEdicion) {
 
-            if (botonesExistentes) {
+                if (botonesExistentes) {
 
-                botonesExistentes.remove();
+                    botonesExistentes.remove();
+
+                }
+
+            }
+
+            else {
+
+                const botones =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                botones.className =
+                    "botones-edicion-personal";
+
+
+                botones.innerHTML = `
+
+                    <button
+                        type="button"
+                        title="Editar"
+                        class="btn-editar-personal"
+                    >
+                        ✏️
+                    </button>
+
+                    <button
+                        type="button"
+                        title="Borrar"
+                        class="btn-eliminar-personal"
+                    >
+                        🗑️
+                    </button>
+
+                `;
+
+
+                const botonEditar =
+                    botones.querySelector(
+                        ".btn-editar-personal"
+                    );
+
+
+                const botonEliminar =
+                    botones.querySelector(
+                        ".btn-eliminar-personal"
+                    );
+
+
+                if (botonEditar) {
+
+                    botonEditar.addEventListener(
+                        "click",
+                        function() {
+
+                            editarPersonal(
+                                fila.dataset.id
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                if (botonEliminar) {
+
+                    botonEliminar.addEventListener(
+                        "click",
+                        function() {
+
+                            eliminarPersonal(
+                                fila.dataset.id
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                if (
+                    fila.lastElementChild
+                ) {
+
+                    fila.lastElementChild.appendChild(
+                        botones
+                    );
+
+                }
 
             }
 
         }
-
-        // Activar modo edición
-        else {
-
-            const botones =
-                document.createElement(
-                    "span"
-                );
-
-            botones.className =
-                "botones-edicion-personal";
-
-
-            botones.innerHTML = `
-
-                <button
-                    type="button"
-                    title="Editar"
-                    class="btn-editar-personal"
-                    onclick="editarPersonal(${fila.dataset.id})"
-                >
-                    ✏️
-                </button>
-
-                <button
-                    type="button"
-                    title="Borrar"
-                    class="btn-eliminar-personal"
-                    onclick="eliminarPersonal(${fila.dataset.id})"
-                >
-                    🗑️
-                </button>
-
-            `;
-
-
-            if (fila.lastElementChild) {
-
-                fila.lastElementChild.appendChild(
-                    botones
-                );
-
-            }
-
-        }
-
-    });
+    );
 
 }
 
@@ -271,7 +776,10 @@ function activarEdicionPersonal() {
 // CAMBIAR SECCIÓN
 // ========================================
 
-function mostrarSeccion(seccion, boton) {
+function mostrarSeccion(
+    seccion,
+    boton
+) {
 
     const secciones =
         document.querySelectorAll(
@@ -279,13 +787,15 @@ function mostrarSeccion(seccion, boton) {
         );
 
 
-    secciones.forEach(function(item) {
+    secciones.forEach(
+        function(item) {
 
-        item.classList.remove(
-            "activa"
-        );
+            item.classList.remove(
+                "activa"
+            );
 
-    });
+        }
+    );
 
 
     const seleccionada =
@@ -309,13 +819,15 @@ function mostrarSeccion(seccion, boton) {
         );
 
 
-    botones.forEach(function(item) {
+    botones.forEach(
+        function(item) {
 
-        item.classList.remove(
-            "active"
-        );
+            item.classList.remove(
+                "active"
+            );
 
-    });
+        }
+    );
 
 
     if (boton) {
@@ -366,7 +878,7 @@ function mostrarSeccion(seccion, boton) {
 
 
     // ========================================
-    // BOTÓN DEL TOPBAR
+    // BOTÓN TOPBAR
     // ========================================
 
     const botonTopbar =
@@ -380,7 +892,10 @@ function mostrarSeccion(seccion, boton) {
         botonTopbar.innerHTML = "";
 
 
-        if (seccion === "personal") {
+        if (
+            seccion ===
+            "personal"
+        ) {
 
             botonTopbar.innerHTML = `
 
@@ -404,7 +919,10 @@ function mostrarSeccion(seccion, boton) {
 
         }
 
-        else if (seccion === "proyectos") {
+        else if (
+            seccion ===
+            "proyectos"
+        ) {
 
             botonTopbar.innerHTML = `
 
@@ -420,7 +938,10 @@ function mostrarSeccion(seccion, boton) {
 
         }
 
-        else if (seccion === "mantenimiento") {
+        else if (
+            seccion ===
+            "mantenimiento"
+        ) {
 
             botonTopbar.innerHTML = `
 
@@ -436,7 +957,10 @@ function mostrarSeccion(seccion, boton) {
 
         }
 
-        else if (seccion === "materiales") {
+        else if (
+            seccion ===
+            "materiales"
+        ) {
 
             botonTopbar.innerHTML = `
 
@@ -456,56 +980,76 @@ function mostrarSeccion(seccion, boton) {
 
 
     // ========================================
-    // CARGAR DATOS SEGÚN SECCIÓN
+    // CARGAR DATOS
     // ========================================
 
-    if (seccion === "personal") {
+    if (
+        seccion ===
+        "personal"
+    ) {
 
         cargarPersonal();
 
     }
 
 
-    if (seccion === "cuadrillas") {
+    if (
+        seccion ===
+        "cuadrillas"
+    ) {
 
         cargarPersonal();
 
     }
 
 
-    if (seccion === "proyectos") {
+    if (
+        seccion ===
+        "proyectos"
+    ) {
 
         cargarProyectos();
 
     }
 
 
-    if (seccion === "mantenimiento") {
+    if (
+        seccion ===
+        "mantenimiento"
+    ) {
 
         cargarProyectos();
 
         cargarMantenimientos();
 
 
-        setTimeout(function() {
+        setTimeout(
+            function() {
 
-            inicializarCalendarioMantenimiento();
+                inicializarCalendarioMantenimiento();
 
 
-            if (calendarioMantenimiento) {
+                if (
+                    calendarioMantenimiento
+                ) {
 
-                calendarioMantenimiento.updateSize();
+                    calendarioMantenimiento.updateSize();
 
-                calendarioMantenimiento.refetchEvents();
+                    calendarioMantenimiento.refetchEvents();
 
-            }
+                }
 
-        }, 150);
+            },
+            150
+        );
 
     }
 
 
-    if (seccion === "materiales") {
+    if (
+        seccion ===
+        "materiales"
+    ) {
 
         cargarProyectos();
 
@@ -579,6 +1123,10 @@ function abrirModalPersonal() {
         boton.textContent =
             "Guardar personal";
 
+        boton.classList.add(
+            "btn-guardar-personal"
+        );
+
     }
 
 
@@ -647,6 +1195,16 @@ function abrirModalPersonal() {
         );
 
     }
+
+
+    setTimeout(
+        function() {
+
+            configurarBotonesModalPersonal();
+
+        },
+        0
+    );
 
 }
 
@@ -767,7 +1325,10 @@ function validarDNI() {
         );
 
 
-    if (!input || !mensaje) {
+    if (
+        !input ||
+        !mensaje
+    ) {
 
         return false;
 
@@ -788,7 +1349,10 @@ function validarDNI() {
         );
 
 
-    if (input.value.length === 0) {
+    if (
+        input.value.length ===
+        0
+    ) {
 
         mensaje.textContent = "";
 
@@ -802,7 +1366,10 @@ function validarDNI() {
     }
 
 
-    if (input.value.length < 8) {
+    if (
+        input.value.length <
+        8
+    ) {
 
         mensaje.textContent =
             "El DNI debe tener 8 dígitos.";
@@ -854,7 +1421,10 @@ function validarCelular() {
         );
 
 
-    if (!input || !mensaje) {
+    if (
+        !input ||
+        !mensaje
+    ) {
 
         return true;
 
@@ -875,7 +1445,10 @@ function validarCelular() {
         );
 
 
-    if (input.value.length === 0) {
+    if (
+        input.value.length ===
+        0
+    ) {
 
         mensaje.textContent = "";
 
@@ -889,7 +1462,10 @@ function validarCelular() {
     }
 
 
-    if (input.value.length < 9) {
+    if (
+        input.value.length <
+        9
+    ) {
 
         mensaje.textContent =
             "El celular debe tener 9 dígitos.";
@@ -1031,11 +1607,14 @@ async function registrarPersonal(event) {
                     `/api/personal/${idPersonal}`,
                     {
 
-                        method: "PUT",
+                        method:
+                            "PUT",
 
                         headers: {
+
                             "Content-Type":
                                 "application/json"
+
                         },
 
                         body:
@@ -1055,11 +1634,14 @@ async function registrarPersonal(event) {
                     "/api/personal",
                     {
 
-                        method: "POST",
+                        method:
+                            "POST",
 
                         headers: {
+
                             "Content-Type":
                                 "application/json"
+
                         },
 
                         body:
@@ -1155,6 +1737,10 @@ async function registrarPersonal(event) {
 
             boton.textContent =
                 "Guardar personal";
+
+            boton.classList.add(
+                "btn-guardar-personal"
+            );
 
         }
 
@@ -1474,6 +2060,10 @@ async function editarPersonal(id) {
             boton.textContent =
                 "Guardar cambios";
 
+            boton.classList.add(
+                "btn-guardar-personal"
+            );
+
         }
 
 
@@ -1490,6 +2080,16 @@ async function editarPersonal(id) {
             );
 
         }
+
+
+        setTimeout(
+            function() {
+
+                configurarBotonesModalPersonal();
+
+            },
+            0
+        );
 
     }
     catch (error) {
@@ -1521,16 +2121,12 @@ function cancelarEdicionPersonal() {
         );
 
 
-    // Si no estamos editando,
-    // cerrar directamente
     if (
         !idPersonal ||
         idPersonal.value.trim() === ""
     ) {
 
-        cerrarModal(
-            "modalPersonal"
-        );
+        cerrarModalPersonal();
 
         return;
 
@@ -1548,12 +2144,13 @@ function cancelarEdicionPersonal() {
 
 function mostrarConfirmacionCancelar() {
 
-    // Si ya existe, no crear otro
-    if (
+    const existente =
         document.getElementById(
             "modalConfirmarCancelar"
-        )
-    ) {
+        );
+
+
+    if (existente) {
 
         return;
 
@@ -1617,10 +2214,6 @@ function mostrarConfirmacionCancelar() {
     );
 
 
-    // ========================================
-    // NO CANCELAR
-    // ========================================
-
     const btnNo =
         document.getElementById(
             "btnNoCancelar"
@@ -1640,10 +2233,6 @@ function mostrarConfirmacionCancelar() {
 
     }
 
-
-    // ========================================
-    // SÍ CANCELAR
-    // ========================================
 
     const btnSi =
         document.getElementById(
@@ -1741,7 +2330,40 @@ function cerrarModalPersonal() {
         boton.textContent =
             "Guardar personal";
 
+        boton.classList.add(
+            "btn-guardar-personal"
+        );
+
     }
+
+
+    const errorDNI =
+        document.getElementById(
+            "errorDNI"
+        );
+
+
+    const errorCelular =
+        document.getElementById(
+            "errorCelular"
+        );
+
+
+    if (errorDNI) {
+
+        errorDNI.textContent = "";
+
+    }
+
+
+    if (errorCelular) {
+
+        errorCelular.textContent = "";
+
+    }
+
+
+    configurarBotonesModalPersonal();
 
 }
 
@@ -1772,7 +2394,8 @@ async function eliminarPersonal(id) {
                 `/api/personal/${id}`,
                 {
 
-                    method: "DELETE"
+                    method:
+                        "DELETE"
 
                 }
             );
@@ -1805,7 +2428,7 @@ async function eliminarPersonal(id) {
     catch (error) {
 
         console.error(
-            "Error eliminando personal:",
+            "Error eliminando el personal:",
             error
         );
 
@@ -1843,7 +2466,11 @@ function actualizarCuadrillas(personal) {
         );
 
 
-    if (!c1 || !c2 || !c3) {
+    if (
+        !c1 ||
+        !c2 ||
+        !c3
+    ) {
 
         return;
 
@@ -1851,12 +2478,16 @@ function actualizarCuadrillas(personal) {
 
 
     c1.innerHTML = "";
+
     c2.innerHTML = "";
+
     c3.innerHTML = "";
 
 
     let cantidad1 = 0;
+
     let cantidad2 = 0;
+
     let cantidad3 = 0;
 
 
@@ -2046,11 +2677,14 @@ async function registrarProyecto(event) {
                 "/api/proyectos",
                 {
 
-                    method: "POST",
+                    method:
+                        "POST",
 
                     headers: {
+
                         "Content-Type":
                             "application/json"
+
                     },
 
                     body:
@@ -2425,11 +3059,14 @@ async function registrarMaterial(event) {
                 "/api/materiales",
                 {
 
-                    method: "POST",
+                    method:
+                        "POST",
 
                     headers: {
+
                         "Content-Type":
                             "application/json"
+
                     },
 
                     body:
@@ -2685,11 +3322,14 @@ async function registrarMantenimiento(event) {
                 "/api/mantenimientos",
                 {
 
-                    method: "POST",
+                    method:
+                        "POST",
 
                     headers: {
+
                         "Content-Type":
                             "application/json"
+
                     },
 
                     body:
@@ -2743,7 +3383,9 @@ async function registrarMantenimiento(event) {
         await cargarMantenimientos();
 
 
-        if (calendarioMantenimiento) {
+        if (
+            calendarioMantenimiento
+        ) {
 
             calendarioMantenimiento.refetchEvents();
 
@@ -2952,6 +3594,7 @@ async function cargarUsuarioActual() {
                     "";
 
             }
+
             else {
 
                 botonPersonal.style.display =
@@ -2986,7 +3629,10 @@ async function cerrarSesion() {
             await fetch(
                 "/api/logout",
                 {
-                    method: "POST"
+
+                    method:
+                        "POST"
+
                 }
             );
 
@@ -2997,6 +3643,7 @@ async function cerrarSesion() {
                 "/login.html";
 
         }
+
         else {
 
             alert(
@@ -3030,14 +3677,18 @@ window.addEventListener(
     "resize",
     function() {
 
-        if (!calendarioMantenimiento) {
+        if (
+            !calendarioMantenimiento
+        ) {
 
             return;
 
         }
 
 
-        if (resizeCalendarioPendiente) {
+        if (
+            resizeCalendarioPendiente
+        ) {
 
             return;
 
@@ -3055,7 +3706,9 @@ window.addEventListener(
                     false;
 
 
-                if (calendarioMantenimiento) {
+                if (
+                    calendarioMantenimiento
+                ) {
 
                     calendarioMantenimiento.updateSize();
 
@@ -3075,6 +3728,11 @@ window.addEventListener(
 document.addEventListener(
     "DOMContentLoaded",
     async function() {
+
+        aplicarEstilosModalPersonal();
+
+        configurarBotonesModalPersonal();
+
 
         await cargarPersonal();
 
