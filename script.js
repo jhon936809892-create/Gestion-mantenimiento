@@ -1010,7 +1010,7 @@ async function cargarPersonal() {
                         );
 
 
-                    fila.innerHTML = `
+                    fila.innerHTML = 
 
                         <td>
                             ${persona.nombres || ""}
@@ -1038,33 +1038,37 @@ async function cargarPersonal() {
                             ""}
                         </td>
 
-                        <td>
+                            fila.innerHTML = `
 
-                            <div class="acciones-personal">
+    <td>
+        ${persona.nombres || ""}
+    </td>
 
-                                <button
-                                    type="button"
-                                    class="btn-editar-personal"
-                                    title="Editar personal"
-                                    onclick="editarPersonal(${persona.id})"
-                                >
-                                    ✏️
-                                </button>
+    <td>
+        ${persona.apellidos || ""}
+    </td>
 
-                                <button
-                                    type="button"
-                                    class="btn-eliminar-personal"
-                                    title="Eliminar personal"
-                                    onclick="eliminarPersonal(${persona.id})"
-                                >
-                                    🗑️
-                                </button>
+    <td>
+        ${persona.documento || ""}
+    </td>
 
-                            </div>
+    <td>
+        ${persona.celular || ""}
+    </td>
 
-                        </td>
+    <td>
+        ${persona.cargo || ""}
+    </td>
 
-                    `;
+    <td>
+        ${persona.cuadrilla || persona.cuadrilla_id || ""}
+    </td>
+
+`;
+
+                     
+
+                    ;
 
 
                     tabla.appendChild(fila);
