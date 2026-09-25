@@ -932,6 +932,53 @@
 
     <script src="script.js"></script>
 
+<!-- ========================================
+     MODAL CONFIRMAR CANCELACIÓN
+======================================== -->
+
+<div
+    id="modalConfirmarCancelar"
+    class="modal modal-confirmacion"
+>
+
+    <div class="modal-contenido modal-confirmacion-contenido">
+
+        <h2>
+            ¿Cancelar edición?
+        </h2>
+
+        <p>
+            ¿Está seguro de que desea cancelar?
+        </p>
+
+        <p class="texto-advertencia">
+            Se perderán los cambios realizados.
+        </p>
+
+        <div class="botones-confirmacion">
+
+            <button
+                type="button"
+                class="btn-no-cancelar"
+                onclick="cerrarConfirmacionCancelar()"
+            >
+                No
+            </button>
+
+            <button
+                type="button"
+                class="btn-si-cancelar"
+                onclick="confirmarCancelacionPersonal()"
+            >
+                Sí, cancelar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    
 </body>
 
 </html>
