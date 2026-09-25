@@ -1362,6 +1362,224 @@ app.post(
 );
 
 
+// -----------------------------------------------------
+// EDITAR PERSONAL
+// SOLO COORDINADOR
+// -----------------------------------------------------
+
+app.put(
+    "/api/personal/:id",
+    requiereCoordinador,
+    async (req, res) => {
+
+        try {
+
+            const { id } = req.params;
+
+            const {
+                nombres,
+                apellidos,
+                documento,
+                celular,
+                cargo,
+                cuadrilla
+            } = req.body;
+
+
+            // ---------------------------------------------
+            // VALIDACIONES
+            // ---------------------------------------------
+
+            if (
+                !nombres ||
+                !apellidos ||
+                !documento
+            ) {
+
+                return res.status(400).json({
+
+                    error:
+                        "Nombres, apellidos y DNI son obligatorios"
+
+                });
+
+            }
+
+
+            if (
+                !/^[0-9]{8}$/.test(documento)
+            ) {
+
+                return res.status(400).json({
+
+                    error:
+                        "El DNI debe tener exactamente 8 dígitos"
+
+                });
+
+            }
+
+
+            if (
+                celular &&
+                !/^[0-9]{9}$/.test(celular)
+            ) {
+
+                return res.status(400).json({
+
+                    error:
+                        "El celular debe tener 9 dígitos"
+
+                });
+
+            }
+
+
+            // ---------------------------------------------
+            // COMPROBAR QUE EXISTE
+            // ---------------------------------------------
+
+            const existente =
+                await pool.query(`
+
+                    SELECT id
+
+                    FROM personal
+
+                    WHERE id = $1
+
+                `, [id]);
+
+
+            if (
+                existente.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    error:
+                        "Personal no encontrado"
+
+                });
+
+            }
+
+
+            // ---------------------------------------------
+            // COMPROBAR DNI
+            // ---------------------------------------------
+
+            const dniExistente =
+                await pool.query(`
+
+                    SELECT id
+
+                    FROM personal
+
+                    WHERE documento = $1
+                    AND id <> $2
+
+                `, [
+                    documento,
+                    id
+                ]);
+
+
+            if (
+                dniExistente.rows.length > 0
+            ) {
+
+                return res.status(409).json({
+
+                    error:
+                        "El DNI ya está registrado en otro personal"
+
+                });
+
+            }
+
+
+            // ---------------------------------------------
+            // ACTUALIZAR
+            // ---------------------------------------------
+
+            const resultado =
+                await pool.query(`
+
+                    UPDATE personal
+
+                    SET
+
+                        nombres = $1,
+                        apellidos = $2,
+                        documento = $3,
+                        celular = $4,
+                        cargo = $5,
+                        cuadrilla_id = $6
+
+                    WHERE id = $7
+
+                    RETURNING *
+
+                `, [
+
+                    nombres.trim(),
+
+                    apellidos.trim(),
+
+                    documento,
+
+                    celular || null,
+
+                    cargo
+                        ? cargo.trim()
+                        : null,
+
+                    cuadrilla || null,
+
+                    id
+
+                ]);
+
+
+            // ---------------------------------------------
+            // RESPUESTA
+            // ---------------------------------------------
+
+            res.json({
+
+                mensaje:
+                    "Personal actualizado correctamente",
+
+                personal:
+                    resultado.rows[0]
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error al editar personal:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                error:
+                    "No se pudo actualizar el personal"
+
+            });
+
+        }
+
+    }
+);
+
+
+
 // =====================================================
 // PROYECTOS
 // =====================================================
