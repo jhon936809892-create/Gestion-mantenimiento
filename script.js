@@ -416,7 +416,84 @@ function mostrarSeccion(seccion, boton) {
 
 function abrirModalPersonal() {
 
-    const modal = document.getElementById("modalPersonal");
+    const modal =
+        document.getElementById("modalPersonal");
+
+    const titulo =
+        document.getElementById("tituloModalPersonal");
+
+    const boton =
+        document.getElementById("btnGuardarPersonal");
+
+    const id =
+        document.getElementById("idPersonal");
+
+    const formulario =
+        document.getElementById("formPersonal");
+
+
+    // Limpiar formulario
+    if (formulario) {
+        formulario.reset();
+    }
+
+
+    // No estamos editando
+    if (id) {
+        id.value = "";
+    }
+
+
+    // Título
+    if (titulo) {
+        titulo.textContent = "Registrar personal";
+    }
+
+
+    // Botón
+    if (boton) {
+        boton.textContent = "Guardar personal";
+    }
+
+
+    // Limpiar mensajes de validación
+    const errorDNI =
+        document.getElementById("errorDNI");
+
+    const errorCelular =
+        document.getElementById("errorCelular");
+
+
+    if (errorDNI) {
+        errorDNI.textContent = "";
+    }
+
+    if (errorCelular) {
+        errorCelular.textContent = "";
+    }
+
+
+    const documento =
+        document.getElementById("documento");
+
+    const celular =
+        document.getElementById("celular");
+
+
+    if (documento) {
+        documento.classList.remove(
+            "input-error",
+            "input-correcto"
+        );
+    }
+
+    if (celular) {
+        celular.classList.remove(
+            "input-error",
+            "input-correcto"
+        );
+    }
+
 
     if (modal) {
         modal.classList.add("active");
@@ -631,12 +708,19 @@ function validarCelular() {
 // REGISTRAR PERSONAL
 // ========================================
 
+// ========================================
+// REGISTRAR / EDITAR PERSONAL
+// ========================================
+
 async function registrarPersonal(event) {
 
     event.preventDefault();
 
 
-    // Validar DNI
+    // ========================================
+    // VALIDACIONES
+    // ========================================
+
     if (!validarDNI()) {
 
         alert("Ingrese un DNI válido.");
@@ -644,6 +728,256 @@ async function registrarPersonal(event) {
         return;
 
     }
+
+
+    if (!validarCelular()) {
+
+        alert("Ingrese un celular válido.");
+
+        return;
+
+    }
+
+
+    // ========================================
+    // OBTENER ID
+    // ========================================
+
+    const idPersonal =
+        document
+            .getElementById("idPersonal")
+            .value
+            .trim();
+
+
+    // ========================================
+    // DATOS
+    // ========================================
+
+    const datos = {
+
+        nombres:
+            document
+                .getElementById("nombres")
+                .value
+                .trim(),
+
+        apellidos:
+            document
+                .getElementById("apellidos")
+                .value
+                .trim(),
+
+        documento:
+            document
+                .getElementById("documento")
+                .value
+                .trim(),
+
+        celular:
+            document
+                .getElementById("celular")
+                .value
+                .trim(),
+
+        cargo:
+            document
+                .getElementById("cargo")
+                .value
+                .trim(),
+
+        cuadrilla:
+            document
+                .getElementById("cuadrilla")
+                .value
+
+    };
+
+
+    // ========================================
+    // DETERMINAR SI ES REGISTRO O EDICIÓN
+    // ========================================
+
+    const editando =
+        idPersonal !== "";
+
+
+    try {
+
+        let respuesta;
+
+
+        // ========================================
+        // EDITAR
+        // ========================================
+
+        if (editando) {
+
+            respuesta =
+                await fetch(
+                    `/api/personal/${idPersonal}`,
+                    {
+
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(datos)
+
+                    }
+                );
+
+        }
+
+
+        // ========================================
+        // REGISTRAR
+        // ========================================
+
+        else {
+
+            respuesta =
+                await fetch(
+                    "/api/personal",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(datos)
+
+                    }
+                );
+
+        }
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        // ========================================
+        // ERROR
+        // ========================================
+
+        if (!respuesta.ok) {
+
+            alert(
+                resultado.error ||
+                (
+                    editando
+                        ? "No se pudo actualizar el personal."
+                        : "No se pudo registrar el personal."
+                )
+            );
+
+            return;
+
+        }
+
+
+        // ========================================
+        // MENSAJE
+        // ========================================
+
+        alert(
+            editando
+                ? "Personal actualizado correctamente."
+                : "Personal registrado correctamente."
+        );
+
+
+        // ========================================
+        // CERRAR MODAL
+        // ========================================
+
+        cerrarModal("modalPersonal");
+
+
+        // ========================================
+        // LIMPIAR FORMULARIO
+        // ========================================
+
+        const formulario =
+            document.getElementById(
+                "formPersonal"
+            );
+
+
+        if (formulario) {
+            formulario.reset();
+        }
+
+
+        const id =
+            document.getElementById(
+                "idPersonal"
+            );
+
+
+        if (id) {
+            id.value = "";
+        }
+
+
+        // ========================================
+        // RESTAURAR TÍTULO
+        // ========================================
+
+        const titulo =
+            document.getElementById(
+                "tituloModalPersonal"
+            );
+
+
+        if (titulo) {
+            titulo.textContent =
+                "Registrar personal";
+        }
+
+
+        const boton =
+            document.getElementById(
+                "btnGuardarPersonal"
+            );
+
+
+        if (boton) {
+            boton.textContent =
+                "Guardar personal";
+        }
+
+
+        // ========================================
+        // RECARGAR PERSONAL
+        // ========================================
+
+        await cargarPersonal();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error registrando/editando personal:",
+            error
+        );
+
+        alert(
+            "No se pudo conectar con el servidor."
+        );
+
+    }
+
+}
 
 
     // Validar celular
@@ -771,12 +1105,18 @@ async function registrarPersonal(event) {
 // CARGAR PERSONAL
 // ========================================
 
+// ========================================
+// CARGAR PERSONAL
+// ========================================
+
 async function cargarPersonal() {
 
     try {
 
         const respuesta =
-            await fetch("/api/personal");
+            await fetch(
+                "/api/personal"
+            );
 
 
         if (!respuesta.ok) {
@@ -803,46 +1143,350 @@ async function cargarPersonal() {
             tabla.innerHTML = "";
 
 
-            personal.forEach(function (persona) {
+            personal.forEach(
+                function (persona) {
 
-                const fila =
-                    document.createElement("tr");
-
-
-                fila.innerHTML = `
-
-                    <td>
-                        ${persona.nombres || ""}
-                    </td>
-
-                    <td>
-                        ${persona.apellidos || ""}
-                    </td>
-
-                    <td>
-                        ${persona.documento || ""}
-                    </td>
-
-                    <td>
-                        ${persona.celular || ""}
-                    </td>
-
-                    <td>
-                        ${persona.cargo || ""}
-                    </td>
-
-                    <td>
-                        ${persona.cuadrilla || ""}
-                    </td>
-
-                `;
+                    const fila =
+                        document.createElement("tr");
 
 
-                tabla.appendChild(fila);
+                    fila.innerHTML = `
 
-            });
+                        <td>
+                            ${persona.nombres || ""}
+                        </td>
+
+                        <td>
+                            ${persona.apellidos || ""}
+                        </td>
+
+                        <td>
+                            ${persona.documento || ""}
+                        </td>
+
+                        <td>
+                            ${persona.celular || ""}
+                        </td>
+
+                        <td>
+                            ${persona.cargo || ""}
+                        </td>
+
+                        <td>
+                            ${persona.cuadrilla || persona.cuadrilla_id || ""}
+                        </td>
+
+                        <td>
+
+                            <div class="acciones-personal">
+
+                                <button
+                                    type="button"
+                                    class="btn-editar-personal"
+                                    title="Editar personal"
+                                    onclick="editarPersonal(${persona.id})"
+                                >
+                                    ✏️
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn-eliminar-personal"
+                                    title="Eliminar personal"
+                                    onclick="eliminarPersonal(${persona.id})"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    `;
+
+
+                    tabla.appendChild(fila);
+
+                }
+            );
 
         }
+
+        // ========================================
+// EDITAR PERSONAL
+// ========================================
+
+async function editarPersonal(id) {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/personal"
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudo obtener el personal."
+            );
+
+        }
+
+
+        const personal =
+            await respuesta.json();
+
+
+        const persona =
+            personal.find(
+                function (item) {
+
+                    return String(item.id) ===
+                        String(id);
+
+                }
+            );
+
+
+        if (!persona) {
+
+            alert(
+                "No se encontró el personal seleccionado."
+            );
+
+            return;
+
+        }
+
+
+        // ========================================
+        // COLOCAR DATOS EN EL FORMULARIO
+        // ========================================
+
+        document
+            .getElementById("idPersonal")
+            .value =
+                persona.id || "";
+
+
+        document
+            .getElementById("nombres")
+            .value =
+                persona.nombres || "";
+
+
+        document
+            .getElementById("apellidos")
+            .value =
+                persona.apellidos || "";
+
+
+        document
+            .getElementById("documento")
+            .value =
+                persona.documento || "";
+
+
+        document
+            .getElementById("celular")
+            .value =
+                persona.celular || "";
+
+
+        document
+            .getElementById("cargo")
+            .value =
+                persona.cargo || "";
+
+
+        document
+            .getElementById("cuadrilla")
+            .value =
+                persona.cuadrilla_id ||
+                persona.cuadrilla ||
+                "1";
+
+
+        // ========================================
+        // CAMBIAR TÍTULO
+        // ========================================
+
+        const titulo =
+            document.getElementById(
+                "tituloModalPersonal"
+            );
+
+
+        if (titulo) {
+
+            titulo.textContent =
+                "Editar personal";
+
+        }
+
+
+        // ========================================
+        // CAMBIAR BOTÓN
+        // ========================================
+
+        const boton =
+            document.getElementById(
+                "btnGuardarPersonal"
+            );
+
+
+        if (boton) {
+
+            boton.textContent =
+                "Guardar cambios";
+
+        }
+
+
+        // ========================================
+        // MOSTRAR MODAL
+        // ========================================
+
+        const modal =
+            document.getElementById(
+                "modalPersonal"
+            );
+
+
+        if (modal) {
+
+            modal.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error editando personal:",
+            error
+        );
+
+        alert(
+            "No se pudo cargar la información del personal."
+        );
+
+    }
+
+}
+
+        // ========================================
+// ELIMINAR PERSONAL
+// ========================================
+
+async function eliminarPersonal(id) {
+
+    const confirmar =
+        confirm(
+            "¿Está seguro de eliminar este personal?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                `/api/personal/${id}`,
+                {
+
+                    method: "DELETE"
+
+                }
+            );
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            alert(
+                resultado.error ||
+                "No se pudo eliminar el personal."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Personal eliminado correctamente."
+        );
+
+
+        // Recargar tabla
+        await cargarPersonal();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error eliminando personal:",
+            error
+        );
+
+        alert(
+            "No se pudo conectar con el servidor."
+        );
+
+    }
+
+}
+
+
+        // ========================================
+        // TOTAL DE PERSONAL
+        // ========================================
+
+        const totalPersonal =
+            document.getElementById(
+                "totalPersonal"
+            );
+
+
+        if (totalPersonal) {
+
+            totalPersonal.textContent =
+                personal.length;
+
+        }
+
+
+        // ========================================
+        // ACTUALIZAR CUADRILLAS
+        // ========================================
+
+        actualizarCuadrillas(
+            personal
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando personal:",
+            error
+        );
+
+    }
+
+}
 
 
         // Total de personal
