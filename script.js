@@ -631,71 +631,7 @@ function cerrarModal(id) {
 // CERRAR MODAL AL HACER CLIC AFUERA
 // ========================================
 
-document.addEventListener(
-    "click",
-    function(event) {
 
-        if (
-            !event.target.classList.contains("modal")
-        ) {
-
-            return;
-
-        }
-
-
-        // ----------------------------------------
-        // MODAL DE EDICIÓN
-        // ----------------------------------------
-
-        if (
-            event.target.id === "modalPersonal"
-        ) {
-
-            const idPersonal =
-                document.getElementById(
-                    "idPersonal"
-                );
-
-            // Si estamos editando,
-            // no permitir cerrar haciendo clic afuera
-
-            if (
-                idPersonal &&
-                idPersonal.value.trim() !== ""
-            ) {
-
-                return;
-
-            }
-
-        }
-
-
-        // ----------------------------------------
-        // MODAL DE CONFIRMACIÓN
-        // ----------------------------------------
-
-        if (
-            event.target.id ===
-            "modalConfirmarCancelar"
-        ) {
-
-            return;
-
-        }
-
-
-        // ----------------------------------------
-        // OTROS MODALES
-        // ----------------------------------------
-
-        event.target.classList.remove(
-            "active"
-        );
-
-    }
-);
 
 // ========================================
 // VALIDAR DNI
@@ -2897,3 +2833,176 @@ document.addEventListener(
 
     }
 );
+
+
+// =====================================================
+// CONFIRMACIÓN PARA CANCELAR EDICIÓN
+// =====================================================
+
+function mostrarConfirmacionCancelar() {
+
+    // Evitar crear varios cuadros
+    if (document.getElementById("modalConfirmarCancelar")) {
+        return;
+    }
+
+    const modalConfirmacion =
+        document.createElement("div");
+
+    modalConfirmacion.id =
+        "modalConfirmarCancelar";
+
+    modalConfirmacion.className =
+        "modal-confirmacion";
+
+    modalConfirmacion.innerHTML = `
+
+        <div class="cuadro-confirmacion">
+
+            <h3>¿Cancelar edición?</h3>
+
+            <p>
+                Los cambios que hayas realizado
+                no se guardarán.
+            </p>
+
+            <div class="botones-confirmacion">
+
+                <button
+                    type="button"
+                    class="btn-confirmar-no"
+                    id="btnNoCancelar"
+                >
+                    No, continuar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-confirmar-si"
+                    id="btnSiCancelar"
+                >
+                    Sí, cancelar
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(
+        modalConfirmacion
+    );
+
+
+    // NO CANCELAR
+    document
+        .getElementById("btnNoCancelar")
+        .addEventListener(
+            "click",
+            function() {
+
+                modalConfirmacion.remove();
+
+            }
+        );
+
+
+    // SÍ CANCELAR
+    document
+        .getElementById("btnSiCancelar")
+        .addEventListener(
+            "click",
+            function() {
+
+                modalConfirmacion.remove();
+
+                cerrarModalPersonal();
+
+            }
+        );
+
+}
+
+
+// =====================================================
+// CERRAR MODAL PERSONAL
+// =====================================================
+
+function cerrarModalPersonal() {
+
+    const modal =
+        document.getElementById(
+            "modalPersonal"
+        );
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    const formulario =
+        document.getElementById(
+            "formPersonal"
+        );
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    const id =
+        document.getElementById(
+            "idPersonal"
+        );
+
+    if (id) {
+
+        id.value = "";
+
+    }
+
+
+    const titulo =
+        document.getElementById(
+            "tituloModalPersonal"
+        );
+
+    if (titulo) {
+
+        titulo.textContent =
+            "Registrar personal";
+
+    }
+
+
+    const boton =
+        document.getElementById(
+            "btnGuardarPersonal"
+        );
+
+    if (boton) {
+
+        boton.textContent =
+            "Guardar personal";
+
+    }
+
+}
+
+
+// =====================================================
+// CANCELAR DESDE EL BOTÓN
+// =====================================================
+
+function cancelarEdicionPersonal() {
+
+    mostrarConfirmacionCancelar();
+
+}
