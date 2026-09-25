@@ -962,7 +962,6 @@ async function registrarPersonal(event) {
 
 }
 
-
 // ========================================
 // CARGAR PERSONAL
 // ========================================
@@ -972,10 +971,7 @@ async function cargarPersonal() {
     try {
 
         const respuesta =
-            await fetch(
-                "/api/personal"
-            );
-
+            await fetch("/api/personal");
 
         if (!respuesta.ok) {
 
@@ -985,105 +981,57 @@ async function cargarPersonal() {
 
         }
 
-
         const personal =
             await respuesta.json();
 
-
         const tabla =
-            document.getElementById(
-                "tablaPersonal"
-            );
-
+            document.getElementById("tablaPersonal");
 
         if (tabla) {
 
             tabla.innerHTML = "";
 
+            personal.forEach(function(persona) {
 
-            personal.forEach(
-                function(persona) {
+                const fila =
+                    document.createElement("tr");
 
-                    const fila =
-                        document.createElement(
-                            "tr"
-                        );
+                fila.innerHTML = `
 
+                    <td>
+                        ${persona.nombres || ""}
+                    </td>
 
-                    fila.innerHTML = 
+                    <td>
+                        ${persona.apellidos || ""}
+                    </td>
 
-                        <td>
-                            ${persona.nombres || ""}
-                        </td>
+                    <td>
+                        ${persona.documento || ""}
+                    </td>
 
-                        <td>
-                            ${persona.apellidos || ""}
-                        </td>
+                    <td>
+                        ${persona.celular || ""}
+                    </td>
 
-                        <td>
-                            ${persona.documento || ""}
-                        </td>
+                    <td>
+                        ${persona.cargo || ""}
+                    </td>
 
-                        <td>
-                            ${persona.celular || ""}
-                        </td>
+                    <td>
+                        ${persona.cuadrilla || persona.cuadrilla_id || ""}
+                    </td>
 
-                        <td>
-                            ${persona.cargo || ""}
-                        </td>
+                `;
 
-                        <td>
-                            ${persona.cuadrilla ||
-                            persona.cuadrilla_id ||
-                            ""}
-                        </td>
+                tabla.appendChild(fila);
 
-                            fila.innerHTML = `
-
-    <td>
-        ${persona.nombres || ""}
-    </td>
-
-    <td>
-        ${persona.apellidos || ""}
-    </td>
-
-    <td>
-        ${persona.documento || ""}
-    </td>
-
-    <td>
-        ${persona.celular || ""}
-    </td>
-
-    <td>
-        ${persona.cargo || ""}
-    </td>
-
-    <td>
-        ${persona.cuadrilla || persona.cuadrilla_id || ""}
-    </td>
-
-`;
-
-                     
-
-                    ;
-
-
-                    tabla.appendChild(fila);
-
-                }
-            );
+            });
 
         }
 
-
         const totalPersonal =
-            document.getElementById(
-                "totalPersonal"
-            );
-
+            document.getElementById("totalPersonal");
 
         if (totalPersonal) {
 
@@ -1092,10 +1040,7 @@ async function cargarPersonal() {
 
         }
 
-
-        actualizarCuadrillas(
-            personal
-        );
+        actualizarCuadrillas(personal);
 
     }
     catch (error) {
@@ -1108,7 +1053,6 @@ async function cargarPersonal() {
     }
 
 }
-
 
 // ========================================
 // EDITAR PERSONAL
