@@ -1352,7 +1352,114 @@ function cancelarEdicionPersonal() {
 
 }
 
+// ========================================
+// CERRAR CONFIRMACIÓN DE CANCELACIÓN
+// ========================================
 
+function cerrarConfirmacionCancelar() {
+
+    const modal =
+        document.getElementById(
+            "modalConfirmarCancelar"
+        );
+
+    if (modal) {
+
+        modal.classList.remove("active");
+
+    }
+
+}
+
+
+// ========================================
+// CONFIRMAR CANCELACIÓN
+// ========================================
+
+function confirmarCancelacionPersonal() {
+
+    // ----------------------------------------
+    // Cerrar cuadro de confirmación
+    // ----------------------------------------
+
+    cerrarConfirmacionCancelar();
+
+
+    // ----------------------------------------
+    // Cerrar modal de edición
+    // ----------------------------------------
+
+    cerrarModal(
+        "modalPersonal"
+    );
+
+
+    // ----------------------------------------
+    // Limpiar formulario
+    // ----------------------------------------
+
+    const formulario =
+        document.getElementById(
+            "formPersonal"
+        );
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    // ----------------------------------------
+    // Limpiar ID
+    // ----------------------------------------
+
+    const id =
+        document.getElementById(
+            "idPersonal"
+        );
+
+    if (id) {
+
+        id.value = "";
+
+    }
+
+
+    // ----------------------------------------
+    // Restaurar título
+    // ----------------------------------------
+
+    const titulo =
+        document.getElementById(
+            "tituloModalPersonal"
+        );
+
+    if (titulo) {
+
+        titulo.textContent =
+            "Registrar personal";
+
+    }
+
+
+    // ----------------------------------------
+    // Restaurar botón guardar
+    // ----------------------------------------
+
+    const boton =
+        document.getElementById(
+            "btnGuardarPersonal"
+        );
+
+    if (boton) {
+
+        boton.textContent =
+            "Guardar personal";
+
+    }
+
+}
     // ----------------------------------------
     // CERRAR MODAL
     // ----------------------------------------
