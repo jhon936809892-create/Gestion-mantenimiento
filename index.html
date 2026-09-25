@@ -422,12 +422,9 @@
     </main>
 
 
-<div
-    id="modalPersonal"
-    class="modal"
->
+<div id="modalPersonal" class="modal">
 
-    <div class="modal-content">
+    <div class="modal-content modal-personal-content">
 
         <div class="modal-header">
 
@@ -447,30 +444,176 @@
                 id="idPersonal"
             >
 
-            <!-- aquí siguen todos tus campos -->
+            <label for="nombresPersonal">
+                Nombres
+            </label>
+
+            <input
+                type="text"
+                id="nombresPersonal"
+                required
+            >
+
+            <label for="apellidosPersonal">
+                Apellidos
+            </label>
+
+            <input
+                type="text"
+                id="apellidosPersonal"
+                required
+            >
+
+            <label for="tipoDocumentoPersonal">
+                Tipo de documento
+            </label>
+
+            <select
+                id="tipoDocumentoPersonal"
+                required
+            >
+
+                <option value="">
+                    Seleccione un tipo
+                </option>
+
+                <option value="DNI">
+                    DNI
+                </option>
+
+                <option value="CE">
+                    CE
+                </option>
+
+            </select>
+
+            <label for="documentoPersonal">
+                DNI / CE
+            </label>
+
+            <input
+                type="text"
+                id="documentoPersonal"
+                required
+            >
+
+            <label for="celularPersonal">
+                Celular
+            </label>
+
+            <input
+                type="text"
+                id="celularPersonal"
+            >
+
+            <label for="cargoPersonal">
+                Cargo
+            </label>
+
+            <input
+                type="text"
+                id="cargoPersonal"
+            >
+
+            <label for="cuadrillaPersonal">
+                Cuadrilla
+            </label>
+
+            <select
+                id="cuadrillaPersonal"
+                required
+            >
+
+                <option value="">
+                    Seleccione una cuadrilla
+                </option>
+
+                <option value="1">
+                    Cuadrilla 1
+                </option>
+
+                <option value="2">
+                    Cuadrilla 2
+                </option>
+
+                <option value="3">
+                    Cuadrilla 3
+                </option>
+
+            </select>
 
             <div class="botones-formulario-personal">
 
-    <button
-        type="button"
-        id="btnCancelarPersonal"
-        class="btn-cancelar-personal"
-        onclick="cancelarEdicionPersonal()"
-    >
-        Cancelar
-    </button>
+                <button
+                    type="button"
+                    id="btnCancelarPersonal"
+                    class="btn-cancelar-personal"
+                    onclick="cancelarEdicionPersonal()"
+                >
+                    Cancelar
+                </button>
 
-    <button
-        type="submit"
-        id="btnGuardarPersonal"
-        class="btn-guardar-personal"
-    >
-        Guardar personal
-    </button>
+                <button
+                    type="submit"
+                    id="btnGuardarPersonal"
+                    class="btn-guardar-personal"
+                >
+                    Guardar personal
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 
-        </form>
+
+<!-- CONFIRMACIÓN DE CANCELACIÓN -->
+
+<div
+    id="modalConfirmarCancelarPersonal"
+    class="modal"
+>
+
+    <div class="modal-content modal-confirmacion-personal">
+
+        <div class="modal-header">
+
+            <h2>
+                Cancelar registro
+            </h2>
+
+        </div>
+
+        <div class="confirmacion-personal-body">
+
+            <p>
+                ¿Está seguro de que desea cancelar el registro?
+            </p>
+
+        </div>
+
+        <div class="botones-confirmacion-personal">
+
+            <button
+                type="button"
+                class="btn-confirmar-no"
+                onclick="cerrarConfirmacionCancelarPersonal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                type="button"
+                class="btn-confirmar-si"
+                onclick="confirmarCancelarPersonal()"
+            >
+                Sí, cancelar
+            </button>
+
+        </div>
 
     </div>
 
