@@ -35,45 +35,34 @@ function aplicarEstilosModalPersonal() {
         #modalPersonal .botones-modal {
 
             display: flex !important;
-
             justify-content: flex-end !important;
-
             align-items: center !important;
-
             gap: 10px !important;
-
             width: 100% !important;
-
             margin-top: 20px !important;
 
         }
 
 
         /* ========================================
-           BOTÓN GUARDAR - AZUL
+           BOTÓN GUARDAR
         ======================================== */
 
         #modalPersonal #btnGuardarPersonal,
         #modalPersonal .btn-guardar-personal {
 
             background-color: #2563eb !important;
-
             background: #2563eb !important;
-
             color: white !important;
-
             border: 1px solid #2563eb !important;
-
             border-radius: 6px !important;
-
             padding: 10px 18px !important;
-
             cursor: pointer !important;
-
             font-weight: 600 !important;
 
-            transition: background-color 0.2s ease,
-                        transform 0.1s ease !important;
+            transition:
+                background-color 0.2s ease,
+                transform 0.1s ease !important;
 
         }
 
@@ -102,23 +91,17 @@ function aplicarEstilosModalPersonal() {
         #modalPersonal .btn-cancelar-personal {
 
             background-color: #ffffff !important;
-
             background: #ffffff !important;
-
             color: #333333 !important;
-
             border: 1px solid #cccccc !important;
-
             border-radius: 6px !important;
-
             padding: 10px 18px !important;
-
             cursor: pointer !important;
-
             font-weight: 600 !important;
 
-            transition: background-color 0.2s ease,
-                        border-color 0.2s ease !important;
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease !important;
 
         }
 
@@ -127,7 +110,6 @@ function aplicarEstilosModalPersonal() {
         #modalPersonal .btn-cancelar-personal:hover {
 
             background-color: #f3f4f6 !important;
-
             border-color: #999999 !important;
 
         }
@@ -140,30 +122,38 @@ function aplicarEstilosModalPersonal() {
         #modalConfirmarCancelar {
 
             position: fixed !important;
-
             inset: 0 !important;
-
             background: rgba(0, 0, 0, 0.45) !important;
 
             display: flex !important;
-
             justify-content: center !important;
-
             align-items: center !important;
 
             z-index: 99999 !important;
 
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.2s ease,
+                visibility 0.2s ease;
+
         }
 
 
-        #modalConfirmarCancelar .cuadro-confirmacion {
+        #modalConfirmarCancelar.active {
+
+            opacity: 1 !important;
+            visibility: visible !important;
+
+        }
+
+
+        #modalConfirmarCancelar .modal-confirmacion-contenido {
 
             background: white !important;
-
             width: min(420px, 90%) !important;
-
             padding: 25px !important;
-
             border-radius: 10px !important;
 
             box-shadow:
@@ -172,10 +162,9 @@ function aplicarEstilosModalPersonal() {
         }
 
 
-        #modalConfirmarCancelar h3 {
+        #modalConfirmarCancelar h2 {
 
             margin-top: 0 !important;
-
             margin-bottom: 10px !important;
 
         }
@@ -183,7 +172,15 @@ function aplicarEstilosModalPersonal() {
 
         #modalConfirmarCancelar p {
 
-            margin-bottom: 20px !important;
+            margin-bottom: 10px !important;
+
+        }
+
+
+        #modalConfirmarCancelar .texto-advertencia {
+
+            color: #dc2626 !important;
+            font-weight: 600 !important;
 
         }
 
@@ -191,11 +188,8 @@ function aplicarEstilosModalPersonal() {
         #modalConfirmarCancelar .botones-confirmacion {
 
             display: flex !important;
-
             justify-content: flex-end !important;
-
             gap: 10px !important;
-
             margin-top: 20px !important;
 
         }
@@ -204,34 +198,67 @@ function aplicarEstilosModalPersonal() {
         #modalConfirmarCancelar button {
 
             padding: 9px 16px !important;
-
             border-radius: 6px !important;
-
             cursor: pointer !important;
-
             font-weight: 600 !important;
 
         }
 
 
-        #modalConfirmarCancelar .btn-confirmar-no {
+        #modalConfirmarCancelar .btn-no-cancelar {
 
             background: white !important;
-
             color: #333 !important;
-
             border: 1px solid #ccc !important;
 
         }
 
 
-        #modalConfirmarCancelar .btn-confirmar-si {
+        #modalConfirmarCancelar .btn-si-cancelar {
 
             background: #dc2626 !important;
-
             color: white !important;
-
             border: 1px solid #dc2626 !important;
+
+        }
+
+
+        /* ========================================
+           BOTONES DE EDICIÓN PERSONAL
+        ======================================== */
+
+        .botones-edicion-personal {
+
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 8px;
+
+        }
+
+
+        .botones-edicion-personal button {
+
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px 6px;
+            border-radius: 5px;
+
+        }
+
+
+        .btn-editar-personal:hover {
+
+            background: #dbeafe;
+
+        }
+
+
+        .btn-eliminar-personal:hover {
+
+            background: #fee2e2;
 
         }
 
@@ -249,12 +276,8 @@ function configurarBotonesModalPersonal() {
 
     aplicarEstilosModalPersonal();
 
-
     const modal =
-        document.getElementById(
-            "modalPersonal"
-        );
-
+        document.getElementById("modalPersonal");
 
     if (!modal) {
         return;
@@ -266,10 +289,7 @@ function configurarBotonesModalPersonal() {
     // ========================================
 
     const botonGuardar =
-        document.getElementById(
-            "btnGuardarPersonal"
-        );
-
+        document.getElementById("btnGuardarPersonal");
 
     if (botonGuardar) {
 
@@ -277,8 +297,7 @@ function configurarBotonesModalPersonal() {
             "btn-guardar-personal"
         );
 
-        botonGuardar.type =
-            "submit";
+        botonGuardar.type = "submit";
 
     }
 
@@ -288,9 +307,7 @@ function configurarBotonesModalPersonal() {
     // ========================================
 
     let botonCancelar =
-        document.getElementById(
-            "btnCancelarPersonal"
-        );
+        document.getElementById("btnCancelarPersonal");
 
 
     if (!botonCancelar) {
@@ -306,39 +323,34 @@ function configurarBotonesModalPersonal() {
     if (!botonCancelar) {
 
         const botones =
-            modal.querySelectorAll(
-                "button"
-            );
+            modal.querySelectorAll("button");
 
+        botones.forEach(function(boton) {
 
-        botones.forEach(
-            function(boton) {
+            const texto =
+                (
+                    boton.textContent ||
+                    ""
+                )
+                .trim()
+                .toLowerCase();
 
-                const texto =
-                    (
-                        boton.textContent ||
-                        ""
-                    )
-                    .trim()
-                    .toLowerCase();
+            if (
+                texto.includes("cancelar")
+            ) {
 
-
-                if (
-                    texto.includes(
-                        "cancelar"
-                    )
-                ) {
-
-                    botonCancelar =
-                        boton;
-
-                }
+                botonCancelar = boton;
 
             }
-        );
+
+        });
 
     }
 
+
+    // ========================================
+    // CONFIGURAR CANCELAR
+    // ========================================
 
     if (botonCancelar) {
 
@@ -346,30 +358,26 @@ function configurarBotonesModalPersonal() {
             botonCancelar.id ||
             "btnCancelarPersonal";
 
-        botonCancelar.type =
-            "button";
+        botonCancelar.type = "button";
 
         botonCancelar.classList.add(
             "btn-cancelar-personal"
         );
 
 
-        // Evitar múltiples eventos
+        // Evitar eventos duplicados
         botonCancelar.onclick = null;
 
 
-        botonCancelar.addEventListener(
-            "click",
+        botonCancelar.onclick =
             function(event) {
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
                 cancelarEdicionPersonal();
 
-            }
-        );
+            };
 
     }
 
@@ -378,7 +386,10 @@ function configurarBotonesModalPersonal() {
     // COLOCAR BOTONES A LA DERECHA
     // ========================================
 
-    if (botonGuardar && botonCancelar) {
+    if (
+        botonGuardar &&
+        botonCancelar
+    ) {
 
         let contenedor =
             botonGuardar.parentElement;
@@ -386,7 +397,8 @@ function configurarBotonesModalPersonal() {
 
         if (
             contenedor &&
-            contenedor !== botonCancelar.parentElement
+            contenedor !==
+            botonCancelar.parentElement
         ) {
 
             contenedor =
@@ -494,6 +506,10 @@ function inicializarCalendarioMantenimiento() {
                     true,
 
 
+                // ========================================
+                // CARGAR EVENTOS
+                // ========================================
+
                 events:
                     async function(
                         info,
@@ -578,7 +594,6 @@ function inicializarCalendarioMantenimiento() {
                                 error
                             );
 
-
                             failureCallback(
                                 error
                             );
@@ -588,12 +603,15 @@ function inicializarCalendarioMantenimiento() {
                     },
 
 
+                // ========================================
+                // CLICK EN MANTENIMIENTO
+                // ========================================
+
                 eventClick:
                     function(info) {
 
                         const evento =
                             info.event;
-
 
                         const datos =
                             evento.extendedProps;
@@ -667,6 +685,10 @@ function activarEdicionPersonal() {
                 );
 
 
+            // ========================================
+            // DESACTIVAR EDICIÓN
+            // ========================================
+
             if (modoEdicion) {
 
                 if (botonesExistentes) {
@@ -675,94 +697,97 @@ function activarEdicionPersonal() {
 
                 }
 
+                return;
+
             }
 
-            else {
 
-                const botones =
-                    document.createElement(
-                        "span"
-                    );
+            // ========================================
+            // ACTIVAR EDICIÓN
+            // ========================================
 
-
-                botones.className =
-                    "botones-edicion-personal";
-
-
-                botones.innerHTML = `
-
-                    <button
-                        type="button"
-                        title="Editar"
-                        class="btn-editar-personal"
-                    >
-                        ✏️
-                    </button>
-
-                    <button
-                        type="button"
-                        title="Borrar"
-                        class="btn-eliminar-personal"
-                    >
-                        🗑️
-                    </button>
-
-                `;
+            const botones =
+                document.createElement(
+                    "span"
+                );
 
 
-                const botonEditar =
-                    botones.querySelector(
-                        ".btn-editar-personal"
-                    );
+            botones.className =
+                "botones-edicion-personal";
 
 
-                const botonEliminar =
-                    botones.querySelector(
-                        ".btn-eliminar-personal"
-                    );
+            botones.innerHTML = `
+
+                <button
+                    type="button"
+                    title="Editar"
+                    class="btn-editar-personal"
+                >
+                    ✏️
+                </button>
+
+                <button
+                    type="button"
+                    title="Borrar"
+                    class="btn-eliminar-personal"
+                >
+                    🗑️
+                </button>
+
+            `;
 
 
-                if (botonEditar) {
-
-                    botonEditar.addEventListener(
-                        "click",
-                        function() {
-
-                            editarPersonal(
-                                fila.dataset.id
-                            );
-
-                        }
-                    );
-
-                }
+            const botonEditar =
+                botones.querySelector(
+                    ".btn-editar-personal"
+                );
 
 
-                if (botonEliminar) {
-
-                    botonEliminar.addEventListener(
-                        "click",
-                        function() {
-
-                            eliminarPersonal(
-                                fila.dataset.id
-                            );
-
-                        }
-                    );
-
-                }
+            const botonEliminar =
+                botones.querySelector(
+                    ".btn-eliminar-personal"
+                );
 
 
-                if (
-                    fila.lastElementChild
-                ) {
+            if (botonEditar) {
 
-                    fila.lastElementChild.appendChild(
-                        botones
-                    );
+                botonEditar.addEventListener(
+                    "click",
+                    function() {
 
-                }
+                        editarPersonal(
+                            fila.dataset.id
+                        );
+
+                    }
+                );
+
+            }
+
+
+            if (botonEliminar) {
+
+                botonEliminar.addEventListener(
+                    "click",
+                    function() {
+
+                        eliminarPersonal(
+                            fila.dataset.id
+                        );
+
+                    }
+                );
+
+            }
+
+
+            if (
+                fila.lastElementChild
+            ) {
+
+                fila.lastElementChild.appendChild(
+                    botones
+                );
 
             }
 
@@ -839,6 +864,10 @@ function mostrarSeccion(
     }
 
 
+    // ========================================
+    // TÍTULOS
+    // ========================================
+
     const titulos = {
 
         dashboard:
@@ -893,8 +922,7 @@ function mostrarSeccion(
 
 
         if (
-            seccion ===
-            "personal"
+            seccion === "personal"
         ) {
 
             botonTopbar.innerHTML = `
@@ -919,9 +947,9 @@ function mostrarSeccion(
 
         }
 
+
         else if (
-            seccion ===
-            "proyectos"
+            seccion === "proyectos"
         ) {
 
             botonTopbar.innerHTML = `
@@ -938,9 +966,9 @@ function mostrarSeccion(
 
         }
 
+
         else if (
-            seccion ===
-            "mantenimiento"
+            seccion === "mantenimiento"
         ) {
 
             botonTopbar.innerHTML = `
@@ -957,9 +985,9 @@ function mostrarSeccion(
 
         }
 
+
         else if (
-            seccion ===
-            "materiales"
+            seccion === "materiales"
         ) {
 
             botonTopbar.innerHTML = `
@@ -984,8 +1012,7 @@ function mostrarSeccion(
     // ========================================
 
     if (
-        seccion ===
-        "personal"
+        seccion === "personal"
     ) {
 
         cargarPersonal();
@@ -994,8 +1021,7 @@ function mostrarSeccion(
 
 
     if (
-        seccion ===
-        "cuadrillas"
+        seccion === "cuadrillas"
     ) {
 
         cargarPersonal();
@@ -1004,8 +1030,7 @@ function mostrarSeccion(
 
 
     if (
-        seccion ===
-        "proyectos"
+        seccion === "proyectos"
     ) {
 
         cargarProyectos();
@@ -1014,8 +1039,7 @@ function mostrarSeccion(
 
 
     if (
-        seccion ===
-        "mantenimiento"
+        seccion === "mantenimiento"
     ) {
 
         cargarProyectos();
@@ -1047,8 +1071,7 @@ function mostrarSeccion(
 
 
     if (
-        seccion ===
-        "materiales"
+        seccion === "materiales"
     ) {
 
         cargarProyectos();
@@ -1130,6 +1153,36 @@ function abrirModalPersonal() {
     }
 
 
+    limpiarErroresPersonal();
+
+
+    if (modal) {
+
+        modal.classList.add(
+            "active"
+        );
+
+    }
+
+
+    setTimeout(
+        function() {
+
+            configurarBotonesModalPersonal();
+
+        },
+        0
+    );
+
+}
+
+
+// ========================================
+// LIMPIAR ERRORES PERSONAL
+// ========================================
+
+function limpiarErroresPersonal() {
+
     const errorDNI =
         document.getElementById(
             "errorDNI"
@@ -1186,25 +1239,6 @@ function abrirModalPersonal() {
         );
 
     }
-
-
-    if (modal) {
-
-        modal.classList.add(
-            "active"
-        );
-
-    }
-
-
-    setTimeout(
-        function() {
-
-            configurarBotonesModalPersonal();
-
-        },
-        0
-    );
 
 }
 
@@ -1285,20 +1319,18 @@ async function abrirModalMaterial() {
 
 
 // ========================================
-// CERRAR MODAL
-// ========================================
-
-// ========================================
 // CANCELAR EDICIÓN DE PERSONAL
 // ========================================
 
 function cancelarEdicionPersonal() {
 
     const idPersonal =
-        document.getElementById("idPersonal");
+        document.getElementById(
+            "idPersonal"
+        );
 
-    // Si no estamos editando,
-    // simplemente cerrar el formulario
+
+    // No estamos editando
     if (
         !idPersonal ||
         idPersonal.value.trim() === ""
@@ -1307,46 +1339,52 @@ function cancelarEdicionPersonal() {
         cerrarModalPersonal();
 
         return;
+
     }
 
-    // Si estamos editando,
-    // mostrar confirmación
+
+    // Estamos editando
     mostrarConfirmacionCancelar();
+
 }
 
 
 // ========================================
-// MOSTRAR CONFIRMACIÓN DE CANCELACIÓN
+// MOSTRAR CONFIRMACIÓN
 // ========================================
 
 function mostrarConfirmacionCancelar() {
 
-    // Si ya existe una confirmación,
-    // no crear otra
     const existente =
         document.getElementById(
             "modalConfirmarCancelar"
         );
 
+
     if (existente) {
 
         return;
+
     }
 
 
     const modalConfirmacion =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     modalConfirmacion.id =
         "modalConfirmarCancelar";
 
+
     modalConfirmacion.className =
-        "modal modal-confirmacion";
+        "modal-confirmacion";
 
 
     modalConfirmacion.innerHTML = `
 
-        <div class="modal-contenido modal-confirmacion-contenido">
+        <div class="modal-confirmacion-contenido">
 
             <h2>
                 ¿Cancelar edición?
@@ -1390,14 +1428,15 @@ function mostrarConfirmacionCancelar() {
     );
 
 
-    // Activar el modal después de crearlo
-    requestAnimationFrame(function() {
+    requestAnimationFrame(
+        function() {
 
-        modalConfirmacion.classList.add(
-            "active"
-        );
+            modalConfirmacion.classList.add(
+                "active"
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -1413,6 +1452,7 @@ function cerrarConfirmacionCancelar() {
             "modalConfirmarCancelar"
         );
 
+
     if (!modal) {
 
         return;
@@ -1425,11 +1465,18 @@ function cerrarConfirmacionCancelar() {
     );
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        modal.remove();
+            if (modal) {
 
-    }, 200);
+                modal.remove();
+
+            }
+
+        },
+        200
+    );
 
 }
 
@@ -1448,15 +1495,7 @@ function confirmarCancelacionPersonal() {
 
     if (modalConfirmacion) {
 
-        modalConfirmacion.classList.remove(
-            "active"
-        );
-
-        setTimeout(function() {
-
-            modalConfirmacion.remove();
-
-        }, 200);
+        modalConfirmacion.remove();
 
     }
 
@@ -1469,102 +1508,13 @@ function confirmarCancelacionPersonal() {
 // ========================================
 // CERRAR MODAL PERSONAL
 // ========================================
-
-function cerrarModalPersonal() {
-
-    const modal =
-        document.getElementById(
-            "modalPersonal"
-        );
-
-
-    if (modal) {
-
-        modal.classList.remove(
-            "active"
-        );
-
-    }
-
-
-    const formulario =
-        document.getElementById(
-            "formPersonal"
-        );
-
-
-    if (formulario) {
-
-        formulario.reset();
-
-    }
-
-
-    const id =
-        document.getElementById(
-            "idPersonal"
-        );
-
-
-    if (id) {
-
-        id.value = "";
-
-    }
-
-
-    const titulo =
-        document.getElementById(
-            "tituloModalPersonal"
-        );
-
-
-    if (titulo) {
-
-        titulo.textContent =
-            "Registrar personal";
-
-    }
-
-
-    const boton =
-        document.getElementById(
-            "btnGuardarPersonal"
-        );
-
-
-    if (boton) {
-
-        boton.textContent =
-            "Guardar personal";
-
-    }
-
-
-    const btnCancelar =
-        document.getElementById(
-            "btnCancelarPersonal"
-        );
-
-
-    if (btnCancelar) {
-
-        btnCancelar.textContent =
-            "Cancelar";
-
-    }
-
-}
-
-
-// ========================================
-// CERRAR MODAL PERSONAL
+// ESTA ES LA ÚNICA FUNCIÓN cerrarModalPersonal()
 // ========================================
 
 function cerrarModalPersonal() {
 
     // ========================================
-    // CERRAR CUADRO DE CONFIRMACIÓN
+    // CERRAR CONFIRMACIÓN
     // ========================================
 
     const confirmacion =
@@ -1581,7 +1531,7 @@ function cerrarModalPersonal() {
 
 
     // ========================================
-    // CERRAR MODAL PRINCIPAL
+    // CERRAR MODAL
     // ========================================
 
     const modal =
@@ -1617,7 +1567,7 @@ function cerrarModalPersonal() {
 
 
     // ========================================
-    // LIMPIAR ID DE EDICIÓN
+    // LIMPIAR ID
     // ========================================
 
     const id =
@@ -1666,13 +1616,20 @@ function cerrarModalPersonal() {
         boton.textContent =
             "Guardar personal";
 
+        boton.classList.add(
+            "btn-guardar-personal"
+        );
+
     }
 
-}
-// ========================================
-// CERRAR MODAL PERSONAL
-// ========================================
 
+    // ========================================
+    // LIMPIAR ERRORES
+    // ========================================
+
+    limpiarErroresPersonal();
+
+}
 
 
 // ========================================
@@ -1700,10 +1657,8 @@ async function eliminarPersonal(id) {
             await fetch(
                 `/api/personal/${id}`,
                 {
-
                     method:
                         "DELETE"
-
                 }
             );
 
@@ -1785,16 +1740,12 @@ function actualizarCuadrillas(personal) {
 
 
     c1.innerHTML = "";
-
     c2.innerHTML = "";
-
     c3.innerHTML = "";
 
 
     let cantidad1 = 0;
-
     let cantidad2 = 0;
-
     let cantidad3 = 0;
 
 
@@ -1831,9 +1782,7 @@ function actualizarCuadrillas(personal) {
                 ) === "1"
             ) {
 
-                c1.appendChild(
-                    div
-                );
+                c1.appendChild(div);
 
                 cantidad1++;
 
@@ -1845,9 +1794,7 @@ function actualizarCuadrillas(personal) {
                 ) === "2"
             ) {
 
-                c2.appendChild(
-                    div
-                );
+                c2.appendChild(div);
 
                 cantidad2++;
 
@@ -1859,9 +1806,7 @@ function actualizarCuadrillas(personal) {
                 ) === "3"
             ) {
 
-                c3.appendChild(
-                    div
-                );
+                c3.appendChild(div);
 
                 cantidad3++;
 
