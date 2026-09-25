@@ -636,20 +636,53 @@ document.addEventListener(
     function(event) {
 
         if (
-            event.target.classList.contains(
-                "modal"
-            )
+            !event.target.classList.contains("modal")
         ) {
 
-            event.target.classList.remove(
-                "active"
-            );
+            return;
 
         }
 
+
+        // -----------------------------------------
+        // MODAL DE PERSONAL
+        // -----------------------------------------
+
+        if (
+            event.target.id === "modalPersonal"
+        ) {
+
+            const idPersonal =
+                document.getElementById(
+                    "idPersonal"
+                );
+
+
+            // Si estamos editando,
+            // NO permitir cerrar haciendo clic afuera
+
+            if (
+                idPersonal &&
+                idPersonal.value.trim() !== ""
+            ) {
+
+                return;
+
+            }
+
+        }
+
+
+        // -----------------------------------------
+        // OTROS MODALES
+        // -----------------------------------------
+
+        event.target.classList.remove(
+            "active"
+        );
+
     }
 );
-
 
 // ========================================
 // VALIDAR DNI
