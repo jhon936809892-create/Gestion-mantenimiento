@@ -444,8 +444,14 @@
 </div>
 
             <form
-                onsubmit="registrarPersonal(event)"
-            >
+    id="formPersonal"
+    onsubmit="registrarPersonal(event)"
+>
+    
+    <input
+        type="hidden"
+        id="idPersonal"
+    >
 
                 <div class="form-grid">
 
@@ -562,10 +568,10 @@
                 </div>
 
                 <button
-                    class="btn-primary full"
-                    type="submit"
-                >
-                    Guardar personal
+                        class="btn-primary full"
+                        type="submit"
+                        id="btnGuardarPersonal">
+                        Guardar personal
                 </button>
 
             </form>
