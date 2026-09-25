@@ -1109,14 +1109,16 @@ async function registrarPersonal(event) {
 // CARGAR PERSONAL
 // ========================================
 
+// ========================================
+// CARGAR PERSONAL
+// ========================================
+
 async function cargarPersonal() {
 
     try {
 
         const respuesta =
-            await fetch(
-                "/api/personal"
-            );
+            await fetch("/api/personal");
 
 
         if (!respuesta.ok) {
@@ -1133,9 +1135,7 @@ async function cargarPersonal() {
 
 
         const tabla =
-            document.getElementById(
-                "tablaPersonal"
-            );
+            document.getElementById("tablaPersonal");
 
 
         if (tabla) {
@@ -1143,74 +1143,107 @@ async function cargarPersonal() {
             tabla.innerHTML = "";
 
 
-            personal.forEach(
-                function (persona) {
+            personal.forEach(function (persona) {
 
-                    const fila =
-                        document.createElement("tr");
-
-
-                    fila.innerHTML = `
-
-                        <td>
-                            ${persona.nombres || ""}
-                        </td>
-
-                        <td>
-                            ${persona.apellidos || ""}
-                        </td>
-
-                        <td>
-                            ${persona.documento || ""}
-                        </td>
-
-                        <td>
-                            ${persona.celular || ""}
-                        </td>
-
-                        <td>
-                            ${persona.cargo || ""}
-                        </td>
-
-                        <td>
-                            ${persona.cuadrilla || persona.cuadrilla_id || ""}
-                        </td>
-
-                        <td>
-
-                            <div class="acciones-personal">
-
-                                <button
-                                    type="button"
-                                    class="btn-editar-personal"
-                                    title="Editar personal"
-                                    onclick="editarPersonal(${persona.id})"
-                                >
-                                    ✏️
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="btn-eliminar-personal"
-                                    title="Eliminar personal"
-                                    onclick="eliminarPersonal(${persona.id})"
-                                >
-                                    🗑️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    `;
+                const fila =
+                    document.createElement("tr");
 
 
-                    tabla.appendChild(fila);
+                fila.innerHTML = `
 
-                }
-            );
+                    <td>
+                        ${persona.nombres || ""}
+                    </td>
+
+                    <td>
+                        ${persona.apellidos || ""}
+                    </td>
+
+                    <td>
+                        ${persona.documento || ""}
+                    </td>
+
+                    <td>
+                        ${persona.celular || ""}
+                    </td>
+
+                    <td>
+                        ${persona.cargo || ""}
+                    </td>
+
+                    <td>
+                        ${persona.cuadrilla || persona.cuadrilla_id || ""}
+                    </td>
+
+                    <td>
+
+                        <div class="acciones-personal">
+
+                            <button
+                                type="button"
+                                class="btn-editar-personal"
+                                title="Editar personal"
+                                onclick="editarPersonal(${persona.id})"
+                            >
+                                ✏️
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn-eliminar-personal"
+                                title="Eliminar personal"
+                                onclick="eliminarPersonal(${persona.id})"
+                            >
+                                🗑️
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                `;
+
+
+                tabla.appendChild(fila);
+
+            });
 
         }
+
+
+        // ========================================
+        // TOTAL DE PERSONAL
+        // ========================================
+
+        const totalPersonal =
+            document.getElementById("totalPersonal");
+
+
+        if (totalPersonal) {
+
+            totalPersonal.textContent =
+                personal.length;
+
+        }
+
+
+        // ========================================
+        // ACTUALIZAR CUADRILLAS
+        // ========================================
+
+        actualizarCuadrillas(personal);
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando personal:",
+            error
+        );
+
+    }
+
+}
 
         // ========================================
 // EDITAR PERSONAL
