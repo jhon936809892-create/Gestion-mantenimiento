@@ -2108,7 +2108,6 @@ async function editarPersonal(id) {
 
 }
 
-
 // ========================================
 // CANCELAR EDICIÓN DE PERSONAL
 // ========================================
@@ -2116,11 +2115,10 @@ async function editarPersonal(id) {
 function cancelarEdicionPersonal() {
 
     const idPersonal =
-        document.getElementById(
-            "idPersonal"
-        );
+        document.getElementById("idPersonal");
 
-
+    // Si NO estamos editando un registro,
+    // simplemente cerrar el formulario.
     if (
         !idPersonal ||
         idPersonal.value.trim() === ""
@@ -2132,7 +2130,8 @@ function cancelarEdicionPersonal() {
 
     }
 
-
+    // Si estamos editando,
+    // preguntar antes de cancelar.
     mostrarConfirmacionCancelar();
 
 }
@@ -2144,11 +2143,11 @@ function cancelarEdicionPersonal() {
 
 function mostrarConfirmacionCancelar() {
 
+    // Evitar que se creen varios cuadros.
     const existente =
         document.getElementById(
             "modalConfirmarCancelar"
         );
-
 
     if (existente) {
 
@@ -2158,9 +2157,7 @@ function mostrarConfirmacionCancelar() {
 
 
     const modalConfirmacion =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     modalConfirmacion.id =
@@ -2214,6 +2211,10 @@ function mostrarConfirmacionCancelar() {
     );
 
 
+    // ========================================
+    // NO, CONTINUAR
+    // ========================================
+
     const btnNo =
         document.getElementById(
             "btnNoCancelar"
@@ -2222,17 +2223,28 @@ function mostrarConfirmacionCancelar() {
 
     if (btnNo) {
 
-        btnNo.addEventListener(
-            "click",
-            function() {
+        btnNo.onclick = function() {
 
-                modalConfirmacion.remove();
+            const modal =
+                document.getElementById(
+                    "modalConfirmarCancelar"
+                );
+
+
+            if (modal) {
+
+                modal.remove();
 
             }
-        );
+
+        };
 
     }
 
+
+    // ========================================
+    // SÍ, CANCELAR
+    // ========================================
 
     const btnSi =
         document.getElementById(
@@ -2242,22 +2254,142 @@ function mostrarConfirmacionCancelar() {
 
     if (btnSi) {
 
-        btnSi.addEventListener(
-            "click",
-            function() {
+        btnSi.onclick = function() {
 
-                modalConfirmacion.remove();
+            const modal =
+                document.getElementById(
+                    "modalConfirmarCancelar"
+                );
 
-                cerrarModalPersonal();
+
+            if (modal) {
+
+                modal.remove();
 
             }
-        );
+
+
+            cerrarModalPersonal();
+
+        };
 
     }
 
 }
 
 
+// ========================================
+// CERRAR MODAL PERSONAL
+// ========================================
+
+function cerrarModalPersonal() {
+
+    // ========================================
+    // CERRAR CUADRO DE CONFIRMACIÓN
+    // ========================================
+
+    const confirmacion =
+        document.getElementById(
+            "modalConfirmarCancelar"
+        );
+
+
+    if (confirmacion) {
+
+        confirmacion.remove();
+
+    }
+
+
+    // ========================================
+    // CERRAR MODAL PRINCIPAL
+    // ========================================
+
+    const modal =
+        document.getElementById(
+            "modalPersonal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    // ========================================
+    // LIMPIAR FORMULARIO
+    // ========================================
+
+    const formulario =
+        document.getElementById(
+            "formPersonal"
+        );
+
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    // ========================================
+    // LIMPIAR ID DE EDICIÓN
+    // ========================================
+
+    const id =
+        document.getElementById(
+            "idPersonal"
+        );
+
+
+    if (id) {
+
+        id.value = "";
+
+    }
+
+
+    // ========================================
+    // RESTAURAR TÍTULO
+    // ========================================
+
+    const titulo =
+        document.getElementById(
+            "tituloModalPersonal"
+        );
+
+
+    if (titulo) {
+
+        titulo.textContent =
+            "Registrar personal";
+
+    }
+
+
+    // ========================================
+    // RESTAURAR BOTÓN
+    // ========================================
+
+    const boton =
+        document.getElementById(
+            "btnGuardarPersonal"
+        );
+
+
+    if (boton) {
+
+        boton.textContent =
+            "Guardar personal";
+
+    }
+
+}
 // ========================================
 // CERRAR MODAL PERSONAL
 // ========================================
