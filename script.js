@@ -123,7 +123,7 @@ function inicializarCalendarioMantenimiento() {
                                         }
 
                                     };
-
+                                                                
                                 }
                             );
 
@@ -188,6 +188,7 @@ function activarEdicionPersonal() {
             ".botones-edicion-personal"
         ) !== null;
 
+
     filas.forEach(function(fila) {
 
         const botonesExistentes =
@@ -195,59 +196,46 @@ function activarEdicionPersonal() {
                 ".botones-edicion-personal"
             );
 
+
         if (modoEdicion) {
 
-            // Ocultar y eliminar los botones
             if (botonesExistentes) {
 
                 botonesExistentes.remove();
 
             }
 
-        } else {
+        }
 
-            // Crear los botones
+        else {
+
             const botones =
                 document.createElement("span");
 
             botones.className =
                 "botones-edicion-personal";
 
-            botones.style.display = "inline-flex";
-            botones.style.alignItems = "center";
-            botones.style.gap = "4px";
-            botones.style.marginLeft = "8px";
-            botones.style.verticalAlign = "middle";
 
-           botones.innerHTML = `
+            botones.innerHTML = `
 
-    <button
-        type="button"
-        title="Editar"
-        class="btn-editar-personal"
-        style="
-            padding: 2px 5px;
-            font-size: 14px;
-            line-height: 1;
-        "
-    >
-        ✏️
-    </button>
+                <button
+                    type="button"
+                    title="Editar"
+                    class="btn-editar-personal"
+                >
+                    ✏️
+                </button>
 
-    <button
-        type="button"
-        title="Borrar"
-        class="btn-eliminar-personal"
-        style="
-            padding: 2px 5px;
-            font-size: 14px;
-            line-height: 1;
-        "
-    >
-        🗑️
-    </button>
+                <button
+                    type="button"
+                    title="Borrar"
+                    class="btn-eliminar-personal"
+                >
+                    🗑️
+                </button>
 
-`;
+            `;
+
 
             fila.lastElementChild.appendChild(
                 botones
