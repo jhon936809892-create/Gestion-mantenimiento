@@ -257,19 +257,25 @@ function mostrarSeccion(seccion, boton) {
         botonTopbar.innerHTML = "";
 
 
-        if (seccion === "personal") {
+     if (seccion === "personal") {
 
-            botonTopbar.innerHTML = `
-                <button
-                    class="btn-primary"
-                    onclick="abrirModalPersonal()"
-                >
-                    + Registrar personal
-                </button>
-            `;
+    botonTopbar.innerHTML = `
+        <button
+            class="btn-primary"
+            onclick="abrirModalPersonal()"
+        >
+            + Registrar personal
+        </button>
 
-        }
+        <button
+            class="btn-primary"
+            onclick="activarEdicionPersonal()"
+        >
+            ✏️ Editar
+        </button>
+    `;
 
+}
 
         else if (seccion === "proyectos") {
 
@@ -2551,7 +2557,13 @@ document.addEventListener(
             document.querySelector(
                 ".menu.active"
             )
+            
         );
+        function activarEdicionPersonal() {
+
+    console.log("Modo edición activado");
+
+}
 
     }
 );
