@@ -179,6 +179,52 @@ function inicializarCalendarioMantenimiento() {
 }
 
 
+function activarEdicionPersonal() {
+
+    const filas =
+        document.querySelectorAll("#tablaPersonal tr");
+
+    filas.forEach(function(fila) {
+
+        if (
+            fila.querySelector(".botones-edicion-personal")
+        ) {
+            return;
+        }
+
+        const botones =
+            document.createElement("span");
+
+        botones.className =
+            "botones-edicion-personal";
+
+        botones.style.marginLeft = "10px";
+
+        botones.innerHTML = `
+
+            <button
+                type="button"
+                title="Editar"
+                class="btn-editar-personal"
+            >
+                ✏️
+            </button>
+
+            <button
+                type="button"
+                title="Borrar"
+                class="btn-eliminar-personal"
+            >
+                🗑️
+            </button>
+
+        `;
+
+        fila.lastElementChild.appendChild(botones);
+
+    });
+
+}
 // ========================================
 // CAMBIAR SECCIÓN
 // ========================================
