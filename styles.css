@@ -1701,3 +1701,110 @@ section {
         max-height: 550px;
     }
 }
+
+/* ========================================
+   ACCIONES PERSONAL
+======================================== */
+
+.acciones-personal {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+
+/* BOTÓN EDITAR */
+
+.btn-editar-personal,
+.btn-eliminar-personal {
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition: 0.2s;
+
+}
+
+
+/* EDITAR */
+
+.btn-editar-personal {
+
+    background: #eff6ff;
+
+    color: #2563eb;
+}
+
+
+.btn-editar-personal:hover {
+
+    background: #dbeafe;
+
+    transform: scale(1.05);
+
+}
+
+
+/* ELIMINAR */
+
+.btn-eliminar-personal {
+
+    background: #fef2f2;
+
+    color: #dc2626;
+}
+
+
+.btn-eliminar-personal:hover {
+
+    background: #fee2e2;
+
+    transform: scale(1.05);
+
+}
+
+
+/* ========================================
+   ACCIONES EN CELULAR
+======================================== */
+
+@media (max-width: 768px) {
+
+    .acciones-personal {
+
+        gap: 5px;
+
+    }
+
+
+    .btn-editar-personal,
+    .btn-eliminar-personal {
+
+        width: 32px;
+
+        height: 32px;
+
+        font-size: 15px;
+
+    }
+
+}
