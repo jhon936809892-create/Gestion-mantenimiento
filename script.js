@@ -1,36 +1,29 @@
-
 // ========================================
 // VARIABLES
 // ========================================
 
 let proyectos = [];
-
 let calendarioMantenimiento = null;
+
+
 // ========================================
 // INICIALIZAR CALENDARIO
 // ========================================
 
 function inicializarCalendarioMantenimiento() {
 
-    const elemento =
-        document.getElementById(
-            "calendarioMantenimiento"
-        );
+    const elemento = document.getElementById(
+        "calendarioMantenimiento"
+    );
 
-
-    // Si no existe el calendario
     if (!elemento) {
         return;
     }
 
-
-    // Si ya fue creado
     if (calendarioMantenimiento) {
         return;
     }
 
-
-    // Verificar FullCalendar
     if (typeof FullCalendar === "undefined") {
 
         console.error(
@@ -38,66 +31,37 @@ function inicializarCalendarioMantenimiento() {
         );
 
         return;
-
     }
-
 
     calendarioMantenimiento =
         new FullCalendar.Calendar(
             elemento,
             {
 
-                // Vista inicial
                 initialView: "dayGridMonth",
 
-
-                // Español
                 locale: "es",
 
-
-                // Altura
                 height: "auto",
 
-
-                // Botones
                 headerToolbar: {
-
-                    left:
-                        "prev,next today",
-
-                    center:
-                        "title",
-
+                    left: "prev,next today",
+                    center: "title",
                     right:
                         "dayGridMonth,timeGridWeek,timeGridDay"
-
                 },
 
-
-                // Texto de botones
                 buttonText: {
-
                     today: "Hoy",
-
                     month: "Mes",
-
                     week: "Semana",
-
                     day: "Día"
-
                 },
 
+                scrollTime: "08:00:00",
 
-                // Primera hora
-                scrollTime:
-                    "08:00:00",
-
-
-                // Mostrar hora
                 allDaySlot: true,
 
-
-                // Cargar eventos
                 events: async function (
                     info,
                     successCallback,
@@ -111,7 +75,6 @@ function inicializarCalendarioMantenimiento() {
                                 "/api/mantenimientos"
                             );
 
-
                         if (!respuesta.ok) {
 
                             throw new Error(
@@ -120,10 +83,8 @@ function inicializarCalendarioMantenimiento() {
 
                         }
 
-
                         const mantenimientos =
                             await respuesta.json();
-
 
                         const eventos =
                             mantenimientos.map(
@@ -166,11 +127,9 @@ function inicializarCalendarioMantenimiento() {
                                 }
                             );
 
-
                         successCallback(eventos);
 
                     }
-
                     catch (error) {
 
                         console.error(
@@ -184,17 +143,13 @@ function inicializarCalendarioMantenimiento() {
 
                 },
 
-
-                // Cuando hacen clic en un mantenimiento
                 eventClick: function(info) {
 
                     const evento =
                         info.event;
 
-
                     const datos =
                         evento.extendedProps;
-
 
                     alert(
 
@@ -219,13 +174,9 @@ function inicializarCalendarioMantenimiento() {
             }
         );
 
-
-    calendarioMantenimiento.render(); 
+    calendarioMantenimiento.render();
 
 }
-
-
-
 
 
 // ========================================
@@ -234,36 +185,43 @@ function inicializarCalendarioMantenimiento() {
 
 function mostrarSeccion(seccion, boton) {
 
-    // Ocultar todas las secciones
-    const secciones = document.querySelectorAll(".seccion");
+    const secciones =
+        document.querySelectorAll(".seccion");
 
-    secciones.forEach(function (item) {
+    secciones.forEach(function(item) {
+
         item.classList.remove("activa");
+
     });
 
 
-    // Mostrar sección seleccionada
-    const seleccionada = document.getElementById(seccion);
+    const seleccionada =
+        document.getElementById(seccion);
 
     if (seleccionada) {
+
         seleccionada.classList.add("activa");
+
     }
 
 
-    // Cambiar botón activo del menú
-    const botones = document.querySelectorAll(".menu");
+    const botones =
+        document.querySelectorAll(".menu");
 
-    botones.forEach(function (item) {
+    botones.forEach(function(item) {
+
         item.classList.remove("active");
+
     });
 
 
     if (boton) {
+
         boton.classList.add("active");
+
     }
 
 
-    // Títulos
     const titulos = {
 
         dashboard: "Dashboard",
@@ -276,11 +234,14 @@ function mostrarSeccion(seccion, boton) {
     };
 
 
-    // Cambiar título del topbar
-    const titulo = document.getElementById("titulo");
+    const titulo =
+        document.getElementById("titulo");
 
     if (titulo) {
-        titulo.textContent = titulos[seccion] || "Dashboard";
+
+        titulo.textContent =
+            titulos[seccion] || "Dashboard";
+
     }
 
 
@@ -288,14 +249,14 @@ function mostrarSeccion(seccion, boton) {
     // BOTÓN DEL TOPBAR
     // ========================================
 
-    const botonTopbar = document.getElementById("botonTopbar");
+    const botonTopbar =
+        document.getElementById("botonTopbar");
 
     if (botonTopbar) {
 
         botonTopbar.innerHTML = "";
 
 
-        // PERSONAL
         if (seccion === "personal") {
 
             botonTopbar.innerHTML = `
@@ -310,7 +271,6 @@ function mostrarSeccion(seccion, boton) {
         }
 
 
-        // PROYECTOS
         else if (seccion === "proyectos") {
 
             botonTopbar.innerHTML = `
@@ -325,7 +285,6 @@ function mostrarSeccion(seccion, boton) {
         }
 
 
-        // MANTENIMIENTO
         else if (seccion === "mantenimiento") {
 
             botonTopbar.innerHTML = `
@@ -340,7 +299,6 @@ function mostrarSeccion(seccion, boton) {
         }
 
 
-        // MATERIALES
         else if (seccion === "materiales") {
 
             botonTopbar.innerHTML = `
@@ -362,52 +320,59 @@ function mostrarSeccion(seccion, boton) {
     // ========================================
 
     if (seccion === "personal") {
+
         cargarPersonal();
+
     }
 
 
     if (seccion === "cuadrillas") {
+
         cargarPersonal();
+
     }
 
 
     if (seccion === "proyectos") {
+
         cargarProyectos();
+
     }
 
 
     if (seccion === "mantenimiento") {
 
-    cargarProyectos();
+        cargarProyectos();
 
-    cargarMantenimientos();
+        cargarMantenimientos();
 
-    // Esperar a que la sección sea visible
- setTimeout(function () {
 
-    inicializarCalendarioMantenimiento();
+        setTimeout(function() {
 
-    if (calendarioMantenimiento) {
+            inicializarCalendarioMantenimiento();
 
-        calendarioMantenimiento.updateSize();
+            if (calendarioMantenimiento) {
 
-        calendarioMantenimiento.refetchEvents();
+                calendarioMantenimiento.updateSize();
+
+                calendarioMantenimiento.refetchEvents();
+
+            }
+
+        }, 150);
 
     }
-
-}, 150);
-}
 
 
     if (seccion === "materiales") {
 
         cargarProyectos();
+
         cargarMateriales();
 
     }
 
 }
-
 
 
 // ========================================
@@ -420,10 +385,14 @@ function abrirModalPersonal() {
         document.getElementById("modalPersonal");
 
     const titulo =
-        document.getElementById("tituloModalPersonal");
+        document.getElementById(
+            "tituloModalPersonal"
+        );
 
     const boton =
-        document.getElementById("btnGuardarPersonal");
+        document.getElementById(
+            "btnGuardarPersonal"
+        );
 
     const id =
         document.getElementById("idPersonal");
@@ -432,31 +401,36 @@ function abrirModalPersonal() {
         document.getElementById("formPersonal");
 
 
-    // Limpiar formulario
     if (formulario) {
+
         formulario.reset();
+
     }
 
 
-    // No estamos editando
     if (id) {
+
         id.value = "";
+
     }
 
 
-    // Título
     if (titulo) {
-        titulo.textContent = "Registrar personal";
+
+        titulo.textContent =
+            "Registrar personal";
+
     }
 
 
-    // Botón
     if (boton) {
-        boton.textContent = "Guardar personal";
+
+        boton.textContent =
+            "Guardar personal";
+
     }
 
 
-    // Limpiar mensajes de validación
     const errorDNI =
         document.getElementById("errorDNI");
 
@@ -465,11 +439,16 @@ function abrirModalPersonal() {
 
 
     if (errorDNI) {
+
         errorDNI.textContent = "";
+
     }
 
+
     if (errorCelular) {
+
         errorCelular.textContent = "";
+
     }
 
 
@@ -481,22 +460,29 @@ function abrirModalPersonal() {
 
 
     if (documento) {
+
         documento.classList.remove(
             "input-error",
             "input-correcto"
         );
+
     }
 
+
     if (celular) {
+
         celular.classList.remove(
             "input-error",
             "input-correcto"
         );
+
     }
 
 
     if (modal) {
+
         modal.classList.add("active");
+
     }
 
 }
@@ -504,10 +490,13 @@ function abrirModalPersonal() {
 
 async function abrirModalProyecto() {
 
-    const modal = document.getElementById("modalProyecto");
+    const modal =
+        document.getElementById("modalProyecto");
 
     if (modal) {
+
         modal.classList.add("active");
+
     }
 
 }
@@ -518,10 +507,14 @@ async function abrirModalMantenimiento() {
     await cargarProyectos();
 
     const modal =
-        document.getElementById("modalMantenimiento");
+        document.getElementById(
+            "modalMantenimiento"
+        );
 
     if (modal) {
+
         modal.classList.add("active");
+
     }
 
 }
@@ -532,42 +525,55 @@ async function abrirModalMaterial() {
     await cargarProyectos();
 
     const modal =
-        document.getElementById("modalMaterial");
+        document.getElementById(
+            "modalMaterial"
+        );
 
     if (modal) {
+
         modal.classList.add("active");
+
     }
 
 }
-
 
 
 function cerrarModal(id) {
 
-    const modal = document.getElementById(id);
+    const modal =
+        document.getElementById(id);
 
     if (modal) {
+
         modal.classList.remove("active");
+
     }
 
 }
-
 
 
 // ========================================
 // CERRAR MODAL AL HACER CLIC AFUERA
 // ========================================
 
-document.addEventListener("click", function (event) {
+document.addEventListener(
+    "click",
+    function(event) {
 
-    if (event.target.classList.contains("modal")) {
+        if (
+            event.target.classList.contains(
+                "modal"
+            )
+        ) {
 
-        event.target.classList.remove("active");
+            event.target.classList.remove(
+                "active"
+            );
+
+        }
 
     }
-
-});
-
+);
 
 
 // ========================================
@@ -584,57 +590,64 @@ function validarDNI() {
 
 
     if (!input || !mensaje) {
+
         return false;
+
     }
 
 
-    // Solo números
     input.value =
         input.value.replace(/[^0-9]/g, "");
 
-
-    // Máximo 8 dígitos
     input.value =
         input.value.slice(0, 8);
 
 
-    // Vacío
     if (input.value.length === 0) {
 
         mensaje.textContent = "";
 
-        input.classList.remove("input-error");
-        input.classList.remove("input-correcto");
+        input.classList.remove(
+            "input-error",
+            "input-correcto"
+        );
 
         return false;
 
     }
 
 
-    // Menos de 8
     if (input.value.length < 8) {
 
         mensaje.textContent =
             "El DNI debe tener 8 dígitos.";
 
-        input.classList.add("input-error");
-        input.classList.remove("input-correcto");
+        input.classList.add(
+            "input-error"
+        );
+
+        input.classList.remove(
+            "input-correcto"
+        );
 
         return false;
 
     }
 
 
-    // Correcto
     mensaje.textContent = "";
 
-    input.classList.remove("input-error");
-    input.classList.add("input-correcto");
+    input.classList.remove(
+        "input-error"
+    );
+
+    input.classList.add(
+        "input-correcto"
+    );
 
     return true;
 
 }
-
 
 
 // ========================================
@@ -647,66 +660,71 @@ function validarCelular() {
         document.getElementById("celular");
 
     const mensaje =
-        document.getElementById("errorCelular");
+        document.getElementById(
+            "errorCelular"
+        );
 
 
     if (!input || !mensaje) {
+
         return true;
+
     }
 
 
-    // Solo números
     input.value =
         input.value.replace(/[^0-9]/g, "");
 
-
-    // Máximo 9 dígitos
     input.value =
         input.value.slice(0, 9);
 
 
-    // Celular opcional
     if (input.value.length === 0) {
 
         mensaje.textContent = "";
 
-        input.classList.remove("input-error");
-        input.classList.remove("input-correcto");
+        input.classList.remove(
+            "input-error",
+            "input-correcto"
+        );
 
         return true;
 
     }
 
 
-    // Menos de 9
     if (input.value.length < 9) {
 
         mensaje.textContent =
             "El celular debe tener 9 dígitos.";
 
-        input.classList.add("input-error");
-        input.classList.remove("input-correcto");
+        input.classList.add(
+            "input-error"
+        );
+
+        input.classList.remove(
+            "input-correcto"
+        );
 
         return false;
 
     }
 
 
-    // Correcto
     mensaje.textContent = "";
 
-    input.classList.remove("input-error");
-    input.classList.add("input-correcto");
+    input.classList.remove(
+        "input-error"
+    );
+
+    input.classList.add(
+        "input-correcto"
+    );
 
     return true;
 
 }
 
-
-
-// ========================================
-// REGISTRAR PERSONAL
-// ========================================
 
 // ========================================
 // REGISTRAR / EDITAR PERSONAL
@@ -717,13 +735,11 @@ async function registrarPersonal(event) {
     event.preventDefault();
 
 
-    // ========================================
-    // VALIDACIONES
-    // ========================================
-
     if (!validarDNI()) {
 
-        alert("Ingrese un DNI válido.");
+        alert(
+            "Ingrese un DNI válido."
+        );
 
         return;
 
@@ -732,16 +748,14 @@ async function registrarPersonal(event) {
 
     if (!validarCelular()) {
 
-        alert("Ingrese un celular válido.");
+        alert(
+            "Ingrese un celular válido."
+        );
 
         return;
 
     }
 
-
-    // ========================================
-    // OBTENER ID
-    // ========================================
 
     const idPersonal =
         document
@@ -749,10 +763,6 @@ async function registrarPersonal(event) {
             .value
             .trim();
 
-
-    // ========================================
-    // DATOS
-    // ========================================
 
     const datos = {
 
@@ -794,10 +804,6 @@ async function registrarPersonal(event) {
     };
 
 
-    // ========================================
-    // DETERMINAR SI ES REGISTRO O EDICIÓN
-    // ========================================
-
     const editando =
         idPersonal !== "";
 
@@ -806,10 +812,6 @@ async function registrarPersonal(event) {
 
         let respuesta;
 
-
-        // ========================================
-        // EDITAR
-        // ========================================
 
         if (editando) {
 
@@ -832,11 +834,6 @@ async function registrarPersonal(event) {
                 );
 
         }
-
-
-        // ========================================
-        // REGISTRAR
-        // ========================================
 
         else {
 
@@ -865,10 +862,6 @@ async function registrarPersonal(event) {
             await respuesta.json();
 
 
-        // ========================================
-        // ERROR
-        // ========================================
-
         if (!respuesta.ok) {
 
             alert(
@@ -885,10 +878,6 @@ async function registrarPersonal(event) {
         }
 
 
-        // ========================================
-        // MENSAJE
-        // ========================================
-
         alert(
             editando
                 ? "Personal actualizado correctamente."
@@ -896,16 +885,10 @@ async function registrarPersonal(event) {
         );
 
 
-        // ========================================
-        // CERRAR MODAL
-        // ========================================
+        cerrarModal(
+            "modalPersonal"
+        );
 
-        cerrarModal("modalPersonal");
-
-
-        // ========================================
-        // LIMPIAR FORMULARIO
-        // ========================================
 
         const formulario =
             document.getElementById(
@@ -914,7 +897,9 @@ async function registrarPersonal(event) {
 
 
         if (formulario) {
+
             formulario.reset();
+
         }
 
 
@@ -925,13 +910,11 @@ async function registrarPersonal(event) {
 
 
         if (id) {
+
             id.value = "";
+
         }
 
-
-        // ========================================
-        // RESTAURAR TÍTULO
-        // ========================================
 
         const titulo =
             document.getElementById(
@@ -940,8 +923,10 @@ async function registrarPersonal(event) {
 
 
         if (titulo) {
+
             titulo.textContent =
                 "Registrar personal";
+
         }
 
 
@@ -952,14 +937,12 @@ async function registrarPersonal(event) {
 
 
         if (boton) {
+
             boton.textContent =
                 "Guardar personal";
+
         }
 
-
-        // ========================================
-        // RECARGAR PERSONAL
-        // ========================================
 
         await cargarPersonal();
 
@@ -980,135 +963,6 @@ async function registrarPersonal(event) {
 }
 
 
-    // Validar celular
-    if (!validarCelular()) {
-
-        alert("Ingrese un celular válido.");
-
-        return;
-
-    }
-
-
-    const datos = {
-
-        nombres:
-            document
-                .getElementById("nombres")
-                .value
-                .trim(),
-
-        apellidos:
-            document
-                .getElementById("apellidos")
-                .value
-                .trim(),
-
-        documento:
-            document
-                .getElementById("documento")
-                .value
-                .trim(),
-
-        celular:
-            document
-                .getElementById("celular")
-                .value
-                .trim(),
-
-        cargo:
-            document
-                .getElementById("cargo")
-                .value
-                .trim(),
-
-        cuadrilla:
-            document
-                .getElementById("cuadrilla")
-                .value
-
-    };
-
-
-    try {
-
-        const respuesta =
-            await fetch("/api/personal", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(datos)
-
-            });
-
-
-        const resultado =
-            await respuesta.json();
-
-
-        if (!respuesta.ok) {
-
-            alert(
-                resultado.error ||
-                "No se pudo registrar el personal."
-            );
-
-            return;
-
-        }
-
-
-        alert(
-            "Personal registrado correctamente."
-        );
-
-
-        cerrarModal("modalPersonal");
-
-
-        const formulario =
-            document.querySelector(
-                "#modalPersonal form"
-            );
-
-
-        if (formulario) {
-            formulario.reset();
-        }
-
-
-        cargarPersonal();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error registrando personal:",
-            error
-        );
-
-        alert(
-            "No se pudo conectar con el servidor."
-        );
-
-    }
-
-}
-
-
-
-// ========================================
-// CARGAR PERSONAL
-// ========================================
-
-// ========================================
-// CARGAR PERSONAL
-// ========================================
-
 // ========================================
 // CARGAR PERSONAL
 // ========================================
@@ -1118,7 +972,9 @@ async function cargarPersonal() {
     try {
 
         const respuesta =
-            await fetch("/api/personal");
+            await fetch(
+                "/api/personal"
+            );
 
 
         if (!respuesta.ok) {
@@ -1135,7 +991,9 @@ async function cargarPersonal() {
 
 
         const tabla =
-            document.getElementById("tablaPersonal");
+            document.getElementById(
+                "tablaPersonal"
+            );
 
 
         if (tabla) {
@@ -1143,80 +1001,84 @@ async function cargarPersonal() {
             tabla.innerHTML = "";
 
 
-            personal.forEach(function (persona) {
+            personal.forEach(
+                function(persona) {
 
-                const fila =
-                    document.createElement("tr");
-
-
-                fila.innerHTML = `
-
-                    <td>
-                        ${persona.nombres || ""}
-                    </td>
-
-                    <td>
-                        ${persona.apellidos || ""}
-                    </td>
-
-                    <td>
-                        ${persona.documento || ""}
-                    </td>
-
-                    <td>
-                        ${persona.celular || ""}
-                    </td>
-
-                    <td>
-                        ${persona.cargo || ""}
-                    </td>
-
-                    <td>
-                        ${persona.cuadrilla || persona.cuadrilla_id || ""}
-                    </td>
-
-                    <td>
-
-                        <div class="acciones-personal">
-
-                            <button
-                                type="button"
-                                class="btn-editar-personal"
-                                title="Editar personal"
-                                onclick="editarPersonal(${persona.id})"
-                            >
-                                ✏️
-                            </button>
-
-                            <button
-                                type="button"
-                                class="btn-eliminar-personal"
-                                title="Eliminar personal"
-                                onclick="eliminarPersonal(${persona.id})"
-                            >
-                                🗑️
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                `;
+                    const fila =
+                        document.createElement(
+                            "tr"
+                        );
 
 
-                tabla.appendChild(fila);
+                    fila.innerHTML = `
 
-            });
+                        <td>
+                            ${persona.nombres || ""}
+                        </td>
+
+                        <td>
+                            ${persona.apellidos || ""}
+                        </td>
+
+                        <td>
+                            ${persona.documento || ""}
+                        </td>
+
+                        <td>
+                            ${persona.celular || ""}
+                        </td>
+
+                        <td>
+                            ${persona.cargo || ""}
+                        </td>
+
+                        <td>
+                            ${persona.cuadrilla ||
+                            persona.cuadrilla_id ||
+                            ""}
+                        </td>
+
+                        <td>
+
+                            <div class="acciones-personal">
+
+                                <button
+                                    type="button"
+                                    class="btn-editar-personal"
+                                    title="Editar personal"
+                                    onclick="editarPersonal(${persona.id})"
+                                >
+                                    ✏️
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="btn-eliminar-personal"
+                                    title="Eliminar personal"
+                                    onclick="eliminarPersonal(${persona.id})"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    `;
+
+
+                    tabla.appendChild(fila);
+
+                }
+            );
 
         }
 
 
-        // ========================================
-        // TOTAL DE PERSONAL
-        // ========================================
-
         const totalPersonal =
-            document.getElementById("totalPersonal");
+            document.getElementById(
+                "totalPersonal"
+            );
 
 
         if (totalPersonal) {
@@ -1227,11 +1089,9 @@ async function cargarPersonal() {
         }
 
 
-        // ========================================
-        // ACTUALIZAR CUADRILLAS
-        // ========================================
-
-        actualizarCuadrillas(personal);
+        actualizarCuadrillas(
+            personal
+        );
 
     }
     catch (error) {
@@ -1245,7 +1105,8 @@ async function cargarPersonal() {
 
 }
 
-        // ========================================
+
+// ========================================
 // EDITAR PERSONAL
 // ========================================
 
@@ -1274,7 +1135,7 @@ async function editarPersonal(id) {
 
         const persona =
             personal.find(
-                function (item) {
+                function(item) {
 
                     return String(item.id) ===
                         String(id);
@@ -1293,10 +1154,6 @@ async function editarPersonal(id) {
 
         }
 
-
-        // ========================================
-        // COLOCAR DATOS EN EL FORMULARIO
-        // ========================================
 
         document
             .getElementById("idPersonal")
@@ -1342,10 +1199,6 @@ async function editarPersonal(id) {
                 "1";
 
 
-        // ========================================
-        // CAMBIAR TÍTULO
-        // ========================================
-
         const titulo =
             document.getElementById(
                 "tituloModalPersonal"
@@ -1360,10 +1213,6 @@ async function editarPersonal(id) {
         }
 
 
-        // ========================================
-        // CAMBIAR BOTÓN
-        // ========================================
-
         const boton =
             document.getElementById(
                 "btnGuardarPersonal"
@@ -1377,10 +1226,6 @@ async function editarPersonal(id) {
 
         }
 
-
-        // ========================================
-        // MOSTRAR MODAL
-        // ========================================
 
         const modal =
             document.getElementById(
@@ -1412,7 +1257,8 @@ async function editarPersonal(id) {
 
 }
 
-        // ========================================
+
+// ========================================
 // ELIMINAR PERSONAL
 // ========================================
 
@@ -1425,7 +1271,9 @@ async function eliminarPersonal(id) {
 
 
     if (!confirmar) {
+
         return;
+
     }
 
 
@@ -1463,7 +1311,6 @@ async function eliminarPersonal(id) {
         );
 
 
-        // Recargar tabla
         await cargarPersonal();
 
     }
@@ -1483,76 +1330,6 @@ async function eliminarPersonal(id) {
 }
 
 
-        // ========================================
-        // TOTAL DE PERSONAL
-        // ========================================
-
-        const totalPersonal =
-            document.getElementById(
-                "totalPersonal"
-            );
-
-
-        if (totalPersonal) {
-
-            totalPersonal.textContent =
-                personal.length;
-
-        }
-
-
-        // ========================================
-        // ACTUALIZAR CUADRILLAS
-        // ========================================
-
-        actualizarCuadrillas(
-            personal
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error cargando personal:",
-            error
-        );
-
-    }
-
-}
-
-
-        // Total de personal
-        const totalPersonal =
-            document.getElementById(
-                "totalPersonal"
-            );
-
-
-        if (totalPersonal) {
-
-            totalPersonal.textContent =
-                personal.length;
-
-        }
-
-
-        actualizarCuadrillas(personal);
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error cargando personal:",
-            error
-        );
-
-    }
-
-}
-
-
-
 // ========================================
 // ACTUALIZAR CUADRILLAS
 // ========================================
@@ -1570,7 +1347,9 @@ function actualizarCuadrillas(personal) {
 
 
     if (!c1 || !c2 || !c3) {
+
         return;
+
     }
 
 
@@ -1584,13 +1363,16 @@ function actualizarCuadrillas(personal) {
     let cantidad3 = 0;
 
 
-    personal.forEach(function (persona) {
+    personal.forEach(function(persona) {
 
         const div =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
-        div.className = "tecnico";
+        div.className =
+            "tecnico";
 
 
         div.innerHTML = `
@@ -1607,7 +1389,9 @@ function actualizarCuadrillas(personal) {
         `;
 
 
-        if (String(persona.cuadrilla_id) === "1") {
+        if (
+            String(persona.cuadrilla_id) === "1"
+        ) {
 
             c1.appendChild(div);
 
@@ -1639,13 +1423,19 @@ function actualizarCuadrillas(personal) {
 
 
     const cantidadC1 =
-        document.getElementById("cantidadC1");
+        document.getElementById(
+            "cantidadC1"
+        );
 
     const cantidadC2 =
-        document.getElementById("cantidadC2");
+        document.getElementById(
+            "cantidadC2"
+        );
 
     const cantidadC3 =
-        document.getElementById("cantidadC3");
+        document.getElementById(
+            "cantidadC3"
+        );
 
 
     if (cantidadC1) {
@@ -1674,7 +1464,6 @@ function actualizarCuadrillas(personal) {
 }
 
 
-
 // ========================================
 // REGISTRAR PROYECTO
 // ========================================
@@ -1688,29 +1477,39 @@ async function registrarProyecto(event) {
 
         nombre:
             document
-                .getElementById("nombreProyecto")
+                .getElementById(
+                    "nombreProyecto"
+                )
                 .value
                 .trim(),
 
         cuadrilla:
             document
-                .getElementById("cuadrillaProyecto")
+                .getElementById(
+                    "cuadrillaProyecto"
+                )
                 .value,
 
         responsable:
             document
-                .getElementById("responsableProyecto")
+                .getElementById(
+                    "responsableProyecto"
+                )
                 .value
                 .trim(),
 
         fecha:
             document
-                .getElementById("fechaProyecto")
+                .getElementById(
+                    "fechaProyecto"
+                )
                 .value,
 
         estado:
             document
-                .getElementById("estadoProyecto")
+                .getElementById(
+                    "estadoProyecto"
+                )
                 .value
 
     };
@@ -1730,18 +1529,22 @@ async function registrarProyecto(event) {
     try {
 
         const respuesta =
-            await fetch("/api/proyectos", {
+            await fetch(
+                "/api/proyectos",
+                {
 
-                method: "POST",
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body:
-                    JSON.stringify(datos)
+                    body:
+                        JSON.stringify(datos)
 
-            });
+                }
+            );
 
 
         const resultado =
@@ -1765,7 +1568,9 @@ async function registrarProyecto(event) {
         );
 
 
-        cerrarModal("modalProyecto");
+        cerrarModal(
+            "modalProyecto"
+        );
 
 
         const formulario =
@@ -1775,7 +1580,9 @@ async function registrarProyecto(event) {
 
 
         if (formulario) {
+
             formulario.reset();
+
         }
 
 
@@ -1798,11 +1605,6 @@ async function registrarProyecto(event) {
 }
 
 
-
-// ========================================
-// CARGAR PROYECTOS
-// ========================================
-
 // ========================================
 // CARGAR PROYECTOS
 // ========================================
@@ -1812,7 +1614,9 @@ async function cargarProyectos() {
     try {
 
         const respuesta =
-            await fetch("/api/proyectos");
+            await fetch(
+                "/api/proyectos"
+            );
 
 
         if (!respuesta.ok) {
@@ -1839,40 +1643,44 @@ async function cargarProyectos() {
             tabla.innerHTML = "";
 
 
-            proyectos.forEach(function (proyecto) {
+            proyectos.forEach(
+                function(proyecto) {
 
-                const fila =
-                    document.createElement("tr");
-
-
-                fila.innerHTML = `
-
-                    <td>
-                        ${proyecto.codigo || ""}
-                    </td>
-
-                    <td>
-                        ${proyecto.nombre || ""}
-                    </td>
-
-                    <td>
-                        ${proyecto.tipo || ""}
-                    </td>
-
-                    <td>
-                        ${proyecto.sede || ""}
-                    </td>
-
-                    <td>
-                        ${proyecto.tipo_cable || ""}
-                    </td>
-
-                `;
+                    const fila =
+                        document.createElement(
+                            "tr"
+                        );
 
 
-                tabla.appendChild(fila);
+                    fila.innerHTML = `
 
-            });
+                        <td>
+                            ${proyecto.codigo || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.nombre || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.tipo || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.sede || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.tipo_cable || ""}
+                        </td>
+
+                    `;
+
+
+                    tabla.appendChild(fila);
+
+                }
+            );
 
         }
 
@@ -1894,7 +1702,6 @@ async function cargarProyectos() {
         cargarSelectProyectos();
 
     }
-
     catch (error) {
 
         console.error(
@@ -1905,7 +1712,6 @@ async function cargarProyectos() {
     }
 
 }
-
 
 
 // ========================================
@@ -1927,10 +1733,12 @@ function cargarSelectProyectos() {
     ];
 
 
-    selects.forEach(function (select) {
+    selects.forEach(function(select) {
 
         if (!select) {
+
             return;
+
         }
 
 
@@ -1947,23 +1755,29 @@ function cargarSelectProyectos() {
         `;
 
 
-        proyectos.forEach(function (proyecto) {
+        proyectos.forEach(
+            function(proyecto) {
 
-            const option =
-                document.createElement("option");
-
-
-            option.value =
-                proyecto.id;
-
-
-            option.textContent =
-                proyecto.nombre;
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
 
-            select.appendChild(option);
+                option.value =
+                    proyecto.id;
 
-        });
+
+                option.textContent =
+                    proyecto.nombre;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
 
 
         if (valorActual) {
@@ -1978,7 +1792,6 @@ function cargarSelectProyectos() {
 }
 
 
-
 // ========================================
 // REGISTRAR MATERIAL
 // ========================================
@@ -1990,26 +1803,34 @@ async function registrarMaterial(event) {
 
     const proyecto =
         document
-            .getElementById("proyectoMaterial")
+            .getElementById(
+                "proyectoMaterial"
+            )
             .value;
 
 
     const material =
         document
-            .getElementById("nombreMaterial")
+            .getElementById(
+                "nombreMaterial"
+            )
             .value
             .trim();
 
 
     const cantidad =
         document
-            .getElementById("cantidadMaterial")
+            .getElementById(
+                "cantidadMaterial"
+            )
             .value;
 
 
     const unidad =
         document
-            .getElementById("unidadMaterial")
+            .getElementById(
+                "unidadMaterial"
+            )
             .value;
 
 
@@ -2080,21 +1901,22 @@ async function registrarMaterial(event) {
     try {
 
         const respuesta =
-            await fetch("/api/materiales", {
+            await fetch(
+                "/api/materiales",
+                {
 
-                method: "POST",
+                    method: "POST",
 
-                headers: {
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                    "Content-Type":
-                        "application/json"
+                    body:
+                        JSON.stringify(datos)
 
-                },
-
-                body:
-                    JSON.stringify(datos)
-
-            });
+                }
+            );
 
 
         const resultado =
@@ -2118,7 +1940,9 @@ async function registrarMaterial(event) {
         );
 
 
-        cerrarModal("modalMaterial");
+        cerrarModal(
+            "modalMaterial"
+        );
 
 
         const formulario =
@@ -2128,7 +1952,9 @@ async function registrarMaterial(event) {
 
 
         if (formulario) {
+
             formulario.reset();
+
         }
 
 
@@ -2151,7 +1977,6 @@ async function registrarMaterial(event) {
 }
 
 
-
 // ========================================
 // CARGAR MATERIALES
 // ========================================
@@ -2161,7 +1986,9 @@ async function cargarMateriales() {
     try {
 
         const respuesta =
-            await fetch("/api/materiales");
+            await fetch(
+                "/api/materiales"
+            );
 
 
         if (!respuesta.ok) {
@@ -2184,43 +2011,49 @@ async function cargarMateriales() {
 
 
         if (!tabla) {
+
             return;
+
         }
 
 
         tabla.innerHTML = "";
 
 
-        materiales.forEach(function (material) {
+        materiales.forEach(
+            function(material) {
 
-            const fila =
-                document.createElement("tr");
-
-
-            fila.innerHTML = `
-
-                <td>
-                    ${material.material || ""}
-                </td>
-
-                <td>
-                    ${material.cantidad || ""}
-                </td>
-
-                <td>
-                    ${material.unidad || ""}
-                </td>
-
-                <td>
-                    ${material.proyecto || ""}
-                </td>
-
-            `;
+                const fila =
+                    document.createElement(
+                        "tr"
+                    );
 
 
-            tabla.appendChild(fila);
+                fila.innerHTML = `
 
-        });
+                    <td>
+                        ${material.material || ""}
+                    </td>
+
+                    <td>
+                        ${material.cantidad || ""}
+                    </td>
+
+                    <td>
+                        ${material.unidad || ""}
+                    </td>
+
+                    <td>
+                        ${material.proyecto || ""}
+                    </td>
+
+                `;
+
+
+                tabla.appendChild(fila);
+
+            }
+        );
 
     }
     catch (error) {
@@ -2233,7 +2066,6 @@ async function cargarMateriales() {
     }
 
 }
-
 
 
 // ========================================
@@ -2331,10 +2163,8 @@ async function registrarMantenimiento(event) {
                     method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
                     body:
@@ -2377,11 +2207,20 @@ async function registrarMantenimiento(event) {
 
 
         if (formulario) {
+
             formulario.reset();
+
         }
 
 
-        cargarMantenimientos();
+        await cargarMantenimientos();
+
+
+        if (calendarioMantenimiento) {
+
+            calendarioMantenimiento.refetchEvents();
+
+        }
 
     }
     catch (error) {
@@ -2398,7 +2237,6 @@ async function registrarMantenimiento(event) {
     }
 
 }
-
 
 
 // ========================================
@@ -2430,56 +2268,57 @@ async function cargarMantenimientos() {
 
         const tabla =
             document.getElementById(
-            "tablaMantenimiento"
+                "tablaMantenimiento"
             );
 
 
         if (tabla) {
-        tabla.innerHTML = "";
+
+            tabla.innerHTML = "";
+
+            mantenimientos.forEach(
+                function(mantenimiento) {
+
+                    const fila =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    fila.innerHTML = `
+
+                        <td>
+                            ${mantenimiento.fecha || ""}
+                        </td>
+
+                        <td>
+                            ${mantenimiento.proyecto || ""}
+                        </td>
+
+                        <td>
+                            Cuadrilla
+                            ${mantenimiento.cuadrilla || ""}
+                        </td>
+
+                        <td>
+                            ${mantenimiento.trabajo || ""}
+                        </td>
+
+                        <td>
+                            ${mantenimiento.estado || ""}
+                        </td>
+
+                    `;
+
+
+                    tabla.appendChild(
+                        fila
+                    );
+
+                }
+            );
+
         }
-
-
-        mantenimientos.forEach(
-    function (mantenimiento) {
-
-        if (!tabla) {
-            return;
-        }
-
-        const fila =
-            document.createElement("tr");
-
-
-        fila.innerHTML = `
-
-            <td>
-                ${mantenimiento.fecha || ""}
-            </td>
-
-            <td>
-                ${mantenimiento.proyecto || ""}
-            </td>
-
-            <td>
-                Cuadrilla
-                ${mantenimiento.cuadrilla || ""}
-            </td>
-
-            <td>
-                ${mantenimiento.trabajo || ""}
-            </td>
-
-            <td>
-                ${mantenimiento.estado || ""}
-            </td>
-
-        `;
-
-
-        tabla.appendChild(fila);
-
-    }
-);
 
 
         const total =
@@ -2508,41 +2347,6 @@ async function cargarMantenimientos() {
 }
 
 
-
-// ========================================
-// INICIO
-// ========================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
-
-        // Cargar datos
-        await cargarPersonal();
-
-        await cargarProyectos();
-
-        await cargarMantenimientos();
-
-        if (calendarioMantenimiento) {
-             calendarioMantenimiento.refetchEvents();
-        }
-
-        await cargarMateriales();
-
-
-        // Dashboard inicia sin botón
-        mostrarSeccion(
-            "dashboard",
-            document.querySelector(
-                ".menu.active"
-            )
-        );
-
-    }
-);
-
-
 // ========================================
 // USUARIO ACTUAL Y PERMISOS
 // ========================================
@@ -2551,40 +2355,62 @@ async function cargarUsuarioActual() {
 
     try {
 
-        const respuesta = await fetch("/api/usuario");
+        const respuesta =
+            await fetch(
+                "/api/usuario"
+            );
+
 
         if (!respuesta.ok) {
+
             return;
+
         }
 
-        const usuario = await respuesta.json();
 
-        console.log("Usuario conectado:", usuario);
+        const usuario =
+            await respuesta.json();
 
-        // Mostrar nombre/cargo si existen estos elementos
+
+        console.log(
+            "Usuario conectado:",
+            usuario
+        );
+
+
         const nombreUsuario =
-            document.getElementById("nombreUsuario");
+            document.getElementById(
+                "nombreUsuario"
+            );
+
 
         const cargoUsuario =
-            document.getElementById("cargoUsuario");
+            document.getElementById(
+                "cargoUsuario"
+            );
+
 
         if (nombreUsuario) {
+
             nombreUsuario.textContent =
                 usuario.nombre || "";
+
         }
+
 
         if (cargoUsuario) {
+
             cargoUsuario.textContent =
                 usuario.cargo || "";
+
         }
 
 
-        // ========================================
-        // PERMISO PARA GESTIONAR PERSONAL
-        // ========================================
-
         const botonPersonal =
-            document.getElementById("btnRegistrarPersonal");
+            document.getElementById(
+                "btnRegistrarPersonal"
+            );
+
 
         if (botonPersonal) {
 
@@ -2593,11 +2419,14 @@ async function cargarUsuarioActual() {
                 "Coordinador de Proyectos"
             ) {
 
-                botonPersonal.style.display = "";
+                botonPersonal.style.display =
+                    "";
 
-            } else {
+            }
+            else {
 
-                botonPersonal.style.display = "none";
+                botonPersonal.style.display =
+                    "none";
 
             }
 
@@ -2614,6 +2443,8 @@ async function cargarUsuarioActual() {
     }
 
 }
+
+
 // ========================================
 // CERRAR SESIÓN
 // ========================================
@@ -2622,76 +2453,157 @@ async function cerrarSesion() {
 
     try {
 
-        const respuesta = await fetch("/api/logout", {
-            method: "POST"
-        });
+        const respuesta =
+            await fetch(
+                "/api/logout",
+                {
+                    method: "POST"
+                }
+            );
+
 
         if (respuesta.ok) {
 
-            window.location.href = "/login.html";
+            window.location.href =
+                "/login.html";
 
-        } else {
+        }
+        else {
 
-            alert("No se pudo cerrar la sesión.");
+            alert(
+                "No se pudo cerrar la sesión."
+            );
 
         }
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(error);
 
-        alert("Error al cerrar sesión.");
+        alert(
+            "Error al cerrar sesión."
+        );
 
     }
 
 }
+
+
 // ========================================
 // ACTUALIZAR CALENDARIO AL CAMBIAR TAMAÑO
 // ========================================
 
 let resizeCalendarioPendiente = false;
 
-window.addEventListener("resize", function () {
 
-    if (!calendarioMantenimiento) {
-        return;
-    }
+window.addEventListener(
+    "resize",
+    function() {
 
-    if (resizeCalendarioPendiente) {
-        return;
-    }
+        if (!calendarioMantenimiento) {
 
-    resizeCalendarioPendiente = true;
+            return;
 
-    requestAnimationFrame(function () {
-
-        resizeCalendarioPendiente = false;
-
-        if (calendarioMantenimiento) {
-            calendarioMantenimiento.updateSize();
         }
 
-    });
 
-});
+        if (resizeCalendarioPendiente) {
+
+            return;
+
+        }
+
+
+        resizeCalendarioPendiente =
+            true;
+
+
+        requestAnimationFrame(
+            function() {
+
+                resizeCalendarioPendiente =
+                    false;
+
+
+                if (calendarioMantenimiento) {
+
+                    calendarioMantenimiento.updateSize();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
 // ========================================
-// OBSERVAR CAMBIOS DE TAMAÑO DEL CALENDARIO
+// OBSERVAR CAMBIOS DE TAMAÑO
 // ========================================
 
 const elementoCalendario =
-    document.getElementById("calendarioMantenimiento");
+    document.getElementById(
+        "calendarioMantenimiento"
+    );
+
 
 if (elementoCalendario) {
 
     const observadorCalendario =
-        new ResizeObserver(function () {
+        new ResizeObserver(
+            function() {
 
-            if (calendarioMantenimiento) {
-                calendarioMantenimiento.updateSize();
+                if (calendarioMantenimiento) {
+
+                    calendarioMantenimiento.updateSize();
+
+                }
+
             }
+        );
 
-        });
 
-    observadorCalendario.observe(elementoCalendario);
+    observadorCalendario.observe(
+        elementoCalendario
+    );
 
 }
+
+
+// ========================================
+// INICIO
+// ========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        await cargarPersonal();
+
+        await cargarProyectos();
+
+        await cargarMantenimientos();
+
+        await cargarMateriales();
+
+        await cargarUsuarioActual();
+
+
+        if (calendarioMantenimiento) {
+
+            calendarioMantenimiento.refetchEvents();
+
+        }
+
+
+        mostrarSeccion(
+            "dashboard",
+            document.querySelector(
+                ".menu.active"
+            )
+        );
+
+    }
+);
