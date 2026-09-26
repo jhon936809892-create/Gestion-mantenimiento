@@ -3294,12 +3294,19 @@ async function registrarMantenimiento(event) {
                         "proyectoMantenimiento"
                     )
                     .value
-            ),
+                    ),
 
         Sede:
             document
                 .getElementById(
-                    "cuadrillaMantenimiento"
+                    "SedeMantenimiento"
+                )
+                .value,
+
+        inicio:
+            document
+                .getElementById(
+                "inicioMantenimiento"
                 )
                 .value,
 
@@ -3345,6 +3352,16 @@ async function registrarMantenimiento(event) {
 
     alert(
         "Debe seleccionar una sede."
+    );
+
+    return;
+
+}
+
+    if (!datos.inicio) {
+
+    alert(
+        "Debe indicar el inicio del mantenimiento."
     );
 
     return;
