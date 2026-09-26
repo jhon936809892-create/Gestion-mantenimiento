@@ -2856,7 +2856,7 @@ async function cargarProyectos() {
                         </td>
 
                         <td>
-                            ${proyecto.sede || ""}
+                            ${proyecto.Sede || ""}
                         </td>
 
                         <td>
@@ -3348,7 +3348,7 @@ async function registrarMantenimiento(event) {
         return;
 
     }
-    if (!datos.sede) {
+    if (!datos.Sede) {
 
     alert(
         "Debe seleccionar una sede."
