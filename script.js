@@ -2189,17 +2189,153 @@ async function editarPersonal(id) {
 // ELIMINAR PERSONAL
 // ========================================
 
-async function eliminarPersonal(id) {
+// ========================================
+// ELIMINAR PERSONAL
+// ========================================
 
-    const confirmar =
-        confirm(
-            "¿Está seguro de eliminar este personal?"
+function eliminarPersonal(id) {
+
+    const existente =
+        document.getElementById(
+            "modalConfirmarEliminar"
         );
 
 
-    if (!confirmar) {
+    if (existente) {
 
         return;
+
+    }
+
+
+    const modal =
+        document.createElement(
+            "div"
+        );
+
+
+    modal.id =
+        "modalConfirmarEliminar";
+
+
+    modal.className =
+        "modal-confirmacion";
+
+
+    modal.innerHTML = `
+
+        <div class="modal-confirmacion-contenido">
+
+            <h2>
+                ¿Eliminar personal?
+            </h2>
+
+            <p>
+                ¿Está seguro de que desea eliminar este personal?
+            </p>
+
+            <p class="texto-advertencia">
+                Esta acción no se puede deshacer.
+            </p>
+
+            <div class="botones-confirmacion">
+
+                <button
+                    type="button"
+                    class="btn-no-cancelar"
+                    onclick="cerrarConfirmacionEliminar()"
+                >
+                    No
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-si-cancelar"
+                    onclick="confirmarEliminacionPersonal(${id})"
+                >
+                    Sí, eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        modal
+    );
+
+
+    requestAnimationFrame(
+        function() {
+
+            modal.classList.add(
+                "active"
+            );
+
+        }
+    );
+
+}
+
+
+// ========================================
+// CERRAR CONFIRMACIÓN DE ELIMINAR
+// ========================================
+
+function cerrarConfirmacionEliminar() {
+
+    const modal =
+        document.getElementById(
+            "modalConfirmarEliminar"
+        );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.remove(
+        "active"
+    );
+
+
+    setTimeout(
+        function() {
+
+            if (modal) {
+
+                modal.remove();
+
+            }
+
+        },
+        200
+    );
+
+}
+
+
+// ========================================
+// CONFIRMAR ELIMINACIÓN
+// ========================================
+
+async function confirmarEliminacionPersonal(id) {
+
+    const modal =
+        document.getElementById(
+            "modalConfirmarEliminar"
+        );
+
+
+    if (modal) {
+
+        modal.remove();
 
     }
 
@@ -2255,7 +2391,6 @@ async function eliminarPersonal(id) {
     }
 
 }
-
 
 // ========================================
 // ACTUALIZAR CUADRILLAS
