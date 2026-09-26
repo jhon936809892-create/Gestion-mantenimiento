@@ -1273,31 +1273,29 @@ async function abrirModalProyecto() {
 // MODAL MANTENIMIENTO
 // ========================================
 
+// ========================================
+// MODAL MANTENIMIENTO
+// ========================================
+
 async function abrirModalMantenimiento() {
 
     await cargarProyectos();
-
 
     const modal =
         document.getElementById(
             "modalMantenimiento"
         );
 
-    if (modal) {
-    modal.style.display = "none";
-}
-
-
-    if (modal) {
-
-        modal.classList.add(
-            "active"
+    if (!modal) {
+        console.error(
+            "No se encontró el modal de mantenimiento."
         );
-
+        return;
     }
 
-}
+    modal.classList.add("active");
 
+}
 
 // ========================================
 // MODAL MATERIAL
@@ -3436,10 +3434,14 @@ async function registrarMantenimiento(event) {
         );
 
 
-        cerrarModal(
-            "modalMantenimiento"
-        );
+       const modal =
+    document.getElementById(
+        "modalMantenimiento"
+    );
 
+if (modal) {
+    modal.classList.remove("active");
+}
 
         const formulario =
             document.querySelector(
