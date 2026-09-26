@@ -1887,7 +1887,7 @@ app.get(
 
             res.json(resultado.rows);
 
-        } catch (error) {
+         catch (error) {
 
             console.error(
                 "Error al obtener mantenimientos:",
