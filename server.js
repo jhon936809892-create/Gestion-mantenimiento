@@ -2226,25 +2226,28 @@ app.post(
             const resultado =
                 await pool.query(`
 
+
                     INSERT INTO mantenimientos
 
-                    (
-                        fecha,
-                        proyecto_id,
-                        cuadrilla_id,
-                        trabajo,
-                        estado
-                    )
-
-                    VALUES
-
-                    (
-                        $1,
-                        $2,
-                        $3,
-                        $4,
-                        $5
-                    )
+                        (
+                            fecha,
+                            proyecto_id,
+                            cuadrilla_id,
+                            trabajo,
+                            estado,
+                            tipo_mantenimiento
+                        )
+                        
+                        VALUES
+                        
+                        (
+                            $1,
+                            $2,
+                            $3,
+                            $4,
+                            $5,
+                            $6
+                        )
 
                     RETURNING *
 
@@ -2258,7 +2261,9 @@ app.post(
 
                     trabajo.trim(),
 
-                    estado || "Pendiente"
+                    estado || "Pendiente",
+
+                    tipo_mantenimiento || null
 
                 ]);
 
