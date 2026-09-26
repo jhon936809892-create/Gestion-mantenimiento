@@ -670,7 +670,7 @@ app.get(
                 );
 
 
-            const indiceSede =
+            const indicesede =
                 encabezados.indexOf(
                     "SEDE\n"
                 );
@@ -690,7 +690,7 @@ app.get(
                 indiceCodigo === -1 ||
                 indiceProyecto === -1 ||
                 indiceTipo === -1 ||
-                indiceSede === -1 ||
+                indicesede === -1 ||
                 indiceTipoCable === -1
             ) {
 
@@ -750,8 +750,8 @@ app.get(
                         .trim();
 
 
-                const Sede =
-                    (fila[indiceSede] || "")
+                const sede =
+                    (fila[indicesede] || "")
                         .trim();
 
 
@@ -811,7 +811,7 @@ app.get(
                         SET
                             nombre = $1,
                             tipo = $2,
-                            Sede = $3,
+                            sede = $3,
                             tipo_cable = $4
 
                         WHERE codigo = $5
@@ -820,7 +820,7 @@ app.get(
                         [
                             nombre,
                             tipo,
-                            Sede,
+                            sede,
                             tipoCable,
                             codigo
                         ]
@@ -847,7 +847,7 @@ app.get(
                             codigo,
                             nombre,
                             tipo,
-                            Sede,
+                            sede,
                             tipo_cable
                         )
 
@@ -865,7 +865,7 @@ app.get(
                             codigo,
                             nombre,
                             tipo,
-                            Sede,
+                            sede,
                             tipoCable
                         ]
 
