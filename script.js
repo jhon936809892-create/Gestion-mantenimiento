@@ -3471,6 +3471,23 @@ async function registrarMantenimiento(event) {
 
     }
 
+    function cancelarMantenimiento() {
+
+    const formulario = document.querySelector(
+        'form[onsubmit="registrarMantenimiento(event)"]'
+    );
+
+    if (formulario) {
+        formulario.reset();
+    }
+
+    const modal = document.getElementById("modalMantenimiento");
+
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
 }
 
 
