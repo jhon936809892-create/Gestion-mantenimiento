@@ -2272,6 +2272,18 @@ app.post(
 
     }
 );
+
+
+app.get(
+    "/api/prueba-mantenimiento",
+    requiereSesion,
+    (req, res) => {
+        res.json({
+            ok: true,
+            mensaje: "La ruta de mantenimiento está funcionando"
+        });
+    }
+);
 // =====================================================
 // MATERIALES
 // =====================================================
