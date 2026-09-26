@@ -1879,6 +1879,59 @@ app.get(
         }
     }
 );
+
+
+
+// -----------------------------------------------------
+// OBTENER TODOS LOS PROYECTOS
+// -----------------------------------------------------
+
+app.get(
+    "/api/proyectos",
+    requiereSesion,
+    async (req, res) => {
+
+        try {
+
+            const resultado =
+                await pool.query(`
+
+                    SELECT
+                        p.id,
+                        p.codigo,
+                        p.nombre,
+                        p.tipo,
+                        p.sede,
+                        p.tipo_cable
+
+                    FROM proyectos p
+
+                    ORDER BY p.id DESC
+
+                `);
+
+            res.json(
+                resultado.rows
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Error al obtener proyectos:",
+                error
+            );
+
+            res.status(500).json({
+
+                error:
+                    "No se pudieron obtener los proyectos"
+
+            });
+
+        }
+
+    }
+);
 // -----------------------------------------------------
 // OBTENER UN PROYECTO
 // -----------------------------------------------------
