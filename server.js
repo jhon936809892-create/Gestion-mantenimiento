@@ -745,7 +745,7 @@ app.get(
                         .trim();
 
 
-                const sede =
+                const Sede =
                     (fila[indiceSede] || "")
                         .trim();
 
@@ -806,7 +806,7 @@ app.get(
                         SET
                             nombre = $1,
                             tipo = $2,
-                            sede = $3,
+                            Sede = $3,
                             tipo_cable = $4
 
                         WHERE codigo = $5
@@ -815,7 +815,7 @@ app.get(
                         [
                             nombre,
                             tipo,
-                            sede,
+                            Sede,
                             tipoCable,
                             codigo
                         ]
@@ -842,7 +842,7 @@ app.get(
                             codigo,
                             nombre,
                             tipo,
-                            sede,
+                            Sede,
                             tipo_cable
                         )
 
@@ -860,7 +860,7 @@ app.get(
                             codigo,
                             nombre,
                             tipo,
-                            sede,
+                            Sede,
                             tipoCable
                         ]
 
@@ -1849,7 +1849,7 @@ app.get(
                         p.codigo,
                         p.nombre,
                         p.tipo,
-                        p.sede,
+                        p.Sede,
                         p.tipo_cable
 
                     FROM proyectos p
