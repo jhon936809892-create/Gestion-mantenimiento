@@ -1633,6 +1633,396 @@ function cerrarModalPersonal() {
 
 
 // ========================================
+// EDITAR PERSONAL
+// ========================================
+
+async function editarPersonal(id) {
+
+    try {
+
+        const respuesta =
+            await fetch(`/api/personal/${id}`);
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudo obtener el personal"
+            );
+
+        }
+
+        const persona =
+            await respuesta.json();
+
+
+        // ========================================
+        // CARGAR DATOS EN EL FORMULARIO
+        // ========================================
+
+        document.getElementById(
+            "idPersonal"
+        ).value = persona.id || "";
+
+
+        document.getElementById(
+            "nombresPersonal"
+        ).value = persona.nombres || "";
+
+
+        document.getElementById(
+            "apellidosPersonal"
+        ).value = persona.apellidos || "";
+
+
+        document.getElementById(
+            "tipoDocumentoPersonal"
+        ).value = "DNI";
+
+
+        document.getElementById(
+            "documentoPersonal"
+        ).value = persona.documento || "";
+
+
+        document.getElementById(
+            "celularPersonal"
+        ).value = persona.celular || "";
+
+
+        document.getElementById(
+            "cargoPersonal"
+        ).value = persona.cargo || "";
+
+
+        document.getElementById(
+            "cuadrillaPersonal"
+        ).value = persona.cuadrilla_id || "";
+
+
+        // ========================================
+        // CAMBIAR TÍTULO
+        // ========================================
+
+        const titulo =
+            document.getElementById(
+                "tituloModalPersonal"
+            );
+
+        if (titulo) {
+
+            titulo.textContent =
+                "Editar personal";
+
+        }
+
+
+        // ========================================
+        // CAMBIAR TEXTO DEL BOTÓN
+        // ========================================
+
+        const boton =
+            document.getElementById(
+                "btnGuardarPersonal"
+            );
+
+        if (boton) {
+
+            boton.textContent =
+                "Guardar cambios";
+
+        }
+
+
+        // ========================================
+        // ABRIR MODAL
+        // ========================================
+
+        const modal =
+            document.getElementById(
+                "modalPersonal"
+            );
+
+        if (modal) {
+
+            modal.classList.add(
+                "active"
+            );
+
+        }
+
+
+        // ========================================
+        // CONFIGURAR BOTONES
+        // ========================================
+
+        configurarBotonesModalPersonal();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error editando personal:",
+            error
+        );
+
+        alert(
+            "No se pudo cargar la información del personal."
+        );
+
+    }
+
+}
+
+
+// ========================================
+// REGISTRAR / ACTUALIZAR PERSONAL
+// ========================================
+
+async function registrarPersonal(event) {
+
+    event.preventDefault();
+
+
+    const id =
+        document.getElementById(
+            "idPersonal"
+        ).value.trim();
+
+
+    const datos = {
+
+        nombres:
+            document.getElementById(
+                "nombresPersonal"
+            ).value.trim(),
+
+        apellidos:
+            document.getElementById(
+                "apellidosPersonal"
+            ).value.trim(),
+
+        documento:
+            document.getElementById(
+                "documentoPersonal"
+            ).value.trim(),
+
+        celular:
+            document.getElementById(
+                "celularPersonal"
+            ).value.trim(),
+
+        cargo:
+            document.getElementById(
+                "cargoPersonal"
+            ).value.trim(),
+
+        cuadrilla:
+            document.getElementById(
+                "cuadrillaPersonal"
+            ).value
+
+    };
+
+
+    // ========================================
+    // VALIDACIONES
+    // ========================================
+
+    if (
+        !datos.nombres ||
+        !datos.apellidos ||
+        !datos.documento
+    ) {
+
+        alert(
+            "Nombres, apellidos y DNI son obligatorios."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !/^[0-9]{8}$/.test(
+            datos.documento
+        )
+    ) {
+
+        alert(
+            "El DNI debe tener exactamente 8 dígitos."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        datos.celular &&
+        !/^[0-9]{9}$/.test(
+            datos.celular
+        )
+    ) {
+
+        alert(
+            "El celular debe tener 9 dígitos."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        // ========================================
+        // SI HAY ID → EDITAR
+        // ========================================
+
+        let respuesta;
+
+
+        if (id) {
+
+            respuesta =
+                await fetch(
+                    `/api/personal/${id}`,
+                    {
+
+                        method:
+                            "PUT",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                datos
+                            )
+
+                    }
+                );
+
+        }
+
+
+        // ========================================
+        // SI NO HAY ID → REGISTRAR
+        // ========================================
+
+        else {
+
+            respuesta =
+                await fetch(
+                    "/api/personal",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                datos
+                            )
+
+                    }
+                );
+
+        }
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            alert(
+                resultado.error ||
+                "No se pudo guardar el personal."
+            );
+
+            return;
+
+        }
+
+
+        // ========================================
+        // MENSAJE
+        // ========================================
+
+        if (id) {
+
+            alert(
+                "Personal actualizado correctamente."
+            );
+
+        }
+
+        else {
+
+            alert(
+                "Personal registrado correctamente."
+            );
+
+        }
+
+
+        // ========================================
+        // CERRAR MODAL
+        // ========================================
+
+        cerrarModalPersonal();
+
+
+        // ========================================
+        // ACTUALIZAR TABLA
+        // ========================================
+
+        await cargarPersonal();
+
+
+        // ========================================
+        // ACTUALIZAR CUADRILLAS
+        // ========================================
+
+        actualizarCuadrillas(
+            await (
+                await fetch(
+                    "/api/personal"
+                )
+            ).json()
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error guardando personal:",
+            error
+        );
+
+        alert(
+            "No se pudo conectar con el servidor."
+        );
+
+    }
+
+}
+
+// ========================================
 // ELIMINAR PERSONAL
 // ========================================
 
