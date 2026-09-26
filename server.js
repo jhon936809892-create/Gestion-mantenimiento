@@ -2112,8 +2112,7 @@ app.get(
                     LEFT JOIN proyectos p
                         ON m.proyecto_id = p.id
 
-                    LEFT JOIN cuadrillas c
-                        ON m.cuadrilla_id = c.id
+                    
 
                     ORDER BY
                         m.id DESC
