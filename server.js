@@ -2092,13 +2092,9 @@ app.get(
                 SELECT
                     m.id,
                     m.fecha,
-
                     p.nombre AS proyecto,
-
-                    p."Sede" AS sede,
-
+                    p.sede AS sede,
                     m.tipo_mantenimiento AS trabajo,
-
                     m.estado
 
                 FROM mantenimientos m
@@ -2125,7 +2121,6 @@ app.get(
         }
     }
 );
-
 
 // -----------------------------------------------------
 // REGISTRAR MANTENIMIENTO
