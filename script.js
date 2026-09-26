@@ -3528,7 +3528,16 @@ async function cargarMantenimientos() {
                     document.createElement("tr");
 
                 fila.innerHTML = `
-                    <td>${mantenimiento.fecha || ""}</td>
+                    <td>
+    ${
+        mantenimiento.fecha
+            ? new Date(mantenimiento.fecha).toLocaleString("es-PE", {
+                dateStyle: "short",
+                timeStyle: "short"
+            })
+            : ""
+    }
+</td>
                     <td>${mantenimiento.proyecto || ""}</td>
                     <td>${mantenimiento.sede || ""}</td>
                     <td>${mantenimiento.trabajo || ""}</td>
