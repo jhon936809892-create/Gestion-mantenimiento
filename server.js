@@ -1198,15 +1198,14 @@ app.post(
         try {
 
             const {
-
-                nombres,
-                apellidos,
-                documento,
-                celular,
-                cargo,
-                cuadrilla
-
-            } = req.body;
+    fecha,
+    proyecto,
+    proyecto_id,
+    cuadrilla,
+    trabajo,
+    estado,
+    tipo_mantenimiento
+} = req.body;
 
 
             if (
