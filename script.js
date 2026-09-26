@@ -3289,10 +3289,7 @@ async function registrarMantenimiento(event) {
 
     const datos = {
 
-        fecha:
-            inicio
-                ? inicio.split("T")[0]
-                : "",
+       fecha: inicio || "",
 
         proyecto_id:
             Number(
