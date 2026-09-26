@@ -2092,10 +2092,13 @@ app.get(
                 SELECT
                     m.id,
                     m.fecha,
+
                     p.nombre AS proyecto,
-                    p.sede AS sede,
-                    m.tipo_mantenimiento AS trabajo,
-                    m.tipo_mantenimiento AS tipo_mantenimiento,
+
+                    p."Sede" AS sede,
+
+                    m.tipo_mantenimiento,
+
                     m.estado
 
                 FROM mantenimientos m
