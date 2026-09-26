@@ -2107,10 +2107,15 @@ app.get(
                         m.trabajo,
                         m.estado
 
-                    FROM mantenimientos m
+                   FROM mantenimientos m
 
-                    LEFT JOIN proyectos p
+                        LEFT JOIN proyectos p
                         ON m.proyecto_id = p.id
+
+                        LEFT JOIN cuadrillas c
+                        ON m.cuadrilla_id = c.id
+
+                        ORDER BY m.id DESC
 
                     
 
@@ -2322,8 +2327,11 @@ app.get(
 
                     FROM materiales m
 
-                    LEFT JOIN proyectos p
+                   LEFT JOIN proyectos p
                         ON m.proyecto_id = p.id
+
+                        LEFT JOIN cuadrillas c
+                        ON m.cuadrilla_id = c.id
 
                     ORDER BY
                         m.id DESC
