@@ -2225,3 +2225,26 @@ section {
 .btn-danger:hover {
     background-color: #b02a37;
 }
+
+
+.form-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.form-buttons button {
+    width: 180px;
+    height: 42px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #b02a37;
+}
