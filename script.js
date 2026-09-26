@@ -3618,7 +3618,7 @@ async function cargarGraficosDashboard() {
 
                 const tipo =
                     (
-                        mantenimiento.tipo_mantenimiento ||
+                        mantenimiento.trabajo ||
                         ""
                     )
                     .trim()
