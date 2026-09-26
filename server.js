@@ -20,7 +20,12 @@ const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 
-
+app.get("/api/prueba-mantenimiento", (req, res) => {
+    res.json({
+        ok: true,
+        mensaje: "ESTE SERVER.JS SÍ ESTÁ EJECUTÁNDOSE"
+    });
+});
 // =====================================================
 // CONEXIÓN POSTGRESQL
 // =====================================================
