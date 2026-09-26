@@ -3515,8 +3515,8 @@ async function cargarMantenimientos() {
                         </td>
 
                         <td>
-                            Cuadrilla
-                            ${mantenimiento.cuadrilla || ""}
+                            
+                            ${mantenimiento.Sede || ""}
                         </td>
 
                         <td>
