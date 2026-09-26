@@ -3991,28 +3991,3 @@ document.addEventListener(
 );
 
 
-.graficos-dashboard {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.grafico-panel {
-    min-height: 380px;
-}
-
-.grafico-ruleta {
-    position: relative;
-    width: 100%;
-    height: 300px;
-}
-
-
-@media (max-width: 768px) {
-
-    .graficos-dashboard {
-        grid-template-columns: 1fr;
-    }
-
-}
