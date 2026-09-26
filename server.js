@@ -1853,7 +1853,7 @@ app.get(
                         p.codigo,
                         p.nombre,
                         p.tipo,
-                        p.Sede,
+                        p.sede,
                         p.tipo_cable
 
                     FROM proyectos p
@@ -1887,7 +1887,6 @@ app.get(
 
     }
 );
-
 
 // -----------------------------------------------------
 // OBTENER UN PROYECTO
