@@ -4059,7 +4059,7 @@ document.addEventListener(
 
         await cargarUsuarioActual();
 
-        //await cargarGraficosDashboard();
+        await cargarGraficosDashboard();
 
 
         mostrarSeccion(
