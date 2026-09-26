@@ -3498,42 +3498,32 @@ async function cargarMantenimientos() {
                 "/api/mantenimientos"
             );
 
-
         if (!respuesta.ok) {
 
             throw new Error(
                 "Error al obtener mantenimientos"
             );
-
         }
-
 
         const mantenimientos =
             await respuesta.json();
-
 
         const tabla =
             document.getElementById(
                 "tablaMantenimiento"
             );
 
-
         if (tabla) {
 
             tabla.innerHTML = "";
-
 
             mantenimientos.forEach(
                 function(mantenimiento) {
 
                     const fila =
-                        document.createElement(
-                            "tr"
-                        );
-
+                        document.createElement("tr");
 
                     fila.innerHTML = `
-
                         <td>
                             ${mantenimiento.fecha || ""}
                         </td>
@@ -3543,8 +3533,7 @@ async function cargarMantenimientos() {
                         </td>
 
                         <td>
-                            
-                            ${mantenimiento.Sede || ""}
+                            ${mantenimiento.sede || ""}
                         </td>
 
                         <td>
@@ -3554,45 +3543,33 @@ async function cargarMantenimientos() {
                         <td>
                             ${mantenimiento.estado || ""}
                         </td>
-
                     `;
 
-
-                    tabla.appendChild(
-                        fila
-                    );
+                    tabla.appendChild(fila);
 
                 }
             );
-
         }
-
 
         const total =
             document.getElementById(
                 "totalMantenimientos"
             );
 
-
         if (total) {
 
             total.textContent =
                 mantenimientos.length;
-
         }
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Error cargando mantenimientos:",
             error
         );
-
     }
-
 }
-
 
 // ========================================
 // USUARIO ACTUAL Y PERMISOS
