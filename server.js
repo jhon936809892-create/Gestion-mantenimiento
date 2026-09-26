@@ -1854,6 +1854,8 @@ app.get(
 
                     p.sede AS sede,
 
+                    m.descripcion AS trabajo,
+
                     m.tipo_mantenimiento,
 
                     m.estado
@@ -1865,6 +1867,23 @@ app.get(
 
                 ORDER BY m.id DESC
             `);
+
+            res.json(resultado.rows);
+
+        } catch (error) {
+
+            console.error(
+                "Error al obtener mantenimientos:",
+                error
+            );
+
+            res.status(500).json({
+                error:
+                    "No se pudieron obtener los mantenimientos"
+            });
+        }
+    }
+);
 
             res.json(resultado.rows);
 
@@ -2079,35 +2098,13 @@ app.post(
 // OBTENER MANTENIMIENTOS
 // -----------------------------------------------------
 
-app.get(
-    "/api/mantenimientos",
-    requiereSesion,
-    async (req, res) => {
 
-        try {
-
-            const resultado = await pool.query(`
-                SELECT
-                    m.id,
-                    m.fecha,
-
-                    p.nombre AS proyecto,
-
-                    p."Sede" AS sede,
-
-                    m.tipo_mantenimiento,
-
-                    m.estado
-
-                FROM mantenimientos m
-
-                LEFT JOIN proyectos p
-                    ON m.proyecto_id = p.id
-
-                ORDER BY m.id DESC
-            `);
 
             res.json(resultado.rows);
+
+
+
+
 
         } catch (error) {
 
