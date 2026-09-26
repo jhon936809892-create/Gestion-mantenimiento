@@ -3570,6 +3570,267 @@ async function cargarMantenimientos() {
         );
     }
 }
+
+// ========================================
+// GRÁFICOS DEL DASHBOARD
+// ========================================
+
+let graficoCertificaciones = null;
+let graficoAverias = null;
+
+
+async function cargarGraficosDashboard() {
+
+    try {
+
+        const respuesta =
+            await fetch("/api/mantenimientos");
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudieron obtener los mantenimientos."
+            );
+
+        }
+
+        const mantenimientos =
+            await respuesta.json();
+
+
+        // ========================================
+        // CONTADORES POR SEDE
+        // ========================================
+
+        const certificaciones = {};
+        const averias = {};
+
+
+        mantenimientos.forEach(
+            function(mantenimiento) {
+
+                const sede =
+                    mantenimiento.sede ||
+                    "Sin sede";
+
+
+                const tipo =
+                    (
+                        mantenimiento.tipo_mantenimiento ||
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                // ========================================
+                // CERTIFICACIONES
+                // ========================================
+
+                if (
+                    tipo === "certificación" ||
+                    tipo === "certificacion"
+                ) {
+
+                    if (
+                        !certificaciones[sede]
+                    ) {
+
+                        certificaciones[sede] = 0;
+
+                    }
+
+                    certificaciones[sede]++;
+
+                }
+
+
+                // ========================================
+                // AVERÍAS
+                // ========================================
+
+                if (
+                    tipo === "avería" ||
+                    tipo === "averia"
+                ) {
+
+                    if (
+                        !averias[sede]
+                    ) {
+
+                        averias[sede] = 0;
+
+                    }
+
+                    averias[sede]++;
+
+                }
+
+            }
+        );
+
+
+        // ========================================
+        // GRÁFICO CERTIFICACIONES
+        // ========================================
+
+        const canvasCertificaciones =
+            document.getElementById(
+                "graficoCertificaciones"
+            );
+
+
+        if (canvasCertificaciones) {
+
+            if (graficoCertificaciones) {
+
+                graficoCertificaciones.destroy();
+
+            }
+
+
+            graficoCertificaciones =
+                new Chart(
+                    canvasCertificaciones,
+                    {
+
+                        type: "pie",
+
+                        data: {
+
+                            labels:
+                                Object.keys(
+                                    certificaciones
+                                ),
+
+                            datasets: [
+
+                                {
+
+                                    data:
+                                        Object.values(
+                                            certificaciones
+                                        ),
+
+                                    borderWidth: 1
+
+                                }
+
+                            ]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            maintainAspectRatio: false,
+
+                            plugins: {
+
+                                legend: {
+
+                                    position:
+                                        "bottom"
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        // ========================================
+        // GRÁFICO AVERÍAS
+        // ========================================
+
+        const canvasAverias =
+            document.getElementById(
+                "graficoAverias"
+            );
+
+
+        if (canvasAverias) {
+
+            if (graficoAverias) {
+
+                graficoAverias.destroy();
+
+            }
+
+
+            graficoAverias =
+                new Chart(
+                    canvasAverias,
+                    {
+
+                        type: "pie",
+
+                        data: {
+
+                            labels:
+                                Object.keys(
+                                    averias
+                                ),
+
+                            datasets: [
+
+                                {
+
+                                    data:
+                                        Object.values(
+                                            averias
+                                        ),
+
+                                    borderWidth: 1
+
+                                }
+
+                            ]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            maintainAspectRatio: false,
+
+                            plugins: {
+
+                                legend: {
+
+                                    position:
+                                        "bottom"
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando gráficos del Dashboard:",
+            error
+        );
+
+    }
+
+}
+
 // ========================================
 // USUARIO ACTUAL Y PERMISOS
 // ========================================
