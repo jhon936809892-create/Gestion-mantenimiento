@@ -2726,7 +2726,7 @@ async function cargarProyectos() {
                         </td>
 
                         <td>
-                            ${proyecto.Sede || ""}
+                            ${proyecto.sede || ""}
                         </td>
 
                         <td>
