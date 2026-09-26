@@ -1839,55 +1839,49 @@ app.put(
 // -----------------------------------------------------
 
 app.get(
-    "/api/proyectos",
+    "/api/mantenimientos",
     requiereSesion,
     async (req, res) => {
 
         try {
 
-            const resultado =
-                await pool.query(`
+            const resultado = await pool.query(`
+                SELECT
+                    m.id,
+                    m.fecha,
 
-                    SELECT
-                        p.id,
-                        p.codigo,
-                        p.nombre,
-                        p.tipo,
-                        p.sede,
-                        p.tipo_cable
+                    p.nombre AS proyecto,
 
-                    FROM proyectos p
+                    p.sede AS sede,
 
-                    ORDER BY p.id DESC
+                    m.tipo_mantenimiento,
 
-                `);
+                    m.estado
 
+                FROM mantenimientos m
 
-            res.json(
-                resultado.rows
-            );
+                LEFT JOIN proyectos p
+                    ON m.proyecto_id = p.id
 
-        }
+                ORDER BY m.id DESC
+            `);
 
-        catch (error) {
+            res.json(resultado.rows);
+
+        } catch (error) {
 
             console.error(
-                "Error al obtener proyectos:",
+                "Error al obtener mantenimientos:",
                 error
             );
 
             res.status(500).json({
-
                 error:
-                    "No se pudieron obtener los proyectos"
-
+                    "No se pudieron obtener los mantenimientos"
             });
-
         }
-
     }
 );
-
 // -----------------------------------------------------
 // OBTENER UN PROYECTO
 // -----------------------------------------------------
