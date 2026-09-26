@@ -3357,85 +3357,80 @@ async function cargarMantenimientos() {
 
     try {
 
-        const respuesta =
-            await fetch("/api/mantenimientos");
+        const respuesta = await fetch("/api/mantenimientos");
+
+        console.log("Respuesta mantenimientos:", respuesta);
 
         if (!respuesta.ok) {
-            throw new Error(
-                "Error al obtener mantenimientos"
-            );
+            throw new Error("Error al obtener mantenimientos");
         }
 
-        const mantenimientos =
-            await respuesta.json();
+        const mantenimientos = await respuesta.json();
 
-        console.log(
-            "Mantenimientos recibidos:",
-            mantenimientos
-        );
+        console.log("MANTENIMIENTOS RECIBIDOS:", mantenimientos);
 
-        const tabla =
-            document.getElementById(
-                "tablaMantenimiento"
-            );
+        const tabla = document.getElementById("tablaMantenimiento");
+
+        console.log("TABLA ENCONTRADA:", tabla);
 
         if (!tabla) {
-            console.error(
-                "No existe tablaMantenimiento"
-            );
+            console.error("❌ NO EXISTE #tablaMantenimiento EN EL HTML");
             return;
         }
 
         tabla.innerHTML = "";
 
-        mantenimientos.forEach(
-            function(mantenimiento) {
+        mantenimientos.forEach(function(mantenimiento) {
 
-                const fila =
-                    document.createElement("tr");
+            const fila = document.createElement("tr");
 
-                fila.innerHTML = `
-                    <td>
-    ${
-        mantenimiento.fecha
-            ? new Date(mantenimiento.fecha).toLocaleString("es-PE", {
-                dateStyle: "short",
-                timeStyle: "short"
-            })
-            : ""
-    }
-</td>
-                    <td>${mantenimiento.proyecto || ""}</td>
-                    <td>${mantenimiento.sede || ""}</td>
-                    <td>${mantenimiento.trabajo || ""}</td>
-                    <td>${mantenimiento.estado || ""}</td>
-                `;
+            fila.innerHTML = `
+                <td>
+                    ${
+                        mantenimiento.fecha
+                            ? new Date(mantenimiento.fecha).toLocaleString("es-PE", {
+                                dateStyle: "short",
+                                timeStyle: "short"
+                            })
+                            : ""
+                    }
+                </td>
 
-                tabla.appendChild(fila);
-            }
+                <td>${mantenimiento.proyecto || ""}</td>
+
+                <td>${mantenimiento.sede || ""}</td>
+
+                <td>${mantenimiento.trabajo || ""}</td>
+
+                <td>${mantenimiento.estado || ""}</td>
+            `;
+
+            tabla.appendChild(fila);
+
+        });
+
+        console.log(
+            "✅ Filas creadas:",
+            mantenimientos.length
         );
 
         const total =
-            document.getElementById(
-                "totalMantenimientos"
-            );
+            document.getElementById("totalMantenimientos");
 
         if (total) {
-            total.textContent =
-                mantenimientos.length;
+            total.textContent = mantenimientos.length;
         }
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(
-            "Error cargando mantenimientos:",
+            "❌ Error cargando mantenimientos:",
             error
         );
 
-        alert(
-            "No se pudieron cargar los mantenimientos."
-        );
     }
+
 }
 
 // ========================================
