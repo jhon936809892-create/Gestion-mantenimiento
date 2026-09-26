@@ -5,6 +5,8 @@
 let proyectos = [];
 let calendarioMantenimiento = null;
 let resizeCalendarioPendiente = false;
+let graficoCertificaciones = null;
+let graficoAverias = null;
 
 
 // ========================================
@@ -4056,6 +4058,8 @@ document.addEventListener(
         await cargarMateriales();
 
         await cargarUsuarioActual();
+
+        await cargarGraficosDashboard();
 
 
         mostrarSeccion(
