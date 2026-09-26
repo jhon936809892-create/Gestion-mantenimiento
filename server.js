@@ -2088,49 +2088,30 @@ app.get(
 
         try {
 
-            const resultado =
-                await pool.query(`
+            const resultado = await pool.query(`
+                SELECT
+                    m.id,
+                    m.fecha,
 
-                    SELECT
+                    p.nombre AS proyecto,
 
-                        m.id,
-                        m.fecha,
-                        m.proyecto_id,
+                    p."Sede" AS sede,
 
-                        p.nombre AS proyecto,
+                    m.tipo_mantenimiento AS trabajo,
 
-                        m.cuadrilla_id,
+                    m.estado
 
-                        c.nombre AS cuadrilla,
+                FROM mantenimientos m
 
-                        m.trabajo,
-                        m.estado
+                LEFT JOIN proyectos p
+                    ON m.proyecto_id = p.id
 
-                   FROM mantenimientos m
+                ORDER BY m.id DESC
+            `);
 
-                        LEFT JOIN proyectos p
-                        ON m.proyecto_id = p.id
+            res.json(resultado.rows);
 
-                        LEFT JOIN cuadrillas c
-                        ON m.cuadrilla_id = c.id
-
-                        ORDER BY m.id DESC
-
-                    
-
-                    ORDER BY
-                        m.id DESC
-
-                `);
-
-
-            res.json(
-                resultado.rows
-            );
-
-        }
-
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Error al obtener mantenimientos:",
@@ -2138,14 +2119,10 @@ app.get(
             );
 
             res.status(500).json({
-
                 error:
                     "No se pudieron obtener los mantenimientos"
-
             });
-
         }
-
     }
 );
 
