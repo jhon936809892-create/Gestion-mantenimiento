@@ -739,8 +739,7 @@
             </div>
 
             <form
-                onsubmit="registrarMantenimiento(event)"
-            >
+                onsubmit="registrarMantenimiento(event)">
 
                 <label>
                     Fecha
@@ -749,8 +748,15 @@
                 <input
                     type="date"
                     id="fechaMantenimiento"
-                    required
-                >
+                    required>
+
+                <label for="inicioMantenimiento">
+                    Inicio del mantenimiento
+                </label>
+
+                <input
+                    type="datetime-local"
+                    id="inicioMantenimiento">
 
                 <label>
                     Proyecto
@@ -758,8 +764,7 @@
 
                 <select
                     id="proyectoMantenimiento"
-                    required
-                >
+                    required>
 
                     <option value="">
                         Seleccione un proyecto
