@@ -3278,14 +3278,18 @@ async function registrarMantenimiento(event) {
     event.preventDefault();
 
 
+    const inicio =
+        document
+            .getElementById("inicioMantenimiento")
+            .value;
+
+
     const datos = {
 
         fecha:
-            document
-                .getElementById(
-                    "fechaMantenimiento"
-                )
-                .value,
+            inicio
+                ? inicio.split("T")[0]
+                : "",
 
         proyecto_id:
             Number(
@@ -3294,19 +3298,12 @@ async function registrarMantenimiento(event) {
                         "proyectoMantenimiento"
                     )
                     .value
-                    ),
+            ),
 
-        Sede:
+        cuadrilla:
             document
                 .getElementById(
-                    "SedeMantenimiento"
-                )
-                .value,
-
-        inicio:
-            document
-                .getElementById(
-                "inicioMantenimiento"
+                    "cuadrillaMantenimiento"
                 )
                 .value,
 
@@ -3324,12 +3321,13 @@ async function registrarMantenimiento(event) {
                     "estadoMantenimiento"
                 )
                 .value,
-        
+
         tipo_mantenimiento:
             document
-                .getElementById("tipoMantenimiento"
+                .getElementById(
+                    "tipoMantenimiento"
                 )
-                .value,
+                .value
 
     };
 
@@ -3337,7 +3335,7 @@ async function registrarMantenimiento(event) {
     if (!datos.fecha) {
 
         alert(
-            "Debe seleccionar una fecha."
+            "Debe seleccionar la fecha y hora del mantenimiento."
         );
 
         return;
@@ -3354,25 +3352,28 @@ async function registrarMantenimiento(event) {
         return;
 
     }
-    if (!datos.Sede) {
 
-    alert(
-        "Debe seleccionar una sede."
-    );
 
-    return;
+    if (!datos.cuadrilla) {
 
-}
+        alert(
+            "Debe seleccionar una cuadrilla."
+        );
 
-    if (!datos.inicio) {
+        return;
 
-    alert(
-        "Debe indicar el inicio del mantenimiento."
-    );
+    }
 
-    return;
 
-}
+    if (!datos.tipo_mantenimiento) {
+
+        alert(
+            "Debe seleccionar un tipo de mantenimiento."
+        );
+
+        return;
+
+    }
 
 
     if (!datos.trabajo) {
@@ -3393,8 +3394,7 @@ async function registrarMantenimiento(event) {
                 "/api/mantenimientos",
                 {
 
-                    method:
-                        "POST",
+                    method: "POST",
 
                     headers: {
 
@@ -3404,9 +3404,7 @@ async function registrarMantenimiento(event) {
                     },
 
                     body:
-                        JSON.stringify(
-                            datos
-                        )
+                        JSON.stringify(datos)
 
                 }
             );
@@ -3476,23 +3474,6 @@ async function registrarMantenimiento(event) {
         );
 
     }
-
-    function cancelarMantenimiento() {
-
-    const formulario = document.querySelector(
-        'form[onsubmit="registrarMantenimiento(event)"]'
-    );
-
-    if (formulario) {
-        formulario.reset();
-    }
-
-    const modal = document.getElementById("modalMantenimiento");
-
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
 
 }
 
