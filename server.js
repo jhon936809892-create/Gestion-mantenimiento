@@ -2084,7 +2084,7 @@ app.post(
 
 
 
-        } catch (error) {
+         catch (error) {
 
             console.error(
                 "Error al obtener mantenimientos:",
