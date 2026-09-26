@@ -2095,6 +2095,7 @@ app.get(
                     p.nombre AS proyecto,
                     p.sede AS sede,
                     m.tipo_mantenimiento AS trabajo,
+                    m.tipo_mantenimiento AS tipo_mantenimiento,
                     m.estado
 
                 FROM mantenimientos m
