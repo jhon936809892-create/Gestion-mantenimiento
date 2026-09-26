@@ -3296,7 +3296,7 @@ async function registrarMantenimiento(event) {
                     .value
             ),
 
-        cuadrilla:
+        Sede:
             document
                 .getElementById(
                     "cuadrillaMantenimiento"
@@ -3341,6 +3341,15 @@ async function registrarMantenimiento(event) {
         return;
 
     }
+    if (!datos.sede) {
+
+    alert(
+        "Debe seleccionar una sede."
+    );
+
+    return;
+
+}
 
 
     if (!datos.trabajo) {
