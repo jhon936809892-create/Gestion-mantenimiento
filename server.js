@@ -1540,6 +1540,74 @@ app.put(
 
     }
 );
+
+// ========================================
+// OBTENER PERSONAL POR ID
+// ========================================
+
+app.get(
+    "/api/personal/:id",
+    requiereCoordinador,
+    async (req, res) => {
+
+        try {
+
+            const { id } = req.params;
+
+
+            const resultado =
+                await pool.query(`
+
+                    SELECT *
+
+                    FROM personal
+
+                    WHERE id = $1
+
+                `, [id]);
+
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    error:
+                        "No se encontró el personal"
+
+                });
+
+            }
+
+
+            res.json(
+                resultado.rows[0]
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error obteniendo personal:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                error:
+                    "No se pudo obtener el personal"
+
+            });
+
+        }
+
+    }
+);
+
+
 // -----------------------------------------------------
 // EDITAR PERSONAL
 // SOLO COORDINADOR
