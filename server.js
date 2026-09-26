@@ -1852,7 +1852,7 @@ app.get(
                     p.nombre AS proyecto,
                   p.sede AS sede,
 
-                m.descripcion AS trabajo,
+                m.tipo_mantenimiento AS trabajo,
 
                 m.tipo_mantenimiento,
 
