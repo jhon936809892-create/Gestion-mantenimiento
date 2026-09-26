@@ -3323,7 +3323,13 @@ async function registrarMantenimiento(event) {
                 .getElementById(
                     "estadoMantenimiento"
                 )
-                .value
+                .value,
+        
+        tipo_mantenimiento:
+            document
+                .getElementById("tipoMantenimiento"
+                )
+                .value,
 
     };
 
