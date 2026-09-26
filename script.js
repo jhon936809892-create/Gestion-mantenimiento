@@ -1261,6 +1261,7 @@ async function abrirModalProyecto() {
 
         modal.classList.add(
             "active"
+            
         );
 
     }
@@ -1281,6 +1282,10 @@ async function abrirModalMantenimiento() {
         document.getElementById(
             "modalMantenimiento"
         );
+
+    if (modal) {
+    modal.style.display = "none";
+}
 
 
     if (modal) {
