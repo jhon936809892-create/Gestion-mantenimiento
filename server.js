@@ -2168,7 +2168,8 @@ app.post(
                 proyecto_id,
                 cuadrilla,
                 trabajo,
-                estado
+                estado,
+                tipo_mantenimiento
 
             } = req.body;
 
@@ -2226,28 +2227,25 @@ app.post(
             const resultado =
                 await pool.query(`
 
-
                     INSERT INTO mantenimientos
+                    (
+                        fecha,
+                        proyecto_id,
+                        cuadrilla_id,
+                        descripcion,
+                        estado,
+                        tipo_mantenimiento
+                    )
 
-                        (
-                            fecha,
-                            proyecto_id,
-                            cuadrilla_id,
-                            trabajo,
-                            estado,
-                            tipo_mantenimiento
-                        )
-                        
-                        VALUES
-                        
-                        (
-                            $1,
-                            $2,
-                            $3,
-                            $4,
-                            $5,
-                            $6
-                        )
+                    VALUES
+                    (
+                        $1,
+                        $2,
+                        $3,
+                        $4,
+                        $5,
+                        $6
+                    )
 
                     RETURNING *
 
@@ -2298,8 +2296,6 @@ app.post(
 
     }
 );
-
-
 // =====================================================
 // MATERIALES
 // =====================================================
