@@ -1859,7 +1859,106 @@ function actualizarCuadrillas(personal) {
 
 }
 
+// ========================================
+// CARGAR PERSONAL
+// ========================================
 
+async function cargarPersonal() {
+
+    try {
+
+        const respuesta =
+            await fetch("/api/personal");
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "Error al obtener el personal"
+            );
+
+        }
+
+
+        const personal =
+            await respuesta.json();
+
+
+        const tabla =
+            document.getElementById(
+                "tablaPersonal"
+            );
+
+
+        if (!tabla) {
+
+            return;
+
+        }
+
+
+        tabla.innerHTML = "";
+
+
+        personal.forEach(
+            function(persona) {
+
+                const fila =
+                    document.createElement("tr");
+
+
+                fila.dataset.id =
+                    persona.id;
+
+
+                fila.innerHTML = `
+
+                    <td>
+                        ${persona.nombres || ""}
+                    </td>
+
+                    <td>
+                        ${persona.apellidos || ""}
+                    </td>
+
+                    <td>
+                        ${persona.documento || ""}
+                    </td>
+
+                    <td>
+                        ${persona.celular || ""}
+                    </td>
+
+                    <td>
+                        ${persona.cargo || ""}
+                    </td>
+
+                    <td>
+                        ${persona.cuadrilla_id || ""}
+                    </td>
+
+                `;
+
+
+                tabla.appendChild(fila);
+
+            }
+        );
+
+
+        actualizarCuadrillas(personal);
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando personal:",
+            error
+        );
+
+    }
+
+}
 // ========================================
 // REGISTRAR PROYECTO
 // ========================================
