@@ -3494,12 +3494,9 @@ async function cargarMantenimientos() {
     try {
 
         const respuesta =
-            await fetch(
-                "/api/mantenimientos"
-            );
+            await fetch("/api/mantenimientos");
 
         if (!respuesta.ok) {
-
             throw new Error(
                 "Error al obtener mantenimientos"
             );
@@ -3508,48 +3505,42 @@ async function cargarMantenimientos() {
         const mantenimientos =
             await respuesta.json();
 
+        console.log(
+            "Mantenimientos recibidos:",
+            mantenimientos
+        );
+
         const tabla =
             document.getElementById(
                 "tablaMantenimiento"
             );
 
-        if (tabla) {
-
-            tabla.innerHTML = "";
-
-            mantenimientos.forEach(
-                function(mantenimiento) {
-
-                    const fila =
-                        document.createElement("tr");
-
-                    fila.innerHTML = `
-                        <td>
-                            ${mantenimiento.fecha || ""}
-                        </td>
-
-                        <td>
-                            ${mantenimiento.proyecto || ""}
-                        </td>
-
-                        <td>
-                            ${mantenimiento.sede || ""}
-                        </td>
-
-                        <td>
-                            ${mantenimiento.trabajo || ""}
-                        </td>
-
-                        <td>
-                            ${mantenimiento.estado || ""}
-                        </td>
-                    `;
-
-                    tabla.appendChild(fila);
-
-                }
+        if (!tabla) {
+            console.error(
+                "No existe tablaMantenimiento"
             );
+            return;
         }
+
+        tabla.innerHTML = "";
+
+        mantenimientos.forEach(
+            function(mantenimiento) {
+
+                const fila =
+                    document.createElement("tr");
+
+                fila.innerHTML = `
+                    <td>${mantenimiento.fecha || ""}</td>
+                    <td>${mantenimiento.proyecto || ""}</td>
+                    <td>${mantenimiento.sede || ""}</td>
+                    <td>${mantenimiento.trabajo || ""}</td>
+                    <td>${mantenimiento.estado || ""}</td>
+                `;
+
+                tabla.appendChild(fila);
+            }
+        );
 
         const total =
             document.getElementById(
@@ -3557,7 +3548,6 @@ async function cargarMantenimientos() {
             );
 
         if (total) {
-
             total.textContent =
                 mantenimientos.length;
         }
@@ -3568,9 +3558,12 @@ async function cargarMantenimientos() {
             "Error cargando mantenimientos:",
             error
         );
+
+        alert(
+            "No se pudieron cargar los mantenimientos."
+        );
     }
 }
-
 // ========================================
 // USUARIO ACTUAL Y PERMISOS
 // ========================================
