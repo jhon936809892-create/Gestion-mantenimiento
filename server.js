@@ -1358,6 +1358,188 @@ app.post(
 );
 
 
+
+// ========================================
+// EDITAR PERSONAL
+// ========================================
+
+app.put(
+    "/api/personal/:id",
+    requiereCoordinador,
+    async (req, res) => {
+
+        try {
+
+            const { id } = req.params;
+
+            const {
+                nombres,
+                apellidos,
+                documento,
+                celular,
+                cargo,
+                cuadrilla
+            } = req.body;
+
+
+            if (
+                !nombres ||
+                !apellidos ||
+                !documento
+            ) {
+
+                return res.status(400).json({
+
+                    error:
+                        "Nombres, apellidos y DNI son obligatorios"
+
+                });
+
+            }
+
+
+            if (
+                !/^[0-9]{8}$/.test(documento)
+            ) {
+
+                return res.status(400).json({
+
+                    error:
+                        "El DNI debe tener exactamente 8 dígitos"
+
+                });
+
+            }
+
+
+            if (
+                celular &&
+                !/^[0-9]{9}$/.test(celular)
+            ) {
+
+                return res.status(400).json({
+
+                    error:
+                        "El celular debe tener 9 dígitos"
+
+                });
+
+            }
+
+
+            const dniExistente =
+                await pool.query(`
+
+                    SELECT id
+
+                    FROM personal
+
+                    WHERE documento = $1
+                    AND id <> $2
+
+                `, [
+                    documento,
+                    id
+                ]);
+
+
+            if (
+                dniExistente.rows.length > 0
+            ) {
+
+                return res.status(409).json({
+
+                    error:
+                        "El DNI ya está registrado por otra persona"
+
+                });
+
+            }
+
+
+            const resultado =
+                await pool.query(`
+
+                    UPDATE personal
+
+                    SET
+                        nombres = $1,
+                        apellidos = $2,
+                        documento = $3,
+                        celular = $4,
+                        cargo = $5,
+                        cuadrilla_id = $6
+
+                    WHERE id = $7
+
+                    RETURNING *
+
+                `, [
+
+                    nombres.trim(),
+
+                    apellidos.trim(),
+
+                    documento,
+
+                    celular || null,
+
+                    cargo
+                        ? cargo.trim()
+                        : null,
+
+                    cuadrilla || null,
+
+                    id
+
+                ]);
+
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    error:
+                        "No se encontró el personal"
+
+                });
+
+            }
+
+
+            res.json({
+
+                mensaje:
+                    "Personal actualizado correctamente",
+
+                personal:
+                    resultado.rows[0]
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Error editando personal:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                error:
+                    "No se pudo actualizar el personal"
+
+            });
+
+        }
+
+    }
+);
 // -----------------------------------------------------
 // EDITAR PERSONAL
 // SOLO COORDINADOR
