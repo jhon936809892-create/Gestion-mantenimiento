@@ -1849,15 +1849,9 @@ app.get(
                 SELECT
                     m.id,
                     m.fecha,
-
                     p.nombre AS proyecto,
-
                     p.sede AS sede,
-
-                    m.descripcion AS trabajo,
-
                     m.tipo_mantenimiento,
-
                     m.estado
 
                 FROM mantenimientos m
@@ -1881,23 +1875,7 @@ app.get(
                 error:
                     "No se pudieron obtener los mantenimientos"
             });
-        }
-    }
-);
 
-            res.json(resultado.rows);
-
-         catch (error) {
-
-            console.error(
-                "Error al obtener mantenimientos:",
-                error
-            );
-
-            res.status(500).json({
-                error:
-                    "No se pudieron obtener los mantenimientos"
-            });
         }
     }
 );
