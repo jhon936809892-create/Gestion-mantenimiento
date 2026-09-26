@@ -738,109 +738,105 @@
 
             </div>
 
-            <form
-                onsubmit="registrarMantenimiento(event)">
+            <form onsubmit="registrarMantenimiento(event)">
 
-                <label>
-                    Fecha
-                </label>
+    <label for="inicioMantenimiento">
+        Fecha y hora del mantenimiento
+    </label>
 
-                <input
-                    type="date"
-                    id="fechaMantenimiento"
-                    required>
+    <input
+        type="datetime-local"
+        id="inicioMantenimiento"
+        required
+    >
 
-                <label for="inicioMantenimiento">
-                    Inicio del mantenimiento
-                </label>
+    <label for="proyectoMantenimiento">
+        Proyecto
+    </label>
 
-                <input
-                    type="datetime-local"
-                    id="inicioMantenimiento">
+    <select
+        id="proyectoMantenimiento"
+        required
+    >
+        <option value="">
+            Seleccione un proyecto
+        </option>
+    </select>
 
-                <label>
-                    Proyecto
-                </label>
+    <label for="cuadrillaMantenimiento">
+        Cuadrilla que atendió el mantenimiento
+    </label>
 
-                <select
-                    id="proyectoMantenimiento"
-                    required>
+    <select
+        id="cuadrillaMantenimiento"
+        required
+    >
+        <option value="">
+            Seleccione una cuadrilla
+        </option>
 
-                    <option value="">
-                        Seleccione un proyecto
-                    </option>
+        <option value="1">
+            Cuadrilla 1
+        </option>
 
-                </select>
+        <option value="2">
+            Cuadrilla 2
+        </option>
 
-                <label>
-                    Cuadrilla
-                </label>
+        <option value="3">
+            Cuadrilla 3
+        </option>
+    </select>
 
-               <select id="SedeMantenimiento" required>
+    <label for="trabajoMantenimiento">
+        Descripción del trabajo
+    </label>
 
-    <option value="">
-        Seleccione una sede
-    </option>
+    <textarea
+        id="trabajoMantenimiento"
+        required
+    ></textarea>
 
-    <option value="Sede 1">
-        Sede 1
-    </option>
+    <label for="estadoMantenimiento">
+        Estado
+    </label>
 
-    <option value="Sede 2">
-        Sede 2
-    </option>
+    <select id="estadoMantenimiento">
 
-    <option value="Sede 3">
-        Sede 3
-    </option>
+        <option value="Pendiente">
+            Pendiente
+        </option>
 
-    <option value="Sede 4">
-        Sede 4
-    </option>
+        <option value="En proceso">
+            En proceso
+        </option>
 
-    <option value="Sede 5">
-        Sede 5
-    </option>
+        <option value="Terminado">
+            Terminado
+        </option>
 
-</select>
+    </select>
 
-                <label>
-                    Descripción del trabajo
-                </label>
+    <div class="form-buttons">
 
-                <textarea
-                    id="trabajoMantenimiento"
-                    required
-                ></textarea>
+        <button
+            class="btn-primary"
+            type="submit"
+        >
+            Guardar mantenimiento
+        </button>
 
-                <label>
-                    Estado
-                </label>
+        <button
+            class="btn-secondary"
+            type="button"
+            onclick="cancelarMantenimiento()"
+        >
+            Cancelar
+        </button>
 
-                <select id="estadoMantenimiento">
+    </div>
 
-                    <option>
-                        Pendiente
-                    </option>
-
-                    <option>
-                        En proceso
-                    </option>
-
-                    <option>
-                        Terminado
-                    </option>
-
-                </select>
-
-                <button
-                    class="btn-primary full"
-                    type="submit"
-                >
-                    Guardar mantenimiento
-                </button>
-
-            </form>
+</form>
 
         </div>
 
