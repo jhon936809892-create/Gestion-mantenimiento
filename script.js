@@ -658,6 +658,8 @@ function inicializarCalendarioMantenimiento() {
 }
 
 
+
+
 // ========================================
 // ACTIVAR / DESACTIVAR EDICIÓN DE PERSONAL
 // ========================================
@@ -2016,6 +2018,167 @@ async function registrarPersonal(event) {
 
         alert(
             "No se pudo conectar con el servidor."
+        );
+
+    }
+
+}
+
+// ========================================
+// EDITAR PERSONAL
+// ========================================
+
+async function editarPersonal(id) {
+
+    try {
+
+        const respuesta =
+            await fetch(`/api/personal/${id}`);
+
+
+        if (!respuesta.ok) {
+
+            const resultado =
+                await respuesta.json();
+
+            alert(
+                resultado.error ||
+                "No se pudo obtener el personal."
+            );
+
+            return;
+
+        }
+
+
+        const persona =
+            await respuesta.json();
+
+
+        // ========================================
+        // CARGAR DATOS
+        // ========================================
+
+        document.getElementById(
+            "idPersonal"
+        ).value =
+            persona.id || "";
+
+
+        document.getElementById(
+            "nombresPersonal"
+        ).value =
+            persona.nombres || "";
+
+
+        document.getElementById(
+            "apellidosPersonal"
+        ).value =
+            persona.apellidos || "";
+
+
+        document.getElementById(
+            "tipoDocumentoPersonal"
+        ).value =
+            "DNI";
+
+
+        document.getElementById(
+            "documentoPersonal"
+        ).value =
+            persona.documento || "";
+
+
+        document.getElementById(
+            "celularPersonal"
+        ).value =
+            persona.celular || "";
+
+
+        document.getElementById(
+            "cargoPersonal"
+        ).value =
+            persona.cargo || "";
+
+
+        document.getElementById(
+            "cuadrillaPersonal"
+        ).value =
+            persona.cuadrilla_id || "";
+
+
+        // ========================================
+        // CAMBIAR TÍTULO
+        // ========================================
+
+        const titulo =
+            document.getElementById(
+                "tituloModalPersonal"
+            );
+
+
+        if (titulo) {
+
+            titulo.textContent =
+                "Editar personal";
+
+        }
+
+
+        // ========================================
+        // CAMBIAR BOTÓN
+        // ========================================
+
+        const boton =
+            document.getElementById(
+                "btnGuardarPersonal"
+            );
+
+
+        if (boton) {
+
+            boton.textContent =
+                "Guardar cambios";
+
+        }
+
+
+        // ========================================
+        // ABRIR MODAL
+        // ========================================
+
+        const modal =
+            document.getElementById(
+                "modalPersonal"
+            );
+
+
+        if (modal) {
+
+            modal.classList.add(
+                "active"
+            );
+
+        }
+
+
+        // ========================================
+        // CONFIGURAR BOTONES
+        // ========================================
+
+        configurarBotonesModalPersonal();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error editando personal:",
+            error
+        );
+
+
+        alert(
+            "No se pudo cargar la información del personal."
         );
 
     }
