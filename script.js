@@ -3354,102 +3354,57 @@ if (modal) {
 // CARGAR MANTENIMIENTOS
 // ========================================
 
-
 async function cargarMantenimientos() {
 
     try {
 
-        const respuesta =
-            await fetch("/api/mantenimientos");
-
+        const respuesta = await fetch("/api/mantenimientos");
 
         if (!respuesta.ok) {
-
-            throw new Error(
-                "Error al obtener mantenimientos"
-            );
-
+            throw new Error("Error al obtener mantenimientos");
         }
 
+        const mantenimientos = await respuesta.json();
 
-        const mantenimientos =
-            await respuesta.json();
-
-
-        const tabla =
-            document.getElementById(
-                "tablaMantenimientos"
-            );
-
+        // OJO: en tu HTML el ID es tablaMantenimiento (singular)
+        const tabla = document.getElementById("tablaMantenimiento");
 
         if (!tabla) {
-
-            console.warn(
-                "No se encontró la tabla tablaMantenimientos."
-            );
-
+            console.warn("No se encontró la tabla tablaMantenimiento.");
             return;
-
         }
-
 
         tabla.innerHTML = "";
 
+        mantenimientos.forEach(function(mantenimiento) {
 
-        mantenimientos.forEach(
-            function(mantenimiento) {
+            const fila = document.createElement("tr");
 
-                const fila =
-                    document.createElement("tr");
+            fila.innerHTML = `
+                <td>${mantenimiento.fecha || ""}</td>
+                <td>${mantenimiento.proyecto || ""}</td>
+                <td>${mantenimiento.sede || ""}</td>
+                <td>${mantenimiento.tipo_mantenimiento || ""}</td>
+                <td>${mantenimiento.estado || ""}</td>
+            `;
 
+            tabla.appendChild(fila);
 
-                fila.innerHTML = `
+        });
 
-                    <td>
-                        ${mantenimiento.fecha || ""}
-                    </td>
+        const total = document.getElementById("totalMantenimientos");
 
-                    <td>
-                        ${mantenimiento.proyecto || ""}
-                    </td>
+        if (total) {
+            total.textContent = mantenimientos.length;
+        }
 
-                    <td>
-                        ${mantenimiento.cuadrilla || ""}
-                    </td>
+    } catch (error) {
 
-                    <td>
-                        ${mantenimiento.tipo_mantenimiento || ""}
-                    </td>
-
-                    <td>
-                        ${mantenimiento.trabajo || ""}
-                    </td>
-
-                    <td>
-                        ${mantenimiento.estado || ""}
-                    </td>
-
-                `;
-
-
-                tabla.appendChild(fila);
-
-            }
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error cargando mantenimientos:",
-            error
-        );
+        console.error("Error cargando mantenimientos:", error);
 
     }
 
 }
-
-
 // ========================================
 // GRÁFICOS DEL DASHBOARD
 // ========================================
