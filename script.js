@@ -3354,6 +3354,102 @@ if (modal) {
 // CARGAR MANTENIMIENTOS
 // ========================================
 
+
+async function cargarMantenimientos() {
+
+    try {
+
+        const respuesta =
+            await fetch("/api/mantenimientos");
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "Error al obtener mantenimientos"
+            );
+
+        }
+
+
+        const mantenimientos =
+            await respuesta.json();
+
+
+        const tabla =
+            document.getElementById(
+                "tablaMantenimientos"
+            );
+
+
+        if (!tabla) {
+
+            console.warn(
+                "No se encontró la tabla tablaMantenimientos."
+            );
+
+            return;
+
+        }
+
+
+        tabla.innerHTML = "";
+
+
+        mantenimientos.forEach(
+            function(mantenimiento) {
+
+                const fila =
+                    document.createElement("tr");
+
+
+                fila.innerHTML = `
+
+                    <td>
+                        ${mantenimiento.fecha || ""}
+                    </td>
+
+                    <td>
+                        ${mantenimiento.proyecto || ""}
+                    </td>
+
+                    <td>
+                        ${mantenimiento.cuadrilla || ""}
+                    </td>
+
+                    <td>
+                        ${mantenimiento.tipo_mantenimiento || ""}
+                    </td>
+
+                    <td>
+                        ${mantenimiento.trabajo || ""}
+                    </td>
+
+                    <td>
+                        ${mantenimiento.estado || ""}
+                    </td>
+
+                `;
+
+
+                tabla.appendChild(fila);
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando mantenimientos:",
+            error
+        );
+
+    }
+
+}
+
+
 // ========================================
 // GRÁFICOS DEL DASHBOARD
 // ========================================
