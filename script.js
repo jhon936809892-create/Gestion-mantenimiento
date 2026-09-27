@@ -7,7 +7,8 @@ let calendarioMantenimiento = null;
 let resizeCalendarioPendiente = false;
 let graficoCertificaciones = null;
 let graficoAverias = null;
-
+let graficoSplitters = null;
+let graficoTrabajoCampo = null;
 
 // ========================================
 // ESTILOS AUTOMÁTICOS PARA MODAL PERSONAL
@@ -3369,12 +3370,17 @@ async function cargarMantenimientos() {
 
         console.log("MANTENIMIENTOS RECIBIDOS:", mantenimientos);
 
-        const tabla = document.getElementById("tablaMantenimiento");
+        // =====================================================
+        // TABLA DE MANTENIMIENTOS
+        // =====================================================
 
-        console.log("TABLA ENCONTRADA:", tabla);
+        const tabla =
+            document.getElementById("tablaMantenimiento");
 
         if (!tabla) {
-            console.error("❌ NO EXISTE #tablaMantenimiento EN EL HTML");
+            console.error(
+                "❌ NO EXISTE #tablaMantenimiento EN EL HTML"
+            );
             return;
         }
 
@@ -3382,13 +3388,16 @@ async function cargarMantenimientos() {
 
         mantenimientos.forEach(function(mantenimiento) {
 
-            const fila = document.createElement("tr");
+            const fila =
+                document.createElement("tr");
 
             fila.innerHTML = `
                 <td>
                     ${
                         mantenimiento.fecha
-                            ? new Date(mantenimiento.fecha).toLocaleString("es-PE", {
+                            ? new Date(
+                                mantenimiento.fecha
+                            ).toLocaleString("es-PE", {
                                 dateStyle: "short",
                                 timeStyle: "short"
                             })
@@ -3396,32 +3405,141 @@ async function cargarMantenimientos() {
                     }
                 </td>
 
-                <td>${mantenimiento.proyecto || ""}</td>
+                <td>
+                    ${mantenimiento.proyecto || ""}
+                </td>
 
-                <td>${mantenimiento.sede || ""}</td>
+                <td>
+                    ${mantenimiento.sede || ""}
+                </td>
 
-                <td>${mantenimiento.trabajo || ""}</td>
+                <td>
+                    ${mantenimiento.trabajo || ""}
+                </td>
 
-                <td>${mantenimiento.estado || ""}</td>
+                <td>
+                    ${mantenimiento.estado || ""}
+                </td>
             `;
 
             tabla.appendChild(fila);
 
         });
 
-        console.log(
-            "✅ Filas creadas:",
-            mantenimientos.length
-        );
+
+        // =====================================================
+        // TOTAL DE MANTENIMIENTOS
+        // =====================================================
 
         const total =
-            document.getElementById("totalMantenimientos");
+            document.getElementById(
+                "totalMantenimientos"
+            );
 
         if (total) {
-            total.textContent = mantenimientos.length;
+            total.textContent =
+                mantenimientos.length;
         }
 
+
+        // =====================================================
+        // SEPARAR MANTENIMIENTOS POR TIPO
+        // =====================================================
+
+        const certificaciones =
+            mantenimientos.filter(function(mantenimiento) {
+
+                return mantenimiento.tipo_mantenimiento ===
+                    "Certificación";
+
+            });
+
+
+        const averias =
+            mantenimientos.filter(function(mantenimiento) {
+
+                return mantenimiento.tipo_mantenimiento ===
+                    "Avería";
+
+            });
+
+
+        const cambiosSplitter =
+            mantenimientos.filter(function(mantenimiento) {
+
+                return mantenimiento.tipo_mantenimiento ===
+                    "Cambio de splitter";
+
+            });
+
+
+        const trabajosCampo =
+            mantenimientos.filter(function(mantenimiento) {
+
+                return mantenimiento.tipo_mantenimiento ===
+                    "Trabajo en campo";
+
+            });
+
+
+        // =====================================================
+        // MOSTRAR EN CONSOLA PARA COMPROBAR
+        // =====================================================
+
+        console.log(
+            "Certificaciones:",
+            certificaciones
+        );
+
+        console.log(
+            "Averías:",
+            averias
+        );
+
+        console.log(
+            "Cambios de splitter:",
+            cambiosSplitter
+        );
+
+        console.log(
+            "Trabajos en campo:",
+            trabajosCampo
+        );
+
+
+        // =====================================================
+        // CREAR GRÁFICOS
+        // =====================================================
+
+        crearGraficoMantenimientos(
+            "graficoCertificaciones",
+            certificaciones,
+            "Certificaciones por sede"
+        );
+
+
+        crearGraficoMantenimientos(
+            "graficoAverias",
+            averias,
+            "Averías por sede"
+        );
+
+
+        crearGraficoMantenimientos(
+            "graficoSplitter",
+            cambiosSplitter,
+            "Cambio de splitter por sede"
+        );
+
+
+        crearGraficoMantenimientos(
+            "graficoCampo",
+            trabajosCampo,
+            "Trabajo en campo por sede"
+        );
+
     }
+
     catch (error) {
 
         console.error(
@@ -3433,6 +3551,122 @@ async function cargarMantenimientos() {
 
 }
 
+
+function crearGraficoMantenimientos(
+    idCanvas,
+    mantenimientos,
+    titulo
+) {
+
+    const canvas =
+        document.getElementById(idCanvas);
+
+    if (!canvas) {
+
+        console.log(
+            "No existe el canvas:",
+            idCanvas
+        );
+
+        return;
+    }
+
+
+    // =====================================================
+    // CONTAR MANTENIMIENTOS POR SEDE
+    // =====================================================
+
+    const cantidades = {};
+
+
+    mantenimientos.forEach(
+        function(mantenimiento) {
+
+            const sede =
+                mantenimiento.sede || "Sin sede";
+
+
+            if (!cantidades[sede]) {
+
+                cantidades[sede] = 0;
+
+            }
+
+            cantidades[sede]++;
+
+        }
+    );
+
+
+    const sedes =
+        Object.keys(cantidades);
+
+
+    const valores =
+        Object.values(cantidades);
+
+
+    // =====================================================
+    // EVITAR GRÁFICOS DUPLICADOS
+    // =====================================================
+
+    if (canvas._chart) {
+
+        canvas._chart.destroy();
+
+    }
+
+
+    // =====================================================
+    // CREAR GRÁFICO
+    // =====================================================
+
+    canvas._chart =
+        new Chart(canvas, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: sedes,
+
+                datasets: [{
+
+                    data: valores
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    },
+
+                    title: {
+
+                        display: true,
+
+                        text: titulo
+
+                    }
+
+                }
+
+            }
+
+        });
+
+}
 // ========================================
 // GRÁFICOS DEL DASHBOARD
 // ========================================
@@ -3464,24 +3698,90 @@ async function cargarGraficosDashboard() {
 
         const certificaciones = {};
         const averias = {};
-
+        const splitters = {};
+        const trabajoCampo = {};
 
         mantenimientos.forEach(
-            function(mantenimiento) {
+    function(mantenimiento) {
 
-                const sede =
-                    mantenimiento.sede ||
-                    "Sin sede";
+        const sede =
+            mantenimiento.sede ||
+            "Sin sede";
+
+        const tipo =
+            (
+                mantenimiento.tipo_mantenimiento ||
+                ""
+            )
+            .trim()
+            .toLowerCase();
 
 
-                const tipo =
-                    (
-                        mantenimiento.trabajo ||
-                        ""
-                    )
-                    .trim()
-                    .toLowerCase();
+        // ========================================
+        // CERTIFICACIONES
+        // ========================================
 
+        if (
+            tipo === "certificación"
+        ) {
+
+            if (!certificaciones[sede]) {
+                certificaciones[sede] = 0;
+            }
+
+            certificaciones[sede]++;
+        }
+
+
+        // ========================================
+        // AVERÍAS
+        // ========================================
+
+        if (
+            tipo === "avería"
+        ) {
+
+            if (!averias[sede]) {
+                averias[sede] = 0;
+            }
+
+            averias[sede]++;
+        }
+
+
+        // ========================================
+        // CAMBIO DE SPLITTER
+        // ========================================
+
+        if (
+            tipo === "cambio de splitter"
+        ) {
+
+            if (!splitters[sede]) {
+                splitters[sede] = 0;
+            }
+
+            splitters[sede]++;
+        }
+
+
+        // ========================================
+        // TRABAJO EN CAMPO
+        // ========================================
+
+        if (
+            tipo === "trabajo en campo"
+        ) {
+
+            if (!trabajoCampo[sede]) {
+                trabajoCampo[sede] = 0;
+            }
+
+            trabajoCampo[sede]++;
+        }
+
+    }
+);
 
                 // ========================================
                 // CERTIFICACIONES
