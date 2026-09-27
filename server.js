@@ -1832,7 +1832,7 @@ app.get(
                         m.cuadrilla_id,
                         c.nombre AS cuadrilla,
                         m.descripcion,
-                        m.descripcion AS trabajo,
+                        m.mantenimiento AS trabajo,
                         m.estado,
                         m.tipo_mantenimiento
 
