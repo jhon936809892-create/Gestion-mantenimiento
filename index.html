@@ -108,187 +108,227 @@
         </header>
 
         <section
-            id="dashboard"
-            class="seccion activa"
-        >
+    id="dashboard"
+    class="seccion activa"
+>
 
-            <div class="cards">
+    <!-- =========================================
+         TARJETAS PRINCIPALES
+    ========================================== -->
 
-                <div class="card">
+    <div class="cards">
 
-                    <div class="card-icon">
-                        👷
-                    </div>
+        <div class="card">
 
-                    <div>
-                        <p>Personal</p>
-
-                        <h2 id="totalPersonal">
-                            0
-                        </h2>
-                    </div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        👥
-                    </div>
-
-                    <div>
-                        <p>Cuadrillas</p>
-
-                        <h2>
-                            3
-                        </h2>
-                    </div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        📁
-                    </div>
-
-                    <div>
-                        <p>Proyectos</p>
-
-                        <h2 id="totalProyectos">
-                            0
-                        </h2>
-                    </div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        🔧
-                    </div>
-
-                    <div>
-                        <p>Mantenimientos</p>
-
-                        <h2 id="totalMantenimientos">
-                            0
-                        </h2>
-                    </div>
-
-                </div>
-
+            <div class="card-icon">
+                👷
             </div>
 
-            <div class="panel">
+            <div>
+                <p>Personal</p>
+
+                <h2 id="totalPersonal">
+                    0
+                </h2>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                👥
+            </div>
+
+            <div>
+                <p>Cuadrillas</p>
 
                 <h2>
-                    Resumen
+                    3
                 </h2>
+            </div>
 
-                <div class="resumen">
+        </div>
 
-                    <div>
-                        <strong>
-                            Cuadrilla 1
-                        </strong>
 
-                        <span id="cantidadC1">
-                            0 técnicos
-                        </span>
-                    </div>
+        <div class="card">
 
-                    <div>
-                        <strong>
-                            Cuadrilla 2
-                        </strong>
+            <div class="card-icon">
+                📁
+            </div>
 
-                        <span id="cantidadC2">
-                            0 técnicos
-                        </span>
-                    </div>
+            <div>
+                <p>Proyectos</p>
 
-                    <div>
-                        <strong>
-                            Cuadrilla 3
-                        </strong>
+                <h2 id="totalProyectos">
+                    0
+                </h2>
+            </div>
 
-                        <span id="cantidadC3">
-                            0 técnicos
-                        </span>
-                    </div>
+        </div>
 
-                </div>
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔧
+            </div>
+
+            <div>
+                <p>Mantenimientos</p>
+
+                <h2 id="totalMantenimientos">
+                    0
+                </h2>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         RESUMEN
+    ========================================== -->
+
+    <div class="panel">
+
+        <h2>
+            Resumen
+        </h2>
+
+        <div class="resumen">
+
+            <div>
+
+                <strong>
+                    Cuadrilla 1
+                </strong>
+
+                <span id="cantidadC1">
+                    0 técnicos
+                </span>
 
             </div>
 
-            <div class="graficos-dashboard">
 
-    <!-- CERTIFICACIONES -->
-    <div class="panel grafico-panel">
+            <div>
 
-        <h2>
-            Certificaciones por Distrito
-        </h2>
+                <strong>
+                    Cuadrilla 2
+                </strong>
 
-        <div class="grafico-ruleta">
+                <span id="cantidadC2">
+                    0 técnicos
+                </span>
 
-            <canvas id="graficoCertificaciones"></canvas>
-
-        </div>
-
-    </div>
+            </div>
 
 
-    <!-- AVERÍAS -->
-    <div class="panel grafico-panel">
+            <div>
 
-        <h2>
-            Averías por Distrito
-        </h2>
+                <strong>
+                    Cuadrilla 3
+                </strong>
 
-        <div class="grafico-ruleta">
+                <span id="cantidadC3">
+                    0 técnicos
+                </span>
 
-            <canvas id="graficoAverias"></canvas>
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- CAMBIO DE SPLITTER -->
-    <div class="panel grafico-panel">
+    <!-- =========================================
+         GRÁFICOS DE MANTENIMIENTOS
+    ========================================== -->
 
-        <h2>
-            Cambio de splitter por Distrito
-        </h2>
-
-        <div class="grafico-ruleta">
-
-            <canvas id="graficoSplitter"></canvas>
-
-        </div>
-
-    </div>
+    <div class="graficos-dashboard">
 
 
-    <!-- TRABAJO EN CAMPO -->
-    <div class="panel grafico-panel">
+        <!-- CERTIFICACIONES -->
 
-        <h2>
-            Trabajo en campo por Distrito
-        </h2>
+        <div class="panel grafico-panel">
 
-        <div class="grafico-ruleta">
+            <h2>
+                Certificaciones por Distrito
+            </h2>
 
-            <canvas id="graficoTrabajoCampo"></canvas>
+            <div class="grafico-ruleta">
+
+                <canvas
+                    id="graficoCertificaciones"
+                ></canvas>
+
+            </div>
 
         </div>
 
+
+        <!-- AVERÍAS -->
+
+        <div class="panel grafico-panel">
+
+            <h2>
+                Averías por Distrito
+            </h2>
+
+            <div class="grafico-ruleta">
+
+                <canvas
+                    id="graficoAverias"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- CAMBIO DE SPLITTER -->
+
+        <div class="panel grafico-panel">
+
+            <h2>
+                Cambio de splitter por Distrito
+            </h2>
+
+            <div class="grafico-ruleta">
+
+                <canvas
+                    id="graficoSplitter"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRABAJO EN CAMPO -->
+
+        <div class="panel grafico-panel">
+
+            <h2>
+                Trabajo en campo por Distrito
+            </h2>
+
+            <div class="grafico-ruleta">
+
+                <canvas
+                    id="graficoTrabajoCampo"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+
     </div>
 
-</div>
-        </section>
+</section>
 
         <section
             id="personal"
