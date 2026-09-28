@@ -90,50 +90,7 @@ function mostrarSeccion(seccion, boton) {
 
     };
 
-    const botonTopbar =
-    document.getElementById("botonTopbar");
-
-if (botonTopbar) {
-
-    botonTopbar.innerHTML = "";
-
-    if (seccion === "proyectos") {
-
-        botonTopbar.innerHTML = `
-            <button
-                type="button"
-                class="btn-primary"
-                onclick="abrirModalProyecto()"
-            >
-                + Agregar proyecto
-            </button>
-        `;
-
-    }
-
-    if (seccion === "mantenimiento") {
-
-        botonTopbar.innerHTML = `
-            <button
-                type="button"
-                class="btn-primary"
-                onclick="abrirModalMantenimiento()"
-            >
-                + Agregar mantenimiento
-            </button>
-        `;
-
-    }
-
-}
-
-
-    if (titulo) {
-
-        titulo.textContent =
-            titulos[seccion] || seccion;
-
-    }
+   
 
     const botonTopbar =
     document.getElementById("botonTopbar");
