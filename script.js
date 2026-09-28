@@ -1,4 +1,4 @@
-```javascript
+
 // ============================================================
 // SISTEMA DE GESTIÓN DE CUADRILLAS
 // SCRIPT.JS
@@ -2927,4 +2927,3 @@ window.addEventListener(
 
     }
 );
-```
