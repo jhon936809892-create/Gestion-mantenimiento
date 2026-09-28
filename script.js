@@ -52,6 +52,7 @@ function mostrarSeccion(seccion, boton) {
     const seleccionada =
         document.getElementById(seccion);
 
+
     if (seleccionada) {
 
         seleccionada.classList.add("activa");
@@ -75,6 +76,10 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
+    // ========================================================
+    // TÍTULO
+    // ========================================================
+
     const titulo =
         document.getElementById("titulo");
 
@@ -90,44 +95,129 @@ function mostrarSeccion(seccion, boton) {
 
     };
 
-   
 
-   const botonTopbar =
-    document.getElementById("botonTopbar");
+    if (titulo) {
 
-if (botonTopbar) {
-
-    botonTopbar.innerHTML = "";
-
-    if (seccion === "proyectos") {
-
-        botonTopbar.innerHTML = `
-            <button
-                type="button"
-                class="btn-primary"
-                onclick="abrirModalProyecto()"
-            >
-                + Añadir proyecto
-            </button>
-        `;
+        titulo.textContent =
+            titulos[seccion] || seccion;
 
     }
+
+
+    // ========================================================
+    // BOTÓN TOPBAR
+    // ========================================================
+
+    const botonTopbar =
+        document.getElementById("botonTopbar");
+
+
+    if (botonTopbar) {
+
+        botonTopbar.innerHTML = "";
+
+
+        if (seccion === "proyectos") {
+
+            botonTopbar.innerHTML = `
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="abrirModalProyecto()"
+                >
+                    + Añadir proyecto
+                </button>
+            `;
+
+        }
+
+
+        if (seccion === "mantenimiento") {
+
+            botonTopbar.innerHTML = `
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="abrirModalMantenimiento()"
+                >
+                    + Añadir mantenimiento
+                </button>
+            `;
+
+        }
+
+    }
+
+
+    // ========================================================
+    // MANTENIMIENTO
+    // ========================================================
 
     if (seccion === "mantenimiento") {
 
-        botonTopbar.innerHTML = `
-            <button
-                type="button"
-                class="btn-primary"
-                onclick="abrirModalMantenimiento()"
-            >
-                + Añadir mantenimiento
-            </button>
-        `;
+        cargarProyectos();
+
+        cargarMantenimientos();
+
+
+        setTimeout(function() {
+
+            inicializarCalendarioMantenimiento();
+
+
+            if (calendarioMantenimiento) {
+
+                calendarioMantenimiento.updateSize();
+
+                calendarioMantenimiento.refetchEvents();
+
+            }
+
+        }, 150);
 
     }
 
-}
+
+    // ========================================================
+    // PROYECTOS
+    // ========================================================
+
+    if (seccion === "proyectos") {
+
+        cargarProyectos();
+
+    }
+
+
+    // ========================================================
+    // PERSONAL
+    // ========================================================
+
+    if (seccion === "personal") {
+
+        if (typeof cargarPersonal === "function") {
+
+            cargarPersonal();
+
+        }
+
+    }
+
+
+    // ========================================================
+    // MATERIALES
+    // ========================================================
+
+    if (seccion === "materiales") {
+
+        if (typeof cargarMateriales === "function") {
+
+            cargarMateriales();
+
+        }
+
+    }
+
 }
 
 
