@@ -1,3 +1,4 @@
+
 // ============================================================
 // SISTEMA DE GESTIÓN DE CUADRILLAS
 // SCRIPT.JS
@@ -24,11 +25,12 @@ let graficoTrabajoCampo = null;
 
 function cerrarModal(id) {
 
-    const modal =
-        document.getElementById(id);
+    const modal = document.getElementById(id);
 
     if (modal) {
+
         modal.classList.remove("active");
+
     }
 
 }
@@ -40,6 +42,10 @@ function cerrarModal(id) {
 
 function mostrarSeccion(seccion, boton) {
 
+    // --------------------------------------------------------
+    // OCULTAR TODAS LAS SECCIONES
+    // --------------------------------------------------------
+
     document
         .querySelectorAll(".seccion")
         .forEach(function(elemento) {
@@ -48,6 +54,10 @@ function mostrarSeccion(seccion, boton) {
 
         });
 
+
+    // --------------------------------------------------------
+    // MOSTRAR SECCIÓN SELECCIONADA
+    // --------------------------------------------------------
 
     const seleccionada =
         document.getElementById(seccion);
@@ -59,6 +69,10 @@ function mostrarSeccion(seccion, boton) {
 
     }
 
+
+    // --------------------------------------------------------
+    // CAMBIAR BOTÓN ACTIVO DEL MENÚ
+    // --------------------------------------------------------
 
     document
         .querySelectorAll(".menu")
@@ -76,9 +90,9 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // ========================================================
+    // --------------------------------------------------------
     // TÍTULO
-    // ========================================================
+    // --------------------------------------------------------
 
     const titulo =
         document.getElementById("titulo");
@@ -104,9 +118,9 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // ========================================================
-    // BOTÓN TOPBAR
-    // ========================================================
+    // --------------------------------------------------------
+    // BOTÓN DE LA TOPBAR
+    // --------------------------------------------------------
 
     const botonTopbar =
         document.getElementById("botonTopbar");
@@ -117,9 +131,14 @@ function mostrarSeccion(seccion, boton) {
         botonTopbar.innerHTML = "";
 
 
+        // ----------------------------------------------------
+        // BOTÓN PROYECTO
+        // ----------------------------------------------------
+
         if (seccion === "proyectos") {
 
             botonTopbar.innerHTML = `
+
                 <button
                     type="button"
                     class="btn-primary"
@@ -127,14 +146,20 @@ function mostrarSeccion(seccion, boton) {
                 >
                     + Añadir proyecto
                 </button>
+
             `;
 
         }
 
 
+        // ----------------------------------------------------
+        // BOTÓN MANTENIMIENTO
+        // ----------------------------------------------------
+
         if (seccion === "mantenimiento") {
 
             botonTopbar.innerHTML = `
+
                 <button
                     type="button"
                     class="btn-primary"
@@ -142,6 +167,7 @@ function mostrarSeccion(seccion, boton) {
                 >
                     + Añadir mantenimiento
                 </button>
+
             `;
 
         }
@@ -149,9 +175,9 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // ========================================================
-    // MANTENIMIENTO
-    // ========================================================
+    // --------------------------------------------------------
+    // MÓDULO MANTENIMIENTO
+    // --------------------------------------------------------
 
     if (seccion === "mantenimiento") {
 
@@ -178,9 +204,9 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // ========================================================
-    // PROYECTOS
-    // ========================================================
+    // --------------------------------------------------------
+    // MÓDULO PROYECTOS
+    // --------------------------------------------------------
 
     if (seccion === "proyectos") {
 
@@ -189,9 +215,9 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // ========================================================
-    // PERSONAL
-    // ========================================================
+    // --------------------------------------------------------
+    // MÓDULO PERSONAL
+    // --------------------------------------------------------
 
     if (seccion === "personal") {
 
@@ -204,9 +230,9 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // ========================================================
-    // MATERIALES
-    // ========================================================
+    // --------------------------------------------------------
+    // MÓDULO MATERIALES
+    // --------------------------------------------------------
 
     if (seccion === "materiales") {
 
@@ -219,79 +245,6 @@ function mostrarSeccion(seccion, boton) {
     }
 
 }
-
-
-    // ========================================================
-    // CARGAR MÓDULO MANTENIMIENTO
-    // ========================================================
-
-    if (seccion === "mantenimiento") {
-
-        cargarProyectos();
-
-        cargarMantenimientos();
-
-
-        setTimeout(function() {
-
-            inicializarCalendarioMantenimiento();
-
-            if (calendarioMantenimiento) {
-
-                calendarioMantenimiento.updateSize();
-
-                calendarioMantenimiento.refetchEvents();
-
-            }
-
-        }, 150);
-
-    }
-
-
-    // ========================================================
-    // CARGAR PROYECTOS
-    // ========================================================
-
-    if (seccion === "proyectos") {
-
-        cargarProyectos();
-
-    }
-
-
-    // ========================================================
-    // CARGAR PERSONAL
-    // ========================================================
-
-    if (seccion === "personal") {
-
-        if (typeof cargarPersonal === "function") {
-
-            cargarPersonal();
-
-        }
-
-    }
-
-
-    // ========================================================
-    // CARGAR MATERIALES
-    // ========================================================
-
-    if (seccion === "materiales") {
-
-        if (typeof cargarMateriales === "function") {
-
-            cargarMateriales();
-
-        }
-
-    }
-
-}
-
-
 
 
 // ============================================================
@@ -303,6 +256,7 @@ function abrirModalProyecto() {
     const modal =
         document.getElementById("modalProyecto");
 
+
     if (!modal) {
 
         console.error(
@@ -313,8 +267,10 @@ function abrirModalProyecto() {
 
     }
 
+
     const formulario =
         modal.querySelector("form");
+
 
     if (formulario) {
 
@@ -322,9 +278,12 @@ function abrirModalProyecto() {
 
     }
 
+
     modal.classList.add("active");
 
 }
+
+
 // ============================================================
 // PROYECTOS
 // ============================================================
@@ -357,7 +316,7 @@ async function cargarProyectos() {
 
 
         // ====================================================
-        // TABLA PROYECTOS
+        // TABLA DE PROYECTOS
         // ====================================================
 
         const tabla =
@@ -410,7 +369,7 @@ async function cargarProyectos() {
 
 
         // ====================================================
-        // TOTAL PROYECTOS
+        // TOTAL DE PROYECTOS
         // ====================================================
 
         const total =
@@ -432,7 +391,6 @@ async function cargarProyectos() {
         // ====================================================
 
         cargarSelectProyectos();
-
 
     }
     catch (error) {
@@ -475,6 +433,10 @@ function cargarSelectProyectos() {
     }
 
 
+    // --------------------------------------------------------
+    // BUSCAR PROYECTOS MIENTRAS SE ESCRIBE
+    // --------------------------------------------------------
+
     inputProyecto.oninput =
         function() {
 
@@ -486,6 +448,9 @@ function cargarSelectProyectos() {
 
             resultados.innerHTML = "";
 
+
+            // Se borra el ID hasta que el usuario
+            // seleccione un proyecto real.
 
             inputProyecto.dataset.proyectoId =
                 "";
@@ -501,24 +466,38 @@ function cargarSelectProyectos() {
             }
 
 
+            // ------------------------------------------------
+            // BUSCAR POR CÓDIGO O NOMBRE
+            // ------------------------------------------------
+
             const encontrados =
-    proyectos.filter(function(proyecto) {
+                proyectos.filter(function(proyecto) {
 
-        const codigo =
-            String(proyecto.codigo || "")
-                .toLowerCase();
+                    const codigo =
+                        String(
+                            proyecto.codigo || ""
+                        )
+                        .toLowerCase();
 
-        const nombre =
-            String(proyecto.nombre || "")
-                .toLowerCase();
 
-        return (
-            codigo.includes(texto) ||
-            nombre.includes(texto)
-        );
+                    const nombre =
+                        String(
+                            proyecto.nombre || ""
+                        )
+                        .toLowerCase();
 
-    });
 
+                    return (
+                        codigo.includes(texto) ||
+                        nombre.includes(texto)
+                    );
+
+                });
+
+
+            // ------------------------------------------------
+            // SIN RESULTADOS
+            // ------------------------------------------------
 
             if (
                 encontrados.length === 0
@@ -542,6 +521,10 @@ function cargarSelectProyectos() {
             }
 
 
+            // ------------------------------------------------
+            // MOSTRAR RESULTADOS
+            // ------------------------------------------------
+
             encontrados.forEach(function(proyecto) {
 
                 const opcion =
@@ -552,8 +535,11 @@ function cargarSelectProyectos() {
                     "opcion-proyecto-mantenimiento";
 
 
+                // IMPORTANTE:
+                // Ahora muestra el NOMBRE del proyecto.
+
                 opcion.textContent =
-                    proyecto.codigo;
+                    proyecto.nombre || "";
 
 
                 opcion.addEventListener(
@@ -606,13 +592,25 @@ function seleccionarProyectoMantenimiento(proyecto) {
     }
 
 
-    input.value =
-        proyecto.codigo || "";
+    // --------------------------------------------------------
+    // MOSTRAR NOMBRE DEL PROYECTO
+    // --------------------------------------------------------
 
+    input.value =
+        proyecto.nombre || "";
+
+
+    // --------------------------------------------------------
+    // GUARDAR ID REAL DEL PROYECTO
+    // --------------------------------------------------------
 
     input.dataset.proyectoId =
         proyecto.id || "";
 
+
+    // --------------------------------------------------------
+    // OCULTAR RESULTADOS
+    // --------------------------------------------------------
 
     if (resultados) {
 
@@ -655,6 +653,10 @@ function abrirListaProyectosMantenimiento() {
     }
 
 
+    // --------------------------------------------------------
+    // SI YA ESTÁ ABIERTA, CERRARLA
+    // --------------------------------------------------------
+
     if (
         resultados.style.display ===
         "block"
@@ -670,6 +672,10 @@ function abrirListaProyectosMantenimiento() {
 
     resultados.innerHTML = "";
 
+
+    // --------------------------------------------------------
+    // NO HAY PROYECTOS
+    // --------------------------------------------------------
 
     if (
         !proyectos ||
@@ -694,6 +700,10 @@ function abrirListaProyectosMantenimiento() {
     }
 
 
+    // --------------------------------------------------------
+    // MOSTRAR TODOS LOS PROYECTOS
+    // --------------------------------------------------------
+
     proyectos.forEach(function(proyecto) {
 
         const opcion =
@@ -704,8 +714,11 @@ function abrirListaProyectosMantenimiento() {
             "opcion-proyecto-mantenimiento";
 
 
+        // IMPORTANTE:
+        // Mostrar nombre y no código.
+
         opcion.textContent =
-            proyecto.codigo || "";
+            proyecto.nombre || "";
 
 
         opcion.addEventListener(
@@ -818,7 +831,11 @@ async function cargarMantenimientos() {
                         </td>
 
                         <td>
-                            ${mantenimiento.codigo || ""}
+                            ${
+                                mantenimiento.nombre ||
+                                mantenimiento.codigo ||
+                                ""
+                            }
                         </td>
 
                         <td>
@@ -889,6 +906,8 @@ async function cargarMantenimientos() {
 // ============================================================
 
 async function abrirModalMantenimiento() {
+
+    // Primero actualizamos los proyectos.
 
     await cargarProyectos();
 
@@ -1079,9 +1098,9 @@ async function registrarMantenimiento(event) {
         ).value;
 
 
-    // ====================================================
+    // ========================================================
     // VALIDACIONES
-    // ====================================================
+    // ========================================================
 
     if (!fecha) {
 
@@ -1097,7 +1116,7 @@ async function registrarMantenimiento(event) {
     if (!proyectoId) {
 
         alert(
-            "Debe seleccionar un proyecto."
+            "Debe seleccionar un proyecto de la lista."
         );
 
         return;
@@ -1138,6 +1157,10 @@ async function registrarMantenimiento(event) {
     }
 
 
+    // ========================================================
+    // DATOS
+    // ========================================================
+
     const datos = {
 
         fecha: fecha,
@@ -1154,6 +1177,16 @@ async function registrarMantenimiento(event) {
 
     };
 
+
+    console.log(
+        "Datos enviados:",
+        datos
+    );
+
+
+    // ========================================================
+    // ENVIAR AL SERVIDOR
+    // ========================================================
 
     try {
 
@@ -1199,6 +1232,10 @@ async function registrarMantenimiento(event) {
         );
 
 
+        // ----------------------------------------------------
+        // CERRAR MODAL
+        // ----------------------------------------------------
+
         const modal =
             document.getElementById(
                 "modalMantenimiento"
@@ -1213,6 +1250,10 @@ async function registrarMantenimiento(event) {
 
         }
 
+
+        // ----------------------------------------------------
+        // LIMPIAR FORMULARIO
+        // ----------------------------------------------------
 
         const formulario =
             document.querySelector(
@@ -1250,8 +1291,16 @@ async function registrarMantenimiento(event) {
         }
 
 
+        // ----------------------------------------------------
+        // ACTUALIZAR TABLA
+        // ----------------------------------------------------
+
         await cargarMantenimientos();
 
+
+        // ----------------------------------------------------
+        // ACTUALIZAR CALENDARIO
+        // ----------------------------------------------------
 
         if (calendarioMantenimiento) {
 
@@ -1259,6 +1308,10 @@ async function registrarMantenimiento(event) {
 
         }
 
+
+        // ----------------------------------------------------
+        // ACTUALIZAR GRÁFICOS
+        // ----------------------------------------------------
 
         await cargarGraficosDashboard();
 
@@ -1281,7 +1334,7 @@ async function registrarMantenimiento(event) {
 
 
 // ============================================================
-// CALENDARIO
+// CALENDARIO DE MANTENIMIENTO
 // ============================================================
 
 function inicializarCalendarioMantenimiento() {
@@ -1298,6 +1351,8 @@ function inicializarCalendarioMantenimiento() {
 
     }
 
+
+    // Si ya existe, no crear otro.
 
     if (calendarioMantenimiento) {
 
@@ -1324,6 +1379,10 @@ function inicializarCalendarioMantenimiento() {
         new FullCalendar.Calendar(
             elemento,
             {
+
+                // ------------------------------------------------
+                // CONFIGURACIÓN
+                // ------------------------------------------------
 
                 initialView:
                     "dayGridMonth",
@@ -1370,6 +1429,10 @@ function inicializarCalendarioMantenimiento() {
                     "08:00:00",
 
 
+                // ------------------------------------------------
+                // EVENTOS
+                // ------------------------------------------------
+
                 events:
                     async function(
                         info,
@@ -1411,6 +1474,7 @@ function inicializarCalendarioMantenimiento() {
 
                                             title:
                                                 `${
+                                                    mantenimiento.nombre ||
                                                     mantenimiento.codigo ||
                                                     "Sin proyecto"
                                                 } - Cuadrilla ${
@@ -1428,7 +1492,9 @@ function inicializarCalendarioMantenimiento() {
                                             extendedProps: {
 
                                                 proyecto:
+                                                    mantenimiento.nombre ||
                                                     mantenimiento.proyecto ||
+                                                    mantenimiento.codigo ||
                                                     "",
 
                                                 sede:
@@ -1460,7 +1526,9 @@ function inicializarCalendarioMantenimiento() {
                                 );
 
 
-                            successCallback(eventos);
+                            successCallback(
+                                eventos
+                            );
 
                         }
                         catch (error) {
@@ -1469,12 +1537,18 @@ function inicializarCalendarioMantenimiento() {
                                 error
                             );
 
-                            failureCallback(error);
+                            failureCallback(
+                                error
+                            );
 
                         }
 
                     },
 
+
+                // ------------------------------------------------
+                // CLICK EN EVENTO
+                // ------------------------------------------------
 
                 eventClick:
                     function(info) {
@@ -1640,7 +1714,7 @@ async function cargarGraficosDashboard() {
 
 
         // ====================================================
-        // DESTRUIR GRÁFICOS
+        // DESTRUIR GRÁFICOS ANTERIORES
         // ====================================================
 
         if (graficoCertificaciones) {
@@ -1796,7 +1870,7 @@ async function cargarGraficosDashboard() {
 
 
         // ====================================================
-        // SPLITTER
+        // CAMBIO DE SPLITTER
         // ====================================================
 
         const canvasSplitter =
@@ -1922,10 +1996,6 @@ async function cargarGraficosDashboard() {
 // ============================================================
 // PERSONAL
 // ============================================================
-
-// Estas funciones se mantienen separadas del módulo
-// Mantenimiento para no mezclar su funcionamiento.
-
 
 async function cargarPersonal() {
 
@@ -2395,7 +2465,11 @@ async function cargarMateriales() {
             fila.innerHTML = `
 
                 <td>
-                    ${material.material || material.nombre || ""}
+                    ${
+                        material.material ||
+                        material.nombre ||
+                        ""
+                    }
                 </td>
 
                 <td>
@@ -2722,6 +2796,10 @@ document.addEventListener(
         );
 
 
+        // ----------------------------------------------------
+        // PERSONAL
+        // ----------------------------------------------------
+
         try {
 
             await cargarPersonal();
@@ -2733,6 +2811,10 @@ document.addEventListener(
 
         }
 
+
+        // ----------------------------------------------------
+        // PROYECTOS
+        // ----------------------------------------------------
 
         try {
 
@@ -2746,6 +2828,10 @@ document.addEventListener(
         }
 
 
+        // ----------------------------------------------------
+        // MANTENIMIENTOS
+        // ----------------------------------------------------
+
         try {
 
             await cargarMantenimientos();
@@ -2757,6 +2843,10 @@ document.addEventListener(
 
         }
 
+
+        // ----------------------------------------------------
+        // MATERIALES
+        // ----------------------------------------------------
 
         try {
 
@@ -2770,6 +2860,10 @@ document.addEventListener(
         }
 
 
+        // ----------------------------------------------------
+        // USUARIO ACTUAL
+        // ----------------------------------------------------
+
         try {
 
             await cargarUsuarioActual();
@@ -2781,6 +2875,10 @@ document.addEventListener(
 
         }
 
+
+        // ----------------------------------------------------
+        // GRÁFICOS
+        // ----------------------------------------------------
 
         try {
 
@@ -2794,8 +2892,18 @@ document.addEventListener(
         }
 
 
-        inicializarCalendarioMantenimiento();
+        // ----------------------------------------------------
+        // NO INICIALIZAMOS EL CALENDARIO AQUÍ
+        // ----------------------------------------------------
+        // Se inicializa cuando se entra a Mantenimiento.
+        // Esto evita problemas porque inicialmente la sección
+        // está oculta.
+        // ----------------------------------------------------
 
+
+        // ----------------------------------------------------
+        // MOSTRAR DASHBOARD
+        // ----------------------------------------------------
 
         mostrarSeccion(
             "dashboard",
