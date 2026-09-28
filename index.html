@@ -858,42 +858,18 @@
 
    
 
- <div class="campo-formulario">
+ <label for="proyectoMantenimiento">
+    Proyecto
+</label>
 
-    <label for="proyectoMantenimiento">
-        Proyecto
-    </label>
+<select id="proyectoMantenimiento" required>
 
-    <div class="input-proyecto-con-boton">
+    <option value="">
+        Seleccione un proyecto
+    </option>
 
-        <input
-            type="text"
-            id="proyectoMantenimiento"
-            placeholder="Escriba el nombre del proyecto..."
-            autocomplete="off"
-            required
-        >
-
-        <button
-            type="button"
-            id="btnDesplegarProyectos"
-        >
-            ▼
-        </button>
-
-    </div>
-
-    <input
-        type="hidden"
-        id="proyectoMantenimientoId"
-    >
-
-    <div
-        id="listaProyectosMantenimiento"
-        class="lista-proyectos-mantenimiento"
-    ></div>
-
-</div>
+</select> 
+                
 <label for="tipoMantenimiento">Tipo de mantenimiento</label>
 <select id="tipoMantenimiento" required>
     <option value="">Seleccione un tipo</option>
