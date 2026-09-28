@@ -2447,8 +2447,8 @@ function cargarSelectProyectos() {
                     function(proyecto) {
 
                         return (
-                            proyecto.nombre &&
-                            proyecto.nombre
+                            proyecto.codigo &&
+                            proyecto.codigo
                                 .toLowerCase()
                                 .includes(texto)
                         );
