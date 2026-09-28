@@ -2305,3 +2305,20 @@ section {
     padding: 10px;
     color: #777;
 }
+
+.input-proyecto-con-boton {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-proyecto-con-boton input {
+    flex: 1;
+}
+
+#btnDesplegarProyectos {
+    width: 45px;
+    height: 42px;
+    margin-left: 5px;
+    cursor: pointer;
+}
