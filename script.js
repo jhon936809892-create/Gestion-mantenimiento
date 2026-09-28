@@ -3251,15 +3251,14 @@ async function registrarMantenimiento(event) {
 
        fecha: inicio || "",
 
-        proyecto_id:
-            Number(
-                document
-                    .getElementById(
-                        "proyectoMantenimiento"
-                    )
-                    .value
-            ),
-
+       proyecto_id:
+    Number(
+        document
+            .getElementById(
+                "proyectoMantenimientoId"
+            )
+            .value
+    ),
         cuadrilla:
             document
                 .getElementById(
