@@ -2274,3 +2274,34 @@ section {
     }
 
 }
+
+.campo-formulario {
+    position: relative;
+}
+
+.lista-proyectos-mantenimiento {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    z-index: 1000;
+}
+
+.opcion-proyecto {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.opcion-proyecto:hover {
+    background: #f0f0f0;
+}
+
+.sin-proyectos {
+    padding: 10px;
+    color: #777;
+}
