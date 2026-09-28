@@ -2780,6 +2780,10 @@ async function cargarProyectos() {
 // CARGAR PROYECTOS EN SELECT
 // ========================================
 
+// ========================================
+// CARGAR PROYECTOS EN SELECT
+// ========================================
+
 function cargarSelectProyectos() {
 
     const input =
@@ -2796,10 +2800,11 @@ function cargarSelectProyectos() {
         document.getElementById(
             "listaProyectosMantenimiento"
         );
+
     const btnDesplegar =
-    document.getElementById(
-        "btnDesplegarProyectos"
-    );
+        document.getElementById(
+            "btnDesplegarProyectos"
+        );
 
 
     if (
@@ -2940,15 +2945,60 @@ function cargarSelectProyectos() {
 
             if (
                 !input.contains(event.target) &&
-                !lista.contains(event.target)
+                !lista.contains(event.target) &&
+                !btnDesplegar?.contains(event.target)
             ) {
 
                 lista.innerHTML = "";
+
+                if (btnDesplegar) {
+                    btnDesplegar.textContent = "▼";
+                    listaAbierta = false;
+                }
 
             }
 
         }
     );
+
+
+    // ========================================
+    // BOTÓN DESPLEGAR / CERRAR PROYECTOS
+    // ========================================
+
+    let listaAbierta = false;
+
+
+    if (btnDesplegar) {
+
+        btnDesplegar.addEventListener(
+            "click",
+            function() {
+
+                listaAbierta =
+                    !listaAbierta;
+
+
+                if (listaAbierta) {
+
+                    mostrarProyectos();
+
+                    btnDesplegar.textContent =
+                        "▲";
+
+                } else {
+
+                    lista.innerHTML = "";
+
+                    btnDesplegar.textContent =
+                        "▼";
+
+                }
+
+            }
+        );
+
+    }
 
 }
 
