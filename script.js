@@ -2796,6 +2796,10 @@ function cargarSelectProyectos() {
         document.getElementById(
             "listaProyectosMantenimiento"
         );
+    const btnDesplegar =
+    document.getElementById(
+        "btnDesplegarProyectos"
+    );
 
 
     if (
