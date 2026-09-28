@@ -1,10 +1,12 @@
-// =====================================================
-// MÓDULO MANTENIMIENTO
-// =====================================================
+// ============================================================
+// SISTEMA DE GESTIÓN DE CUADRILLAS
+// SCRIPT.JS
+// ============================================================
 
-// =====================================================
-// VARIABLES
-// =====================================================
+
+// ============================================================
+// VARIABLES GENERALES
+// ============================================================
 
 let proyectos = [];
 
@@ -16,9 +18,161 @@ let graficoSplitters = null;
 let graficoTrabajoCampo = null;
 
 
-// =====================================================
-// CARGAR PROYECTOS
-// =====================================================
+// ============================================================
+// FUNCIONES GENERALES
+// ============================================================
+
+function cerrarModal(id) {
+
+    const modal =
+        document.getElementById(id);
+
+    if (modal) {
+        modal.classList.remove("active");
+    }
+
+}
+
+
+// ============================================================
+// MOSTRAR SECCIÓN
+// ============================================================
+
+function mostrarSeccion(seccion, boton) {
+
+    document
+        .querySelectorAll(".seccion")
+        .forEach(function(elemento) {
+
+            elemento.classList.remove("activa");
+
+        });
+
+
+    const seleccionada =
+        document.getElementById(seccion);
+
+    if (seleccionada) {
+
+        seleccionada.classList.add("activa");
+
+    }
+
+
+    document
+        .querySelectorAll(".menu")
+        .forEach(function(menu) {
+
+            menu.classList.remove("active");
+
+        });
+
+
+    if (boton) {
+
+        boton.classList.add("active");
+
+    }
+
+
+    const titulo =
+        document.getElementById("titulo");
+
+
+    const titulos = {
+
+        dashboard: "Dashboard",
+        personal: "Personal",
+        cuadrillas: "Cuadrillas",
+        proyectos: "Proyectos",
+        mantenimiento: "Mantenimiento",
+        materiales: "Materiales"
+
+    };
+
+
+    if (titulo) {
+
+        titulo.textContent =
+            titulos[seccion] || seccion;
+
+    }
+
+
+    // ========================================================
+    // CARGAR MÓDULO MANTENIMIENTO
+    // ========================================================
+
+    if (seccion === "mantenimiento") {
+
+        cargarProyectos();
+
+        cargarMantenimientos();
+
+
+        setTimeout(function() {
+
+            inicializarCalendarioMantenimiento();
+
+            if (calendarioMantenimiento) {
+
+                calendarioMantenimiento.updateSize();
+
+                calendarioMantenimiento.refetchEvents();
+
+            }
+
+        }, 150);
+
+    }
+
+
+    // ========================================================
+    // CARGAR PROYECTOS
+    // ========================================================
+
+    if (seccion === "proyectos") {
+
+        cargarProyectos();
+
+    }
+
+
+    // ========================================================
+    // CARGAR PERSONAL
+    // ========================================================
+
+    if (seccion === "personal") {
+
+        if (typeof cargarPersonal === "function") {
+
+            cargarPersonal();
+
+        }
+
+    }
+
+
+    // ========================================================
+    // CARGAR MATERIALES
+    // ========================================================
+
+    if (seccion === "materiales") {
+
+        if (typeof cargarMateriales === "function") {
+
+            cargarMateriales();
+
+        }
+
+    }
+
+}
+
+
+// ============================================================
+// PROYECTOS
+// ============================================================
 
 async function cargarProyectos() {
 
@@ -26,6 +180,7 @@ async function cargarProyectos() {
 
         const respuesta =
             await fetch("/api/proyectos");
+
 
         if (!respuesta.ok) {
 
@@ -35,8 +190,10 @@ async function cargarProyectos() {
 
         }
 
+
         proyectos =
             await respuesta.json();
+
 
         console.log(
             "Proyectos cargados:",
@@ -44,69 +201,68 @@ async function cargarProyectos() {
         );
 
 
-        // =========================================
-        // TABLA DE PROYECTOS
-        // =========================================
+        // ====================================================
+        // TABLA PROYECTOS
+        // ====================================================
 
         const tabla =
             document.getElementById(
                 "tablaProyectos"
             );
 
+
         if (tabla) {
 
             tabla.innerHTML = "";
 
-            proyectos.forEach(
-                function(proyecto) {
 
-                    const fila =
-                        document.createElement(
-                            "tr"
-                        );
+            proyectos.forEach(function(proyecto) {
 
-                    fila.innerHTML = `
+                const fila =
+                    document.createElement("tr");
 
-                        <td>
-                            ${proyecto.nombre || ""}
-                        </td>
 
-                        <td>
-                            ${proyecto.codigo || ""}
-                        </td>
+                fila.innerHTML = `
 
-                        <td>
-                            ${proyecto.tipo || ""}
-                        </td>
+                    <td>
+                        ${proyecto.nombre || ""}
+                    </td>
 
-                        <td>
-                            ${proyecto.sede || ""}
-                        </td>
+                    <td>
+                        ${proyecto.codigo || ""}
+                    </td>
 
-                        <td>
-                            ${proyecto.tipo_cable || ""}
-                        </td>
+                    <td>
+                        ${proyecto.tipo || ""}
+                    </td>
 
-                    `;
+                    <td>
+                        ${proyecto.sede || ""}
+                    </td>
 
-                    tabla.appendChild(
-                        fila
-                    );
+                    <td>
+                        ${proyecto.tipo_cable || ""}
+                    </td>
 
-                }
-            );
+                `;
+
+
+                tabla.appendChild(fila);
+
+            });
 
         }
 
 
-        // =========================================
-        // CONTADOR DE PROYECTOS
-        // =========================================
+        // ====================================================
+        // TOTAL PROYECTOS
+        // ====================================================
 
         const total =
             document.getElementById(
                 "totalProyectos"
             );
+
 
         if (total) {
 
@@ -116,9 +272,9 @@ async function cargarProyectos() {
         }
 
 
-        // =========================================
-        // SELECTOR DE PROYECTO
-        // =========================================
+        // ====================================================
+        // CONFIGURAR BUSCADOR DE MANTENIMIENTO
+        // ====================================================
 
         cargarSelectProyectos();
 
@@ -136,9 +292,9 @@ async function cargarProyectos() {
 }
 
 
-// =====================================================
-// CONFIGURAR SELECTOR DE PROYECTOS
-// =====================================================
+// ============================================================
+// SELECTOR DE PROYECTOS PARA MANTENIMIENTO
+// ============================================================
 
 function cargarSelectProyectos() {
 
@@ -147,10 +303,12 @@ function cargarSelectProyectos() {
             "proyectoMantenimiento"
         );
 
+
     const resultados =
         document.getElementById(
             "resultadosProyectosMantenimiento"
         );
+
 
     if (
         !inputProyecto ||
@@ -162,19 +320,6 @@ function cargarSelectProyectos() {
     }
 
 
-    inputProyecto.value = "";
-
-    inputProyecto.dataset.proyectoId = "";
-
-    resultados.innerHTML = "";
-
-    resultados.style.display = "none";
-
-
-    // =========================================
-    // BUSCAR MIENTRAS ESCRIBE
-    // =========================================
-
     inputProyecto.oninput =
         function() {
 
@@ -183,9 +328,12 @@ function cargarSelectProyectos() {
                     .trim()
                     .toLowerCase();
 
+
             resultados.innerHTML = "";
 
-            inputProyecto.dataset.proyectoId = "";
+
+            inputProyecto.dataset.proyectoId =
+                "";
 
 
             if (!texto) {
@@ -198,23 +346,21 @@ function cargarSelectProyectos() {
             }
 
 
-            const proyectosFiltrados =
-                proyectos.filter(
-                    function(proyecto) {
+            const encontrados =
+                proyectos.filter(function(proyecto) {
 
-                        return (
-                            proyecto.codigo &&
-                            proyecto.codigo
-                                .toLowerCase()
-                                .includes(texto)
-                        );
+                    return (
+                        proyecto.codigo &&
+                        proyecto.codigo
+                            .toLowerCase()
+                            .includes(texto)
+                    );
 
-                    }
-                );
+                });
 
 
             if (
-                proyectosFiltrados.length === 0
+                encontrados.length === 0
             ) {
 
                 resultados.innerHTML = `
@@ -225,47 +371,45 @@ function cargarSelectProyectos() {
 
                 `;
 
+
                 resultados.style.display =
                     "block";
+
 
                 return;
 
             }
 
 
-            proyectosFiltrados.forEach(
-                function(proyecto) {
+            encontrados.forEach(function(proyecto) {
 
-                    const opcion =
-                        document.createElement(
-                            "div"
+                const opcion =
+                    document.createElement("div");
+
+
+                opcion.className =
+                    "opcion-proyecto-mantenimiento";
+
+
+                opcion.textContent =
+                    proyecto.codigo;
+
+
+                opcion.addEventListener(
+                    "click",
+                    function() {
+
+                        seleccionarProyectoMantenimiento(
+                            proyecto
                         );
 
-                    opcion.className =
-                        "opcion-proyecto-mantenimiento";
-
-                    opcion.textContent =
-                        proyecto.codigo;
+                    }
+                );
 
 
-                    opcion.addEventListener(
-                        "click",
-                        function() {
+                resultados.appendChild(opcion);
 
-                            seleccionarProyectoMantenimiento(
-                                proyecto
-                            );
-
-                        }
-                    );
-
-
-                    resultados.appendChild(
-                        opcion
-                    );
-
-                }
-            );
+            });
 
 
             resultados.style.display =
@@ -276,41 +420,43 @@ function cargarSelectProyectos() {
 }
 
 
-// =====================================================
+// ============================================================
 // SELECCIONAR PROYECTO
-// =====================================================
+// ============================================================
 
-function seleccionarProyectoMantenimiento(
-    proyecto
-) {
+function seleccionarProyectoMantenimiento(proyecto) {
 
-    const inputProyecto =
+    const input =
         document.getElementById(
             "proyectoMantenimiento"
         );
+
 
     const resultados =
         document.getElementById(
             "resultadosProyectosMantenimiento"
         );
 
-    if (!inputProyecto) {
+
+    if (!input) {
 
         return;
 
     }
 
 
-    inputProyecto.value =
+    input.value =
         proyecto.codigo || "";
 
-    inputProyecto.dataset.proyectoId =
+
+    input.dataset.proyectoId =
         proyecto.id || "";
 
 
     if (resultados) {
 
-        resultados.innerHTML = "";
+        resultados.innerHTML =
+            "";
 
         resultados.style.display =
             "none";
@@ -320,24 +466,26 @@ function seleccionarProyectoMantenimiento(
 }
 
 
-// =====================================================
-// MOSTRAR TODOS LOS PROYECTOS
-// =====================================================
+// ============================================================
+// ABRIR LISTA DE PROYECTOS
+// ============================================================
 
 function abrirListaProyectosMantenimiento() {
 
-    const inputProyecto =
+    const input =
         document.getElementById(
             "proyectoMantenimiento"
         );
+
 
     const resultados =
         document.getElementById(
             "resultadosProyectosMantenimiento"
         );
 
+
     if (
-        !inputProyecto ||
+        !input ||
         !resultados
     ) {
 
@@ -346,12 +494,9 @@ function abrirListaProyectosMantenimiento() {
     }
 
 
-    // =========================================
-    // SI ESTÁ ABIERTA, CERRARLA
-    // =========================================
-
     if (
-        resultados.style.display === "block"
+        resultados.style.display ===
+        "block"
     ) {
 
         resultados.style.display =
@@ -364,10 +509,6 @@ function abrirListaProyectosMantenimiento() {
 
     resultados.innerHTML = "";
 
-
-    // =========================================
-    // NO HAY PROYECTOS
-    // =========================================
 
     if (
         !proyectos ||
@@ -382,51 +523,45 @@ function abrirListaProyectosMantenimiento() {
 
         `;
 
+
         resultados.style.display =
             "block";
+
 
         return;
 
     }
 
 
-    // =========================================
-    // MOSTRAR TODOS
-    // =========================================
+    proyectos.forEach(function(proyecto) {
 
-    proyectos.forEach(
-        function(proyecto) {
+        const opcion =
+            document.createElement("div");
 
-            const opcion =
-                document.createElement(
-                    "div"
+
+        opcion.className =
+            "opcion-proyecto-mantenimiento";
+
+
+        opcion.textContent =
+            proyecto.codigo || "";
+
+
+        opcion.addEventListener(
+            "click",
+            function() {
+
+                seleccionarProyectoMantenimiento(
+                    proyecto
                 );
 
-            opcion.className =
-                "opcion-proyecto-mantenimiento";
-
-            opcion.textContent =
-                proyecto.codigo || "";
+            }
+        );
 
 
-            opcion.addEventListener(
-                "click",
-                function() {
+        resultados.appendChild(opcion);
 
-                    seleccionarProyectoMantenimiento(
-                        proyecto
-                    );
-
-                }
-            );
-
-
-            resultados.appendChild(
-                opcion
-            );
-
-        }
-    );
+    });
 
 
     resultados.style.display =
@@ -435,9 +570,9 @@ function abrirListaProyectosMantenimiento() {
 }
 
 
-// =====================================================
-// CARGAR MANTENIMIENTOS
-// =====================================================
+// ============================================================
+// MANTENIMIENTOS
+// ============================================================
 
 async function cargarMantenimientos() {
 
@@ -463,14 +598,14 @@ async function cargarMantenimientos() {
 
 
         console.log(
-            "Mantenimientos cargados:",
+            "Mantenimientos:",
             mantenimientos
         );
 
 
-        // =========================================
+        // ====================================================
         // TABLA
-        // =========================================
+        // ====================================================
 
         const tabla =
             document.getElementById(
@@ -487,9 +622,7 @@ async function cargarMantenimientos() {
                 function(mantenimiento) {
 
                     const fila =
-                        document.createElement(
-                            "tr"
-                        );
+                        document.createElement("tr");
 
 
                     let fecha =
@@ -510,9 +643,7 @@ async function cargarMantenimientos() {
                         }
                         catch (error) {
 
-                            console.error(
-                                error
-                            );
+                            console.error(error);
 
                         }
 
@@ -534,7 +665,11 @@ async function cargarMantenimientos() {
                         </td>
 
                         <td>
-                            ${mantenimiento.trabajo || mantenimiento.descripcion || ""}
+                            ${
+                                mantenimiento.trabajo ||
+                                mantenimiento.descripcion ||
+                                ""
+                            }
                         </td>
 
                         <td>
@@ -544,9 +679,7 @@ async function cargarMantenimientos() {
                     `;
 
 
-                    tabla.appendChild(
-                        fila
-                    );
+                    tabla.appendChild(fila);
 
                 }
             );
@@ -554,9 +687,9 @@ async function cargarMantenimientos() {
         }
 
 
-        // =========================================
-        // CONTADOR DASHBOARD
-        // =========================================
+        // ====================================================
+        // TOTAL MANTENIMIENTOS
+        // ====================================================
 
         const total =
             document.getElementById(
@@ -572,17 +705,6 @@ async function cargarMantenimientos() {
         }
 
 
-        // =========================================
-        // ACTUALIZAR CALENDARIO
-        // =========================================
-
-        if (calendarioMantenimiento) {
-
-            calendarioMantenimiento.refetchEvents();
-
-        }
-
-
         return mantenimientos;
 
     }
@@ -593,6 +715,7 @@ async function cargarMantenimientos() {
             error
         );
 
+
         return [];
 
     }
@@ -600,26 +723,421 @@ async function cargarMantenimientos() {
 }
 
 
-// =====================================================
-// INICIALIZAR CALENDARIO
-// =====================================================
+// ============================================================
+// ABRIR MODAL MANTENIMIENTO
+// ============================================================
 
-function inicializarCalendarioMantenimiento() {
+async function abrirModalMantenimiento() {
 
-    const calendario =
+    await cargarProyectos();
+
+
+    const modal =
         document.getElementById(
-            "calendarioMantenimiento"
+            "modalMantenimiento"
         );
 
 
-    if (!calendario) {
+    if (!modal) {
+
+        console.error(
+            "No se encontró modalMantenimiento"
+        );
 
         return;
 
     }
 
 
-    // Ya existe
+    const formulario =
+        modal.querySelector("form");
+
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    const proyecto =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
+
+
+    if (proyecto) {
+
+        proyecto.value = "";
+
+        proyecto.dataset.proyectoId =
+            "";
+
+    }
+
+
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
+
+
+    if (resultados) {
+
+        resultados.innerHTML =
+            "";
+
+        resultados.style.display =
+            "none";
+
+    }
+
+
+    modal.classList.add("active");
+
+}
+
+
+// ============================================================
+// CANCELAR MANTENIMIENTO
+// ============================================================
+
+function cancelarMantenimiento() {
+
+    const modal =
+        document.getElementById(
+            "modalMantenimiento"
+        );
+
+
+    const formulario =
+        document.querySelector(
+            "#modalMantenimiento form"
+        );
+
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    const proyecto =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
+
+
+    if (proyecto) {
+
+        proyecto.value = "";
+
+        proyecto.dataset.proyectoId =
+            "";
+
+    }
+
+
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
+
+
+    if (resultados) {
+
+        resultados.innerHTML =
+            "";
+
+        resultados.style.display =
+            "none";
+
+    }
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// REGISTRAR MANTENIMIENTO
+// ============================================================
+
+async function registrarMantenimiento(event) {
+
+    event.preventDefault();
+
+
+    const fecha =
+        document.getElementById(
+            "inicioMantenimiento"
+        ).value;
+
+
+    const proyectoInput =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
+
+
+    const proyectoId =
+        Number(
+            proyectoInput.dataset.proyectoId
+        );
+
+
+    const cuadrilla =
+        document.getElementById(
+            "cuadrillaMantenimiento"
+        ).value;
+
+
+    const trabajo =
+        document.getElementById(
+            "trabajoMantenimiento"
+        ).value.trim();
+
+
+    const estado =
+        document.getElementById(
+            "estadoMantenimiento"
+        ).value;
+
+
+    const tipo =
+        document.getElementById(
+            "tipoMantenimiento"
+        ).value;
+
+
+    // ====================================================
+    // VALIDACIONES
+    // ====================================================
+
+    if (!fecha) {
+
+        alert(
+            "Debe seleccionar la fecha y hora del mantenimiento."
+        );
+
+        return;
+
+    }
+
+
+    if (!proyectoId) {
+
+        alert(
+            "Debe seleccionar un proyecto."
+        );
+
+        return;
+
+    }
+
+
+    if (!cuadrilla) {
+
+        alert(
+            "Debe seleccionar una cuadrilla."
+        );
+
+        return;
+
+    }
+
+
+    if (!tipo) {
+
+        alert(
+            "Debe seleccionar un tipo de mantenimiento."
+        );
+
+        return;
+
+    }
+
+
+    if (!trabajo) {
+
+        alert(
+            "Debe ingresar la descripción del trabajo."
+        );
+
+        return;
+
+    }
+
+
+    const datos = {
+
+        fecha: fecha,
+
+        proyecto_id: proyectoId,
+
+        cuadrilla: cuadrilla,
+
+        trabajo: trabajo,
+
+        estado: estado,
+
+        tipo_mantenimiento: tipo
+
+    };
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/mantenimientos",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(datos)
+
+                }
+            );
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            alert(
+                resultado.error ||
+                "No se pudo registrar el mantenimiento."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Mantenimiento registrado correctamente."
+        );
+
+
+        const modal =
+            document.getElementById(
+                "modalMantenimiento"
+            );
+
+
+        if (modal) {
+
+            modal.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        const formulario =
+            document.querySelector(
+                "#modalMantenimiento form"
+            );
+
+
+        if (formulario) {
+
+            formulario.reset();
+
+        }
+
+
+        proyectoInput.value = "";
+
+        proyectoInput.dataset.proyectoId =
+            "";
+
+
+        const resultados =
+            document.getElementById(
+                "resultadosProyectosMantenimiento"
+            );
+
+
+        if (resultados) {
+
+            resultados.innerHTML =
+                "";
+
+            resultados.style.display =
+                "none";
+
+        }
+
+
+        await cargarMantenimientos();
+
+
+        if (calendarioMantenimiento) {
+
+            calendarioMantenimiento.refetchEvents();
+
+        }
+
+
+        await cargarGraficosDashboard();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error registrando mantenimiento:",
+            error
+        );
+
+
+        alert(
+            "No se pudo conectar con el servidor."
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// CALENDARIO
+// ============================================================
+
+function inicializarCalendarioMantenimiento() {
+
+    const elemento =
+        document.getElementById(
+            "calendarioMantenimiento"
+        );
+
+
+    if (!elemento) {
+
+        return;
+
+    }
+
+
     if (calendarioMantenimiento) {
 
         return;
@@ -627,7 +1145,6 @@ function inicializarCalendarioMantenimiento() {
     }
 
 
-    // FullCalendar no cargó
     if (
         typeof FullCalendar ===
         "undefined"
@@ -644,7 +1161,7 @@ function inicializarCalendarioMantenimiento() {
 
     calendarioMantenimiento =
         new FullCalendar.Calendar(
-            calendario,
+            elemento,
             {
 
                 initialView:
@@ -710,7 +1227,7 @@ function inicializarCalendarioMantenimiento() {
                             if (!respuesta.ok) {
 
                                 throw new Error(
-                                    "No se pudieron cargar los mantenimientos"
+                                    "Error al cargar mantenimientos"
                                 );
 
                             }
@@ -722,9 +1239,7 @@ function inicializarCalendarioMantenimiento() {
 
                             const eventos =
                                 mantenimientos.map(
-                                    function(
-                                        mantenimiento
-                                    ) {
+                                    function(mantenimiento) {
 
                                         return {
 
@@ -734,7 +1249,13 @@ function inicializarCalendarioMantenimiento() {
                                                 ),
 
                                             title:
-                                                `${mantenimiento.proyecto || "Sin proyecto"} - Cuadrilla ${mantenimiento.cuadrilla || ""}`,
+                                                `${
+                                                    mantenimiento.proyecto ||
+                                                    "Sin proyecto"
+                                                } - Cuadrilla ${
+                                                    mantenimiento.cuadrilla ||
+                                                    ""
+                                                }`,
 
                                             start:
                                                 mantenimiento.fecha,
@@ -742,16 +1263,20 @@ function inicializarCalendarioMantenimiento() {
                                             allDay:
                                                 true,
 
+
                                             extendedProps: {
 
                                                 proyecto:
-                                                    mantenimiento.proyecto || "",
+                                                    mantenimiento.proyecto ||
+                                                    "",
 
                                                 sede:
-                                                    mantenimiento.sede || "",
+                                                    mantenimiento.sede ||
+                                                    "",
 
                                                 cuadrilla:
-                                                    mantenimiento.cuadrilla || "",
+                                                    mantenimiento.cuadrilla ||
+                                                    "",
 
                                                 trabajo:
                                                     mantenimiento.trabajo ||
@@ -774,40 +1299,27 @@ function inicializarCalendarioMantenimiento() {
                                 );
 
 
-                            successCallback(
-                                eventos
-                            );
+                            successCallback(eventos);
 
                         }
                         catch (error) {
 
                             console.error(
-                                "Error cargando eventos:",
                                 error
                             );
 
-                            failureCallback(
-                                error
-                            );
+                            failureCallback(error);
 
                         }
 
                     },
 
 
-                // =================================
-                // CLICK EN EVENTO
-                // =================================
-
                 eventClick:
                     function(info) {
 
-                        const evento =
-                            info.event;
-
-
                         const datos =
-                            evento.extendedProps;
+                            info.event.extendedProps;
 
 
                         alert(
@@ -861,25 +1373,589 @@ function inicializarCalendarioMantenimiento() {
 }
 
 
-// =====================================================
-// ABRIR MODAL MANTENIMIENTO
-// =====================================================
+// ============================================================
+// GRÁFICOS DEL DASHBOARD
+// ============================================================
 
-async function abrirModalMantenimiento() {
+async function cargarGraficosDashboard() {
 
-    await cargarProyectos();
+    try {
 
+        const respuesta =
+            await fetch(
+                "/api/mantenimientos"
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "Error al obtener mantenimientos"
+            );
+
+        }
+
+
+        const mantenimientos =
+            await respuesta.json();
+
+
+        const certificaciones = {};
+        const averias = {};
+        const splitters = {};
+        const trabajoCampo = {};
+
+
+        mantenimientos.forEach(
+            function(mantenimiento) {
+
+                const sede =
+                    mantenimiento.sede ||
+                    "Sin sede";
+
+
+                const tipo =
+                    mantenimiento.tipo_mantenimiento ||
+                    "";
+
+
+                if (
+                    tipo ===
+                    "Certificación"
+                ) {
+
+                    certificaciones[sede] =
+                        (
+                            certificaciones[sede] ||
+                            0
+                        ) + 1;
+
+                }
+
+
+                if (
+                    tipo ===
+                    "Avería"
+                ) {
+
+                    averias[sede] =
+                        (
+                            averias[sede] ||
+                            0
+                        ) + 1;
+
+                }
+
+
+                if (
+                    tipo ===
+                    "Cambio de splitter"
+                ) {
+
+                    splitters[sede] =
+                        (
+                            splitters[sede] ||
+                            0
+                        ) + 1;
+
+                }
+
+
+                if (
+                    tipo ===
+                    "Trabajo en campo"
+                ) {
+
+                    trabajoCampo[sede] =
+                        (
+                            trabajoCampo[sede] ||
+                            0
+                        ) + 1;
+
+                }
+
+            }
+        );
+
+
+        // ====================================================
+        // DESTRUIR GRÁFICOS
+        // ====================================================
+
+        if (graficoCertificaciones) {
+
+            graficoCertificaciones.destroy();
+
+            graficoCertificaciones =
+                null;
+
+        }
+
+
+        if (graficoAverias) {
+
+            graficoAverias.destroy();
+
+            graficoAverias =
+                null;
+
+        }
+
+
+        if (graficoSplitters) {
+
+            graficoSplitters.destroy();
+
+            graficoSplitters =
+                null;
+
+        }
+
+
+        if (graficoTrabajoCampo) {
+
+            graficoTrabajoCampo.destroy();
+
+            graficoTrabajoCampo =
+                null;
+
+        }
+
+
+        // ====================================================
+        // CERTIFICACIONES
+        // ====================================================
+
+        const canvasCertificaciones =
+            document.getElementById(
+                "graficoCertificaciones"
+            );
+
+
+        if (
+            canvasCertificaciones &&
+            typeof Chart !== "undefined"
+        ) {
+
+            graficoCertificaciones =
+                new Chart(
+                    canvasCertificaciones,
+                    {
+
+                        type: "pie",
+
+                        data: {
+
+                            labels:
+                                Object.keys(
+                                    certificaciones
+                                ),
+
+                            datasets: [{
+
+                                data:
+                                    Object.values(
+                                        certificaciones
+                                    )
+
+                            }]
+
+                        },
+
+                        options: {
+
+                            responsive:
+                                true,
+
+                            maintainAspectRatio:
+                                false
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        // ====================================================
+        // AVERÍAS
+        // ====================================================
+
+        const canvasAverias =
+            document.getElementById(
+                "graficoAverias"
+            );
+
+
+        if (
+            canvasAverias &&
+            typeof Chart !== "undefined"
+        ) {
+
+            graficoAverias =
+                new Chart(
+                    canvasAverias,
+                    {
+
+                        type: "pie",
+
+                        data: {
+
+                            labels:
+                                Object.keys(
+                                    averias
+                                ),
+
+                            datasets: [{
+
+                                data:
+                                    Object.values(
+                                        averias
+                                    )
+
+                            }]
+
+                        },
+
+                        options: {
+
+                            responsive:
+                                true,
+
+                            maintainAspectRatio:
+                                false
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        // ====================================================
+        // SPLITTER
+        // ====================================================
+
+        const canvasSplitter =
+            document.getElementById(
+                "graficoSplitter"
+            );
+
+
+        if (
+            canvasSplitter &&
+            typeof Chart !== "undefined"
+        ) {
+
+            graficoSplitters =
+                new Chart(
+                    canvasSplitter,
+                    {
+
+                        type: "pie",
+
+                        data: {
+
+                            labels:
+                                Object.keys(
+                                    splitters
+                                ),
+
+                            datasets: [{
+
+                                data:
+                                    Object.values(
+                                        splitters
+                                    )
+
+                            }]
+
+                        },
+
+                        options: {
+
+                            responsive:
+                                true,
+
+                            maintainAspectRatio:
+                                false
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        // ====================================================
+        // TRABAJO EN CAMPO
+        // ====================================================
+
+        const canvasTrabajoCampo =
+            document.getElementById(
+                "graficoTrabajoCampo"
+            );
+
+
+        if (
+            canvasTrabajoCampo &&
+            typeof Chart !== "undefined"
+        ) {
+
+            graficoTrabajoCampo =
+                new Chart(
+                    canvasTrabajoCampo,
+                    {
+
+                        type: "pie",
+
+                        data: {
+
+                            labels:
+                                Object.keys(
+                                    trabajoCampo
+                                ),
+
+                            datasets: [{
+
+                                data:
+                                    Object.values(
+                                        trabajoCampo
+                                    )
+
+                            }]
+
+                        },
+
+                        options: {
+
+                            responsive:
+                                true,
+
+                            maintainAspectRatio:
+                                false
+
+                        }
+
+                    }
+                );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando gráficos:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// PERSONAL
+// ============================================================
+
+// Estas funciones se mantienen separadas del módulo
+// Mantenimiento para no mezclar su funcionamiento.
+
+
+async function cargarPersonal() {
+
+    try {
+
+        const respuesta =
+            await fetch("/api/personal");
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "Error al cargar personal"
+            );
+
+        }
+
+
+        const personal =
+            await respuesta.json();
+
+
+        const tabla =
+            document.getElementById(
+                "tablaPersonal"
+            );
+
+
+        if (!tabla) {
+
+            return;
+
+        }
+
+
+        tabla.innerHTML = "";
+
+
+        personal.forEach(function(persona) {
+
+            const fila =
+                document.createElement("tr");
+
+
+            fila.innerHTML = `
+
+                <td>
+                    ${persona.nombres || ""}
+                </td>
+
+                <td>
+                    ${persona.apellidos || ""}
+                </td>
+
+                <td>
+                    ${
+                        persona.documento ||
+                        persona.dni ||
+                        ""
+                    }
+                </td>
+
+                <td>
+                    ${persona.celular || ""}
+                </td>
+
+                <td>
+                    ${persona.cargo || ""}
+                </td>
+
+                <td>
+                    ${
+                        persona.cuadrilla ||
+                        ""
+                    }
+                </td>
+
+            `;
+
+
+            tabla.appendChild(fila);
+
+        });
+
+
+        const total =
+            document.getElementById(
+                "totalPersonal"
+            );
+
+
+        if (total) {
+
+            total.textContent =
+                personal.length;
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando personal:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// ABRIR MODAL PERSONAL
+// ============================================================
+
+function abrirModalPersonal() {
 
     const modal =
         document.getElementById(
-            "modalMantenimiento"
+            "modalPersonal"
         );
 
 
     if (!modal) {
 
-        console.error(
-            "No se encontró el modal de mantenimiento."
+        return;
+
+    }
+
+
+    const formulario =
+        document.getElementById(
+            "formPersonal"
+        );
+
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    const id =
+        document.getElementById(
+            "idPersonal"
+        );
+
+
+    if (id) {
+
+        id.value = "";
+
+    }
+
+
+    const titulo =
+        document.getElementById(
+            "tituloModalPersonal"
+        );
+
+
+    if (titulo) {
+
+        titulo.textContent =
+            "Registrar personal";
+
+    }
+
+
+    modal.classList.add("active");
+
+}
+
+
+// ============================================================
+// CANCELAR EDICIÓN PERSONAL
+// ============================================================
+
+function cancelarEdicionPersonal() {
+
+    const modalConfirmacion =
+        document.getElementById(
+            "modalConfirmarCancelarPersonal"
+        );
+
+
+    if (modalConfirmacion) {
+
+        modalConfirmacion.classList.add(
+            "active"
         );
 
         return;
@@ -887,114 +1963,10 @@ async function abrirModalMantenimiento() {
     }
 
 
-    // Limpiar datos anteriores
-    const formulario =
-        modal.querySelector(
-            "form"
-        );
-
-
-    if (formulario) {
-
-        formulario.reset();
-
-    }
-
-
-    const inputProyecto =
-        document.getElementById(
-            "proyectoMantenimiento"
-        );
-
-
-    if (inputProyecto) {
-
-        inputProyecto.value = "";
-
-        inputProyecto.dataset.proyectoId =
-            "";
-
-    }
-
-
-    const resultados =
-        document.getElementById(
-            "resultadosProyectosMantenimiento"
-        );
-
-
-    if (resultados) {
-
-        resultados.innerHTML = "";
-
-        resultados.style.display =
-            "none";
-
-    }
-
-
-    modal.classList.add(
-        "active"
-    );
-
-}
-
-
-// =====================================================
-// CANCELAR MANTENIMIENTO
-// =====================================================
-
-function cancelarMantenimiento() {
-
     const modal =
         document.getElementById(
-            "modalMantenimiento"
+            "modalPersonal"
         );
-
-
-    const formulario =
-        document.querySelector(
-            "#modalMantenimiento form"
-        );
-
-
-    if (formulario) {
-
-        formulario.reset();
-
-    }
-
-
-    const inputProyecto =
-        document.getElementById(
-            "proyectoMantenimiento"
-        );
-
-
-    if (inputProyecto) {
-
-        inputProyecto.value = "";
-
-        inputProyecto.dataset.proyectoId =
-            "";
-
-    }
-
-
-    const resultados =
-        document.getElementById(
-            "resultadosProyectosMantenimiento"
-        );
-
-
-    if (resultados) {
-
-        resultados.innerHTML = "";
-
-        resultados.style.display =
-            "none";
-
-    }
 
 
     if (modal) {
@@ -1008,202 +1980,137 @@ function cancelarMantenimiento() {
 }
 
 
-// =====================================================
-// REGISTRAR MANTENIMIENTO
-// =====================================================
+// ============================================================
+// CERRAR CONFIRMACIÓN PERSONAL
+// ============================================================
 
-async function registrarMantenimiento(
-    event
-) {
+function cerrarConfirmacionCancelarPersonal() {
+
+    const modal =
+        document.getElementById(
+            "modalConfirmarCancelarPersonal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// CONFIRMAR CANCELACIÓN PERSONAL
+// ============================================================
+
+function confirmarCancelarPersonal() {
+
+    const formulario =
+        document.getElementById(
+            "formPersonal"
+        );
+
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+
+    const modalPersonal =
+        document.getElementById(
+            "modalPersonal"
+        );
+
+
+    const modalConfirmacion =
+        document.getElementById(
+            "modalConfirmarCancelarPersonal"
+        );
+
+
+    if (modalPersonal) {
+
+        modalPersonal.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (modalConfirmacion) {
+
+        modalConfirmacion.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// REGISTRAR PERSONAL
+// ============================================================
+
+async function registrarPersonal(event) {
 
     event.preventDefault();
 
 
-    // =========================================
-    // OBTENER DATOS
-    // =========================================
-
-    const inputFecha =
-        document.getElementById(
-            "inicioMantenimiento"
-        );
-
-
-    const inputProyecto =
-        document.getElementById(
-            "proyectoMantenimiento"
-        );
-
-
-    const inputCuadrilla =
-        document.getElementById(
-            "cuadrillaMantenimiento"
-        );
-
-
-    const inputTrabajo =
-        document.getElementById(
-            "trabajoMantenimiento"
-        );
-
-
-    const inputEstado =
-        document.getElementById(
-            "estadoMantenimiento"
-        );
-
-
-    const inputTipo =
-        document.getElementById(
-            "tipoMantenimiento"
-        );
-
-
-    if (
-        !inputFecha ||
-        !inputProyecto ||
-        !inputCuadrilla ||
-        !inputTrabajo ||
-        !inputEstado ||
-        !inputTipo
-    ) {
-
-        console.error(
-            "Faltan elementos del formulario de mantenimiento."
-        );
-
-        return;
-
-    }
-
-
-    const fecha =
-        inputFecha.value;
-
-
-    const proyectoId =
-        Number(
-            inputProyecto.dataset.proyectoId
-        );
-
-
-    const cuadrilla =
-        inputCuadrilla.value;
-
-
-    const trabajo =
-        inputTrabajo.value.trim();
-
-
-    const estado =
-        inputEstado.value;
-
-
-    const tipoMantenimiento =
-        inputTipo.value;
-
-
-    // =========================================
-    // VALIDACIONES
-    // =========================================
-
-    if (!fecha) {
-
-        alert(
-            "Debe seleccionar la fecha y hora del mantenimiento."
-        );
-
-        return;
-
-    }
-
-
-    if (!proyectoId) {
-
-        alert(
-            "Debe seleccionar un proyecto."
-        );
-
-        return;
-
-    }
-
-
-    if (!cuadrilla) {
-
-        alert(
-            "Debe seleccionar una cuadrilla."
-        );
-
-        return;
-
-    }
-
-
-    if (!tipoMantenimiento) {
-
-        alert(
-            "Debe seleccionar un tipo de mantenimiento."
-        );
-
-        return;
-
-    }
-
-
-    if (!trabajo) {
-
-        alert(
-            "Debe ingresar la descripción del trabajo."
-        );
-
-        return;
-
-    }
-
-
-    // =========================================
-    // DATOS PARA SERVER.JS
-    // =========================================
-
     const datos = {
 
-        fecha:
-            fecha,
+        nombres:
+            document.getElementById(
+                "nombresPersonal"
+            ).value.trim(),
 
-        proyecto_id:
-            proyectoId,
+        apellidos:
+            document.getElementById(
+                "apellidosPersonal"
+            ).value.trim(),
+
+        tipo_documento:
+            document.getElementById(
+                "tipoDocumentoPersonal"
+            ).value,
+
+        documento:
+            document.getElementById(
+                "documentoPersonal"
+            ).value.trim(),
+
+        celular:
+            document.getElementById(
+                "celularPersonal"
+            ).value.trim(),
+
+        cargo:
+            document.getElementById(
+                "cargoPersonal"
+            ).value.trim(),
 
         cuadrilla:
-            cuadrilla,
-
-        trabajo:
-            trabajo,
-
-        estado:
-            estado,
-
-        tipo_mantenimiento:
-            tipoMantenimiento
+            document.getElementById(
+                "cuadrillaPersonal"
+            ).value
 
     };
-
-
-    console.log(
-        "Registrando mantenimiento:",
-        datos
-    );
 
 
     try {
 
         const respuesta =
             await fetch(
-                "/api/mantenimientos",
+                "/api/personal",
                 {
 
-                    method:
-                        "POST",
+                    method: "POST",
 
                     headers: {
 
@@ -1213,9 +2120,7 @@ async function registrarMantenimiento(
                     },
 
                     body:
-                        JSON.stringify(
-                            datos
-                        )
+                        JSON.stringify(datos)
 
                 }
             );
@@ -1229,7 +2134,7 @@ async function registrarMantenimiento(
 
             alert(
                 resultado.error ||
-                "No se pudo registrar el mantenimiento."
+                "No se pudo registrar el personal."
             );
 
             return;
@@ -1237,22 +2142,14 @@ async function registrarMantenimiento(
         }
 
 
-        // =========================================
-        // ÉXITO
-        // =========================================
-
         alert(
-            "Mantenimiento registrado correctamente."
+            "Personal registrado correctamente."
         );
 
 
-        // =========================================
-        // CERRAR MODAL
-        // =========================================
-
         const modal =
             document.getElementById(
-                "modalMantenimiento"
+                "modalPersonal"
             );
 
 
@@ -1265,68 +2162,13 @@ async function registrarMantenimiento(
         }
 
 
-        // =========================================
-        // LIMPIAR FORMULARIO
-        // =========================================
-
-        const formulario =
-            document.querySelector(
-                "#modalMantenimiento form"
-            );
-
-
-        if (formulario) {
-
-            formulario.reset();
-
-        }
-
-
-        inputProyecto.value = "";
-
-        inputProyecto.dataset.proyectoId =
-            "";
-
-
-        const resultadosProyectos =
-            document.getElementById(
-                "resultadosProyectosMantenimiento"
-            );
-
-
-        if (resultadosProyectos) {
-
-            resultadosProyectos.innerHTML =
-                "";
-
-            resultadosProyectos.style.display =
-                "none";
-
-        }
-
-
-        // =========================================
-        // RECARGAR TABLA
-        // =========================================
-
-        await cargarMantenimientos();
-
-
-        // =========================================
-        // ACTUALIZAR CALENDARIO
-        // =========================================
-
-        if (calendarioMantenimiento) {
-
-            calendarioMantenimiento.refetchEvents();
-
-        }
+        await cargarPersonal();
 
     }
     catch (error) {
 
         console.error(
-            "Error registrando mantenimiento:",
+            "Error registrando personal:",
             error
         );
 
@@ -1340,9 +2182,288 @@ async function registrarMantenimiento(
 }
 
 
-// =====================================================
+// ============================================================
+// MATERIALES
+// ============================================================
+
+async function cargarMateriales() {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/materiales"
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "Error al cargar materiales"
+            );
+
+        }
+
+
+        const materiales =
+            await respuesta.json();
+
+
+        const tabla =
+            document.getElementById(
+                "tablaMateriales"
+            );
+
+
+        if (!tabla) {
+
+            return;
+
+        }
+
+
+        tabla.innerHTML = "";
+
+
+        materiales.forEach(function(material) {
+
+            const fila =
+                document.createElement("tr");
+
+
+            fila.innerHTML = `
+
+                <td>
+                    ${material.material || material.nombre || ""}
+                </td>
+
+                <td>
+                    ${material.cantidad || ""}
+                </td>
+
+                <td>
+                    ${material.unidad || ""}
+                </td>
+
+                <td>
+                    ${material.proyecto || ""}
+                </td>
+
+            `;
+
+
+            tabla.appendChild(fila);
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando materiales:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// REGISTRAR MATERIAL
+// ============================================================
+
+async function registrarMaterial(event) {
+
+    event.preventDefault();
+
+
+    const datos = {
+
+        proyecto_id:
+            document.getElementById(
+                "proyectoMaterial"
+            ).value,
+
+        material:
+            document.getElementById(
+                "nombreMaterial"
+            ).value.trim(),
+
+        cantidad:
+            Number(
+                document.getElementById(
+                    "cantidadMaterial"
+                ).value
+            ),
+
+        unidad:
+            document.getElementById(
+                "unidadMaterial"
+            ).value
+
+    };
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/materiales",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(datos)
+
+                }
+            );
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            alert(
+                resultado.error ||
+                "No se pudo registrar el material."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Material registrado correctamente."
+        );
+
+
+        cerrarModal(
+            "modalMaterial"
+        );
+
+
+        await cargarMateriales();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error registrando material:",
+            error
+        );
+
+
+        alert(
+            "No se pudo conectar con el servidor."
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// CARGAR USUARIO ACTUAL
+// ============================================================
+
+async function cargarUsuarioActual() {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/usuario-actual"
+            );
+
+
+        if (!respuesta.ok) {
+
+            return;
+
+        }
+
+
+        const usuario =
+            await respuesta.json();
+
+
+        console.log(
+            "Usuario actual:",
+            usuario
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error obteniendo usuario actual:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// CERRAR SESIÓN
+// ============================================================
+
+async function cerrarSesion() {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/logout",
+                {
+                    method: "POST"
+                }
+            );
+
+
+        if (respuesta.ok) {
+
+            window.location.href =
+                "/";
+
+        }
+        else {
+
+            alert(
+                "No se pudo cerrar la sesión."
+            );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cerrando sesión:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================================================
 // CERRAR LISTA DE PROYECTOS AL HACER CLICK AFUERA
-// =====================================================
+// ============================================================
 
 document.addEventListener(
     "click",
@@ -1385,210 +2506,156 @@ document.addEventListener(
 );
 
 
-// =====================================================
-// MOSTRAR SECCIÓN
-// =====================================================
+// ============================================================
+// BOTÓN MENÚ MOBILE
+// ============================================================
 
-function mostrarSeccion(
-    seccion,
-    boton
-) {
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-    // =========================================
-    // OCULTAR TODAS
-    // =========================================
-
-    document
-        .querySelectorAll(
-            ".seccion"
-        )
-        .forEach(
-            function(elemento) {
-
-                elemento.classList.remove(
-                    "activa"
-                );
-
-            }
-        );
+        const boton =
+            document.getElementById(
+                "btnMenuMobile"
+            );
 
 
-    // =========================================
-    // MOSTRAR SECCIÓN SELECCIONADA
-    // =========================================
-
-    const seleccionada =
-        document.getElementById(
-            seccion
-        );
+        const sidebar =
+            document.querySelector(
+                ".sidebar"
+            );
 
 
-    if (seleccionada) {
+        if (
+            boton &&
+            sidebar
+        ) {
 
-        seleccionada.classList.add(
-            "activa"
-        );
+            boton.addEventListener(
+                "click",
+                function() {
 
-    }
-
-
-    // =========================================
-    // MENÚ ACTIVO
-    // =========================================
-
-    document
-        .querySelectorAll(
-            ".menu"
-        )
-        .forEach(
-            function(menu) {
-
-                menu.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    if (boton) {
-
-        boton.classList.add(
-            "active"
-        );
-
-    }
-
-
-    // =========================================
-    // TÍTULO
-    // =========================================
-
-    const titulo =
-        document.getElementById(
-            "titulo"
-        );
-
-
-    if (titulo) {
-
-        const titulos = {
-
-            dashboard:
-                "Dashboard",
-
-            personal:
-                "Personal",
-
-            cuadrillas:
-                "Cuadrillas",
-
-            proyectos:
-                "Proyectos",
-
-            mantenimiento:
-                "Mantenimiento",
-
-            materiales:
-                "Materiales"
-
-        };
-
-
-        titulo.textContent =
-            titulos[seccion] ||
-            seccion;
-
-    }
-
-
-    // =========================================
-    // MANTENIMIENTO
-    // =========================================
-
-    if (
-        seccion ===
-        "mantenimiento"
-    ) {
-
-        cargarProyectos();
-
-        cargarMantenimientos();
-
-
-        setTimeout(
-            function() {
-
-                inicializarCalendarioMantenimiento();
-
-
-                if (
-                    calendarioMantenimiento
-                ) {
-
-                    calendarioMantenimiento.updateSize();
-
-                    calendarioMantenimiento.refetchEvents();
+                    sidebar.classList.toggle(
+                        "mobile-open"
+                    );
 
                 }
+            );
 
-            },
-            150
-        );
+        }
 
     }
+);
 
-}
 
-
-// =====================================================
+// ============================================================
 // INICIALIZACIÓN
-// =====================================================
+// ============================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     async function() {
 
         console.log(
-            "Sistema cargado."
+            "Sistema iniciado correctamente."
         );
 
 
-        // =========================================
-        // CARGAR PROYECTOS
-        // =========================================
+        try {
 
-        await cargarProyectos();
+            await cargarPersonal();
 
+        }
+        catch (error) {
 
-        // =========================================
-        // CARGAR MANTENIMIENTOS
-        // =========================================
+            console.error(error);
 
-        await cargarMantenimientos();
+        }
 
 
-        // =========================================
-        // CALENDARIO
-        // =========================================
+        try {
+
+            await cargarProyectos();
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+
+        try {
+
+            await cargarMantenimientos();
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+
+        try {
+
+            await cargarMateriales();
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+
+        try {
+
+            await cargarUsuarioActual();
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+
+        try {
+
+            await cargarGraficosDashboard();
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+        }
+
 
         inicializarCalendarioMantenimiento();
+
+
+        mostrarSeccion(
+            "dashboard",
+            document.querySelector(
+                ".menu.active"
+            )
+        );
 
     }
 );
 
 
-// =====================================================
+// ============================================================
 // ACTUALIZAR CALENDARIO AL CAMBIAR TAMAÑO
-// =====================================================
+// ============================================================
 
 window.addEventListener(
     "resize",
     function() {
 
-        if (
-            calendarioMantenimiento
-        ) {
+        if (calendarioMantenimiento) {
 
             calendarioMantenimiento.updateSize();
 
