@@ -137,8 +137,6 @@ nav {
 
     overflow-x: hidden;
 
-    /* Espacio para que el contenido
-       no quede debajo del encabezado */
     padding-top: 80px;
 }
 
@@ -768,8 +766,6 @@ textarea {
 
 @media (max-width: 768px) {
 
-    /* SIDEBAR */
-
     .sidebar {
         width: 68px;
 
@@ -827,9 +823,6 @@ textarea {
     .menu::first-letter {
         font-size: 21px;
     }
-
-
-    /* BOTÓN MENÚ */
 
     .btn-menu-mobile {
         display: block;
@@ -903,7 +896,6 @@ textarea {
 
         overflow-x: hidden;
 
-        /* espacio para encabezado fijo */
         padding-top: 100px;
     }
 
@@ -1189,8 +1181,6 @@ textarea {
         max-height: 38px;
     }
 
-
-    /* CORREGIDO: .main */
     .main {
         margin-left: 60px;
 
@@ -1558,6 +1548,7 @@ section {
     }
 }
 
+
 /* =====================================================
    PROYECTOS
 ===================================================== */
@@ -1593,7 +1584,6 @@ section {
 
 /* =====================================================
    ENCABEZADO DEL MÓDULO PROYECTOS
-   SE MANTIENE FIJO DENTRO DEL PANEL
 ===================================================== */
 
 #proyectos .section-header {
@@ -1615,7 +1605,6 @@ section {
 
 /* =====================================================
    CONTENEDOR SCROLL DE PROYECTOS
-   SOLO ESTA PARTE SE DESPLAZA
 ===================================================== */
 
 #proyectos .proyectos-scroll {
@@ -1629,7 +1618,6 @@ section {
 
     position: relative;
 
-    /* evita que el contenido se salga */
     box-sizing: border-box;
 }
 
@@ -1701,6 +1689,7 @@ section {
         max-height: 550px;
     }
 }
+
 
 /* ========================================
    ACCIONES PERSONAL
@@ -1808,18 +1797,25 @@ section {
     }
 
 }
+
+
 /* ========================================
    BOTONES DE EDICIÓN DEL PERSONAL
 ======================================== */
 
 .botones-edicion-personal {
     position: absolute;
+
     right: 8px;
+
     top: 50%;
+
     transform: translateY(-50%);
 
     display: flex;
+
     align-items: center;
+
     gap: 4px;
 
     z-index: 10;
@@ -1831,51 +1827,68 @@ section {
 
 .btn-editar-personal,
 .btn-eliminar-personal {
+
     width: 26px;
+
     height: 26px;
 
     padding: 0;
+
     margin: 0;
 
     border: none;
+
     border-radius: 5px;
 
     cursor: pointer;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     font-size: 14px;
+
     line-height: 1;
 }
 
 .btn-cancelar-personal {
+
     background-color: #dc2626;
+
     color: white;
+
     border: none;
+
     padding: 10px 18px;
+
     border-radius: 6px;
+
     cursor: pointer;
+
     font-weight: bold;
 }
 
 .btn-cancelar-personal:hover {
+
     background-color: #b91c1c;
 }
+
 
 /* ========================================
    MODAL DE CONFIRMACIÓN
 ======================================== */
 
 .modal-confirmacion {
+
     z-index: 2000;
 }
-
 
 .modal-confirmacion-contenido {
 
     width: 420px;
+
     max-width: 90%;
 
     background: white;
@@ -1888,34 +1901,26 @@ section {
 
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.25);
-
 }
-
 
 .modal-confirmacion-contenido h2 {
 
     margin-top: 0;
 
     margin-bottom: 15px;
-
 }
-
 
 .modal-confirmacion-contenido p {
 
     margin: 8px 0;
-
 }
-
 
 .texto-advertencia {
 
     color: #dc2626;
 
     font-size: 14px;
-
 }
-
 
 .botones-confirmacion {
 
@@ -1926,9 +1931,7 @@ section {
     gap: 12px;
 
     margin-top: 25px;
-
 }
-
 
 .btn-no-cancelar,
 .btn-si-cancelar {
@@ -1942,39 +1945,30 @@ section {
     cursor: pointer;
 
     font-weight: bold;
-
 }
-
 
 .btn-no-cancelar {
 
     background: #6b7280;
 
     color: white;
-
 }
-
 
 .btn-no-cancelar:hover {
 
     background: #4b5563;
-
 }
-
 
 .btn-si-cancelar {
 
     background: #dc2626;
 
     color: white;
-
 }
-
 
 .btn-si-cancelar:hover {
 
     background: #b91c1c;
-
 }
 
 
@@ -1995,7 +1989,6 @@ section {
     gap: 10px;
 
     margin-top: 20px;
-
 }
 
 
@@ -2022,14 +2015,11 @@ section {
     font-weight: 600;
 
     transition: background 0.2s ease;
-
 }
-
 
 .btn-guardar-personal:hover {
 
     background: #1d4ed8 !important;
-
 }
 
 
@@ -2054,14 +2044,11 @@ section {
     font-size: 14px;
 
     font-weight: 600;
-
 }
-
 
 .btn-cancelar-personal:hover {
 
     background: #d1d5db !important;
-
 }
 
 
@@ -2088,16 +2075,11 @@ section {
     justify-content: center;
 
     z-index: 9999;
-
 }
-
-
-/* SOLO SE MUESTRA CUANDO TIENE ACTIVE */
 
 .modal-confirmacion.active {
 
     display: flex;
-
 }
 
 
@@ -2117,27 +2099,21 @@ section {
 
     box-shadow:
         0 15px 40px rgba(0, 0, 0, 0.20);
-
 }
-
 
 .modal-confirmacion-contenido h2 {
 
     margin-top: 0;
 
     margin-bottom: 10px;
-
 }
-
 
 .modal-confirmacion-contenido p {
 
     margin: 8px 0;
 
     color: #555;
-
 }
-
 
 .modal-confirmacion-contenido
 .texto-advertencia {
@@ -2145,7 +2121,6 @@ section {
     color: #dc2626;
 
     font-size: 14px;
-
 }
 
 
@@ -2164,9 +2139,7 @@ section {
     gap: 10px;
 
     margin-top: 24px;
-
 }
-
 
 .btn-no-cancelar {
 
@@ -2181,16 +2154,12 @@ section {
     border-radius: 7px;
 
     cursor: pointer;
-
 }
-
 
 .btn-no-cancelar:hover {
 
     background: #d1d5db;
-
 }
-
 
 .btn-si-cancelar {
 
@@ -2205,319 +2174,166 @@ section {
     border-radius: 7px;
 
     cursor: pointer;
-
 }
-
 
 .btn-si-cancelar:hover {
 
     background: #b91c1c;
-
 }
 
 
+/* ========================================
+   BOTONES MANTENIMIENTO
+======================================== */
+
 .btn-danger {
+
     background-color: #dc3545;
+
     color: white;
+
     border: none;
 }
 
 .btn-danger:hover {
+
     background-color: #b02a37;
 }
 
-
 .form-buttons {
+
     margin-top: 25px;
+
     display: flex;
+
     justify-content: flex-end;
+
     gap: 10px;
 }
 
 .form-buttons button {
+
     width: 180px;
+
     height: 42px;
 }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-}
 
-.btn-danger:hover {
-    background-color: #b02a37;
-}
+/* ========================================
+   GRÁFICOS DASHBOARD
+======================================== */
 
 .graficos-dashboard {
+
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
+
     gap: 20px;
+
     margin-top: 20px;
 }
 
 .grafico-panel {
+
     min-height: 380px;
 }
 
 .grafico-ruleta {
+
     position: relative;
+
     width: 100%;
+
     height: 300px;
 }
-
 
 @media (max-width: 768px) {
 
     .graficos-dashboard {
+
         grid-template-columns: 1fr;
     }
 
 }
 
-/* ========================================
-   PROYECTO - BUSCADOR CON DESPLEGABLE
-======================================== */
 
-.campo-formulario {
+/* =====================================================
+   PROYECTO - MANTENIMIENTO
+   ÚNICO SELECTOR CON BÚSQUEDA
+===================================================== */
+
+.buscador-proyecto-mantenimiento {
+
     position: relative;
+
     width: 100%;
 }
 
-.input-proyecto-con-boton {
-    display: flex;
-    align-items: center;
+
+/* CAMPO DE TEXTO */
+
+#proyectoMantenimiento {
+
     width: 100%;
-}
 
-.input-proyecto-con-boton input {
-    flex: 1;
-    width: auto;
-}
-
-#btnDesplegarProyectos {
-    width: 45px;
-    height: 42px;
-    margin-left: 5px;
-    flex-shrink: 0;
-    cursor: pointer;
-}
-
-/* ========================================
-   DESPLEGABLE DE PROYECTOS - PEQUEÑO
-======================================== */
-
-.campo-formulario {
-    position: relative;
-    width: 100%;
-}
-
-.input-proyecto-con-boton {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.input-proyecto-con-boton input {
-    flex: 1;
-    width: auto;
-}
-
-#btnDesplegarProyectos {
-    width: 45px;
-    height: 42px;
-    margin-left: 5px;
-    flex-shrink: 0;
-    cursor: pointer;
-}
-
-/* ========================================
-   SELECTOR DE PROYECTO COMPACTO
-======================================== */
-
-.campo-formulario {
-    position: relative;
-    width: 100%;
-}
-
-.input-proyecto-con-boton {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 5px;
-}
-
-.input-proyecto-con-boton input {
-    flex: 1;
-    width: auto;
-    height: 42px;
-}
-
-/* Botón de desplegar */
-
-#btnDesplegarProyectos {
-    width: 42px;
-    height: 42px;
-
-    padding: 0;
-    margin: 0;
-
-    flex-shrink: 0;
-
-    cursor: pointer;
-
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-
-    background: #f9fafb;
-
-    color: #374151;
-
-    font-size: 16px;
-}
-
-#btnDesplegarProyectos:hover {
-    background: #f3f4f6;
+    padding-right: 45px;
 }
 
 
-/* ========================================
-   LISTA DE PROYECTOS
-======================================== */
+/* BOTÓN / FLECHA */
 
-/* ========================================
-   SELECTOR DE PROYECTO COMPACTO
-======================================== */
+#btnDesplegarProyectosMantenimiento {
 
-.campo-formulario {
-    position: relative;
-    width: 100%;
-}
-
-.input-proyecto-con-boton {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 5px;
-}
-
-.input-proyecto-con-boton input {
-    flex: 1;
-    width: auto;
-    height: 42px;
-}
-
-/* Botón de desplegar */
-
-#btnDesplegarProyectos {
-    width: 42px;
-    height: 42px;
-
-    padding: 0;
-    margin: 0;
-
-    flex-shrink: 0;
-
-    cursor: pointer;
-
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-
-    background: #f9fafb;
-
-    color: #374151;
-
-    font-size: 16px;
-}
-
-#btnDesplegarProyectos:hover {
-    background: #f3f4f6;
-}
-
-
-/* ========================================
-   LISTA DE PROYECTOS
-======================================== */
-
-.lista-proyectos-mantenimiento {
     position: absolute;
 
-    top: calc(100% + 3px);
-    left: 0;
+    top: 1px;
 
-    width: calc(100% - 47px);
+    right: 1px;
 
-    max-height: 150px;
+    width: 40px;
 
-    overflow-y: auto;
+    height: calc(100% - 2px);
+
+    padding: 0;
+
+    margin: 0;
+
+    border: none;
+
+    border-left: 1px solid #d1d5db;
+
+    border-radius: 0 5px 5px 0;
 
     background: white;
 
-    border: 1px solid #d1d5db;
-
-    border-radius: 6px;
-
-    z-index: 1000;
-
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-}
-
-
-/* Cada proyecto */
-
-.opcion-proyecto {
-    padding: 8px 10px;
+    color: #374151;
 
     cursor: pointer;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    line-height: 1.3;
+    display: flex;
 
-    white-space: nowrap;
+    align-items: center;
 
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    justify-content: center;
 }
 
-.opcion-proyecto:hover {
+#btnDesplegarProyectosMantenimiento:hover {
+
     background: #f3f4f6;
 }
 
 
-/* Sin proyectos */
-
-.sin-proyectos {
-    padding: 8px 10px;
-
-    color: #777;
-
-    font-size: 13px;
-}
-
-
-/* ========================================
-   BUSCADOR DE PROYECTO - MANTENIMIENTO
-======================================== */
-
-.buscador-proyecto-mantenimiento {
-    position: relative;
-    width: 100%;
-}
-
-#proyectoMantenimiento {
-    width: 100%;
-}
-
-/* ========================================
-   RESULTADOS DEL BUSCADOR
-======================================== */
+/* LISTA */
 
 .resultados-proyectos-mantenimiento {
+
     position: absolute;
 
     top: calc(100% + 3px);
+
     left: 0;
 
     width: 100%;
@@ -2540,11 +2356,11 @@ section {
     display: none;
 }
 
-/* ========================================
-   OPCIÓN DE PROYECTO
-======================================== */
+
+/* OPCIONES */
 
 .opcion-proyecto-mantenimiento {
+
     padding: 10px 11px;
 
     cursor: pointer;
@@ -2561,129 +2377,15 @@ section {
 }
 
 .opcion-proyecto-mantenimiento:hover {
+
     background: #f3f4f6;
 }
 
-/* ========================================
-   SIN RESULTADOS
-======================================== */
+
+/* SIN RESULTADOS */
 
 .sin-resultados-proyecto {
-    padding: 10px 11px;
 
-    color: #777;
-
-    font-size: 14px;
-}
-
-
-/* ========================================
-   PROYECTO - MISMO DISEÑO QUE UN SELECT
-======================================== */
-
-.buscador-proyecto-mantenimiento {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-/* Campo donde se escribe */
-
-#proyectoMantenimiento {
-    width: 100%;
-    height: 42px;
-    padding: 11px 45px 11px 11px;
-}
-
-/* Flecha dentro del mismo cuadro */
-
-/* ========================================
-   PROYECTO - MANTENIMIENTO
-   MISMO TAMAÑO QUE LOS SELECT
-======================================== */
-
-.buscador-proyecto-mantenimiento {
-    position: relative;
-    width: 100%;
-}
-
-#proyectoMantenimiento {
-    width: 100%;
-    padding-right: 40px;
-}
-
-/* Flecha integrada en el campo */
-
-#btnDesplegarProyectosMantenimiento {
-    position: absolute;
-    right: 1px;
-    top: 1px;
-
-    width: 38px;
-    height: calc(100% - 2px);
-
-    padding: 0;
-    margin: 0;
-
-    border: none;
-    border-left: 1px solid #d1d5db;
-
-    border-radius: 0 5px 5px 0;
-
-    background: white;
-    color: #374151;
-
-    cursor: pointer;
-    font-size: 12px;
-}
-
-#btnDesplegarProyectosMantenimiento:hover {
-    background: #f3f4f6;
-}
-
-/* Lista de proyectos */
-
-.resultados-proyectos-mantenimiento {
-    position: absolute;
-    top: calc(100% + 3px);
-    left: 0;
-
-    width: 100%;
-    max-height: 180px;
-
-    overflow-y: auto;
-
-    background: white;
-
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-
-    z-index: 1000;
-
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-
-    display: none;
-}
-
-.opcion-proyecto-mantenimiento {
-    padding: 10px 11px;
-
-    cursor: pointer;
-
-    font-size: 14px;
-    line-height: 1.3;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.opcion-proyecto-mantenimiento:hover {
-    background: #f3f4f6;
-}
-
-.sin-resultados-proyecto {
     padding: 10px 11px;
 
     color: #777;
