@@ -5566,6 +5566,7 @@ async function cargarProyectos() {
 // CARGAR PROYECTOS EN SELECT
 // ========================================
 
+
 // ========================================
 // CARGAR PROYECTOS EN SELECT
 // ========================================
@@ -5600,6 +5601,19 @@ function cargarSelectProyectos() {
     ) {
         return;
     }
+
+
+    // ========================================
+    // EVITAR CONFIGURAR EVENTOS MÁS DE UNA VEZ
+    // ========================================
+
+    if (
+        input.dataset.configurado === "true"
+    ) {
+        return;
+    }
+
+    input.dataset.configurado = "true";
 
 
     // ========================================
@@ -5650,7 +5664,11 @@ function cargarSelectProyectos() {
 
                 opcion.addEventListener(
                     "click",
-                    function() {
+                    function(event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
 
                         input.value =
                             proyecto.nombre;
@@ -5658,7 +5676,16 @@ function cargarSelectProyectos() {
                         inputId.value =
                             proyecto.id;
 
+
                         lista.innerHTML = "";
+
+
+                        if (btnDesplegar) {
+
+                            btnDesplegar.textContent =
+                                "▼";
+
+                        }
 
                     }
                 );
@@ -5706,7 +5733,7 @@ function cargarSelectProyectos() {
 
 
     // ========================================
-    // MOSTRAR LISTA AL HACER CLICK
+    // MOSTRAR AL ENTRAR AL CAMPO
     // ========================================
 
     input.addEventListener(
@@ -5722,7 +5749,52 @@ function cargarSelectProyectos() {
 
 
     // ========================================
-    // CERRAR LISTA AL HACER CLICK AFUERA
+    // BOTÓN DESPLEGAR
+    // ========================================
+
+    let listaAbierta = false;
+
+
+    if (btnDesplegar) {
+
+        btnDesplegar.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+
+                listaAbierta =
+                    !listaAbierta;
+
+
+                if (listaAbierta) {
+
+                    mostrarProyectos();
+
+                    btnDesplegar.textContent =
+                        "▲";
+
+                }
+
+                else {
+
+                    lista.innerHTML = "";
+
+                    btnDesplegar.textContent =
+                        "▼";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // ========================================
+    // CERRAR AL HACER CLICK AFUERA
     // ========================================
 
     document.addEventListener(
@@ -5737,15 +5809,23 @@ function cargarSelectProyectos() {
 
                 lista.innerHTML = "";
 
+                listaAbierta = false;
+
+
                 if (btnDesplegar) {
-                    btnDesplegar.textContent = "▼";
-                    listaAbierta = false;
+
+                    btnDesplegar.textContent =
+                        "▼";
+
                 }
 
             }
 
         }
     );
+
+}
+
 
 
     // ========================================
