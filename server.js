@@ -1741,31 +1741,31 @@ app.get(
 
             const resultado =
                 await pool.query(`
+SELECT
 
-                    SELECT
+    m.id,
 
-                        m.id,
+    m.fecha,
 
-                        m.fecha,
+    m.proyecto_id,
 
-                        m.proyecto_id,
+    p.codigo AS codigo,
 
-                        p.nombre AS proyecto,
+    p.nombre AS proyecto,
 
-                        p.sede AS sede,
+    p.sede AS sede,
 
-                        m.cuadrilla_id,
+    m.cuadrilla_id,
 
-                        c.nombre AS cuadrilla,
+    c.nombre AS cuadrilla,
 
-                        m.tipo_mantenimiento AS trabajo,
+    m.tipo_mantenimiento AS trabajo,
 
-                        m.descripcion,
+    m.descripcion,
 
-                        m.tipo_mantenimiento,
+    m.tipo_mantenimiento,
 
-                        m.estado
-
+    m.estado
                     FROM mantenimientos m
 
                     LEFT JOIN proyectos p
