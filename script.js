@@ -718,7 +718,7 @@ function abrirListaProyectosMantenimiento() {
         // Mostrar nombre y no código.
 
         opcion.textContent =
-            proyecto.nombre || "";
+            proyecto.codigo || "";
 
 
         opcion.addEventListener(
