@@ -2397,245 +2397,55 @@ async function cargarProyectos() {
 // cada vez que cambia la variable proyectos.
 // ========================================
 
+// ========================================
+// CARGAR PROYECTOS EN SELECT
+// ========================================
+
 function cargarSelectProyectos() {
 
-    const input =
+    const selectProyecto =
         document.getElementById(
             "proyectoMantenimiento"
         );
 
-    const inputId =
-        document.getElementById(
-            "proyectoMantenimientoId"
-        );
-
-    const lista =
-        document.getElementById(
-            "listaProyectosMantenimiento"
-        );
-
-    const btnDesplegar =
-        document.getElementById(
-            "btnDesplegarProyectos"
-        );
-
-    if (
-        !input ||
-        !inputId ||
-        !lista
-    ) {
-
+    if (!selectProyecto) {
         return;
-
     }
 
+    // Limpiar opciones actuales
+    selectProyecto.innerHTML = "";
 
-    // ========================================
-    // FUNCIÓN PARA MOSTRAR PROYECTOS
-    // ========================================
+    // Opción inicial
+    const opcionInicial =
+        document.createElement("option");
 
-    function mostrarProyectos(texto = "") {
+    opcionInicial.value = "";
 
-        lista.innerHTML = "";
+    opcionInicial.textContent =
+        "Seleccione un proyecto";
 
-        const textoBuscado =
-            texto
-                .trim()
-                .toLowerCase();
-
-        const proyectosFiltrados =
-            proyectos.filter(
-                function(proyecto) {
-
-                    return (
-                        proyecto.nombre &&
-                        proyecto.nombre
-                            .toLowerCase()
-                            .includes(textoBuscado)
-                    );
-
-                }
-            );
-
-        proyectosFiltrados.forEach(
-            function(proyecto) {
-
-                const opcion =
-                    document.createElement(
-                        "div"
-                    );
-
-                opcion.className =
-                    "opcion-proyecto";
-
-                opcion.textContent =
-                    proyecto.nombre;
-
-                opcion.addEventListener(
-                    "click",
-                    function(event) {
-
-                        event.preventDefault();
-                        event.stopPropagation();
-
-                        input.value =
-                            proyecto.nombre;
-
-                        inputId.value =
-                            proyecto.id;
-
-                        lista.innerHTML = "";
-
-                        if (btnDesplegar) {
-
-                            btnDesplegar.textContent =
-                                "▼";
-
-                        }
-
-                    }
-                );
-
-                lista.appendChild(
-                    opcion
-                );
-
-            }
-        );
-
-        if (
-            proyectosFiltrados.length === 0
-        ) {
-
-            lista.innerHTML = `
-                <div class="sin-proyectos">
-                    No se encontraron proyectos
-                </div>
-            `;
-
-        }
-
-    }
-
-
-    // ========================================
-    // EVITAR EVENTOS DUPLICADOS
-    // ========================================
-
-    if (
-        input.dataset.eventosConfigurados === "true"
-    ) {
-
-        return;
-
-    }
-
-    input.dataset.eventosConfigurados =
-        "true";
-
-
-    // ========================================
-    // ESCRIBIR Y FILTRAR
-    // ========================================
-
-    input.addEventListener(
-        "input",
-        function() {
-
-            inputId.value = "";
-
-            mostrarProyectos(
-                input.value
-            );
-
-        }
+    selectProyecto.appendChild(
+        opcionInicial
     );
 
+    // Cargar proyectos
+    proyectos.forEach(
+        function(proyecto) {
 
-    // ========================================
-    // MOSTRAR LISTA AL HACER FOCUS
-    // ========================================
+            const opcion =
+                document.createElement("option");
 
-    input.addEventListener(
-        "focus",
-        function() {
+            // El VALUE será el ID real del proyecto
+            opcion.value =
+                proyecto.id;
 
-            mostrarProyectos(
-                input.value
+            // Lo que verá el usuario será el nombre
+            opcion.textContent =
+                proyecto.nombre;
+
+            selectProyecto.appendChild(
+                opcion
             );
-
-        }
-    );
-
-
-    // ========================================
-    // BOTÓN DESPLEGAR
-    // ========================================
-
-    let listaAbierta = false;
-
-    if (btnDesplegar) {
-
-        btnDesplegar.addEventListener(
-            "click",
-            function(event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                listaAbierta =
-                    !listaAbierta;
-
-                if (listaAbierta) {
-
-                    mostrarProyectos();
-
-                    btnDesplegar.textContent =
-                        "▲";
-
-                }
-
-                else {
-
-                    lista.innerHTML = "";
-
-                    btnDesplegar.textContent =
-                        "▼";
-
-                }
-
-            }
-        );
-
-    }
-
-
-    // ========================================
-    // CERRAR AL HACER CLICK AFUERA
-    // ========================================
-
-    document.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                !input.contains(event.target) &&
-                !lista.contains(event.target) &&
-                !btnDesplegar?.contains(event.target)
-            ) {
-
-                lista.innerHTML = "";
-
-                listaAbierta = false;
-
-                if (btnDesplegar) {
-
-                    btnDesplegar.textContent =
-                        "▼";
-
-                }
-
-            }
 
         }
     );
@@ -2922,13 +2732,13 @@ async function registrarMantenimiento(event) {
             inicio || "",
 
         proyecto_id:
-            Number(
-                document
-                    .getElementById(
-                        "proyectoMantenimientoId"
-                    )
-                    .value
-            ),
+    Number(
+        document
+            .getElementById(
+                "proyectoMantenimiento"
+            )
+            .value
+    ),
 
         cuadrilla:
             document
@@ -3076,27 +2886,16 @@ async function registrarMantenimiento(event) {
 
         }
 
-        const inputProyecto =
-            document.getElementById(
-                "proyectoMantenimiento"
-            );
+       const selectProyecto =
+    document.getElementById(
+        "proyectoMantenimiento"
+    );
 
-        const inputProyectoId =
-            document.getElementById(
-                "proyectoMantenimientoId"
-            );
+if (selectProyecto) {
 
-        if (inputProyecto) {
+    selectProyecto.value = "";
 
-            inputProyecto.value = "";
-
-        }
-
-        if (inputProyectoId) {
-
-            inputProyectoId.value = "";
-
-        }
+}
 
         await cargarMantenimientos();
 
