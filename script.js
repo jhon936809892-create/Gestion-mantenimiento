@@ -1492,9 +1492,9 @@ function inicializarCalendarioMantenimiento() {
                                             extendedProps: {
 
                                                 proyecto:
-                                                    mantenimiento.nombre ||
-                                                    mantenimiento.proyecto ||
                                                     mantenimiento.codigo ||
+                                                    mantenimiento.proyecto ||
+                                                    mantenimiento.nombre ||
                                                     "",
 
                                                 sede:
