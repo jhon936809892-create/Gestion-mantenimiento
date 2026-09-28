@@ -3761,3 +3761,77 @@ document.addEventListener(
 
     }
 );
+
+function abrirListaProyectosMantenimiento() {
+
+    const inputProyecto =
+        document.getElementById("proyectoMantenimiento");
+
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
+
+    if (!inputProyecto || !resultados) {
+        return;
+    }
+
+    // Si la lista está abierta, la cerramos
+    if (resultados.style.display === "block") {
+
+        resultados.style.display = "none";
+        return;
+
+    }
+
+    resultados.innerHTML = "";
+
+    if (!proyectos || proyectos.length === 0) {
+
+        resultados.innerHTML = `
+            <div class="sin-resultados-proyecto">
+                No hay proyectos disponibles
+            </div>
+        `;
+
+        resultados.style.display = "block";
+
+        return;
+    }
+
+    // Mostrar todos los proyectos
+    proyectos.forEach(function(proyecto) {
+
+        const opcion =
+            document.createElement("div");
+
+        opcion.className =
+            "opcion-proyecto-mantenimiento";
+
+        opcion.textContent =
+            proyecto.codigo;
+
+        opcion.addEventListener(
+            "click",
+            function() {
+
+                inputProyecto.value =
+                    proyecto.codigo;
+
+                inputProyecto.dataset.proyectoId =
+                    proyecto.id;
+
+                resultados.innerHTML = "";
+
+                resultados.style.display =
+                    "none";
+
+            }
+        );
+
+        resultados.appendChild(opcion);
+
+    });
+
+    resultados.style.display = "block";
+}
