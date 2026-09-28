@@ -85,8 +85,8 @@ function mostrarSeccion(seccion, boton) {
         personal: "Personal",
         cuadrillas: "Cuadrillas",
         proyectos: "Lista de Proyectos",
-        mantenimiento: "Mantenimiento",
-        materiales: "Materiales"
+        mantenimiento: "Lista de Mantenimiento",
+        materiales: "Lista de Materiales"
 
     };
 
