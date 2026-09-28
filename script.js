@@ -2290,165 +2290,142 @@ async function registrarProyecto(event) {
 // ========================================
 // CARGAR PROYECTOS
 // ========================================
+function cargarSelectProyectos() {
 
-async function cargarProyectos() {
+    const inputProyecto =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
 
-    try {
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
 
-        const respuesta =
-            await fetch(
-                "/api/proyectos"
-            );
+    if (
+        !inputProyecto ||
+        !resultados
+    ) {
 
-        if (!respuesta.ok) {
+        return;
 
-            throw new Error(
-                "Error al obtener proyectos"
-            );
+    }
 
-        }
+    inputProyecto.value = "";
 
-        proyectos =
-            await respuesta.json();
+    inputProyecto.dataset.proyectoId = "";
 
-        const tabla =
-            document.getElementById(
-                "tablaProyectos"
-            );
+    resultados.innerHTML = "";
 
-        if (tabla) {
+    resultados.style.display = "none";
 
-            tabla.innerHTML = "";
 
-            proyectos.forEach(
-                function(proyecto) {
+    inputProyecto.oninput =
+        function() {
 
-                    const fila =
-                        document.createElement(
-                            "tr"
+            const texto =
+                inputProyecto.value
+                    .trim()
+                    .toLowerCase();
+
+            resultados.innerHTML = "";
+
+
+            if (!texto) {
+
+                resultados.style.display =
+                    "none";
+
+                inputProyecto.dataset.proyectoId =
+                    "";
+
+                return;
+
+            }
+
+
+            const proyectosFiltrados =
+                proyectos.filter(
+                    function(proyecto) {
+
+                        return (
+                            proyecto.nombre &&
+                            proyecto.nombre
+                                .toLowerCase()
+                                .includes(texto)
                         );
 
-                    fila.innerHTML = `
+                    }
+                );
 
-                        <td>
-                            ${proyecto.codigo || ""}
-                        </td>
 
-                        <td>
-                            ${proyecto.nombre || ""}
-                        </td>
+            if (
+                proyectosFiltrados.length === 0
+            ) {
 
-                        <td>
-                            ${proyecto.tipo || ""}
-                        </td>
+                resultados.innerHTML = `
 
-                        <td>
-                            ${proyecto.sede || ""}
-                        </td>
+                    <div class="sin-resultados-proyecto">
+                        No se encontraron proyectos
+                    </div>
 
-                        <td>
-                            ${proyecto.tipo_cable || ""}
-                        </td>
+                `;
 
-                    `;
+                resultados.style.display =
+                    "block";
 
-                    tabla.appendChild(
-                        fila
+                return;
+
+            }
+
+
+            proyectosFiltrados.forEach(
+                function(proyecto) {
+
+                    const opcion =
+                        document.createElement(
+                            "div"
+                        );
+
+                    opcion.className =
+                        "opcion-proyecto-mantenimiento";
+
+                    opcion.textContent =
+                        proyecto.nombre;
+
+
+                    opcion.addEventListener(
+                        "click",
+                        function() {
+
+                            inputProyecto.value =
+                                proyecto.nombre;
+
+                            inputProyecto.dataset.proyectoId =
+                                proyecto.id;
+
+                            resultados.innerHTML =
+                                "";
+
+                            resultados.style.display =
+                                "none";
+
+                        }
+                    );
+
+
+                    resultados.appendChild(
+                        opcion
                     );
 
                 }
             );
 
-        }
 
-        const total =
-            document.getElementById(
-                "totalProyectos"
-            );
+            resultados.style.display =
+                "block";
 
-        if (total) {
-
-            total.textContent =
-                proyectos.length;
-
-        }
-
-        cargarSelectProyectos();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error cargando proyectos:",
-            error
-        );
-
-    }
-
-}
-
-
-// ========================================
-// CARGAR PROYECTOS EN SELECT
-// ========================================
-// IMPORTANTE:
-// Los eventos se configuran UNA SOLA VEZ.
-// La lista de proyectos se actualiza
-// cada vez que cambia la variable proyectos.
-// ========================================
-
-// ========================================
-// CARGAR PROYECTOS EN SELECT
-// ========================================
-
-function cargarSelectProyectos() {
-
-    const selectProyecto =
-        document.getElementById(
-            "proyectoMantenimiento"
-        );
-
-    if (!selectProyecto) {
-        return;
-    }
-
-    // Limpiar opciones actuales
-    selectProyecto.innerHTML = "";
-
-    // Opción inicial
-    const opcionInicial =
-        document.createElement("option");
-
-    opcionInicial.value = "";
-
-    opcionInicial.textContent =
-        "Seleccione un proyecto";
-
-    selectProyecto.appendChild(
-        opcionInicial
-    );
-
-    // Cargar proyectos
-    proyectos.forEach(
-        function(proyecto) {
-
-            const opcion =
-                document.createElement("option");
-
-            // El VALUE será el ID real del proyecto
-            opcion.value =
-                proyecto.id;
-
-            // Lo que verá el usuario será el nombre
-            opcion.textContent =
-                proyecto.nombre;
-
-            selectProyecto.appendChild(
-                opcion
-            );
-
-        }
-    );
+        };
 
 }
 
@@ -2731,13 +2708,14 @@ async function registrarMantenimiento(event) {
         fecha:
             inicio || "",
 
-        proyecto_id:
+      proyecto_id:
     Number(
         document
             .getElementById(
                 "proyectoMantenimiento"
             )
-            .value
+            .dataset
+            .proyectoId
     ),
 
         cuadrilla:
