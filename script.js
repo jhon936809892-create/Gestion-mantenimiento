@@ -20,6 +20,16 @@ let graficoTrabajoCampo = null;
 
 
 // ============================================================
+// VARIABLES PARA EL DASHBOARD
+// ============================================================
+
+let datosPersonalDashboard = [];
+let datosProyectosDashboard = [];
+let datosMantenimientosDashboard = [];
+let datosMaterialesDashboard = [];
+
+
+// ============================================================
 // FUNCIONES GENERALES
 // ============================================================
 
@@ -172,6 +182,17 @@ function mostrarSeccion(seccion, boton) {
 
 
     // --------------------------------------------------------
+    // DASHBOARD
+    // --------------------------------------------------------
+
+    if (seccion === "dashboard") {
+
+        actualizarDashboard();
+
+    }
+
+
+    // --------------------------------------------------------
     // MÓDULO MANTENIMIENTO
     // --------------------------------------------------------
 
@@ -305,6 +326,11 @@ async function cargarProyectos() {
             await respuesta.json();
 
 
+        // Guardamos para el Dashboard
+        datosProyectosDashboard =
+            proyectos;
+
+
         console.log(
             "Proyectos cargados:",
             proyectos
@@ -383,6 +409,13 @@ async function cargarProyectos() {
 
 
         // ====================================================
+        // ACTUALIZAR DASHBOARD
+        // ====================================================
+
+        actualizarDashboard();
+
+
+        // ====================================================
         // CONFIGURAR BUSCADOR DE MANTENIMIENTO
         // ====================================================
 
@@ -445,8 +478,8 @@ function cargarSelectProyectos() {
             resultados.innerHTML = "";
 
 
-            // Se borra el ID hasta que el usuario
-            // seleccione un proyecto real.
+            // Se borra el ID hasta que se seleccione
+            // un proyecto real.
 
             inputProyecto.dataset.proyectoId =
                 "";
@@ -531,10 +564,9 @@ function cargarSelectProyectos() {
                     "opcion-proyecto-mantenimiento";
 
 
-                // =================================================
-                // IMPORTANTE
-                // EL NOMBRE VISIBLE DEL PROYECTO ES EL CÓDIGO
-                // =================================================
+                // --------------------------------------------
+                // EN MANTENIMIENTO SE MUESTRA EL CÓDIGO
+                // --------------------------------------------
 
                 opcion.textContent =
                     proyecto.codigo || "";
@@ -712,10 +744,9 @@ function abrirListaProyectosMantenimiento() {
             "opcion-proyecto-mantenimiento";
 
 
-        // =====================================================
-        // IMPORTANTE:
-        // MOSTRAR CÓDIGO DEL PROYECTO
-        // =====================================================
+        // ----------------------------------------------------
+        // MOSTRAR CÓDIGO
+        // ----------------------------------------------------
 
         opcion.textContent =
             proyecto.codigo || "";
@@ -769,6 +800,11 @@ async function cargarMantenimientos() {
 
         const mantenimientos =
             await respuesta.json();
+
+
+        // Guardamos para Dashboard
+        datosMantenimientosDashboard =
+            mantenimientos;
 
 
         console.log(
@@ -879,6 +915,22 @@ async function cargarMantenimientos() {
         }
 
 
+        // ====================================================
+        // CONTADORES DE ESTADO
+        // ====================================================
+
+        actualizarContadoresMantenimiento(
+            mantenimientos
+        );
+
+
+        // ====================================================
+        // ACTUALIZAR DASHBOARD
+        // ====================================================
+
+        actualizarDashboard();
+
+
         return mantenimientos;
 
     }
@@ -891,6 +943,401 @@ async function cargarMantenimientos() {
 
 
         return [];
+
+    }
+
+}
+
+
+// ============================================================
+// CONTADORES DE MANTENIMIENTO
+// ============================================================
+
+function actualizarContadoresMantenimiento(
+    mantenimientos
+) {
+
+    if (!Array.isArray(mantenimientos)) {
+
+        return;
+
+    }
+
+
+    let pendientes = 0;
+    let enProceso = 0;
+    let terminados = 0;
+
+
+    mantenimientos.forEach(
+        function(mantenimiento) {
+
+            const estado =
+                String(
+                    mantenimiento.estado || ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            if (
+                estado === "pendiente"
+            ) {
+
+                pendientes++;
+
+            }
+
+
+            else if (
+                estado === "en proceso"
+            ) {
+
+                enProceso++;
+
+            }
+
+
+            else if (
+                estado === "terminado"
+            ) {
+
+                terminados++;
+
+            }
+
+        }
+    );
+
+
+    // --------------------------------------------------------
+    // IDs PRINCIPALES DEL DASHBOARD
+    // --------------------------------------------------------
+
+    const elementosPendientes = [
+
+        "mantenimientosPendientes",
+        "totalMantenimientosPendientes",
+        "mantenimientoPendientes"
+
+    ];
+
+
+    const elementosProceso = [
+
+        "mantenimientosEnProceso",
+        "totalMantenimientosEnProceso",
+        "mantenimientoEnProceso"
+
+    ];
+
+
+    const elementosTerminados = [
+
+        "mantenimientosTerminados",
+        "totalMantenimientosTerminados",
+        "mantenimientoTerminados"
+
+    ];
+
+
+    actualizarPrimerElemento(
+        elementosPendientes,
+        pendientes
+    );
+
+
+    actualizarPrimerElemento(
+        elementosProceso,
+        enProceso
+    );
+
+
+    actualizarPrimerElemento(
+        elementosTerminados,
+        terminados
+    );
+
+}
+
+
+// ============================================================
+// ACTUALIZAR PRIMER ELEMENTO ENCONTRADO
+// ============================================================
+
+function actualizarPrimerElemento(
+    ids,
+    valor
+) {
+
+    for (
+        let i = 0;
+        i < ids.length;
+        i++
+    ) {
+
+        const elemento =
+            document.getElementById(
+                ids[i]
+            );
+
+
+        if (elemento) {
+
+            elemento.textContent =
+                valor;
+
+            return;
+
+        }
+
+    }
+
+}
+
+
+// ============================================================
+// DASHBOARD GENERAL
+// ============================================================
+
+function actualizarDashboard() {
+
+    // --------------------------------------------------------
+    // PERSONAL
+    // --------------------------------------------------------
+
+    const totalPersonal =
+        document.getElementById(
+            "totalPersonal"
+        );
+
+
+    if (
+        totalPersonal &&
+        Array.isArray(
+            datosPersonalDashboard
+        )
+    ) {
+
+        totalPersonal.textContent =
+            datosPersonalDashboard.length;
+
+    }
+
+
+    // --------------------------------------------------------
+    // PROYECTOS
+    // --------------------------------------------------------
+
+    const totalProyectos =
+        document.getElementById(
+            "totalProyectos"
+        );
+
+
+    if (
+        totalProyectos &&
+        Array.isArray(
+            datosProyectosDashboard
+        )
+    ) {
+
+        totalProyectos.textContent =
+            datosProyectosDashboard.length;
+
+    }
+
+
+    // --------------------------------------------------------
+    // MANTENIMIENTOS
+    // --------------------------------------------------------
+
+    const totalMantenimientos =
+        document.getElementById(
+            "totalMantenimientos"
+        );
+
+
+    if (
+        totalMantenimientos &&
+        Array.isArray(
+            datosMantenimientosDashboard
+        )
+    ) {
+
+        totalMantenimientos.textContent =
+            datosMantenimientosDashboard.length;
+
+    }
+
+
+    // --------------------------------------------------------
+    // ESTADOS DE MANTENIMIENTO
+    // --------------------------------------------------------
+
+    actualizarContadoresMantenimiento(
+        datosMantenimientosDashboard
+    );
+
+
+    // --------------------------------------------------------
+    // MATERIALES
+    // --------------------------------------------------------
+
+    const totalMateriales =
+        document.getElementById(
+            "totalMateriales"
+        );
+
+
+    if (
+        totalMateriales &&
+        Array.isArray(
+            datosMaterialesDashboard
+        )
+    ) {
+
+        totalMateriales.textContent =
+            datosMaterialesDashboard.length;
+
+    }
+
+
+    // --------------------------------------------------------
+    // CUADRILLAS
+    // --------------------------------------------------------
+
+    const totalCuadrillas =
+        document.getElementById(
+            "totalCuadrillas"
+        );
+
+
+    if (totalCuadrillas) {
+
+        totalCuadrillas.textContent =
+            "3";
+
+    }
+
+
+    // --------------------------------------------------------
+    // CANTIDAD DE PERSONAL POR CUADRILLA
+    // --------------------------------------------------------
+
+    actualizarCantidadCuadrillas();
+
+}
+
+
+// ============================================================
+// CANTIDAD DE PERSONAL POR CUADRILLA
+// ============================================================
+
+function actualizarCantidadCuadrillas() {
+
+    if (
+        !Array.isArray(
+            datosPersonalDashboard
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    let cuadrilla1 = 0;
+    let cuadrilla2 = 0;
+    let cuadrilla3 = 0;
+
+
+    datosPersonalDashboard.forEach(
+        function(persona) {
+
+            const cuadrilla =
+                String(
+                    persona.cuadrilla || ""
+                ).trim();
+
+
+            if (cuadrilla === "1") {
+
+                cuadrilla1++;
+
+            }
+
+
+            if (cuadrilla === "2") {
+
+                cuadrilla2++;
+
+            }
+
+
+            if (cuadrilla === "3") {
+
+                cuadrilla3++;
+
+            }
+
+        }
+    );
+
+
+    const cantidadC1 =
+        document.getElementById(
+            "cantidadC1"
+        );
+
+
+    const cantidadC2 =
+        document.getElementById(
+            "cantidadC2"
+        );
+
+
+    const cantidadC3 =
+        document.getElementById(
+            "cantidadC3"
+        );
+
+
+    if (cantidadC1) {
+
+        cantidadC1.textContent =
+            cuadrilla1 +
+            (
+                cuadrilla1 === 1
+                    ? " técnico"
+                    : " técnicos"
+            );
+
+    }
+
+
+    if (cantidadC2) {
+
+        cantidadC2.textContent =
+            cuadrilla2 +
+            (
+                cuadrilla2 === 1
+                    ? " técnico"
+                    : " técnicos"
+            );
+
+    }
+
+
+    if (cantidadC3) {
+
+        cantidadC3.textContent =
+            cuadrilla3 +
+            (
+                cuadrilla3 === 1
+                    ? " técnico"
+                    : " técnicos"
+            );
 
     }
 
@@ -1288,7 +1735,7 @@ async function registrarMantenimiento(event) {
 
 
         // ----------------------------------------------------
-        // ACTUALIZAR TABLA
+        // ACTUALIZAR TABLA Y DASHBOARD
         // ----------------------------------------------------
 
         await cargarMantenimientos();
@@ -1376,10 +1823,6 @@ function inicializarCalendarioMantenimiento() {
             elemento,
             {
 
-                // ------------------------------------------------
-                // CONFIGURACIÓN
-                // ------------------------------------------------
-
                 initialView:
                     "dayGridMonth",
 
@@ -1425,10 +1868,6 @@ function inicializarCalendarioMantenimiento() {
                     "08:00:00",
 
 
-                // ------------------------------------------------
-                // EVENTOS
-                // ------------------------------------------------
-
                 events:
                     async function(
                         info,
@@ -1468,9 +1907,9 @@ function inicializarCalendarioMantenimiento() {
                                                     mantenimiento.id
                                                 ),
 
-                                            // =================================================
-                                            // EL PROYECTO SE MUESTRA CON EL CÓDIGO
-                                            // =================================================
+                                            // --------------------------------
+                                            // SE MUESTRA EL CÓDIGO
+                                            // --------------------------------
 
                                             title:
                                                 `${
@@ -1542,10 +1981,6 @@ function inicializarCalendarioMantenimiento() {
 
                     },
 
-
-                // ------------------------------------------------
-                // CLICK EN EVENTO
-                // ------------------------------------------------
 
                 eventClick:
                     function(info) {
@@ -2015,6 +2450,12 @@ async function cargarPersonal() {
             await respuesta.json();
 
 
+        // Guardamos para Dashboard
+
+        datosPersonalDashboard =
+            personal;
+
+
         const tabla =
             document.getElementById(
                 "tablaPersonal"
@@ -2022,6 +2463,8 @@ async function cargarPersonal() {
 
 
         if (!tabla) {
+
+            actualizarDashboard();
 
             return;
 
@@ -2090,6 +2533,9 @@ async function cargarPersonal() {
                 personal.length;
 
         }
+
+
+        actualizarDashboard();
 
     }
     catch (error) {
@@ -2437,6 +2883,12 @@ async function cargarMateriales() {
             await respuesta.json();
 
 
+        // Guardamos para Dashboard
+
+        datosMaterialesDashboard =
+            materiales;
+
+
         const tabla =
             document.getElementById(
                 "tablaMateriales"
@@ -2444,6 +2896,8 @@ async function cargarMateriales() {
 
 
         if (!tabla) {
+
+            actualizarDashboard();
 
             return;
 
@@ -2487,6 +2941,9 @@ async function cargarMateriales() {
             tabla.appendChild(fila);
 
         });
+
+
+        actualizarDashboard();
 
     }
     catch (error) {
@@ -2890,10 +3347,17 @@ document.addEventListener(
 
 
         // ----------------------------------------------------
-        // NO INICIALIZAMOS EL CALENDARIO AQUÍ
+        // ACTUALIZAR DASHBOARD
         // ----------------------------------------------------
 
-        // Se inicializa cuando se entra a Mantenimiento.
+        actualizarDashboard();
+
+
+        // ----------------------------------------------------
+        // NO INICIALIZAMOS CALENDARIO AQUÍ
+        // ----------------------------------------------------
+
+        // Se inicializa al entrar a Mantenimiento.
 
 
         // ----------------------------------------------------
@@ -2927,3 +3391,4 @@ window.addEventListener(
 
     }
 );
+
