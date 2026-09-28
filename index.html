@@ -860,14 +860,27 @@
         Proyecto
     </label>
 
-    <select
+   <div class="campo-formulario">
+    <label for="proyectoMantenimiento">Proyecto</label>
+
+    <input
+        type="text"
         id="proyectoMantenimiento"
+        placeholder="Escriba el nombre del proyecto..."
+        autocomplete="off"
         required
     >
-        <option value="">
-            Seleccione un proyecto
-        </option>
-    </select>
+
+    <input
+        type="hidden"
+        id="proyectoMantenimientoId"
+    >
+
+    <div
+        id="listaProyectosMantenimiento"
+        class="lista-proyectos-mantenimiento"
+    ></div>
+</div>
 
 <label for="tipoMantenimiento">Tipo de mantenimiento</label>
 <select id="tipoMantenimiento" required>
@@ -917,7 +930,7 @@
     </label>
 
     <select id="estadoMantenimiento">
-
+https://github.com/jhon936809892-create/Gestion-mantenimiento/blob/main/index.html
         <option value="Pendiente">
             Pendiente
         </option>
