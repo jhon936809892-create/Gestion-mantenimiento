@@ -437,75 +437,62 @@
 </section>
 </section>
 
-        <section
-            id="mantenimiento"
-            class="seccion"
-        >
+        <section id="mantenimiento" class="seccion">
 
-            <div class="panel-header">
+    <!-- LISTA DE MANTENIMIENTOS -->
 
-    <div>
-        <h2>Lista de mantenimientos</h2>
-        <p>Gestiona los mantenimientos registrados</p>
+    <div class="panel">
+
+        <div class="tabla-responsive">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Proyecto</th>
+                        <th>Sede</th>
+                        <th>Trabajo</th>
+                        <th>Estado</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaMantenimiento"></tbody>
+
+            </table>
+
+        </div>
+
     </div>
 
-    <button
-        type="button"
-        class="btn-primary"
-        onclick="abrirModalMantenimiento()"
-    >
-        + Agregar mantenimiento
-    </button>
 
-</div>
+    <!-- CALENDARIO -->
 
-                <div class="tabla-responsive">
+    <div class="panel calendario-panel">
 
-                    <table>
+        <div class="calendario-header">
 
-                        <thead>
+            <div>
 
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Proyecto</th>
-                                <th>Sede</th>
-                                <th>Trabajo</th>
-                                <th>Estado</th>
-                            </tr>
+                <h2>
+                    Calendario de mantenimientos
+                </h2>
 
-                        </thead>
-
-                        <tbody id="tablaMantenimiento"></tbody>
-
-                    </table>
-
-                </div>
+                <p>
+                    Consulta los mantenimientos por mes, semana o día.
+                </p>
 
             </div>
 
-            <div class="panel calendario-panel">
+        </div>
 
-                <div class="calendario-header">
+        <div id="calendarioMantenimiento"></div>
 
-                    <div>
+    </div>
 
-                        <h2>
-                            Calendario de mantenimientos
-                        </h2>
-
-                        <p>
-                            Consulta los mantenimientos por mes, semana o día.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div id="calendarioMantenimiento"></div>
-
-            </div>
-
-        </section>
+</section>
 
         <section
             id="materiales"
