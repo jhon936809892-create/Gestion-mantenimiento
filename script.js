@@ -1306,7 +1306,7 @@ function inicializarCalendarioMantenimiento() {
 
                                             title:
                                                 `${
-                                                    mantenimiento.proyecto ||
+                                                    mantenimiento.codigo ||
                                                     "Sin proyecto"
                                                 } - Cuadrilla ${
                                                     mantenimiento.cuadrilla ||
