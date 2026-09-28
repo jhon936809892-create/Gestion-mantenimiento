@@ -2307,53 +2307,54 @@ section {
    DESPLEGABLE DE PROYECTOS - PEQUEÑO
 ======================================== */
 
+.campo-formulario {
+    position: relative;
+    width: 100%;
+}
+
+.input-proyecto-con-boton {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-proyecto-con-boton input {
+    flex: 1;
+    width: auto;
+}
+
+#btnDesplegarProyectos {
+    width: 45px;
+    height: 42px;
+    margin-left: 5px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
 .lista-proyectos-mantenimiento {
     position: absolute;
-
     top: 100%;
     left: 0;
-
     width: calc(100% - 50px);
-
-    max-height: 140px;
-
+    max-height: 200px;
     overflow-y: auto;
-
     background: white;
-
-    border: 1px solid #d1d5db;
-
-    border-radius: 5px;
-
+    border: 1px solid #ccc;
+    border-radius: 6px;
     z-index: 1000;
-
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
 }
 
 .opcion-proyecto {
-    padding: 7px 9px;
-
+    padding: 10px;
     cursor: pointer;
-
-    font-size: 13px;
-
-    line-height: 1.3;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .opcion-proyecto:hover {
-    background: #f0f4f8;
+    background: #f0f0f0;
 }
 
 .sin-proyectos {
-    padding: 7px 9px;
-
+    padding: 10px;
     color: #777;
-
-    font-size: 13px;
 }
