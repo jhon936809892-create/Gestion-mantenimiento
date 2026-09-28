@@ -858,25 +858,40 @@
 
    
 
-   <div class="campo-formulario">
-    <label for="proyectoMantenimiento">Proyecto</label>
+  <div class="campo-formulario">
 
-   <div class="input-proyecto-con-boton">
+    <label for="proyectoMantenimiento">
+        Proyecto
+    </label>
+
+    <div class="input-proyecto-con-boton">
+
+        <input
+            type="text"
+            id="proyectoMantenimiento"
+            placeholder="Escriba el nombre del proyecto..."
+            autocomplete="off"
+            required
+        >
+
+        <button
+            type="button"
+            id="btnDesplegarProyectos"
+        >
+            ▼
+        </button>
+
+    </div>
 
     <input
-        type="text"
-        id="proyectoMantenimiento"
-        placeholder="Escriba el nombre del proyecto..."
-        autocomplete="off"
-        required
+        type="hidden"
+        id="proyectoMantenimientoId"
     >
 
-    <button
-        type="button"
-        id="btnDesplegarProyectos"
-    >
-        ▼
-    </button>
+    <div
+        id="listaProyectosMantenimiento"
+        class="lista-proyectos-mantenimiento"
+    ></div>
 
 </div>
     
