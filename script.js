@@ -2447,8 +2447,8 @@ function cargarSelectProyectos() {
                     function(proyecto) {
 
                         return (
-                            proyecto.nombre &&
-                            proyecto.nombre
+                            proyecto.codigo &&
+                            proyecto.codigo
                                 .toLowerCase()
                                 .includes(texto)
                         );
@@ -2489,7 +2489,7 @@ function cargarSelectProyectos() {
                         "opcion-proyecto-mantenimiento";
 
                     opcion.textContent =
-                        proyecto.nombre;
+                        proyecto.codigo;
 
 
                     opcion.addEventListener(
@@ -2497,7 +2497,7 @@ function cargarSelectProyectos() {
                         function() {
 
                             inputProyecto.value =
-                                proyecto.nombre;
+                                proyecto.codigo;
 
                             inputProyecto.dataset.proyectoId =
                                 proyecto.id;
