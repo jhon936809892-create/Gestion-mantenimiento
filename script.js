@@ -2782,71 +2782,164 @@ async function cargarProyectos() {
 
 function cargarSelectProyectos() {
 
-    const selects = [
-
-        document.getElementById(
-            "proyectoMaterial"
-        ),
-
+    const input =
         document.getElementById(
             "proyectoMantenimiento"
-        )
+        );
 
-    ];
+    const inputId =
+        document.getElementById(
+            "proyectoMantenimientoId"
+        );
 
-
-    selects.forEach(
-        function(select) {
-
-            if (!select) {
-
-                return;
-
-            }
+    const lista =
+        document.getElementById(
+            "listaProyectosMantenimiento"
+        );
 
 
-            const valorActual =
-                select.value;
+    if (
+        !input ||
+        !inputId ||
+        !lista
+    ) {
+        return;
+    }
 
 
-            select.innerHTML = `
+    // ========================================
+    // MOSTRAR PROYECTOS
+    // ========================================
 
-                <option value="">
-                    Seleccione un proyecto
-                </option>
+    function mostrarProyectos(texto = "") {
 
-            `;
+        lista.innerHTML = "";
+
+        const textoBuscado =
+            texto
+                .trim()
+                .toLowerCase();
 
 
-            proyectos.forEach(
+        const proyectosFiltrados =
+            proyectos.filter(
                 function(proyecto) {
 
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-
-                    option.value =
-                        proyecto.id;
-
-
-                    option.textContent =
-                        proyecto.codigo;
-
-
-                    select.appendChild(
-                        option
+                    return (
+                        proyecto.nombre &&
+                        proyecto.nombre
+                            .toLowerCase()
+                            .includes(textoBuscado)
                     );
 
                 }
             );
 
 
-            if (valorActual) {
+        proyectosFiltrados.forEach(
+            function(proyecto) {
 
-                select.value =
-                    valorActual;
+                const opcion =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                opcion.className =
+                    "opcion-proyecto";
+
+
+                opcion.textContent =
+                    proyecto.nombre;
+
+
+                opcion.addEventListener(
+                    "click",
+                    function() {
+
+                        input.value =
+                            proyecto.nombre;
+
+                        inputId.value =
+                            proyecto.id;
+
+                        lista.innerHTML = "";
+
+                    }
+                );
+
+
+                lista.appendChild(
+                    opcion
+                );
+
+            }
+        );
+
+
+        if (
+            proyectosFiltrados.length === 0
+        ) {
+
+            lista.innerHTML = `
+                <div class="sin-proyectos">
+                    No se encontraron proyectos
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    // ========================================
+    // ESCRIBIR Y FILTRAR
+    // ========================================
+
+    input.addEventListener(
+        "input",
+        function() {
+
+            inputId.value = "";
+
+            mostrarProyectos(
+                input.value
+            );
+
+        }
+    );
+
+
+    // ========================================
+    // MOSTRAR LISTA AL HACER CLICK
+    // ========================================
+
+    input.addEventListener(
+        "focus",
+        function() {
+
+            mostrarProyectos(
+                input.value
+            );
+
+        }
+    );
+
+
+    // ========================================
+    // CERRAR LISTA AL HACER CLICK AFUERA
+    // ========================================
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                !input.contains(event.target) &&
+                !lista.contains(event.target)
+            ) {
+
+                lista.innerHTML = "";
 
             }
 
@@ -2854,7 +2947,6 @@ function cargarSelectProyectos() {
     );
 
 }
-
 
 // ========================================
 // REGISTRAR MATERIAL
