@@ -2275,21 +2275,55 @@ section {
 
 }
 
+/* ========================================
+   PROYECTO - BUSCADOR CON DESPLEGABLE
+======================================== */
+
 .campo-formulario {
     position: relative;
+    width: 100%;
+}
+
+.input-proyecto-con-boton {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-proyecto-con-boton input {
+    flex: 1;
+    width: auto;
+}
+
+#btnDesplegarProyectos {
+    width: 45px;
+    height: 42px;
+    margin-left: 5px;
+    flex-shrink: 0;
+    cursor: pointer;
 }
 
 .lista-proyectos-mantenimiento {
     position: absolute;
+
     top: 100%;
     left: 0;
-    width: 100%;
+
+    width: calc(100% - 50px);
+
     max-height: 200px;
+
     overflow-y: auto;
+
     background: white;
+
     border: 1px solid #ccc;
+
     border-radius: 6px;
+
     z-index: 1000;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
 }
 
 .opcion-proyecto {
@@ -2304,21 +2338,4 @@ section {
 .sin-proyectos {
     padding: 10px;
     color: #777;
-}
-
-.input-proyecto-con-boton {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.input-proyecto-con-boton input {
-    flex: 1;
-}
-
-#btnDesplegarProyectos {
-    width: 45px;
-    height: 42px;
-    margin-left: 5px;
-    cursor: pointer;
 }
