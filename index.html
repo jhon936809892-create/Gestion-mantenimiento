@@ -867,10 +867,18 @@
     <input
         type="text"
         id="proyectoMantenimiento"
-        placeholder="Escriba para buscar un proyecto..."
+        placeholder="Seleccione un proyecto"
         autocomplete="off"
         required
     >
+
+    <button
+        type="button"
+        class="flecha-proyecto-mantenimiento"
+        onclick="abrirListaProyectosMantenimiento()"
+    >
+        ▼
+    </button>
 
     <div
         id="resultadosProyectosMantenimiento"
