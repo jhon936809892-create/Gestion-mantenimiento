@@ -92,7 +92,7 @@ function mostrarSeccion(seccion, boton) {
 
    
 
-    const botonTopbar =
+   const botonTopbar =
     document.getElementById("botonTopbar");
 
 if (botonTopbar) {
@@ -113,6 +113,21 @@ if (botonTopbar) {
 
     }
 
+    if (seccion === "mantenimiento") {
+
+        botonTopbar.innerHTML = `
+            <button
+                type="button"
+                class="btn-primary"
+                onclick="abrirModalMantenimiento()"
+            >
+                + Añadir mantenimiento
+            </button>
+        `;
+
+    }
+
+}
 }
 
 
