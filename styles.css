@@ -2598,14 +2598,30 @@ section {
 
 /* Flecha dentro del mismo cuadro */
 
+/* ========================================
+   PROYECTO - MANTENIMIENTO
+   MISMO TAMAÑO QUE LOS SELECT
+======================================== */
+
+.buscador-proyecto-mantenimiento {
+    position: relative;
+    width: 100%;
+}
+
+#proyectoMantenimiento {
+    width: 100%;
+    padding-right: 40px;
+}
+
+/* Flecha integrada en el campo */
+
 #btnDesplegarProyectosMantenimiento {
     position: absolute;
+    right: 1px;
+    top: 1px;
 
-    right: 0;
-    top: 0;
-
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: calc(100% - 2px);
 
     padding: 0;
     margin: 0;
@@ -2613,26 +2629,64 @@ section {
     border: none;
     border-left: 1px solid #d1d5db;
 
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 5px 5px 0;
+
+    background: white;
+    color: #374151;
+
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#btnDesplegarProyectosMantenimiento:hover {
+    background: #f3f4f6;
+}
+
+/* Lista de proyectos */
+
+.resultados-proyectos-mantenimiento {
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 0;
+
+    width: 100%;
+    max-height: 180px;
+
+    overflow-y: auto;
 
     background: white;
 
-    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    z-index: 1000;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+
+    display: none;
+}
+
+.opcion-proyecto-mantenimiento {
+    padding: 10px 11px;
 
     cursor: pointer;
 
     font-size: 14px;
+    line-height: 1.3;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Cuando el campo está seleccionado */
-
-.buscador-proyecto-mantenimiento:focus-within
-#btnDesplegarProyectosMantenimiento {
-    border-left-color: #2563eb;
-}
-
-/* Hover de la flecha */
-
-#btnDesplegarProyectosMantenimiento:hover {
+.opcion-proyecto-mantenimiento:hover {
     background: #f3f4f6;
+}
+
+.sin-resultados-proyecto {
+    padding: 10px 11px;
+
+    color: #777;
+
+    font-size: 14px;
 }
