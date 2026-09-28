@@ -225,11 +225,11 @@ async function cargarProyectos() {
                 fila.innerHTML = `
 
                     <td>
-                        ${proyecto.nombre || ""}
+                        ${proyecto.codigo || ""}
                     </td>
 
                     <td>
-                        ${proyecto.codigo || ""}
+                        ${proyecto.nombre || ""}
                     </td>
 
                     <td>
