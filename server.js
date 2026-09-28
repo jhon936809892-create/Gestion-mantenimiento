@@ -1,3 +1,4 @@
+
 // =====================================================
 // SERVER.JS
 // SISTEMA DE GESTIÓN DE CUADRILLAS
@@ -48,7 +49,9 @@ const pool = process.env.DATABASE_URL
 // =====================================================
 
 let sheets = null;
-let GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID || "";
+
+let GOOGLE_SHEET_ID =
+    process.env.GOOGLE_SHEET_ID || "";
 
 try {
 
@@ -58,34 +61,36 @@ try {
         process.env.GOOGLE_PRIVATE_KEY
     ) {
 
-        const authGoogle = new google.auth.GoogleAuth({
+        const authGoogle =
+            new google.auth.GoogleAuth({
 
-            credentials: {
+                credentials: {
 
-                project_id:
-                    process.env.GOOGLE_PROJECT_ID,
+                    project_id:
+                        process.env.GOOGLE_PROJECT_ID,
 
-                client_email:
-                    process.env.GOOGLE_CLIENT_EMAIL,
+                    client_email:
+                        process.env.GOOGLE_CLIENT_EMAIL,
 
-                private_key:
-                    process.env.GOOGLE_PRIVATE_KEY.replace(
-                        /\\n/g,
-                        "\n"
-                    )
+                    private_key:
+                        process.env.GOOGLE_PRIVATE_KEY.replace(
+                            /\\n/g,
+                            "\n"
+                        )
 
-            },
+                },
 
-            scopes: [
-                "https://www.googleapis.com/auth/spreadsheets.readonly"
-            ]
+                scopes: [
+                    "https://www.googleapis.com/auth/spreadsheets.readonly"
+                ]
 
-        });
+            });
 
-        sheets = google.sheets({
-            version: "v4",
-            auth: authGoogle
-        });
+        sheets =
+            google.sheets({
+                version: "v4",
+                auth: authGoogle
+            });
 
     }
 
@@ -254,10 +259,12 @@ pool.connect()
 
         console.log("----------------------------------------");
         console.log("PostgreSQL conectado correctamente");
+
         console.log(
             "Base de datos:",
             process.env.DB_NAME || "gestion_cuadrillas"
         );
+
         console.log("----------------------------------------");
 
         client.release();
@@ -847,14 +854,9 @@ app.get(
                 mensaje:
                     "Proyectos sincronizados correctamente.",
 
-                creados:
-                    creados,
-
-                actualizados:
-                    actualizados,
-
-                ignorados:
-                    ignorados
+                creados,
+                actualizados,
+                ignorados
 
             });
 
@@ -998,8 +1000,6 @@ app.get(
 // PERSONAL
 // =====================================================
 
-// OBTENER TODO EL PERSONAL
-
 app.get(
     "/api/personal",
     requiereSesion,
@@ -1058,10 +1058,6 @@ app.get(
     }
 );
 
-
-// =====================================================
-// OBTENER UN PERSONAL
-// =====================================================
 
 app.get(
     "/api/personal/:id",
@@ -1128,10 +1124,6 @@ app.get(
 );
 
 
-// =====================================================
-// REGISTRAR PERSONAL
-// =====================================================
-
 app.post(
     "/api/personal",
     requiereCoordinador,
@@ -1140,14 +1132,12 @@ app.post(
         try {
 
             const {
-
                 nombres,
                 apellidos,
                 documento,
                 celular,
                 cargo,
                 cuadrilla
-
             } = req.body;
 
             if (
@@ -1244,17 +1234,12 @@ app.post(
                 `, [
 
                     nombres.trim(),
-
                     apellidos.trim(),
-
                     documento,
-
                     celular || null,
-
                     cargo
                         ? cargo.trim()
                         : null,
-
                     cuadrilla || null
 
                 ]);
@@ -1291,10 +1276,6 @@ app.post(
 );
 
 
-// =====================================================
-// EDITAR PERSONAL
-// =====================================================
-
 app.put(
     "/api/personal/:id",
     requiereCoordinador,
@@ -1306,14 +1287,12 @@ app.put(
                 req.params;
 
             const {
-
                 nombres,
                 apellidos,
                 documento,
                 celular,
                 cargo,
                 cuadrilla
-
             } = req.body;
 
             if (
@@ -1430,19 +1409,13 @@ app.put(
                 `, [
 
                     nombres.trim(),
-
                     apellidos.trim(),
-
                     documento,
-
                     celular || null,
-
                     cargo
                         ? cargo.trim()
                         : null,
-
                     cuadrilla || null,
-
                     id
 
                 ]);
@@ -1483,7 +1456,10 @@ app.put(
 // PROYECTOS
 // =====================================================
 
+
+// -----------------------------------------------------
 // OBTENER TODOS LOS PROYECTOS
+// -----------------------------------------------------
 
 app.get(
     "/api/proyectos",
@@ -1537,9 +1513,9 @@ app.get(
 );
 
 
-// =====================================================
+// -----------------------------------------------------
 // OBTENER UN PROYECTO
-// =====================================================
+// -----------------------------------------------------
 
 app.get(
     "/api/proyectos/:id",
@@ -1618,9 +1594,9 @@ app.get(
 );
 
 
-// =====================================================
+// -----------------------------------------------------
 // REGISTRAR PROYECTO
-// =====================================================
+// -----------------------------------------------------
 
 app.post(
     "/api/proyectos",
@@ -1630,13 +1606,11 @@ app.post(
         try {
 
             const {
-
                 nombre,
                 cuadrilla,
                 responsable,
                 fecha,
                 estado
-
             } = req.body;
 
             if (!nombre) {
@@ -1678,15 +1652,11 @@ app.post(
                 `, [
 
                     nombre.trim(),
-
                     cuadrilla || null,
-
                     responsable
                         ? responsable.trim()
                         : null,
-
                     fecha || null,
-
                     estado || "Pendiente"
 
                 ]);
@@ -1741,31 +1711,33 @@ app.get(
 
             const resultado =
                 await pool.query(`
-SELECT
 
-    m.id,
+                    SELECT
 
-    m.fecha,
+                        m.id,
 
-    m.proyecto_id,
+                        m.fecha,
 
-    p.codigo AS codigo,
+                        m.proyecto_id,
 
-    p.nombre AS proyecto,
+                        p.codigo AS codigo,
 
-    p.sede AS sede,
+                        p.nombre AS proyecto,
 
-    m.cuadrilla_id,
+                        p.sede AS sede,
 
-    c.nombre AS cuadrilla,
+                        m.cuadrilla_id,
 
-    m.tipo_mantenimiento AS trabajo,
+                        c.nombre AS cuadrilla,
 
-    m.descripcion,
+                        m.descripcion AS trabajo,
 
-    m.tipo_mantenimiento,
+                        m.descripcion,
 
-    m.estado
+                        m.tipo_mantenimiento,
+
+                        m.estado
+
                     FROM mantenimientos m
 
                     LEFT JOIN proyectos p
@@ -1825,15 +1797,27 @@ app.get(
                     SELECT
 
                         m.id,
+
                         m.fecha,
+
                         m.proyecto_id,
+
+                        p.codigo AS codigo,
+
                         p.nombre AS proyecto,
+
                         p.sede AS sede,
+
                         m.cuadrilla_id,
+
                         c.nombre AS cuadrilla,
+
                         m.descripcion,
-                        m.mantenimiento AS trabajo,
+
+                        m.descripcion AS trabajo,
+
                         m.estado,
+
                         m.tipo_mantenimiento
 
                     FROM mantenimientos m
@@ -1901,44 +1885,81 @@ app.post(
             const {
 
                 fecha,
+
                 proyecto_id,
+
                 proyecto,
+
                 cuadrilla,
+
+                cuadrilla_id,
+
                 trabajo,
+
+                descripcion,
+
                 estado,
+
                 tipo_mantenimiento
 
             } = req.body;
+
 
             console.log(
                 "DATOS RECIBIDOS PARA MANTENIMIENTO:",
                 req.body
             );
 
+
+            // -------------------------------------------------
+            // VALIDAR FECHA
+            // -------------------------------------------------
+
             if (!fecha) {
 
                 return res.status(400).json({
+
                     error:
                         "La fecha es obligatoria"
+
                 });
 
             }
 
-            if (!trabajo) {
+
+            // -------------------------------------------------
+            // ACEPTAR trabajo O descripcion
+            // -------------------------------------------------
+
+            const trabajoFinal =
+                (trabajo || descripcion || "")
+                    .toString()
+                    .trim();
+
+
+            if (!trabajoFinal) {
 
                 return res.status(400).json({
+
                     error:
                         "La descripción del trabajo es obligatoria"
+
                 });
 
             }
+
+
+            // -------------------------------------------------
+            // DETERMINAR PROYECTO
+            // -------------------------------------------------
 
             let proyectoIdFinal =
                 proyecto_id || null;
 
 
             // -------------------------------------------------
-            // SI EL FRONTEND MANDA NOMBRE EN VEZ DE ID
+            // COMPATIBILIDAD:
+            // SI EL FRONT MANDA EL NOMBRE DEL PROYECTO
             // -------------------------------------------------
 
             if (
@@ -1947,18 +1968,21 @@ app.post(
             ) {
 
                 const proyectoEncontrado =
-                    await pool.query(
-                        `
-                        SELECT id
+                    await pool.query(`
+
+                        SELECT
+                            id
 
                         FROM proyectos
 
                         WHERE nombre = $1
 
                         LIMIT 1
-                        `,
-                        [proyecto]
-                    );
+
+                    `, [
+                        proyecto.toString().trim()
+                    ]);
+
 
                 if (
                     proyectoEncontrado.rows.length > 0
@@ -1973,7 +1997,7 @@ app.post(
 
 
             // -------------------------------------------------
-            // COMPROBAR PROYECTO
+            // COMPROBAR QUE EL PROYECTO EXISTE
             // -------------------------------------------------
 
             if (proyectoIdFinal) {
@@ -1981,7 +2005,8 @@ app.post(
                 const proyectoExiste =
                     await pool.query(`
 
-                        SELECT id
+                        SELECT
+                            id
 
                         FROM proyectos
 
@@ -1990,6 +2015,7 @@ app.post(
                     `, [
                         proyectoIdFinal
                     ]);
+
 
                 if (
                     proyectoExiste.rows.length === 0
@@ -2008,12 +2034,22 @@ app.post(
 
 
             // -------------------------------------------------
+            // DETERMINAR CUADRILLA
+            // -------------------------------------------------
+
+            const cuadrillaFinal =
+                cuadrilla_id ||
+                cuadrilla ||
+                null;
+
+
+            // -------------------------------------------------
             // REGISTRAR MANTENIMIENTO
             // -------------------------------------------------
 
             const resultado =
-                await pool.query(
-                    `
+                await pool.query(`
+
                     INSERT INTO mantenimientos
                     (
                         fecha,
@@ -2035,27 +2071,76 @@ app.post(
                     )
 
                     RETURNING *
-                    `,
-                    [
-                        fecha,
 
-                        proyectoIdFinal,
+                `, [
 
-                        cuadrilla || null,
+                    fecha,
 
-                        trabajo.trim(),
+                    proyectoIdFinal,
 
-                        estado || "Pendiente",
+                    cuadrillaFinal,
 
-                        tipo_mantenimiento || null
-                    ]
-                );
+                    trabajoFinal,
+
+                    estado || "Pendiente",
+
+                    tipo_mantenimiento || null
+
+                ]);
 
 
             console.log(
                 "MANTENIMIENTO REGISTRADO:",
                 resultado.rows[0]
             );
+
+
+            // -------------------------------------------------
+            // DEVOLVER MANTENIMIENTO COMPLETO
+            // -------------------------------------------------
+
+            const mantenimientoCompleto =
+                await pool.query(`
+
+                    SELECT
+
+                        m.id,
+
+                        m.fecha,
+
+                        m.proyecto_id,
+
+                        p.codigo AS codigo,
+
+                        p.nombre AS proyecto,
+
+                        p.sede AS sede,
+
+                        m.cuadrilla_id,
+
+                        c.nombre AS cuadrilla,
+
+                        m.descripcion,
+
+                        m.descripcion AS trabajo,
+
+                        m.estado,
+
+                        m.tipo_mantenimiento
+
+                    FROM mantenimientos m
+
+                    LEFT JOIN proyectos p
+                        ON m.proyecto_id = p.id
+
+                    LEFT JOIN cuadrillas c
+                        ON m.cuadrilla_id = c.id
+
+                    WHERE m.id = $1
+
+                `, [
+                    resultado.rows[0].id
+                ]);
 
 
             res.status(201).json({
@@ -2066,7 +2151,7 @@ app.post(
                     "Mantenimiento registrado correctamente",
 
                 mantenimiento:
-                    resultado.rows[0]
+                    mantenimientoCompleto.rows[0]
 
             });
 
@@ -2109,35 +2194,112 @@ app.put(
             const { id } =
                 req.params;
 
+
             const {
 
                 fecha,
+
                 proyecto_id,
+
                 proyecto,
+
                 cuadrilla,
+
+                cuadrilla_id,
+
                 trabajo,
+
+                descripcion,
+
                 estado,
+
                 tipo_mantenimiento
 
             } = req.body;
 
-            if (
-                !fecha ||
-                !trabajo
-            ) {
+
+            // -------------------------------------------------
+            // VALIDAR FECHA
+            // -------------------------------------------------
+
+            if (!fecha) {
 
                 return res.status(400).json({
 
                     error:
-                        "Fecha y descripción del trabajo son obligatorios"
+                        "La fecha es obligatoria"
 
                 });
 
             }
 
+
+            // -------------------------------------------------
+            // ACEPTAR trabajo O descripcion
+            // -------------------------------------------------
+
+            const trabajoFinal =
+                (trabajo || descripcion || "")
+                    .toString()
+                    .trim();
+
+
+            if (!trabajoFinal) {
+
+                return res.status(400).json({
+
+                    error:
+                        "La descripción del trabajo es obligatoria"
+
+                });
+
+            }
+
+
+            // -------------------------------------------------
+            // COMPROBAR QUE EXISTE EL MANTENIMIENTO
+            // -------------------------------------------------
+
+            const mantenimientoExiste =
+                await pool.query(`
+
+                    SELECT
+                        id
+
+                    FROM mantenimientos
+
+                    WHERE id = $1
+
+                `, [
+                    id
+                ]);
+
+
+            if (
+                mantenimientoExiste.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    error:
+                        "Mantenimiento no encontrado"
+
+                });
+
+            }
+
+
+            // -------------------------------------------------
+            // DETERMINAR PROYECTO
+            // -------------------------------------------------
+
             let proyectoIdFinal =
                 proyecto_id || null;
 
+
+            // -------------------------------------------------
+            // COMPATIBILIDAD POR NOMBRE
+            // -------------------------------------------------
 
             if (
                 !proyectoIdFinal &&
@@ -2147,7 +2309,8 @@ app.put(
                 const proyectoEncontrado =
                     await pool.query(`
 
-                        SELECT id
+                        SELECT
+                            id
 
                         FROM proyectos
 
@@ -2156,8 +2319,9 @@ app.put(
                         LIMIT 1
 
                     `, [
-                        proyecto
+                        proyecto.toString().trim()
                     ]);
+
 
                 if (
                     proyectoEncontrado.rows.length > 0
@@ -2171,56 +2335,99 @@ app.put(
             }
 
 
-            const resultado =
-                await pool.query(`
+            // -------------------------------------------------
+            // COMPROBAR PROYECTO
+            // -------------------------------------------------
 
-                    UPDATE mantenimientos
+            if (proyectoIdFinal) {
 
-                    SET
+                const proyectoExiste =
+                    await pool.query(`
 
-                        fecha = $1,
-                        proyecto_id = $2,
-                        cuadrilla_id = $3,
-                        descripcion = $4,
-                        estado = $5,
-                        tipo_mantenimiento = $6
+                        SELECT
+                            id
 
-                    WHERE id = $7
+                        FROM proyectos
 
-                    RETURNING *
+                        WHERE id = $1
 
-                `, [
-
-                    fecha,
-
-                    proyectoIdFinal,
-
-                    cuadrilla || null,
-
-                    trabajo.trim(),
-
-                    estado || "Pendiente",
-
-                    tipo_mantenimiento || null,
-
-                    id
-
-                ]);
+                    `, [
+                        proyectoIdFinal
+                    ]);
 
 
-            if (
-                resultado.rows.length === 0
-            ) {
+                if (
+                    proyectoExiste.rows.length === 0
+                ) {
 
-                return res.status(404).json({
+                    return res.status(404).json({
 
-                    error:
-                        "Mantenimiento no encontrado"
+                        error:
+                            "El proyecto seleccionado no existe"
 
-                });
+                    });
+
+                }
 
             }
 
+
+            // -------------------------------------------------
+            // DETERMINAR CUADRILLA
+            // -------------------------------------------------
+
+            const cuadrillaFinal =
+                cuadrilla_id ||
+                cuadrilla ||
+                null;
+
+
+            // -------------------------------------------------
+            // ACTUALIZAR
+            // -------------------------------------------------
+
+            await pool.query(`
+
+                UPDATE mantenimientos
+
+                SET
+
+                    fecha = $1,
+
+                    proyecto_id = $2,
+
+                    cuadrilla_id = $3,
+
+                    descripcion = $4,
+
+                    estado = $5,
+
+                    tipo_mantenimiento = $6
+
+                WHERE id = $7
+
+            `, [
+
+                fecha,
+
+                proyectoIdFinal,
+
+                cuadrillaFinal,
+
+                trabajoFinal,
+
+                estado || "Pendiente",
+
+                tipo_mantenimiento || null,
+
+                id
+
+            ]);
+
+
+            // -------------------------------------------------
+            // OBTENER DATOS ACTUALIZADOS
+            // -------------------------------------------------
 
             const mantenimiento =
                 await pool.query(`
@@ -2232,6 +2439,8 @@ app.put(
                         m.fecha,
 
                         m.proyecto_id,
+
+                        p.codigo AS codigo,
 
                         p.nombre AS proyecto,
 
@@ -2259,10 +2468,14 @@ app.put(
 
                     WHERE m.id = $1
 
-                `, [id]);
+                `, [
+                    id
+                ]);
 
 
             res.json({
+
+                ok: true,
 
                 mensaje:
                     "Mantenimiento actualizado correctamente",
@@ -2284,6 +2497,7 @@ app.put(
             res.status(500).json({
 
                 error:
+                    error.message ||
                     "No se pudo actualizar el mantenimiento"
 
             });
@@ -2308,6 +2522,7 @@ app.delete(
             const { id } =
                 req.params;
 
+
             const resultado =
                 await pool.query(`
 
@@ -2317,7 +2532,10 @@ app.delete(
 
                     RETURNING id
 
-                `, [id]);
+                `, [
+                    id
+                ]);
+
 
             if (
                 resultado.rows.length === 0
@@ -2332,7 +2550,10 @@ app.delete(
 
             }
 
+
             res.json({
+
+                ok: true,
 
                 mensaje:
                     "Mantenimiento eliminado correctamente"
@@ -2498,12 +2719,10 @@ app.post(
         try {
 
             const {
-
                 material,
                 cantidad,
                 unidad,
                 proyecto_id
-
             } = req.body;
 
             if (!material) {
@@ -2599,7 +2818,6 @@ app.post(
                 await pool.query(`
 
                     INSERT INTO materiales
-
                     (
                         material,
                         cantidad,
@@ -2608,7 +2826,6 @@ app.post(
                     )
 
                     VALUES
-
                     (
                         $1,
                         $2,
@@ -2621,11 +2838,8 @@ app.post(
                 `, [
 
                     material.trim(),
-
                     cantidadNumero,
-
                     unidad.trim(),
-
                     proyecto_id
 
                 ]);
@@ -2677,10 +2891,8 @@ app.post(
         try {
 
             const {
-
                 proyecto_id,
                 materiales
-
             } = req.body;
 
             if (!proyecto_id) {
@@ -2738,12 +2950,9 @@ app.post(
 
             }
 
-            await client.query(
-                "BEGIN"
-            );
+            await client.query("BEGIN");
 
-            const materialesRegistrados =
-                [];
+            const materialesRegistrados = [];
 
             for (
                 const item of materiales
@@ -2793,7 +3002,6 @@ app.post(
                     await client.query(`
 
                         INSERT INTO materiales
-
                         (
                             material,
                             cantidad,
@@ -2802,7 +3010,6 @@ app.post(
                         )
 
                         VALUES
-
                         (
                             $1,
                             $2,
@@ -2815,11 +3022,8 @@ app.post(
                     `, [
 
                         nombreMaterial,
-
                         cantidadNumero,
-
                         unidad,
-
                         proyecto_id
 
                     ]);
@@ -2830,9 +3034,7 @@ app.post(
 
             }
 
-            await client.query(
-                "COMMIT"
-            );
+            await client.query("COMMIT");
 
             res.status(201).json({
 
@@ -2848,9 +3050,7 @@ app.post(
 
         catch (error) {
 
-            await client.query(
-                "ROLLBACK"
-            );
+            await client.query("ROLLBACK");
 
             console.error(
                 "Error al registrar varios materiales:",
@@ -3073,3 +3273,4 @@ app.listen(
     }
 
 );
+
