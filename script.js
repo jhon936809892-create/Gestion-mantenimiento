@@ -347,16 +347,22 @@ function cargarSelectProyectos() {
 
 
             const encontrados =
-                proyectos.filter(function(proyecto) {
+    proyectos.filter(function(proyecto) {
 
-                    return (
-                        proyecto.codigo &&
-                        proyecto.codigo
-                            .toLowerCase()
-                            .includes(texto)
-                    );
+        const codigo =
+            String(proyecto.codigo || "")
+                .toLowerCase();
 
-                });
+        const nombre =
+            String(proyecto.nombre || "")
+                .toLowerCase();
+
+        return (
+            codigo.includes(texto) ||
+            nombre.includes(texto)
+        );
+
+    });
 
 
             if (
