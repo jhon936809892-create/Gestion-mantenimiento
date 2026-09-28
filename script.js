@@ -2285,7 +2285,105 @@ async function registrarProyecto(event) {
     }
 
 }
+// ========================================
+// CARGAR PROYECTOS
+// ========================================
 
+async function cargarProyectos() {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/proyectos"
+            );
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "Error al obtener proyectos"
+            );
+
+        }
+
+        proyectos =
+            await respuesta.json();
+
+        const tabla =
+            document.getElementById(
+                "tablaProyectos"
+            );
+
+        if (tabla) {
+
+            tabla.innerHTML = "";
+
+            proyectos.forEach(
+                function(proyecto) {
+
+                    const fila =
+                        document.createElement(
+                            "tr"
+                        );
+
+                    fila.innerHTML = `
+
+                        <td>
+                            ${proyecto.codigo || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.nombre || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.tipo || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.sede || ""}
+                        </td>
+
+                        <td>
+                            ${proyecto.tipo_cable || ""}
+                        </td>
+
+                    `;
+
+                    tabla.appendChild(
+                        fila
+                    );
+
+                }
+            );
+
+        }
+
+        const total =
+            document.getElementById(
+                "totalProyectos"
+            );
+
+        if (total) {
+
+            total.textContent =
+                proyectos.length;
+
+        }
+
+        cargarSelectProyectos();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando proyectos:",
+            error
+        );
+
+    }
+
+}
 
 // ========================================
 // CARGAR PROYECTOS
