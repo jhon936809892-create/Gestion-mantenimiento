@@ -2832,7 +2832,7 @@ function cargarSelectProyectos() {
 
 
                     option.textContent =
-                        proyecto.nombre;
+                        proyecto.codigo;
 
 
                     select.appendChild(
