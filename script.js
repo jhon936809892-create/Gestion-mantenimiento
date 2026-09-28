@@ -343,7 +343,7 @@ async function cargarProyectos() {
                     </td>
 
                     <td>
-                        ${proyecto.nombre || ""}
+                        ${proyecto.codigo || ""}
                     </td>
 
                     <td>
@@ -832,8 +832,8 @@ async function cargarMantenimientos() {
 
                         <td>
                             ${
-                                mantenimiento.codigo ||
                                 mantenimiento.nombre ||
+                                mantenimiento.codigo ||
                                 ""
                             }
                         </td>
