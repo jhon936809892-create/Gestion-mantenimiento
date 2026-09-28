@@ -713,7 +713,7 @@ async function cargarMantenimientos() {
                         </td>
 
                         <td>
-                            ${mantenimiento.proyecto || ""}
+                            ${mantenimiento.codigo || ""}
                         </td>
 
                         <td>
