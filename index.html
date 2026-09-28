@@ -858,17 +858,26 @@
 
    
 
- <label for="proyectoMantenimiento">
+<label for="proyectoMantenimiento">
     Proyecto
 </label>
 
-<select id="proyectoMantenimiento" required>
+<div class="buscador-proyecto-mantenimiento">
 
-    <option value="">
-        Seleccione un proyecto
-    </option>
+    <input
+        type="text"
+        id="proyectoMantenimiento"
+        placeholder="Escriba para buscar un proyecto..."
+        autocomplete="off"
+        required
+    >
 
-</select> 
+    <div
+        id="resultadosProyectosMantenimiento"
+        class="resultados-proyectos-mantenimiento"
+    ></div>
+
+</div>
                 
 <label for="tipoMantenimiento">Tipo de mantenimiento</label>
 <select id="tipoMantenimiento" required>
