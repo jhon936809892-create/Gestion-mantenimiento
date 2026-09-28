@@ -1,4 +1,4 @@
-
+```javascript
 // ============================================================
 // SISTEMA DE GESTIÓN DE CUADRILLAS
 // SCRIPT.JS
@@ -28,9 +28,7 @@ function cerrarModal(id) {
     const modal = document.getElementById(id);
 
     if (modal) {
-
         modal.classList.remove("active");
-
     }
 
 }
@@ -61,7 +59,6 @@ function mostrarSeccion(seccion, boton) {
 
     const seleccionada =
         document.getElementById(seccion);
-
 
     if (seleccionada) {
 
@@ -96,7 +93,6 @@ function mostrarSeccion(seccion, boton) {
 
     const titulo =
         document.getElementById("titulo");
-
 
     const titulos = {
 
@@ -343,7 +339,7 @@ async function cargarProyectos() {
                     </td>
 
                     <td>
-                        ${proyecto.codigo || ""}
+                        ${proyecto.nombre || ""}
                     </td>
 
                     <td>
@@ -535,11 +531,13 @@ function cargarSelectProyectos() {
                     "opcion-proyecto-mantenimiento";
 
 
-                // IMPORTANTE:
-                // Ahora muestra el NOMBRE del proyecto.
+                // =================================================
+                // IMPORTANTE
+                // EL NOMBRE VISIBLE DEL PROYECTO ES EL CÓDIGO
+                // =================================================
 
                 opcion.textContent =
-                    proyecto.nombre || "";
+                    proyecto.codigo || "";
 
 
                 opcion.addEventListener(
@@ -593,11 +591,11 @@ function seleccionarProyectoMantenimiento(proyecto) {
 
 
     // --------------------------------------------------------
-    // MOSTRAR NOMBRE DEL PROYECTO
+    // MOSTRAR CÓDIGO DEL PROYECTO
     // --------------------------------------------------------
 
     input.value =
-        proyecto.nombre || "";
+        proyecto.codigo || "";
 
 
     // --------------------------------------------------------
@@ -714,8 +712,10 @@ function abrirListaProyectosMantenimiento() {
             "opcion-proyecto-mantenimiento";
 
 
+        // =====================================================
         // IMPORTANTE:
-        // Mostrar nombre y no código.
+        // MOSTRAR CÓDIGO DEL PROYECTO
+        // =====================================================
 
         opcion.textContent =
             proyecto.codigo || "";
@@ -831,10 +831,7 @@ async function cargarMantenimientos() {
                         </td>
 
                         <td>
-                            ${
-                                mantenimiento.codigo ||
-                                ""
-                            }
+                            ${mantenimiento.codigo || ""}
                         </td>
 
                         <td>
@@ -1471,9 +1468,12 @@ function inicializarCalendarioMantenimiento() {
                                                     mantenimiento.id
                                                 ),
 
+                                            // =================================================
+                                            // EL PROYECTO SE MUESTRA CON EL CÓDIGO
+                                            // =================================================
+
                                             title:
                                                 `${
-                                                    mantenimiento.nombre ||
                                                     mantenimiento.codigo ||
                                                     "Sin proyecto"
                                                 } - Cuadrilla ${
@@ -1492,8 +1492,6 @@ function inicializarCalendarioMantenimiento() {
 
                                                 proyecto:
                                                     mantenimiento.codigo ||
-                                                    mantenimiento.proyecto ||
-                                                    mantenimiento.nombre ||
                                                     "",
 
                                                 sede:
@@ -2894,10 +2892,8 @@ document.addEventListener(
         // ----------------------------------------------------
         // NO INICIALIZAMOS EL CALENDARIO AQUÍ
         // ----------------------------------------------------
+
         // Se inicializa cuando se entra a Mantenimiento.
-        // Esto evita problemas porque inicialmente la sección
-        // está oculta.
-        // ----------------------------------------------------
 
 
         // ----------------------------------------------------
@@ -2931,3 +2927,4 @@ window.addEventListener(
 
     }
 );
+```
