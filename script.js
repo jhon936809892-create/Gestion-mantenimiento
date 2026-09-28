@@ -98,6 +98,29 @@ function mostrarSeccion(seccion, boton) {
 
     }
 
+    const botonTopbar =
+    document.getElementById("botonTopbar");
+
+if (botonTopbar) {
+
+    botonTopbar.innerHTML = "";
+
+    if (seccion === "proyectos") {
+
+        botonTopbar.innerHTML = `
+            <button
+                type="button"
+                class="btn-primary"
+                onclick="abrirModalProyecto()"
+            >
+                + Añadir proyecto
+            </button>
+        `;
+
+    }
+
+}
+
 
     // ========================================================
     // CARGAR MÓDULO MANTENIMIENTO
@@ -170,6 +193,39 @@ function mostrarSeccion(seccion, boton) {
 }
 
 
+
+
+// ============================================================
+// ABRIR MODAL PROYECTO
+// ============================================================
+
+function abrirModalProyecto() {
+
+    const modal =
+        document.getElementById("modalProyecto");
+
+    if (!modal) {
+
+        console.error(
+            "No se encontró modalProyecto"
+        );
+
+        return;
+
+    }
+
+    const formulario =
+        modal.querySelector("form");
+
+    if (formulario) {
+
+        formulario.reset();
+
+    }
+
+    modal.classList.add("active");
+
+}
 // ============================================================
 // PROYECTOS
 // ============================================================
