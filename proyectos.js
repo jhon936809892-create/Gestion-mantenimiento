@@ -1,6 +1,6 @@
-
 // ============================================================
 // MÓDULO PROYECTOS
+// PROYECTOS.JS
 // ============================================================
 
 
@@ -157,14 +157,7 @@ async function cargarProyectos() {
         // ACTUALIZAR DASHBOARD
         // ====================================================
 
-        if (
-            typeof actualizarDashboard ===
-            "function"
-        ) {
-
-            actualizarDashboard();
-
-        }
+        actualizarDashboard();
 
 
         // ====================================================
@@ -214,9 +207,9 @@ function cargarSelectProyectos() {
     }
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // BUSCAR PROYECTOS MIENTRAS SE ESCRIBE
-    // --------------------------------------------------------
+    // ========================================================
 
     inputProyecto.oninput =
         function() {
@@ -247,9 +240,9 @@ function cargarSelectProyectos() {
             }
 
 
-            // ------------------------------------------------
+            // =================================================
             // BUSCAR POR CÓDIGO O NOMBRE
-            // ------------------------------------------------
+            // =================================================
 
             const encontrados =
                 proyectos.filter(function(proyecto) {
@@ -276,9 +269,9 @@ function cargarSelectProyectos() {
                 });
 
 
-            // ------------------------------------------------
+            // =================================================
             // SIN RESULTADOS
-            // ------------------------------------------------
+            // =================================================
 
             if (
                 encontrados.length === 0
@@ -302,9 +295,9 @@ function cargarSelectProyectos() {
             }
 
 
-            // ------------------------------------------------
+            // =================================================
             // MOSTRAR RESULTADOS
-            // ------------------------------------------------
+            // =================================================
 
             encontrados.forEach(function(proyecto) {
 
@@ -316,9 +309,9 @@ function cargarSelectProyectos() {
                     "opcion-proyecto-mantenimiento";
 
 
-                // ------------------------------------------------
-                // AQUÍ SE MUESTRA EL CÓDIGO DEL PROYECTO
-                // ------------------------------------------------
+                // =================================================
+                // EN MANTENIMIENTO SE MUESTRA EL CÓDIGO
+                // =================================================
 
                 opcion.textContent =
                     proyecto.codigo || "";
@@ -336,7 +329,9 @@ function cargarSelectProyectos() {
                 );
 
 
-                resultados.appendChild(opcion);
+                resultados.appendChild(
+                    opcion
+                );
 
             });
 
@@ -374,25 +369,25 @@ function seleccionarProyectoMantenimiento(proyecto) {
     }
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // MOSTRAR CÓDIGO DEL PROYECTO
-    // --------------------------------------------------------
+    // ========================================================
 
     input.value =
         proyecto.codigo || "";
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // GUARDAR ID REAL DEL PROYECTO
-    // --------------------------------------------------------
+    // ========================================================
 
     input.dataset.proyectoId =
         proyecto.id || "";
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // OCULTAR RESULTADOS
-    // --------------------------------------------------------
+    // ========================================================
 
     if (resultados) {
 
@@ -408,7 +403,7 @@ function seleccionarProyectoMantenimiento(proyecto) {
 
 
 // ============================================================
-// ABRIR LISTA DE PROYECTOS DESDE MANTENIMIENTO
+// ABRIR LISTA DE PROYECTOS EN MANTENIMIENTO
 // ============================================================
 
 function abrirListaProyectosMantenimiento() {
@@ -435,9 +430,9 @@ function abrirListaProyectosMantenimiento() {
     }
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // SI YA ESTÁ ABIERTA, CERRARLA
-    // --------------------------------------------------------
+    // ========================================================
 
     if (
         resultados.style.display ===
@@ -455,9 +450,9 @@ function abrirListaProyectosMantenimiento() {
     resultados.innerHTML = "";
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // NO HAY PROYECTOS
-    // --------------------------------------------------------
+    // ========================================================
 
     if (
         !proyectos ||
@@ -482,9 +477,9 @@ function abrirListaProyectosMantenimiento() {
     }
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // MOSTRAR TODOS LOS PROYECTOS
-    // --------------------------------------------------------
+    // ========================================================
 
     proyectos.forEach(function(proyecto) {
 
@@ -496,9 +491,9 @@ function abrirListaProyectosMantenimiento() {
             "opcion-proyecto-mantenimiento";
 
 
-        // ----------------------------------------------------
-        // MOSTRAR CÓDIGO DEL PROYECTO
-        // ----------------------------------------------------
+        // ====================================================
+        // MOSTRAR CÓDIGO
+        // ====================================================
 
         opcion.textContent =
             proyecto.codigo || "";
@@ -516,7 +511,9 @@ function abrirListaProyectosMantenimiento() {
         );
 
 
-        resultados.appendChild(opcion);
+        resultados.appendChild(
+            opcion
+        );
 
     });
 
@@ -525,4 +522,3 @@ function abrirListaProyectosMantenimiento() {
         "block";
 
 }
-
