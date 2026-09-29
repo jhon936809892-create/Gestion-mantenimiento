@@ -1,22 +1,7 @@
-
 // ============================================================
 // MÓDULO DASHBOARD
+// dashboard.js
 // ============================================================
-
-
-// ============================================================
-// VARIABLES DEL DASHBOARD
-// ============================================================
-
-let datosPersonalDashboard = [];
-let datosProyectosDashboard = [];
-let datosMantenimientosDashboard = [];
-let datosMaterialesDashboard = [];
-
-let graficoCertificaciones = null;
-let graficoAverias = null;
-let graficoSplitters = null;
-let graficoTrabajoCampo = null;
 
 
 // ============================================================
@@ -650,4 +635,3 @@ async function cargarGraficosDashboard() {
     }
 
 }
-
