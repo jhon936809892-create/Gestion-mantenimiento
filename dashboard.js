@@ -79,21 +79,8 @@ function actualizarDashboard() {
     }
 
 
-    // --------------------------------------------------------
-    // ESTADOS DE MANTENIMIENTO
-    // --------------------------------------------------------
-
-    if (
-        typeof actualizarContadoresMantenimiento ===
-        "function"
-    ) {
-
-        actualizarContadoresMantenimiento(
-            datosMantenimientosDashboard
-        );
-
-    }
-
+   
+   
 
     // --------------------------------------------------------
     // MATERIALES
