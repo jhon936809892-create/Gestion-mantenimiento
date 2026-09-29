@@ -83,9 +83,16 @@ function actualizarDashboard() {
     // ESTADOS DE MANTENIMIENTO
     // --------------------------------------------------------
 
-    actualizarContadoresMantenimiento(
-        datosMantenimientosDashboard
-    );
+    if (
+        typeof actualizarContadoresMantenimiento ===
+        "function"
+    ) {
+
+        actualizarContadoresMantenimiento(
+            datosMantenimientosDashboard
+        );
+
+    }
 
 
     // --------------------------------------------------------
@@ -107,122 +114,6 @@ function actualizarDashboard() {
 
         totalMateriales.textContent =
             datosMaterialesDashboard.length;
-
-    }
-
-
-  
-
-    
-
-// ============================================================
-// CANTIDAD DE PERSONAL POR CUADRILLA
-// ============================================================
-
-function actualizarCantidadCuadrillas() {
-
-    if (
-        !Array.isArray(
-            datosPersonalDashboard
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    let cuadrilla1 = 0;
-    let cuadrilla2 = 0;
-    let cuadrilla3 = 0;
-
-
-    datosPersonalDashboard.forEach(
-        function(persona) {
-
-            const cuadrilla =
-                String(
-                    persona.cuadrilla || ""
-                ).trim();
-
-
-            if (cuadrilla === "1") {
-
-                cuadrilla1++;
-
-            }
-
-
-            if (cuadrilla === "2") {
-
-                cuadrilla2++;
-
-            }
-
-
-            if (cuadrilla === "3") {
-
-                cuadrilla3++;
-
-            }
-
-        }
-    );
-
-
-    const cantidadC1 =
-        document.getElementById(
-            "cantidadC1"
-        );
-
-
-    const cantidadC2 =
-        document.getElementById(
-            "cantidadC2"
-        );
-
-
-    const cantidadC3 =
-        document.getElementById(
-            "cantidadC3"
-        );
-
-
-    if (cantidadC1) {
-
-        cantidadC1.textContent =
-            cuadrilla1 +
-            (
-                cuadrilla1 === 1
-                    ? " técnico"
-                    : " técnicos"
-            );
-
-    }
-
-
-    if (cantidadC2) {
-
-        cantidadC2.textContent =
-            cuadrilla2 +
-            (
-                cuadrilla2 === 1
-                    ? " técnico"
-                    : " técnicos"
-            );
-
-    }
-
-
-    if (cantidadC3) {
-
-        cantidadC3.textContent =
-            cuadrilla3 +
-            (
-                cuadrilla3 === 1
-                    ? " técnico"
-                    : " técnicos"
-            );
 
     }
 
