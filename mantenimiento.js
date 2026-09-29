@@ -1,8 +1,14 @@
 
 // ============================================================
-// SISTEMA DE GESTIÓN DE CUADRILLAS
-// MANTENIMIENTO.JS
+// MÓDULO MANTENIMIENTO
 // ============================================================
+
+
+// ============================================================
+// VARIABLES
+// ============================================================
+
+let calendarioMantenimiento = null;
 
 
 // ============================================================
@@ -32,9 +38,7 @@ async function cargarMantenimientos() {
             await respuesta.json();
 
 
-        // ====================================================
-        // GUARDAR PARA DASHBOARD
-        // ====================================================
+        // Guardamos para Dashboard
 
         datosMantenimientosDashboard =
             mantenimientos;
@@ -243,10 +247,6 @@ function actualizarContadoresMantenimiento(
     );
 
 
-    // ========================================================
-    // IDs PRINCIPALES DEL DASHBOARD
-    // ========================================================
-
     const elementosPendientes = [
 
         "mantenimientosPendientes",
@@ -330,14 +330,302 @@ function actualizarPrimerElemento(
 
 
 // ============================================================
+// SELECTOR DE PROYECTOS PARA MANTENIMIENTO
+// ============================================================
+
+function cargarSelectProyectos() {
+
+    const inputProyecto =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
+
+
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
+
+
+    if (
+        !inputProyecto ||
+        !resultados
+    ) {
+
+        return;
+
+    }
+
+
+    inputProyecto.oninput =
+        function() {
+
+            const texto =
+                inputProyecto.value
+                    .trim()
+                    .toLowerCase();
+
+
+            resultados.innerHTML = "";
+
+
+            inputProyecto.dataset.proyectoId =
+                "";
+
+
+            if (!texto) {
+
+                resultados.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            const encontrados =
+                proyectos.filter(function(proyecto) {
+
+                    const codigo =
+                        String(
+                            proyecto.codigo || ""
+                        )
+                        .toLowerCase();
+
+
+                    const nombre =
+                        String(
+                            proyecto.nombre || ""
+                        )
+                        .toLowerCase();
+
+
+                    return (
+                        codigo.includes(texto) ||
+                        nombre.includes(texto)
+                    );
+
+                });
+
+
+            if (
+                encontrados.length === 0
+            ) {
+
+                resultados.innerHTML = `
+
+                    <div class="sin-resultados-proyecto">
+                        No se encontraron proyectos
+                    </div>
+
+                `;
+
+
+                resultados.style.display =
+                    "block";
+
+
+                return;
+
+            }
+
+
+            encontrados.forEach(function(proyecto) {
+
+                const opcion =
+                    document.createElement("div");
+
+
+                opcion.className =
+                    "opcion-proyecto-mantenimiento";
+
+
+                // Se mantiene mostrando el código
+
+                opcion.textContent =
+                    proyecto.codigo || "";
+
+
+                opcion.addEventListener(
+                    "click",
+                    function() {
+
+                        seleccionarProyectoMantenimiento(
+                            proyecto
+                        );
+
+                    }
+                );
+
+
+                resultados.appendChild(opcion);
+
+            });
+
+
+            resultados.style.display =
+                "block";
+
+        };
+
+}
+
+
+// ============================================================
+// SELECCIONAR PROYECTO
+// ============================================================
+
+function seleccionarProyectoMantenimiento(proyecto) {
+
+    const input =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
+
+
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
+
+
+    if (!input) {
+
+        return;
+
+    }
+
+
+    input.value =
+        proyecto.codigo || "";
+
+
+    input.dataset.proyectoId =
+        proyecto.id || "";
+
+
+    if (resultados) {
+
+        resultados.innerHTML =
+            "";
+
+        resultados.style.display =
+            "none";
+
+    }
+
+}
+
+
+// ============================================================
+// ABRIR LISTA DE PROYECTOS
+// ============================================================
+
+function abrirListaProyectosMantenimiento() {
+
+    const input =
+        document.getElementById(
+            "proyectoMantenimiento"
+        );
+
+
+    const resultados =
+        document.getElementById(
+            "resultadosProyectosMantenimiento"
+        );
+
+
+    if (
+        !input ||
+        !resultados
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        resultados.style.display ===
+        "block"
+    ) {
+
+        resultados.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    resultados.innerHTML = "";
+
+
+    if (
+        !proyectos ||
+        proyectos.length === 0
+    ) {
+
+        resultados.innerHTML = `
+
+            <div class="sin-resultados-proyecto">
+                No hay proyectos disponibles
+            </div>
+
+        `;
+
+
+        resultados.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+    proyectos.forEach(function(proyecto) {
+
+        const opcion =
+            document.createElement("div");
+
+
+        opcion.className =
+            "opcion-proyecto-mantenimiento";
+
+
+        opcion.textContent =
+            proyecto.codigo || "";
+
+
+        opcion.addEventListener(
+            "click",
+            function() {
+
+                seleccionarProyectoMantenimiento(
+                    proyecto
+                );
+
+            }
+        );
+
+
+        resultados.appendChild(opcion);
+
+    });
+
+
+    resultados.style.display =
+        "block";
+
+}
+
+
+// ============================================================
 // ABRIR MODAL MANTENIMIENTO
 // ============================================================
 
 async function abrirModalMantenimiento() {
-
-    // ========================================================
-    // ACTUALIZAR PROYECTOS
-    // ========================================================
 
     await cargarProyectos();
 
@@ -587,10 +875,6 @@ async function registrarMantenimiento(event) {
     }
 
 
-    // ========================================================
-    // DATOS
-    // ========================================================
-
     const datos = {
 
         fecha: fecha,
@@ -613,10 +897,6 @@ async function registrarMantenimiento(event) {
         datos
     );
 
-
-    // ========================================================
-    // ENVIAR AL SERVIDOR
-    // ========================================================
 
     try {
 
@@ -662,10 +942,6 @@ async function registrarMantenimiento(event) {
         );
 
 
-        // ====================================================
-        // CERRAR MODAL
-        // ====================================================
-
         const modal =
             document.getElementById(
                 "modalMantenimiento"
@@ -680,10 +956,6 @@ async function registrarMantenimiento(event) {
 
         }
 
-
-        // ====================================================
-        // LIMPIAR FORMULARIO
-        // ====================================================
 
         const formulario =
             document.querySelector(
@@ -721,16 +993,8 @@ async function registrarMantenimiento(event) {
         }
 
 
-        // ====================================================
-        // ACTUALIZAR TABLA Y DASHBOARD
-        // ====================================================
-
         await cargarMantenimientos();
 
-
-        // ====================================================
-        // ACTUALIZAR CALENDARIO
-        // ====================================================
 
         if (calendarioMantenimiento) {
 
@@ -738,10 +1002,6 @@ async function registrarMantenimiento(event) {
 
         }
 
-
-        // ====================================================
-        // ACTUALIZAR GRÁFICOS
-        // ====================================================
 
         await cargarGraficosDashboard();
 
@@ -781,10 +1041,6 @@ function inicializarCalendarioMantenimiento() {
 
     }
 
-
-    // ========================================================
-    // SI YA EXISTE, NO CREAR OTRO
-    // ========================================================
 
     if (calendarioMantenimiento) {
 
@@ -857,10 +1113,6 @@ function inicializarCalendarioMantenimiento() {
                     "08:00:00",
 
 
-                // =================================================
-                // EVENTOS
-                // =================================================
-
                 events:
                     async function(
                         info,
@@ -900,11 +1152,6 @@ function inicializarCalendarioMantenimiento() {
                                                     mantenimiento.id
                                                 ),
 
-
-                                            // --------------------------------
-                                            // SE MUESTRA EL CÓDIGO
-                                            // --------------------------------
-
                                             title:
                                                 `${
                                                     mantenimiento.codigo ||
@@ -914,10 +1161,8 @@ function inicializarCalendarioMantenimiento() {
                                                     ""
                                                 }`,
 
-
                                             start:
                                                 mantenimiento.fecha,
-
 
                                             allDay:
                                                 true,
@@ -969,7 +1214,6 @@ function inicializarCalendarioMantenimiento() {
                                 error
                             );
 
-
                             failureCallback(
                                 error
                             );
@@ -978,10 +1222,6 @@ function inicializarCalendarioMantenimiento() {
 
                     },
 
-
-                // =================================================
-                // CLICK EN EVENTO
-                // =================================================
 
                 eventClick:
                     function(info) {
@@ -1085,20 +1325,3 @@ document.addEventListener(
     }
 );
 
-
-// ============================================================
-// ACTUALIZAR CALENDARIO AL CAMBIAR TAMAÑO
-// ============================================================
-
-window.addEventListener(
-    "resize",
-    function() {
-
-        if (calendarioMantenimiento) {
-
-            calendarioMantenimiento.updateSize();
-
-        }
-
-    }
-);
