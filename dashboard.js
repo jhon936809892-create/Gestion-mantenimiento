@@ -111,32 +111,9 @@ function actualizarDashboard() {
     }
 
 
-    // --------------------------------------------------------
-    // CUADRILLAS
-    // --------------------------------------------------------
+  
 
-    const totalCuadrillas =
-        document.getElementById(
-            "totalCuadrillas"
-        );
-
-
-    if (totalCuadrillas) {
-
-        totalCuadrillas.textContent =
-            "3";
-
-    }
-
-
-    // --------------------------------------------------------
-    // CANTIDAD DE PERSONAL POR CUADRILLA
-    // --------------------------------------------------------
-
-    actualizarCantidadCuadrillas();
-
-}
-
+    
 
 // ============================================================
 // CANTIDAD DE PERSONAL POR CUADRILLA
