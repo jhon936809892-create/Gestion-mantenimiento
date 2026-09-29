@@ -2537,18 +2537,19 @@ canvas {
    BOTÓN MENÚ MÓVIL
 ============================================================ */
 
-/* Oculto en PC */
+/* En PC no se muestra */
 .btn-menu-mobile {
     display: none;
 }
 
 
 /* ============================================================
-   SOLO CELULAR
+   MENÚ SOLO PARA CELULAR
 ============================================================ */
 
 @media screen and (max-width: 768px) {
 
+    /* Mostrar las 3 rayas */
     .btn-menu-mobile {
         display: flex;
         align-items: center;
@@ -2564,6 +2565,27 @@ canvas {
         cursor: pointer;
 
         padding: 0;
+    }
+
+
+    /* Sidebar cerrado */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+
+        width: 280px;
+        height: 100vh;
+
+        z-index: 1000;
+
+        transition: left 0.3s ease;
+    }
+
+
+    /* Sidebar abierto */
+    .sidebar.mobile-open {
+        left: 0;
     }
 
 }
