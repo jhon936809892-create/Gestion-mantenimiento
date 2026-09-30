@@ -1,3 +1,4 @@
+
 // ============================================================
 // MÓDULO DASHBOARD
 // dashboard.js
@@ -79,9 +80,6 @@ function actualizarDashboard() {
     }
 
 
-   
-   
-
     // --------------------------------------------------------
     // MATERIALES
     // --------------------------------------------------------
@@ -103,6 +101,217 @@ function actualizarDashboard() {
             datosMaterialesDashboard.length;
 
     }
+
+}
+
+
+// ============================================================
+// CREAR GRÁFICO DE TIPO PIE
+// ============================================================
+
+function crearGraficoPie(
+    canvas,
+    etiquetas,
+    valores
+) {
+
+    if (
+        !canvas ||
+        typeof Chart === "undefined"
+    ) {
+
+        return null;
+
+    }
+
+
+    const grafico =
+        new Chart(
+            canvas,
+            {
+
+                type: "pie",
+
+                data: {
+
+                    labels:
+                        etiquetas,
+
+                    datasets: [{
+
+                        data:
+                            valores,
+
+                        hoverOffset: 18,
+
+                        borderWidth: 2
+
+                    }]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+
+                    // ------------------------------------------------
+                    // INTERACCIÓN
+                    // ------------------------------------------------
+
+                    interaction: {
+
+                        mode: "nearest",
+
+                        intersect: true
+
+                    },
+
+
+                    // ------------------------------------------------
+                    // LEYENDA
+                    // ------------------------------------------------
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom",
+
+
+                            onClick:
+                                function(
+                                    evento,
+                                    legendItem,
+                                    legend
+                                ) {
+
+                                    const chart =
+                                        legend.chart;
+
+
+                                    const indice =
+                                        legendItem.index;
+
+
+                                    const elementosActivos =
+                                        chart.getActiveElements();
+
+
+                                    const yaSeleccionado =
+                                        elementosActivos.length > 0 &&
+                                        elementosActivos[0].index === indice;
+
+
+                                    // --------------------------------
+                                    // SI YA ESTÁ SELECCIONADO
+                                    // → QUITAR RESALTADO
+                                    // --------------------------------
+
+                                    if (
+                                        yaSeleccionado
+                                    ) {
+
+                                        chart.setActiveElements([]);
+
+                                        if (
+                                            chart.tooltip
+                                        ) {
+
+                                            chart.tooltip.setActiveElements(
+                                                [],
+                                                {
+                                                    x: 0,
+                                                    y: 0
+                                                }
+                                            );
+
+                                        }
+
+                                        chart.update();
+
+                                        return;
+
+                                    }
+
+
+                                    // --------------------------------
+                                    // SELECCIONAR DISTRITO
+                                    // --------------------------------
+
+                                    chart.setActiveElements([
+                                        {
+                                            datasetIndex: 0,
+                                            index: indice
+                                        }
+                                    ]);
+
+
+                                    // --------------------------------
+                                    // MOSTRAR INFORMACIÓN
+                                    // DEL DISTRITO SELECCIONADO
+                                    // --------------------------------
+
+                                    if (
+                                        chart.tooltip
+                                    ) {
+
+                                        const meta =
+                                            chart.getDatasetMeta(0);
+
+                                        const elemento =
+                                            meta.data[indice];
+
+
+                                        if (elemento) {
+
+                                            chart.tooltip.setActiveElements(
+                                                [
+                                                    {
+                                                        datasetIndex: 0,
+                                                        index: indice
+                                                    }
+                                                ],
+                                                {
+                                                    x: elemento.x,
+                                                    y: elemento.y
+                                                }
+                                            );
+
+                                        }
+
+                                    }
+
+
+                                    chart.update();
+
+                                }
+
+                        },
+
+
+                        // ------------------------------------------------
+                        // TOOLTIP
+                        // ------------------------------------------------
+
+                        tooltip: {
+
+                            enabled: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    return grafico;
 
 }
 
@@ -134,11 +343,22 @@ async function cargarGraficosDashboard() {
             await respuesta.json();
 
 
+        // ====================================================
+        // DATOS
+        // ====================================================
+
         const certificaciones = {};
+
         const averias = {};
+
         const splitters = {};
+
         const trabajoCampo = {};
 
+
+        // ====================================================
+        // RECORRER MANTENIMIENTOS
+        // ====================================================
 
         mantenimientos.forEach(
             function(mantenimiento) {
@@ -152,6 +372,10 @@ async function cargarGraficosDashboard() {
                     mantenimiento.tipo_mantenimiento ||
                     "";
 
+
+                // --------------------------------------------
+                // CERTIFICACIONES
+                // --------------------------------------------
 
                 if (
                     tipo ===
@@ -167,6 +391,10 @@ async function cargarGraficosDashboard() {
                 }
 
 
+                // --------------------------------------------
+                // AVERÍAS
+                // --------------------------------------------
+
                 if (
                     tipo ===
                     "Avería"
@@ -181,6 +409,10 @@ async function cargarGraficosDashboard() {
                 }
 
 
+                // --------------------------------------------
+                // CAMBIO DE SPLITTER
+                // --------------------------------------------
+
                 if (
                     tipo ===
                     "Cambio de splitter"
@@ -194,6 +426,10 @@ async function cargarGraficosDashboard() {
 
                 }
 
+
+                // --------------------------------------------
+                // TRABAJO EN CAMPO
+                // --------------------------------------------
 
                 if (
                     tipo ===
@@ -257,7 +493,7 @@ async function cargarGraficosDashboard() {
 
 
         // ====================================================
-        // CERTIFICACIONES
+        // GRÁFICO CERTIFICACIONES
         // ====================================================
 
         const canvasCertificaciones =
@@ -266,54 +502,22 @@ async function cargarGraficosDashboard() {
             );
 
 
-        if (
-            canvasCertificaciones &&
-            typeof Chart !== "undefined"
-        ) {
+        graficoCertificaciones =
+            crearGraficoPie(
+                canvasCertificaciones,
 
-            graficoCertificaciones =
-                new Chart(
-                    canvasCertificaciones,
-                    {
+                Object.keys(
+                    certificaciones
+                ),
 
-                        type: "pie",
-
-                        data: {
-
-                            labels:
-                                Object.keys(
-                                    certificaciones
-                                ),
-
-                            datasets: [{
-
-                                data:
-                                    Object.values(
-                                        certificaciones
-                                    )
-
-                            }]
-
-                        },
-
-                        options: {
-
-                            responsive:
-                                true,
-
-                            maintainAspectRatio:
-                                false
-
-                        }
-
-                    }
-                );
-
-        }
+                Object.values(
+                    certificaciones
+                )
+            );
 
 
         // ====================================================
-        // AVERÍAS
+        // GRÁFICO AVERÍAS
         // ====================================================
 
         const canvasAverias =
@@ -322,54 +526,22 @@ async function cargarGraficosDashboard() {
             );
 
 
-        if (
-            canvasAverias &&
-            typeof Chart !== "undefined"
-        ) {
+        graficoAverias =
+            crearGraficoPie(
+                canvasAverias,
 
-            graficoAverias =
-                new Chart(
-                    canvasAverias,
-                    {
+                Object.keys(
+                    averias
+                ),
 
-                        type: "pie",
-
-                        data: {
-
-                            labels:
-                                Object.keys(
-                                    averias
-                                ),
-
-                            datasets: [{
-
-                                data:
-                                    Object.values(
-                                        averias
-                                    )
-
-                            }]
-
-                        },
-
-                        options: {
-
-                            responsive:
-                                true,
-
-                            maintainAspectRatio:
-                                false
-
-                        }
-
-                    }
-                );
-
-        }
+                Object.values(
+                    averias
+                )
+            );
 
 
         // ====================================================
-        // CAMBIO DE SPLITTER
+        // GRÁFICO CAMBIO DE SPLITTER
         // ====================================================
 
         const canvasSplitter =
@@ -378,54 +550,22 @@ async function cargarGraficosDashboard() {
             );
 
 
-        if (
-            canvasSplitter &&
-            typeof Chart !== "undefined"
-        ) {
+        graficoSplitters =
+            crearGraficoPie(
+                canvasSplitter,
 
-            graficoSplitters =
-                new Chart(
-                    canvasSplitter,
-                    {
+                Object.keys(
+                    splitters
+                ),
 
-                        type: "pie",
-
-                        data: {
-
-                            labels:
-                                Object.keys(
-                                    splitters
-                                ),
-
-                            datasets: [{
-
-                                data:
-                                    Object.values(
-                                        splitters
-                                    )
-
-                            }]
-
-                        },
-
-                        options: {
-
-                            responsive:
-                                true,
-
-                            maintainAspectRatio:
-                                false
-
-                        }
-
-                    }
-                );
-
-        }
+                Object.values(
+                    splitters
+                )
+            );
 
 
         // ====================================================
-        // TRABAJO EN CAMPO
+        // GRÁFICO TRABAJO EN CAMPO
         // ====================================================
 
         const canvasTrabajoCampo =
@@ -434,50 +574,18 @@ async function cargarGraficosDashboard() {
             );
 
 
-        if (
-            canvasTrabajoCampo &&
-            typeof Chart !== "undefined"
-        ) {
+        graficoTrabajoCampo =
+            crearGraficoPie(
+                canvasTrabajoCampo,
 
-            graficoTrabajoCampo =
-                new Chart(
-                    canvasTrabajoCampo,
-                    {
+                Object.keys(
+                    trabajoCampo
+                ),
 
-                        type: "pie",
-
-                        data: {
-
-                            labels:
-                                Object.keys(
-                                    trabajoCampo
-                                ),
-
-                            datasets: [{
-
-                                data:
-                                    Object.values(
-                                        trabajoCampo
-                                    )
-
-                            }]
-
-                        },
-
-                        options: {
-
-                            responsive:
-                                true,
-
-                            maintainAspectRatio:
-                                false
-
-                        }
-
-                    }
-                );
-
-        }
+                Object.values(
+                    trabajoCampo
+                )
+            );
 
     }
     catch (error) {
@@ -490,3 +598,5 @@ async function cargarGraficosDashboard() {
     }
 
 }
+
+
