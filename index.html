@@ -168,10 +168,13 @@
 
     </button>
 
-    <!-- USUARIOS -->
+
+    
+  <!-- USUARIOS -->
 
 <button
     class="menu"
+    id="menuUsuarios"
     onclick="mostrarSeccion('usuarios', this)"
 >
 
@@ -1063,82 +1066,231 @@
     class="seccion"
 >
 
-    <div class="panel">
+```
+<div class="panel">
 
-        <!-- ENCABEZADO -->
+    <div class="panel-titulo-dashboard">
 
-        <div class="panel-header">
+        <div>
 
-            <div>
+            <h2>
+                Gestión de Usuarios
+            </h2>
 
-                <h2>
-                    Gestión de Usuarios
-                </h2>
+            <p>
+                Crear y administrar los usuarios del sistema.
+            </p>
 
-                <p>
-                    Administra los usuarios que pueden acceder al sistema.
-                </p>
+        </div>
 
-            </div>
+        <button
+            type="button"
+            class="btn-primary"
+            onclick="abrirModalUsuario()"
+        >
+            + Añadir usuario
+        </button>
 
+    </div>
+
+
+    <div class="tabla-responsive">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Nombre
+                    </th>
+
+                    <th>
+                        Usuario
+                    </th>
+
+                    <th>
+                        Cargo
+                    </th>
+
+                    <th>
+                        Estado
+                    </th>
+
+                    <th>
+                        Acciones
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaUsuarios">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =====================================================
+     MODAL USUARIO
+===================================================== -->
+
+<div
+    id="modalUsuario"
+    class="modal"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h2>
+            Crear usuario
+        </h2>
+
+    </div>
+
+
+    <form
+        id="formUsuario"
+        onsubmit="registrarUsuario(event)"
+    >
+
+
+        <!-- NOMBRE -->
+
+        <label for="nombreUsuario">
+            Nombre completo
+        </label>
+
+        <input
+            type="text"
+            id="nombreUsuario"
+            required
+            placeholder="Ingrese el nombre completo"
+        >
+
+
+        <!-- USUARIO -->
+
+        <label for="usuarioLogin">
+            Usuario
+        </label>
+
+        <input
+            type="text"
+            id="usuarioLogin"
+            required
+            placeholder="Ingrese el nombre de usuario"
+        >
+
+
+        <!-- CONTRASEÑA -->
+
+        <label for="passwordUsuario">
+            Contraseña
+        </label>
+
+        <input
+            type="password"
+            id="passwordUsuario"
+            required
+            placeholder="Ingrese la contraseña"
+        >
+
+
+        <!-- CARGO -->
+
+        <label for="cargoUsuario">
+            Cargo
+        </label>
+
+        <select
+            id="cargoUsuario"
+            required
+        >
+
+            <option value="">
+                Seleccione un cargo
+            </option>
+
+            <option value="Administrador">
+                Administrador
+            </option>
+
+            <option value="Supervisor">
+                Supervisor
+            </option>
+
+            <option value="Coordinador de Proyectos">
+                Coordinador de Proyectos
+            </option>
+
+            <option value="Usuario Simple">
+                Usuario Simple
+            </option>
+
+        </select>
+
+
+        <!-- ESTADO -->
+
+        <label for="activoUsuario">
+            Estado
+        </label>
+
+        <select
+            id="activoUsuario"
+            required
+        >
+
+            <option value="true">
+                Activo
+            </option>
+
+            <option value="false">
+                Inactivo
+            </option>
+
+        </select>
+
+
+        <!-- BOTONES -->
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+                Guardar usuario
+            </button>
 
             <button
                 type="button"
-                class="btn-primary"
-                onclick="abrirModalUsuario()"
+                class="btn-danger"
+                onclick="cerrarModal('modalUsuario')"
             >
-                + Añadir usuario
+                Cancelar
             </button>
 
         </div>
 
+    </form>
 
-        <!-- TABLA DE USUARIOS -->
+</div>
+```
 
-        <div class="tabla-responsive">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Nombre
-                        </th>
-
-                        <th>
-                            Usuario
-                        </th>
-
-                        <th>
-                            Rango
-                        </th>
-
-                        <th>
-                            Estado
-                        </th>
-
-                        <th>
-                            Acciones
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="tablaUsuarios">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
+</div>
 
 <!-- =====================================================
      MODAL PERSONAL
@@ -1812,6 +1964,142 @@
 
 
 
+
+    <!-- =====================================================
+     MODAL USUARIO
+===================================================== -->
+
+<div
+    id="modalUsuario"
+    class="modal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                Añadir usuario
+            </h2>
+
+        </div>
+
+
+        <form
+            id="formUsuario"
+            onsubmit="registrarUsuario(event)"
+        >
+
+            <label for="nombreUsuario">
+                Nombre
+            </label>
+
+            <input
+                type="text"
+                id="nombreUsuario"
+                required
+            >
+
+
+            <label for="usuarioUsuario">
+                Usuario
+            </label>
+
+            <input
+                type="text"
+                id="usuarioUsuario"
+                required
+            >
+
+
+            <label for="passwordUsuario">
+                Contraseña
+            </label>
+
+            <input
+                type="password"
+                id="passwordUsuario"
+                required
+            >
+
+
+            <label for="cargoUsuario">
+                Cargo
+            </label>
+
+            <select
+                id="cargoUsuario"
+                required
+            >
+
+                <option value="">
+                    Seleccione un cargo
+                </option>
+
+                <option value="Administrador">
+                    Administrador
+                </option>
+
+                <option value="Supervisor">
+                    Supervisor
+                </option>
+
+                <option value="Coordinador de Proyectos">
+                    Coordinador de Proyectos
+                </option>
+
+                <option value="Usuario Simple">
+                    Usuario Simple
+                </option>
+
+            </select>
+
+
+            <label for="activoUsuario">
+                Estado
+            </label>
+
+            <select
+                id="activoUsuario"
+                required
+            >
+
+                <option value="true">
+                    Activo
+                </option>
+
+                <option value="false">
+                    Inactivo
+                </option>
+
+            </select>
+
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Guardar usuario
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-danger"
+                    onclick="cerrarModal('modalUsuario')"
+                >
+                    Cancelar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 
 
