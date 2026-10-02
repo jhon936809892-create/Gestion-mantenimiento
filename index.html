@@ -1,39 +1,39 @@
-
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Gestión de Mantenimiento</title>
+<title>Gestión de Mantenimiento</title>
 
-    <link
-        rel="icon"
-        type="image/png"
-        href="img/bantel.png"
-    >
+<link
+    rel="icon"
+    type="image/png"
+    href="img/bantel.png"
+>
 
-    <link
-        rel="stylesheet"
-        href="styles.css"
-    >
+<link
+    rel="stylesheet"
+    href="styles.css"
+>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css"
-        rel="stylesheet"
-    >
+<link
+    href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css"
+    rel="stylesheet"
+>
+```
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      SIDEBAR
@@ -41,136 +41,126 @@
 
 <aside class="sidebar">
 
-    <button
-        id="btnMenuMobile"
-        class="btn-menu-mobile"
-    >
-        ☰
-    </button>
+```
+<button
+    id="btnMenuMobile"
+    class="btn-menu-mobile"
+>
+    ☰
+</button>
 
+<div class="logo">
 
-    <div class="logo">
-
-        <img
-            src="img/bantel.png"
-            alt="Logo"
-        >
-
-        
-
-    </div>
-
-
-    <!-- DASHBOARD -->
-
-    <button
-        class="menu active"
-        onclick="mostrarSeccion('dashboard', this)"
+    <img
+        src="img/bantel.png"
+        alt="Logo"
     >
 
-        <span class="menu-icono">
-            🏠
-        </span>
+</div>
 
-        <span class="menu-texto">
-            Dashboard
-        </span>
+<!-- DASHBOARD -->
 
-    </button>
+<button
+    class="menu active"
+    onclick="mostrarSeccion('dashboard', this)"
+>
 
+    <span class="menu-icono">
+        🏠
+    </span>
 
-    <!-- PERSONAL -->
+    <span class="menu-texto">
+        Dashboard
+    </span>
 
-    <button
-        class="menu"
-        onclick="mostrarSeccion('personal', this)"
-    >
+</button>
 
-        <span class="menu-icono">
-            👷
-        </span>
+<!-- PERSONAL -->
 
-        <span class="menu-texto">
-            Personal
-        </span>
+<button
+    class="menu"
+    onclick="mostrarSeccion('personal', this)"
+>
 
-    </button>
+    <span class="menu-icono">
+        👷
+    </span>
 
+    <span class="menu-texto">
+        Personal
+    </span>
 
-    <!-- CUADRILLAS -->
+</button>
 
-    <button
-        class="menu"
-        onclick="mostrarSeccion('cuadrillas', this)"
-    >
+<!-- CUADRILLAS -->
 
-        <span class="menu-icono">
-            👥
-        </span>
+<button
+    class="menu"
+    onclick="mostrarSeccion('cuadrillas', this)"
+>
 
-        <span class="menu-texto">
-            Cuadrillas
-        </span>
+    <span class="menu-icono">
+        👥
+    </span>
 
-    </button>
+    <span class="menu-texto">
+        Cuadrillas
+    </span>
 
+</button>
 
-    <!-- PROYECTOS -->
+<!-- PROYECTOS -->
 
-    <button
-        class="menu"
-        onclick="mostrarSeccion('proyectos', this)"
-    >
+<button
+    class="menu"
+    onclick="mostrarSeccion('proyectos', this)"
+>
 
-        <span class="menu-icono">
-            📁
-        </span>
+    <span class="menu-icono">
+        📁
+    </span>
 
-        <span class="menu-texto">
-            Proyectos
-        </span>
+    <span class="menu-texto">
+        Proyectos
+    </span>
 
-    </button>
+</button>
 
+<!-- MANTENIMIENTO -->
 
-    <!-- MANTENIMIENTO -->
+<button
+    class="menu"
+    onclick="mostrarSeccion('mantenimiento', this)"
+>
 
-    <button
-        class="menu"
-        onclick="mostrarSeccion('mantenimiento', this)"
-    >
+    <span class="menu-icono">
+        🔧
+    </span>
 
-        <span class="menu-icono">
-            🔧
-        </span>
+    <span class="menu-texto">
+        Mantenimiento
+    </span>
 
-        <span class="menu-texto">
-            Mantenimiento
-        </span>
+</button>
 
-    </button>
+<!-- MATERIALES -->
 
+<button
+    class="menu"
+    onclick="mostrarSeccion('materiales', this)"
+>
 
-    <!-- MATERIALES -->
+    <span class="menu-icono">
+        📦
+    </span>
 
-    <button
-        class="menu"
-        onclick="mostrarSeccion('materiales', this)"
-    >
+    <span class="menu-texto">
+        Materiales
+    </span>
 
-        <span class="menu-icono">
-            📦
-        </span>
+</button>
 
-        <span class="menu-texto">
-            Materiales
-        </span>
-
-    </button>
-
-
-    
-  <!-- USUARIOS -->
+<!-- USUARIOS -->
 
 <button
     class="menu"
@@ -188,28 +178,27 @@
 
 </button>
 
-    <!-- CERRAR SESIÓN -->
+<!-- CERRAR SESIÓN -->
 
-    <div class="sidebar-separador"></div>
+<div class="sidebar-separador"></div>
 
-    <button
-        class="menu menu-salir"
-        onclick="cerrarSesion()"
-    >
+<button
+    class="menu menu-salir"
+    onclick="cerrarSesion()"
+>
 
-        <span class="menu-icono">
-            🚪
-        </span>
+    <span class="menu-icono">
+        🚪
+    </span>
 
-        <span class="menu-texto">
-            Cerrar sesión
-        </span>
+    <span class="menu-texto">
+        Cerrar sesión
+    </span>
 
-    </button>
+</button>
+```
 
 </aside>
-
-
 
 <!-- =====================================================
      CONTENIDO PRINCIPAL
@@ -217,41 +206,33 @@
 
 <main class="main">
 
-
 <!-- =====================================================
      TOPBAR
 ===================================================== -->
 
 <header class="topbar">
 
+```
+<div class="topbar-left">
 
-    <div class="topbar-left">
-
-        <button
-            type="button"
-            class="topbar-menu"
-            onclick="document.getElementById('btnMenuMobile').click()"
-        >
-            ☰
-        </button>
-    </div>
-
-
-    <div
-        class="topbar-right"
-        id="botonTopbar"
+    <button
+        type="button"
+        class="topbar-menu"
+        onclick="document.getElementById('btnMenuMobile').click()"
     >
+        ☰
+    </button>
 
-        
+</div>
 
-
-      
-
-    </div>
+<div
+    class="topbar-right"
+    id="botonTopbar"
+>
+</div>
+```
 
 </header>
-
-
 
 <!-- =====================================================
      DASHBOARD
@@ -262,22 +243,12 @@
     class="seccion activa"
 >
 
-
-
-
-    <!-- =================================================
-         TARJETAS PRINCIPALES
-    ================================================== -->
-
+```
 <!-- =================================================
      TARJETAS PRINCIPALES
 ================================================== -->
 
 <div class="dashboard-cards">
-
-
-    
-
 
 
     <!-- PROYECTOS -->
@@ -307,7 +278,6 @@
     </div>
 
 
-
     <!-- MANTENIMIENTOS -->
 
     <div class="dashboard-card card-mantenimientos">
@@ -333,7 +303,6 @@
         </div>
 
     </div>
-
 
 
     <!-- MANTENIMIENTOS ACABADOS -->
@@ -363,7 +332,6 @@
     </div>
 
 
-
     <!-- MANTENIMIENTOS PENDIENTES -->
 
     <div class="dashboard-card card-mantenimientos-pendientes">
@@ -389,7 +357,6 @@
         </div>
 
     </div>
-
 
 
     <!-- MANTENIMIENTOS EN PROCESO -->
@@ -418,97 +385,279 @@
 
     </div>
 
+</div>
+
+
+<!-- =================================================
+     GRÁFICOS
+================================================== -->
+
+<div class="graficos-dashboard">
+
+
+    <!-- CERTIFICACIONES -->
+
+    <div class="panel grafico-panel">
+
+        <h2>
+            Certificaciones por Distrito
+        </h2>
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoCertificaciones"
+            ></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- AVERÍAS -->
+
+    <div class="panel grafico-panel">
+
+        <h2>
+            Averías por Distrito
+        </h2>
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoAverias"
+            ></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- CAMBIO DE SPLITTER -->
+
+    <div class="panel grafico-panel">
+
+        <h2>
+            Cambio de splitter por Distrito
+        </h2>
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoSplitter"
+            ></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRABAJO EN CAMPO -->
+
+    <div class="panel grafico-panel">
+
+        <h2>
+            Trabajo en campo por Distrito
+        </h2>
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoTrabajoCampo"
+            ></canvas>
+
+        </div>
+
+    </div>
 
 </div>
 
 
+<!-- =================================================
+     ÚLTIMOS MANTENIMIENTOS
+================================================== -->
+
+<div class="dashboard-grid-inferior">
+
+    <div class="panel dashboard-panel ultimos-mantenimientos">
+
+        <div class="panel-titulo-dashboard">
+
+            <div>
+
+                <h2>
+                    Últimos mantenimientos
+                </h2>
+
+                <p>
+                    Registro reciente de mantenimientos
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="btn-ver-todos"
+                onclick="mostrarSeccion('mantenimiento')"
+            >
+                Ver todos →
+            </button>
+
+        </div>
+
+        <div class="tabla-responsive">
+
+            <table class="tabla-dashboard">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+                        <th>Código</th>
+                        <th>Proyecto</th>
+                        <th>Cuadrilla</th>
+                        <th>Trabajo</th>
+                        <th>Estado</th>
+                        <th>Tipo</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaUltimosMantenimientos">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 
+    <!-- RESUMEN RÁPIDO -->
 
-  
+    <div class="panel dashboard-panel resumen-rapido">
 
+        <div class="panel-titulo-dashboard">
 
-    <!-- =================================================
-         GRÁFICOS EXISTENTES
-         SE MANTIENEN PARA NO ROMPER EL SCRIPT ACTUAL
-    ================================================== -->
+            <div>
 
-    <div class="graficos-dashboard">
+                <h2>
+                    Resumen rápido
+                </h2>
 
-
-        <!-- CERTIFICACIONES -->
-
-        <div class="panel grafico-panel">
-
-            <h2>
-                Certificaciones por Distrito
-            </h2>
-
-            <div class="grafico-ruleta">
-
-                <canvas
-                    id="graficoCertificaciones"
-                ></canvas>
+                <p>
+                    Información general
+                </p>
 
             </div>
 
         </div>
 
+        <div class="resumen-rapido-lista">
 
 
-        <!-- AVERÍAS -->
+            <div
+                class="resumen-rapido-item resumen-personal"
+                onclick="mostrarSeccion('personal')"
+            >
 
-        <div class="panel grafico-panel">
+                <div class="resumen-rapido-icono">
+                    👥
+                </div>
 
-            <h2>
-                Averías por Distrito
-            </h2>
+                <div>
 
-            <div class="grafico-ruleta">
+                    <strong>
+                        Personal por cuadrilla
+                    </strong>
 
-                <canvas
-                    id="graficoAverias"
-                ></canvas>
+                    <span>
+                        Distribución del personal
+                    </span>
 
-            </div>
+                </div>
 
-        </div>
-
-
-
-        <!-- CAMBIO DE SPLITTER -->
-
-        <div class="panel grafico-panel">
-
-            <h2>
-                Cambio de splitter por Distrito
-            </h2>
-
-            <div class="grafico-ruleta">
-
-                <canvas
-                    id="graficoSplitter"
-                ></canvas>
+                <b>→</b>
 
             </div>
 
-        </div>
+
+            <div
+                class="resumen-rapido-item resumen-proyectos"
+                onclick="mostrarSeccion('proyectos')"
+            >
+
+                <div class="resumen-rapido-icono">
+                    📁
+                </div>
+
+                <div>
+
+                    <strong>
+                        Proyectos por sede
+                    </strong>
+
+                    <span>
+                        Cantidad de proyectos
+                    </span>
+
+                </div>
+
+                <b>→</b>
+
+            </div>
 
 
+            <div
+                class="resumen-rapido-item resumen-mantenimiento"
+                onclick="mostrarSeccion('mantenimiento')"
+            >
 
-        <!-- TRABAJO EN CAMPO -->
+                <div class="resumen-rapido-icono">
+                    🔧
+                </div>
 
-        <div class="panel grafico-panel">
+                <div>
 
-            <h2>
-                Trabajo en campo por Distrito
-            </h2>
+                    <strong>
+                        Mantenimientos por tipo
+                    </strong>
 
-            <div class="grafico-ruleta">
+                    <span>
+                        Resumen de tipos
+                    </span>
 
-                <canvas
-                    id="graficoTrabajoCampo"
-                ></canvas>
+                </div>
+
+                <b>→</b>
+
+            </div>
+
+
+            <div
+                class="resumen-rapido-item resumen-materiales"
+                onclick="mostrarSeccion('materiales')"
+            >
+
+                <div class="resumen-rapido-icono">
+                    📦
+                </div>
+
+                <div>
+
+                    <strong>
+                        Materiales por proyecto
+                    </strong>
+
+                    <span>
+                        Inventario de materiales
+                    </span>
+
+                </div>
+
+                <b>→</b>
 
             </div>
 
@@ -516,242 +665,10 @@
 
     </div>
 
-
-
-    <!-- =================================================
-         ÚLTIMOS MANTENIMIENTOS
-    ================================================== -->
-
-    <div class="dashboard-grid-inferior">
-
-
-        <div class="panel dashboard-panel ultimos-mantenimientos">
-
-
-            <div class="panel-titulo-dashboard">
-
-                <div>
-
-                    <h2>
-                        Últimos mantenimientos
-                    </h2>
-
-                    <p>
-                        Registro reciente de mantenimientos
-                    </p>
-
-                </div>
-
-                <button
-                    type="button"
-                    class="btn-ver-todos"
-                    onclick="mostrarSeccion('mantenimiento')"
-                >
-                    Ver todos →
-                </button>
-
-            </div>
-
-
-            <div class="tabla-responsive">
-
-                <table class="tabla-dashboard">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Fecha
-                            </th>
-
-                            <th>
-                                Código
-                            </th>
-
-                            <th>
-                                Proyecto
-                            </th>
-
-                            <th>
-                                Cuadrilla
-                            </th>
-
-                            <th>
-                                Trabajo
-                            </th>
-
-                            <th>
-                                Estado
-                            </th>
-
-                            <th>
-                                Tipo
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="tablaUltimosMantenimientos">
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- RESUMEN RÁPIDO -->
-
-        <div class="panel dashboard-panel resumen-rapido">
-
-
-            <div class="panel-titulo-dashboard">
-
-                <div>
-
-                    <h2>
-                        Resumen rápido
-                    </h2>
-
-                    <p>
-                        Información general
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="resumen-rapido-lista">
-
-
-                <div
-                    class="resumen-rapido-item resumen-personal"
-                    onclick="mostrarSeccion('personal')"
-                >
-
-                    <div class="resumen-rapido-icono">
-                        👥
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Personal por cuadrilla
-                        </strong>
-
-                        <span>
-                            Distribución del personal
-                        </span>
-
-                    </div>
-
-                    <b>
-                        →
-                    </b>
-
-                </div>
-
-
-                <div
-                    class="resumen-rapido-item resumen-proyectos"
-                    onclick="mostrarSeccion('proyectos')"
-                >
-
-                    <div class="resumen-rapido-icono">
-                        📁
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Proyectos por sede
-                        </strong>
-
-                        <span>
-                            Cantidad de proyectos
-                        </span>
-
-                    </div>
-
-                    <b>
-                        →
-                    </b>
-
-                </div>
-
-
-                <div
-                    class="resumen-rapido-item resumen-mantenimiento"
-                    onclick="mostrarSeccion('mantenimiento')"
-                >
-
-                    <div class="resumen-rapido-icono">
-                        🔧
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Mantenimientos por tipo
-                        </strong>
-
-                        <span>
-                            Resumen de tipos
-                        </span>
-
-                    </div>
-
-                    <b>
-                        →
-                    </b>
-
-                </div>
-
-
-                <div
-                    class="resumen-rapido-item resumen-materiales"
-                    onclick="mostrarSeccion('materiales')"
-                >
-
-                    <div class="resumen-rapido-icono">
-                        📦
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Materiales por proyecto
-                        </strong>
-
-                        <span>
-                            Inventario de materiales
-                        </span>
-
-                    </div>
-
-                    <b>
-                        →
-                    </b>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
+```
 
 </section>
-
-
 
 <!-- =====================================================
      PERSONAL
@@ -762,56 +679,38 @@
     class="seccion"
 >
 
-    <div class="panel">
+```
+<div class="panel">
 
-        <div class="tabla-responsive">
+    <div class="tabla-responsive">
 
-            <table>
+        <table>
 
-                <thead>
+            <thead>
 
-                    <tr>
+                <tr>
 
-                        <th>
-                            Nombres
-                        </th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>DNI / CE</th>
+                    <th>Celular</th>
+                    <th>Cargo</th>
+                    <th>Cuadrilla</th>
 
-                        <th>
-                            Apellidos
-                        </th>
+                </tr>
 
-                        <th>
-                            DNI / CE
-                        </th>
+            </thead>
 
-                        <th>
-                            Celular
-                        </th>
+            <tbody id="tablaPersonal"></tbody>
 
-                        <th>
-                            Cargo
-                        </th>
-
-                        <th>
-                            Cuadrilla
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="tablaPersonal"></tbody>
-
-            </table>
-
-        </div>
+        </table>
 
     </div>
 
+</div>
+```
+
 </section>
-
-
 
 <!-- =====================================================
      CUADRILLAS
@@ -822,47 +721,43 @@
     class="seccion"
 >
 
-    <div class="cuadrillas-grid">
+```
+<div class="cuadrillas-grid">
 
+    <div class="cuadrilla">
 
-        <div class="cuadrilla">
+        <h3>
+            Cuadrilla 1
+        </h3>
 
-            <h3>
-                Cuadrilla 1
-            </h3>
-
-            <div id="cuadrilla1"></div>
-
-        </div>
-
-
-        <div class="cuadrilla">
-
-            <h3>
-                Cuadrilla 2
-            </h3>
-
-            <div id="cuadrilla2"></div>
-
-        </div>
-
-
-        <div class="cuadrilla">
-
-            <h3>
-                Cuadrilla 3
-            </h3>
-
-            <div id="cuadrilla3"></div>
-
-        </div>
-
+        <div id="cuadrilla1"></div>
 
     </div>
 
+    <div class="cuadrilla">
+
+        <h3>
+            Cuadrilla 2
+        </h3>
+
+        <div id="cuadrilla2"></div>
+
+    </div>
+
+    <div class="cuadrilla">
+
+        <h3>
+            Cuadrilla 3
+        </h3>
+
+        <div id="cuadrilla3"></div>
+
+    </div>
+
+</div>
+```
+
 </section>
-
-
 
 <!-- =====================================================
      PROYECTOS
@@ -873,52 +768,37 @@
     class="seccion"
 >
 
-    <div class="panel">
+```
+<div class="panel">
 
-        <div class="tabla-responsive">
+    <div class="tabla-responsive">
 
-            <table>
+        <table>
 
-                <thead>
+            <thead>
 
-                    <tr>
+                <tr>
 
-                        <th>
-                            Nombre de Proyecto
-                        </th>
+                    <th>Nombre de Proyecto</th>
+                    <th>Proyecto</th>
+                    <th>Tipo</th>
+                    <th>Sede</th>
+                    <th>Tipo de cable</th>
 
-                        <th>
-                            Proyecto
-                        </th>
+                </tr>
 
-                        <th>
-                            Tipo
-                        </th>
+            </thead>
 
-                        <th>
-                            Sede
-                        </th>
+            <tbody id="tablaProyectos"></tbody>
 
-                        <th>
-                            Tipo de cable
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="tablaProyectos"></tbody>
-
-            </table>
-
-        </div>
+        </table>
 
     </div>
 
+</div>
+```
+
 </section>
-
-
 
 <!-- =====================================================
      MANTENIMIENTO
@@ -929,82 +809,64 @@
     class="seccion"
 >
 
+```
+<!-- LISTA DE MANTENIMIENTOS -->
 
-    <!-- LISTA DE MANTENIMIENTOS -->
+<div class="panel">
 
-    <div class="panel">
+    <div class="tabla-responsive">
 
-        <div class="tabla-responsive">
+        <table>
 
-            <table>
+            <thead>
 
-                <thead>
+                <tr>
 
-                    <tr>
+                    <th>Fecha</th>
+                    <th>Proyecto</th>
+                    <th>Sede</th>
+                    <th>Trabajo</th>
+                    <th>Estado</th>
 
-                        <th>
-                            Fecha
-                        </th>
+                </tr>
 
-                        <th>
-                            Proyecto
-                        </th>
+            </thead>
 
-                        <th>
-                            Sede
-                        </th>
+            <tbody id="tablaMantenimiento"></tbody>
 
-                        <th>
-                            Trabajo
-                        </th>
+        </table>
 
-                        <th>
-                            Estado
-                        </th>
+    </div>
 
-                    </tr>
-
-                </thead>
+</div>
 
 
-                <tbody id="tablaMantenimiento"></tbody>
+<!-- CALENDARIO -->
 
-            </table>
+<div class="panel calendario-panel">
+
+    <div class="calendario-header">
+
+        <div>
+
+            <h2>
+                Calendario de mantenimientos
+            </h2>
+
+            <p>
+                Consulta los mantenimientos por mes, semana o día.
+            </p>
 
         </div>
 
     </div>
 
+    <div id="calendarioMantenimiento"></div>
 
-
-    <!-- CALENDARIO -->
-
-    <div class="panel calendario-panel">
-
-        <div class="calendario-header">
-
-            <div>
-
-                <h2>
-                    Calendario de mantenimientos
-                </h2>
-
-                <p>
-                    Consulta los mantenimientos por mes, semana o día.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div id="calendarioMantenimiento"></div>
-
-    </div>
+</div>
+```
 
 </section>
-
-
 
 <!-- =====================================================
      MATERIALES
@@ -1015,52 +877,711 @@
     class="seccion"
 >
 
-    <div class="panel">
+```
+<div class="panel">
 
-        <div class="tabla-responsive">
+    <div class="tabla-responsive">
 
-            <table>
+        <table>
 
-                <thead>
+            <thead>
 
-                    <tr>
+                <tr>
 
-                        <th>
-                            Material
-                        </th>
+                    <th>Material</th>
+                    <th>Cantidad</th>
+                    <th>Unidad</th>
+                    <th>Proyecto</th>
 
-                        <th>
-                            Cantidad
-                        </th>
+                </tr>
 
-                        <th>
-                            Unidad
-                        </th>
+            </thead>
 
-                        <th>
-                            Proyecto
-                        </th>
+            <tbody id="tablaMateriales"></tbody>
 
-                    </tr>
+        </table>
 
-                </thead>
+    </div>
 
+</div>
+```
 
-                <tbody id="tablaMateriales"></tbody>
+</section>
 
-            </table>
+<!-- =====================================================
+     USUARIOS
+===================================================== -->
+
+<section
+    id="usuarios"
+    class="seccion"
+>
+
+```
+<div class="panel">
+
+    <div class="panel-titulo-dashboard">
+
+        <div>
+
+            <h2>
+                Usuarios
+            </h2>
+
+            <p>
+                Gestión de usuarios del sistema
+            </p>
 
         </div>
 
     </div>
 
+    <div class="tabla-responsive">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Cargo</th>
+                    <th>Estado</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaUsuarios"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
 </section>
 
-
-    <!-- =====================================================
-     USUARIOS
+<!-- =====================================================
+     MODAL PERSONAL
 ===================================================== -->
 
+<div
+    id="modalPersonal"
+    class="modal"
+>
+
+```
+<div class="modal-content modal-personal-content">
+
+    <div class="modal-header">
+
+        <h2 id="tituloModalPersonal">
+            Registrar personal
+        </h2>
+
+    </div>
+
+    <form
+        id="formPersonal"
+        onsubmit="registrarPersonal(event)"
+    >
+
+        <input
+            type="hidden"
+            id="idPersonal"
+        >
+
+        <label for="nombresPersonal">
+            Nombres
+        </label>
+
+        <input
+            type="text"
+            id="nombresPersonal"
+            required
+        >
+
+        <label for="apellidosPersonal">
+            Apellidos
+        </label>
+
+        <input
+            type="text"
+            id="apellidosPersonal"
+            required
+        >
+
+        <label for="tipoDocumentoPersonal">
+            Tipo de documento
+        </label>
+
+        <select
+            id="tipoDocumentoPersonal"
+            required
+        >
+
+            <option value="">
+                Seleccione un tipo
+            </option>
+
+            <option value="DNI">
+                DNI
+            </option>
+
+            <option value="CE">
+                CE
+            </option>
+
+        </select>
+
+        <label for="documentoPersonal">
+            DNI / CE
+        </label>
+
+        <input
+            type="text"
+            id="documentoPersonal"
+            required
+        >
+
+        <label for="celularPersonal">
+            Celular
+        </label>
+
+        <input
+            type="text"
+            id="celularPersonal"
+        >
+
+        <label for="cargoPersonal">
+            Cargo
+        </label>
+
+        <input
+            type="text"
+            id="cargoPersonal"
+        >
+
+        <label for="cuadrillaPersonal">
+            Cuadrilla
+        </label>
+
+        <select
+            id="cuadrillaPersonal"
+            required
+        >
+
+            <option value="">
+                Seleccione una cuadrilla
+            </option>
+
+            <option value="1">
+                Cuadrilla 1
+            </option>
+
+            <option value="2">
+                Cuadrilla 2
+            </option>
+
+            <option value="3">
+                Cuadrilla 3
+            </option>
+
+        </select>
+
+        <div class="botones-formulario-personal">
+
+            <button
+                type="button"
+                id="btnCancelarPersonal"
+                class="btn-cancelar-personal"
+                onclick="cancelarEdicionPersonal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                type="submit"
+                id="btnGuardarPersonal"
+                class="btn-guardar-personal"
+            >
+                Guardar personal
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =====================================================
+     CONFIRMACIÓN DE CANCELACIÓN PERSONAL
+===================================================== -->
+
+<div
+    id="modalConfirmarCancelarPersonal"
+    class="modal"
+>
+
+```
+<div class="modal-content modal-confirmacion-personal">
+
+    <div class="modal-header">
+
+        <h2>
+            Cancelar registro
+        </h2>
+
+    </div>
+
+    <div class="confirmacion-personal-body">
+
+        <p>
+            ¿Está seguro de que desea cancelar el registro?
+        </p>
+
+    </div>
+
+    <div class="botones-confirmacion-personal">
+
+        <button
+            type="button"
+            class="btn-confirmar-no"
+            onclick="cerrarConfirmacionCancelarPersonal()"
+        >
+            Cancelar
+        </button>
+
+        <button
+            type="button"
+            class="btn-confirmar-si"
+            onclick="confirmarCancelarPersonal()"
+        >
+            Sí, cancelar
+        </button>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- =====================================================
+     MODAL PROYECTO
+===================================================== -->
+
+<div
+    id="modalProyecto"
+    class="modal"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h2>
+            Nuevo proyecto
+        </h2>
+
+    </div>
+
+    <form
+        onsubmit="registrarProyecto(event)"
+    >
+
+        <label>
+            Nombre del proyecto
+        </label>
+
+        <input
+            type="text"
+            id="nombreProyecto"
+            required
+        >
+
+        <label>
+            Cuadrilla
+        </label>
+
+        <select id="cuadrillaProyecto">
+
+            <option value="1">
+                Cuadrilla 1
+            </option>
+
+            <option value="2">
+                Cuadrilla 2
+            </option>
+
+            <option value="3">
+                Cuadrilla 3
+            </option>
+
+        </select>
+
+        <label>
+            Responsable
+        </label>
+
+        <input
+            type="text"
+            id="responsableProyecto"
+        >
+
+        <label>
+            Fecha
+        </label>
+
+        <input
+            type="date"
+            id="fechaProyecto"
+        >
+
+        <label>
+            Estado
+        </label>
+
+        <select id="estadoProyecto">
+
+            <option>
+                Pendiente
+            </option>
+
+            <option>
+                En proceso
+            </option>
+
+            <option>
+                Terminado
+            </option>
+
+        </select>
+
+        <button
+            class="btn-primary full"
+            type="submit"
+        >
+            Guardar proyecto
+        </button>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =====================================================
+     MODAL MANTENIMIENTO
+===================================================== -->
+
+<div
+    id="modalMantenimiento"
+    class="modal"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h2>
+            Nuevo mantenimiento
+        </h2>
+
+    </div>
+
+    <form
+        onsubmit="registrarMantenimiento(event)"
+    >
+
+        <label for="inicioMantenimiento">
+            Fecha y hora del mantenimiento
+        </label>
+
+        <input
+            type="datetime-local"
+            id="inicioMantenimiento"
+            required
+        >
+
+        <label for="proyectoMantenimiento">
+            Proyecto
+        </label>
+
+        <div class="buscador-proyecto-mantenimiento">
+
+            <input
+                type="text"
+                id="proyectoMantenimiento"
+                placeholder="Seleccione un proyecto"
+                autocomplete="off"
+                required
+            >
+
+            <button
+                type="button"
+                id="btnDesplegarProyectosMantenimiento"
+                onclick="abrirListaProyectosMantenimiento()"
+            >
+                ▼
+            </button>
+
+            <div
+                id="resultadosProyectosMantenimiento"
+                class="resultados-proyectos-mantenimiento"
+            ></div>
+
+        </div>
+
+        <label for="tipoMantenimiento">
+            Tipo de mantenimiento
+        </label>
+
+        <select
+            id="tipoMantenimiento"
+            required
+        >
+
+            <option value="">
+                Seleccione un tipo
+            </option>
+
+            <option value="Avería">
+                Avería
+            </option>
+
+            <option value="Certificación">
+                Certificación
+            </option>
+
+            <option value="Cambio de splitter">
+                Cambio de splitter
+            </option>
+
+            <option value="Trabajo en campo">
+                Trabajo en campo
+            </option>
+
+        </select>
+
+        <label for="cuadrillaMantenimiento">
+            Cuadrilla que atendió el mantenimiento
+        </label>
+
+        <select
+            id="cuadrillaMantenimiento"
+            required
+        >
+
+            <option value="">
+                Seleccione una cuadrilla
+            </option>
+
+            <option value="1">
+                Cuadrilla 1
+            </option>
+
+            <option value="2">
+                Cuadrilla 2
+            </option>
+
+            <option value="3">
+                Cuadrilla 3
+            </option>
+
+        </select>
+
+        <label for="trabajoMantenimiento">
+            Descripción del trabajo
+        </label>
+
+        <textarea
+            id="trabajoMantenimiento"
+            required
+        ></textarea>
+
+        <label for="estadoMantenimiento">
+            Estado
+        </label>
+
+        <select
+            id="estadoMantenimiento"
+        >
+
+            <option value="Pendiente">
+                Pendiente
+            </option>
+
+            <option value="En proceso">
+                En proceso
+            </option>
+
+            <option value="Terminado">
+                Terminado
+            </option>
+
+        </select>
+
+        <div class="form-buttons">
+
+            <button
+                class="btn-primary"
+                type="submit"
+            >
+                Guardar mantenimiento
+            </button>
+
+            <button
+                class="btn-danger"
+                type="button"
+                onclick="cancelarMantenimiento()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =====================================================
+     MODAL MATERIAL
+===================================================== -->
+
+<div
+    id="modalMaterial"
+    class="modal"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h2>
+            Registrar material
+        </h2>
+
+        <button
+            type="button"
+            onclick="cerrarModal('modalMaterial')"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <form
+        onsubmit="registrarMaterial(event)"
+    >
+
+        <label>
+            Proyecto
+        </label>
+
+        <select
+            id="proyectoMaterial"
+            required
+        >
+
+            <option value="">
+                Seleccione un proyecto
+            </option>
+
+        </select>
+
+        <label>
+            Material
+        </label>
+
+        <input
+            type="text"
+            id="nombreMaterial"
+            required
+            placeholder="Ej. Cable de fibra óptica"
+        >
+
+        <label>
+            Cantidad
+        </label>
+
+        <input
+            type="number"
+            id="cantidadMaterial"
+            min="0.01"
+            step="0.01"
+            required
+        >
+
+        <label>
+            Unidad
+        </label>
+
+        <select
+            id="unidadMaterial"
+            required
+        >
+
+            <option value="">
+                Seleccione una unidad
+            </option>
+
+            <option value="Unidad">
+                Unidad
+            </option>
+
+            <option value="Metro">
+                Metro
+            </option>
+
+            <option value="Kg">
+                Kg
+            </option>
+
+            <option value="Caja">
+                Caja
+            </option>
+
+            <option value="Rollo">
+                Rollo
+            </option>
+
+            <option value="Litro">
+                Litro
+            </option>
+
+            <option value="Otro">
+                Otro
+            </option>
+
+        </select>
+
+        <button
+            class="btn-primary full"
+            type="submit"
+        >
+            Guardar material
+        </button>
+
+    </form>
+
+</div>
+```
+
+</div>
 
 <!-- =====================================================
      MODAL USUARIO
@@ -1077,47 +1598,35 @@
     <div class="modal-header">
 
         <h2>
-            Crear usuario
+            Añadir usuario
         </h2>
 
     </div>
-
 
     <form
         id="formUsuario"
         onsubmit="registrarUsuario(event)"
     >
 
-
-        <!-- NOMBRE -->
-
         <label for="nombreUsuario">
-            Nombre completo
+            Nombre
         </label>
 
         <input
             type="text"
             id="nombreUsuario"
             required
-            placeholder="Ingrese el nombre completo"
         >
 
-
-        <!-- USUARIO -->
-
-        <label for="usuarioLogin">
+        <label for="usuarioUsuario">
             Usuario
         </label>
 
         <input
             type="text"
-            id="usuarioLogin"
+            id="usuarioUsuario"
             required
-            placeholder="Ingrese el nombre de usuario"
         >
-
-
-        <!-- CONTRASEÑA -->
 
         <label for="passwordUsuario">
             Contraseña
@@ -1127,11 +1636,7 @@
             type="password"
             id="passwordUsuario"
             required
-            placeholder="Ingrese la contraseña"
         >
-
-
-        <!-- CARGO -->
 
         <label for="cargoUsuario">
             Cargo
@@ -1164,9 +1669,6 @@
 
         </select>
 
-
-        <!-- ESTADO -->
-
         <label for="activoUsuario">
             Estado
         </label>
@@ -1185,9 +1687,6 @@
             </option>
 
         </select>
-
-
-        <!-- BOTONES -->
 
         <div class="form-buttons">
 
@@ -1216,978 +1715,6 @@
 </div>
 
 <!-- =====================================================
-     MODAL PERSONAL
-===================================================== -->
-
-<div
-    id="modalPersonal"
-    class="modal"
->
-
-    <div class="modal-content modal-personal-content">
-
-
-        <div class="modal-header">
-
-            <h2 id="tituloModalPersonal">
-                Registrar personal
-            </h2>
-
-        </div>
-
-
-        <form
-            id="formPersonal"
-            onsubmit="registrarPersonal(event)"
-        >
-
-            <input
-                type="hidden"
-                id="idPersonal"
-            >
-
-
-            <label for="nombresPersonal">
-                Nombres
-            </label>
-
-            <input
-                type="text"
-                id="nombresPersonal"
-                required
-            >
-
-
-            <label for="apellidosPersonal">
-                Apellidos
-            </label>
-
-            <input
-                type="text"
-                id="apellidosPersonal"
-                required
-            >
-
-
-            <label for="tipoDocumentoPersonal">
-                Tipo de documento
-            </label>
-
-            <select
-                id="tipoDocumentoPersonal"
-                required
-            >
-
-                <option value="">
-                    Seleccione un tipo
-                </option>
-
-                <option value="DNI">
-                    DNI
-                </option>
-
-                <option value="CE">
-                    CE
-                </option>
-
-            </select>
-
-
-            <label for="documentoPersonal">
-                DNI / CE
-            </label>
-
-            <input
-                type="text"
-                id="documentoPersonal"
-                required
-            >
-
-
-            <label for="celularPersonal">
-                Celular
-            </label>
-
-            <input
-                type="text"
-                id="celularPersonal"
-            >
-
-
-            <label for="cargoPersonal">
-                Cargo
-            </label>
-
-            <input
-                type="text"
-                id="cargoPersonal"
-            >
-
-
-            <label for="cuadrillaPersonal">
-                Cuadrilla
-            </label>
-
-            <select
-                id="cuadrillaPersonal"
-                required
-            >
-
-                <option value="">
-                    Seleccione una cuadrilla
-                </option>
-
-                <option value="1">
-                    Cuadrilla 1
-                </option>
-
-                <option value="2">
-                    Cuadrilla 2
-                </option>
-
-                <option value="3">
-                    Cuadrilla 3
-                </option>
-
-            </select>
-
-
-            <div class="botones-formulario-personal">
-
-                <button
-                    type="button"
-                    id="btnCancelarPersonal"
-                    class="btn-cancelar-personal"
-                    onclick="cancelarEdicionPersonal()"
-                >
-                    Cancelar
-                </button>
-
-
-                <button
-                    type="submit"
-                    id="btnGuardarPersonal"
-                    class="btn-guardar-personal"
-                >
-                    Guardar personal
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     CONFIRMACIÓN DE CANCELACIÓN
-===================================================== -->
-
-<div
-    id="modalConfirmarCancelarPersonal"
-    class="modal"
->
-
-    <div class="modal-content modal-confirmacion-personal">
-
-
-        <div class="modal-header">
-
-            <h2>
-                Cancelar registro
-            </h2>
-
-        </div>
-
-
-        <div class="confirmacion-personal-body">
-
-            <p>
-                ¿Está seguro de que desea cancelar el registro?
-            </p>
-
-        </div>
-
-
-        <div class="botones-confirmacion-personal">
-
-            <button
-                type="button"
-                class="btn-confirmar-no"
-                onclick="cerrarConfirmacionCancelarPersonal()"
-            >
-                Cancelar
-            </button>
-
-
-            <button
-                type="button"
-                class="btn-confirmar-si"
-                onclick="confirmarCancelarPersonal()"
-            >
-                Sí, cancelar
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     MODAL PROYECTO
-===================================================== -->
-
-<div
-    id="modalProyecto"
-    class="modal"
->
-
-    <div class="modal-content">
-
-
-        <div class="modal-header">
-
-            <h2>
-                Nuevo proyecto
-            </h2>
-
-        </div>
-
-
-        <form
-            onsubmit="registrarProyecto(event)"
-        >
-
-            <label>
-                Nombre del proyecto
-            </label>
-
-            <input
-                type="text"
-                id="nombreProyecto"
-                required
-            >
-
-
-            <label>
-                Cuadrilla
-            </label>
-
-            <select id="cuadrillaProyecto">
-
-                <option value="1">
-                    Cuadrilla 1
-                </option>
-
-                <option value="2">
-                    Cuadrilla 2
-                </option>
-
-                <option value="3">
-                    Cuadrilla 3
-                </option>
-
-            </select>
-
-
-            <label>
-                Responsable
-            </label>
-
-            <input
-                type="text"
-                id="responsableProyecto"
-            >
-
-
-            <label>
-                Fecha
-            </label>
-
-            <input
-                type="date"
-                id="fechaProyecto"
-            >
-
-
-            <label>
-                Estado
-            </label>
-
-            <select id="estadoProyecto">
-
-                <option>
-                    Pendiente
-                </option>
-
-                <option>
-                    En proceso
-                </option>
-
-                <option>
-                    Terminado
-                </option>
-
-            </select>
-
-
-            <button
-                class="btn-primary full"
-                type="submit"
-            >
-                Guardar proyecto
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     MODAL MANTENIMIENTO
-===================================================== -->
-
-<div
-    id="modalMantenimiento"
-    class="modal"
->
-
-    <div class="modal-content">
-
-
-        <div class="modal-header">
-
-            <h2>
-                Nuevo mantenimiento
-            </h2>
-
-        </div>
-
-
-        <form
-            onsubmit="registrarMantenimiento(event)"
-        >
-
-
-            <label for="inicioMantenimiento">
-                Fecha y hora del mantenimiento
-            </label>
-
-            <input
-                type="datetime-local"
-                id="inicioMantenimiento"
-                required
-            >
-
-
-            <label for="proyectoMantenimiento">
-                Proyecto
-            </label>
-
-
-            <div class="buscador-proyecto-mantenimiento">
-
-                <input
-                    type="text"
-                    id="proyectoMantenimiento"
-                    placeholder="Seleccione un proyecto"
-                    autocomplete="off"
-                    required
-                >
-
-
-                <button
-                    type="button"
-                    id="btnDesplegarProyectosMantenimiento"
-                    onclick="abrirListaProyectosMantenimiento()"
-                >
-                    ▼
-                </button>
-
-
-                <div
-                    id="resultadosProyectosMantenimiento"
-                    class="resultados-proyectos-mantenimiento"
-                ></div>
-
-            </div>
-
-
-
-            <label for="tipoMantenimiento">
-                Tipo de mantenimiento
-            </label>
-
-            <select
-                id="tipoMantenimiento"
-                required
-            >
-
-                <option value="">
-                    Seleccione un tipo
-                </option>
-
-                <option value="Avería">
-                    Avería
-                </option>
-
-                <option value="Certificación">
-                    Certificación
-                </option>
-
-                <option value="Cambio de splitter">
-                    Cambio de splitter
-                </option>
-
-                <option value="Trabajo en campo">
-                    Trabajo en campo
-                </option>
-
-            </select>
-
-
-
-            <label for="cuadrillaMantenimiento">
-                Cuadrilla que atendió el mantenimiento
-            </label>
-
-            <select
-                id="cuadrillaMantenimiento"
-                required
-            >
-
-                <option value="">
-                    Seleccione una cuadrilla
-                </option>
-
-                <option value="1">
-                    Cuadrilla 1
-                </option>
-
-                <option value="2">
-                    Cuadrilla 2
-                </option>
-
-                <option value="3">
-                    Cuadrilla 3
-                </option>
-
-            </select>
-
-
-
-            <label for="trabajoMantenimiento">
-                Descripción del trabajo
-            </label>
-
-            <textarea
-                id="trabajoMantenimiento"
-                required
-            ></textarea>
-
-
-
-            <label for="estadoMantenimiento">
-                Estado
-            </label>
-
-            <select
-                id="estadoMantenimiento"
-            >
-
-                <option value="Pendiente">
-                    Pendiente
-                </option>
-
-                <option value="En proceso">
-                    En proceso
-                </option>
-
-                <option value="Terminado">
-                    Terminado
-                </option>
-
-            </select>
-
-
-
-            <div class="form-buttons">
-
-                <button
-                    class="btn-primary"
-                    type="submit"
-                >
-                    Guardar mantenimiento
-                </button>
-
-
-                <button
-                    class="btn-danger"
-                    type="button"
-                    onclick="cancelarMantenimiento()"
-                >
-                    Cancelar
-                </button>
-
-            </div>
-
-
-        </form>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     MODAL MATERIAL
-===================================================== -->
-
-<div
-    id="modalMaterial"
-    class="modal"
->
-
-    <div class="modal-content">
-
-
-        <div class="modal-header">
-
-            <h2>
-                Registrar material
-            </h2>
-
-
-            <button
-                type="button"
-                onclick="cerrarModal('modalMaterial')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <form
-            onsubmit="registrarMaterial(event)"
-        >
-
-
-            <label>
-                Proyecto
-            </label>
-
-            <select
-                id="proyectoMaterial"
-                required
-            >
-
-                <option value="">
-                    Seleccione un proyecto
-                </option>
-
-            </select>
-
-
-
-            <label>
-                Material
-            </label>
-
-            <input
-                type="text"
-                id="nombreMaterial"
-                required
-                placeholder="Ej. Cable de fibra óptica"
-            >
-
-
-
-            <label>
-                Cantidad
-            </label>
-
-            <input
-                type="number"
-                id="cantidadMaterial"
-                min="0.01"
-                step="0.01"
-                required
-            >
-
-
-
-            <label>
-                Unidad
-            </label>
-
-            <select
-                id="unidadMaterial"
-                required
-            >
-
-                <option value="">
-                    Seleccione una unidad
-                </option>
-
-                <option value="Unidad">
-                    Unidad
-                </option>
-
-                <option value="Metro">
-                    Metro
-                </option>
-
-                <option value="Kg">
-                    Kg
-                </option>
-
-                <option value="Caja">
-                    Caja
-                </option>
-
-                <option value="Rollo">
-                    Rollo
-                </option>
-
-                <option value="Litro">
-                    Litro
-                </option>
-
-                <option value="Otro">
-                    Otro
-                </option>
-
-            </select>
-
-
-
-            <button
-                class="btn-primary full"
-                type="submit"
-            >
-                Guardar material
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-
-
-    <!-- =====================================================
-     MODAL USUARIO
-===================================================== -->
-
-<div
-    id="modalUsuario"
-    class="modal"
->
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>
-                Añadir usuario
-            </h2>
-
-        </div>
-
-
-        <form
-            id="formUsuario"
-            onsubmit="registrarUsuario(event)"
-        >
-
-            <label for="nombreUsuario">
-                Nombre
-            </label>
-
-            <input
-                type="text"
-                id="nombreUsuario"
-                required
-            >
-
-
-            <label for="usuarioUsuario">
-                Usuario
-            </label>
-
-            <input
-                type="text"
-                id="usuarioUsuario"
-                required
-            >
-
-
-            <label for="passwordUsuario">
-                Contraseña
-            </label>
-
-            <input
-                type="password"
-                id="passwordUsuario"
-                required
-            >
-
-
-            <label for="cargoUsuario">
-                Cargo
-            </label>
-
-            <select
-                id="cargoUsuario"
-                required
-            >
-
-                <option value="">
-                    Seleccione un cargo
-                </option>
-
-                <option value="Administrador">
-                    Administrador
-                </option>
-
-                <option value="Supervisor">
-                    Supervisor
-                </option>
-
-                <option value="Coordinador de Proyectos">
-                    Coordinador de Proyectos
-                </option>
-
-                <option value="Usuario Simple">
-                    Usuario Simple
-                </option>
-
-            </select>
-
-
-            <label for="activoUsuario">
-                Estado
-            </label>
-
-            <select
-                id="activoUsuario"
-                required
-            >
-
-                <option value="true">
-                    Activo
-                </option>
-
-                <option value="false">
-                    Inactivo
-                </option>
-
-            </select>
-
-
-            <div class="form-buttons">
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-                    Guardar usuario
-                </button>
-
-
-                <button
-                    type="button"
-                    class="btn-danger"
-                    onclick="cerrarModal('modalUsuario')"
-                >
-                    Cancelar
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-
-
-    <!-- =====================================================
-     MODAL USUARIO
-===================================================== -->
-
-<div
-    id="modalUsuario"
-    class="modal"
->
-
-    <div class="modal-content">
-
-
-        <div class="modal-header">
-
-            <h2>
-                Crear usuario
-            </h2>
-
-        </div>
-
-
-        <form
-            id="formUsuario"
-            onsubmit="registrarUsuario(event)"
-        >
-
-
-            <!-- NOMBRE -->
-
-            <label for="nombreUsuario">
-
-                Nombre completo
-
-            </label>
-
-            <input
-                type="text"
-                id="nombreUsuario"
-                required
-            >
-
-
-            <!-- USUARIO -->
-
-            <label for="usuarioUsuario">
-
-                Nombre de usuario
-
-            </label>
-
-            <input
-                type="text"
-                id="usuarioUsuario"
-                required
-            >
-
-
-            <!-- CONTRASEÑA -->
-
-            <label for="passwordUsuario">
-
-                Contraseña
-
-            </label>
-
-            <input
-                type="password"
-                id="passwordUsuario"
-                required
-            >
-
-
-            <!-- RANGO -->
-
-            <label for="rangoUsuario">
-
-                Rango
-
-            </label>
-
-            <select
-                id="rangoUsuario"
-                required
-            >
-
-                <option value="">
-                    Seleccione un rango
-                </option>
-
-                <option value="Administrador">
-                    Administrador
-                </option>
-
-                <option value="Supervisor">
-                    Supervisor
-                </option>
-
-                <option value="Coordinador">
-                    Coordinador
-                </option>
-
-                <option value="Usuario simple">
-                    Usuario simple
-                </option>
-
-            </select>
-
-
-            <!-- ESTADO -->
-
-            <label for="estadoUsuario">
-
-                Estado
-
-            </label>
-
-            <select
-                id="estadoUsuario"
-                required
-            >
-
-                <option value="Activo">
-                    Activo
-                </option>
-
-                <option value="Inactivo">
-                    Inactivo
-                </option>
-
-            </select>
-
-
-            <!-- BOTONES -->
-
-            <div class="form-buttons">
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-                    Guardar usuario
-                </button>
-
-
-                <button
-                    type="button"
-                    class="btn-danger"
-                    onclick="cerrarModal('modalUsuario')"
-                >
-                    Cancelar
-                </button>
-
-            </div>
-
-
-        </form>
-
-    </div>
-
-</div>
-<!-- =====================================================
      LIBRERÍAS
 ===================================================== -->
 
@@ -2196,16 +1723,21 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="variables.js"></script>
-<script src="dashboard.js"></script>
-<script src="proyectos.js"></script>
-<script src="mantenimiento.js"></script>
-<script src="personal.js"></script>
-<script src="materiales.js"></script>
-<script src="usuario.js"></script>
-<script src="script.js"></script>
 
+<script src="dashboard.js"></script>
+
+<script src="proyectos.js"></script>
+
+<script src="mantenimiento.js"></script>
+
+<script src="personal.js"></script>
+
+<script src="materiales.js"></script>
+
+<script src="usuario.js"></script>
+
+<script src="script.js"></script>
 
 </body>
 
 </html>
-
