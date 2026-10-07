@@ -64,6 +64,72 @@ function actualizarDashboard() {
     }
 
 
+    // ========================================================
+// MANTENIMIENTOS ACABADOS Y EN PROCESO
+// ========================================================
+
+if (Array.isArray(datosMantenimientosDashboard)) {
+
+    const mantenimientosAcabados =
+        document.getElementById("mantenimientosAcabados");
+
+    const mantenimientosProceso =
+        document.getElementById("mantenimientosProceso");
+
+
+    // Normalizar el estado
+    function normalizarEstado(estado) {
+
+        return (estado || "")
+            .toString()
+            .trim()
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+    }
+
+
+    // Contar TERMINADOS
+    const cantidadAcabados =
+        datosMantenimientosDashboard.filter(function(mantenimiento) {
+
+            return normalizarEstado(
+                mantenimiento.estado
+            ) === "terminado";
+
+        }).length;
+
+
+    // Contar EN PROCESO
+    const cantidadProceso =
+        datosMantenimientosDashboard.filter(function(mantenimiento) {
+
+            return normalizarEstado(
+                mantenimiento.estado
+            ) === "en proceso";
+
+        }).length;
+
+
+    // Mostrar resultados
+    if (mantenimientosAcabados) {
+
+        mantenimientosAcabados.textContent =
+            cantidadAcabados;
+
+    }
+
+
+    if (mantenimientosProceso) {
+
+        mantenimientosProceso.textContent =
+            cantidadProceso;
+
+    }
+
+}
+
     // --------------------------------------------------------
     // MATERIALES
     // --------------------------------------------------------
