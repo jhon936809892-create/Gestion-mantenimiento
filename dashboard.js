@@ -135,22 +135,21 @@ function crearGraficoPie(
 
                     labels:
                         etiquetas,
-
-                datasets: [{
+datasets: [{
     data:
         valores,
 
     backgroundColor: [
-        "#2563eb",
-        "#16a34a",
-        "#f59e0b",
-        "#dc2626",
-        "#9333ea",
-        "#0891b2",
-        "#ea580c",
-        "#4f46e5",
-        "#65a30d",
-        "#db2777"
+        "#93c5fd",
+        "#86efac",
+        "#fde68a",
+        "#fca5a5",
+        "#c4b5fd",
+        "#67e8f9",
+        "#fdba74",
+        "#a5b4fc",
+        "#bef264",
+        "#f9a8d4"
     ],
 
     borderColor: [
@@ -167,10 +166,8 @@ function crearGraficoPie(
     ],
 
     hoverOffset: 18,
-
     borderWidth: 2
 }]
-
                 },
 
 
