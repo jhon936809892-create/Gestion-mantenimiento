@@ -1384,18 +1384,3 @@ document.addEventListener(
 );
 
 
-**Importante:** en `variables.js` mantén esta única declaración:
-
-
-let calendarioMantenimiento = null;
-
-
-y **no la pongas en `mantenimiento.js`**.
-
-Después de reemplazar `mantenimiento.js`, guarda todo y presiona **Ctrl + F5**. En la consola debería aparecer:
-
-
-Mantenimientos: Array(...)
-
-
-Si aparece `Mantenimientos: Array(0)`, entonces la función ya está funcionando y el siguiente problema sería la información que devuelve `/api/mantenimientos`, no el JavaScript.
