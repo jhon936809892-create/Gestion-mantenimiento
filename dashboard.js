@@ -2576,7 +2576,7 @@ async function cargarUltimosMantenimientosDashboard() {
 
                 const trabajo =
     
-    mantenimiento.descripcion ||
+    mantenimiento.tipo_mantenimiento ||
     "Sin descripción";
 
 
