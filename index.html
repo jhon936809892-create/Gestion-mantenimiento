@@ -39,166 +39,174 @@
      SIDEBAR
 ===================================================== -->
 
+```html
+<!-- ============================================================
+     MENÚ LATERAL
+     ============================================================ -->
+
 <aside class="sidebar">
 
-
-<button
-    id="btnMenuMobile"
-    class="btn-menu-mobile"
->
-    ☰
-</button>
-
-<div class="logo">
-
-    <img
-        src="img/bantel.png"
-        alt="Logo"
+    <!-- BOTÓN MENÚ MOBILE -->
+    <button
+        type="button"
+        id="btnMenuMobile"
+        class="btn-menu-mobile"
+        aria-label="Abrir menú"
+        title="Abrir menú"
     >
+        ☰
+    </button>
 
-</div>
 
-<!-- DASHBOARD -->
+    <!-- LOGO -->
+    <div class="logo">
 
-<button
-    class="menu active"
-    onclick="mostrarSeccion('dashboard', this)"
->
+        <img
+            src="img/bantel.png"
+            alt="Logo"
+        >
 
-    <span class="menu-icono">
-        🏠
-    </span>
+    </div>
 
-    <span class="menu-texto">
-        Dashboard
-    </span>
 
-</button>
+    <!-- ========================================================
+         MENÚ PRINCIPAL
+         ======================================================== -->
 
-<!-- PERSONAL -->
+    <div class="sidebar-menu">
 
-<button
-    class="menu"
-    onclick="mostrarSeccion('personal', this)"
->
 
-    <span class="menu-icono">
-        👷
-    </span>
+        <!-- DASHBOARD -->
 
-    <span class="menu-texto">
-        Personal
-    </span>
+        <button
+            type="button"
+            class="menu active"
+            onclick="mostrarSeccion('dashboard', this)"
+        >
 
-</button>
+            <span class="menu-icon">▣</span>
 
-<!-- CUADRILLAS -->
+            <span>Dashboard</span>
 
-<button
-    class="menu"
-    onclick="mostrarSeccion('cuadrillas', this)"
->
+        </button>
 
-    <span class="menu-icono">
-        👥
-    </span>
 
-    <span class="menu-texto">
-        Cuadrillas
-    </span>
+        <!-- PERSONAL -->
 
-</button>
+        <button
+            type="button"
+            class="menu"
+            onclick="mostrarSeccion('personal', this)"
+        >
 
-<!-- PROYECTOS -->
+            <span class="menu-icon">👤</span>
 
-<button
-    class="menu"
-    onclick="mostrarSeccion('proyectos', this)"
->
+            <span>Personal</span>
 
-    <span class="menu-icono">
-        📁
-    </span>
+        </button>
 
-    <span class="menu-texto">
-        Proyectos
-    </span>
 
-</button>
+        <!-- CUADRILLAS -->
 
-<!-- MANTENIMIENTO -->
+        <button
+            type="button"
+            class="menu"
+            onclick="mostrarSeccion('cuadrillas', this)"
+        >
 
-<button
-    class="menu"
-    onclick="mostrarSeccion('mantenimiento', this)"
->
+            <span class="menu-icon">👥</span>
 
-    <span class="menu-icono">
-        🔧
-    </span>
+            <span>Cuadrillas</span>
 
-    <span class="menu-texto">
-        Mantenimiento
-    </span>
+        </button>
 
-</button>
 
-<!-- MATERIALES -->
+        <!-- PROYECTOS -->
 
-<button
-    class="menu"
-    onclick="mostrarSeccion('materiales', this)"
->
+        <button
+            type="button"
+            class="menu"
+            onclick="mostrarSeccion('proyectos', this)"
+        >
 
-    <span class="menu-icono">
-        📦
-    </span>
+            <span class="menu-icon">📁</span>
 
-    <span class="menu-texto">
-        Materiales
-    </span>
+            <span>Proyectos</span>
 
-</button>
+        </button>
 
-<!-- USUARIOS -->
 
-<button
-    class="menu"
-    id="menuUsuarios"
-    onclick="mostrarSeccion('usuarios', this)"
->
+        <!-- MANTENIMIENTO -->
 
-    <span class="menu-icono">
-        👤
-    </span>
+        <button
+            type="button"
+            class="menu"
+            onclick="mostrarSeccion('mantenimiento', this)"
+        >
 
-    <span class="menu-texto">
-        Usuarios
-    </span>
+            <span class="menu-icon">🔧</span>
 
-</button>
+            <span>Mantenimiento</span>
 
-<!-- CERRAR SESIÓN -->
+        </button>
 
-<div class="sidebar-separador"></div>
 
-<button
-    class="menu menu-salir"
-    onclick="cerrarSesion()"
->
+        <!-- MATERIALES -->
 
-    <span class="menu-icono">
-        🚪
-    </span>
+        <button
+            type="button"
+            class="menu"
+            onclick="mostrarSeccion('materiales', this)"
+        >
 
-    <span class="menu-texto">
-        Cerrar sesión
-    </span>
+            <span class="menu-icon">📦</span>
 
-</button>
+            <span>Materiales</span>
 
+        </button>
+
+
+        <!-- USUARIOS -->
+
+        <button
+            type="button"
+            class="menu"
+            id="menuUsuarios"
+            onclick="mostrarSeccion('usuarios', this)"
+        >
+
+            <span class="menu-icon">👤</span>
+
+            <span>Usuarios</span>
+
+        </button>
+
+
+        <!-- SEPARADOR -->
+
+        <div class="sidebar-separador"></div>
+
+
+        <!-- CERRAR SESIÓN -->
+
+        <button
+            type="button"
+            class="menu menu-salir"
+            onclick="cerrarSesion()"
+        >
+
+            <span class="menu-icon">↪</span>
+
+            <span>Cerrar sesión</span>
+
+        </button>
+
+
+    </div>
 
 </aside>
+```
+
 
 <!-- =====================================================
      CONTENIDO PRINCIPAL
