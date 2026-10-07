@@ -151,12 +151,27 @@ function crearGraficoPie(
                 },
 
 
-                options: {
+             options: {
 
-                    responsive: true,
+    responsive: true,
 
-                    maintainAspectRatio: false,
+    maintainAspectRatio: false,
 
+    // ------------------------------------------------
+    // ANIMACIÓN DEL GRÁFICO
+    // ------------------------------------------------
+
+    animation: {
+
+        duration: 1500,
+
+        easing: "easeInOutQuart",
+
+        animateRotate: true,
+
+        animateScale: true
+
+    },
 
                     // ------------------------------------------------
                     // INTERACCIÓN
