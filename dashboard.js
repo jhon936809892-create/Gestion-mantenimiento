@@ -521,6 +521,10 @@ function cargarSedesEnFiltros(
 // CONFIGURAR FILTRO DE UN GRÁFICO
 // ============================================================
 
+// ============================================================
+// CONFIGURAR FILTRO DE UN GRÁFICO
+// ============================================================
+
 function configurarFiltroGrafico(
     idSelect,
     idCantidad,
@@ -535,21 +539,34 @@ function configurarFiltroGrafico(
     const cantidad =
         document.getElementById(idCantidad);
 
+
     if (
         !select ||
         !grafico
     ) {
+
         return;
+
     }
 
 
     // ============================================================
-    // GUARDAR LOS COLORES ORIGINALES DE CADA SEDE
+    // GUARDAR COLORES ORIGINALES
     // ============================================================
 
-    const coloresOriginales =
-        grafico.data.datasets[0].backgroundColor;
+    const coloresOriginales = [
+        ...grafico.data.datasets[0].backgroundColor
+    ];
 
+
+    const bordesOriginales = [
+        ...grafico.data.datasets[0].borderColor
+    ];
+
+
+    // ============================================================
+    // EVENTO DEL SELECT
+    // ============================================================
 
     select.onchange =
         function() {
@@ -566,14 +583,24 @@ function configurarFiltroGrafico(
                 sedeSeleccionada === ""
             ) {
 
-                grafico.data.labels =
-                    etiquetasOriginales;
+                grafico.data.labels = [
+                    ...etiquetasOriginales
+                ];
 
-                grafico.data.datasets[0].data =
-                    valoresOriginales;
 
-                grafico.data.datasets[0].backgroundColor =
-                    coloresOriginales;
+                grafico.data.datasets[0].data = [
+                    ...valoresOriginales
+                ];
+
+
+                grafico.data.datasets[0].backgroundColor = [
+                    ...coloresOriginales
+                ];
+
+
+                grafico.data.datasets[0].borderColor = [
+                    ...bordesOriginales
+                ];
 
 
                 grafico.setActiveElements([]);
@@ -606,11 +633,12 @@ function configurarFiltroGrafico(
                 grafico.update();
 
                 return;
+
             }
 
 
             // ====================================================
-            // BUSCAR LA SEDE SELECCIONADA
+            // BUSCAR ÍNDICE DE LA SEDE
             // ====================================================
 
             const indice =
@@ -628,62 +656,52 @@ function configurarFiltroGrafico(
             }
 
 
+            // ====================================================
+            // OBTENER VALOR
+            // ====================================================
+
             const valor =
                 valoresOriginales[indice];
 
 
             // ====================================================
-            // OBTENER EL COLOR ORIGINAL DE ESA SEDE
+            // OBTENER COLOR ORIGINAL
             // ====================================================
 
             const colorSede =
-                Array.isArray(
-                    coloresOriginales
-                )
-                    ? coloresOriginales[indice]
-                    : coloresOriginales;
+                coloresOriginales[indice];
+
+
+            const bordeSede =
+                bordesOriginales[indice];
 
 
             // ====================================================
-            // MOSTRAR SOLO LA SEDE SELECCIONADA
+            // MOSTRAR SOLAMENTE LA SEDE SELECCIONADA
             // ====================================================
 
             grafico.data.labels = [
                 sedeSeleccionada
             ];
 
+
             grafico.data.datasets[0].data = [
                 valor
             ];
 
 
-            // IMPORTANTE:
-            // Mantiene el color que tenía originalmente
+            // ====================================================
+            // CONSERVAR COLOR DE LA SEDE
+            // ====================================================
+
             grafico.data.datasets[0].backgroundColor = [
                 colorSede
             ];
 
 
-            // Mantener también el borde correspondiente
-            if (
-                grafico.data.datasets[0].borderColor
-            ) {
-
-                const bordesOriginales =
-                    grafico.data.datasets[0].borderColor;
-
-                const bordeSede =
-                    Array.isArray(
-                        bordesOriginales
-                    )
-                        ? bordesOriginales[indice]
-                        : bordesOriginales;
-
-                grafico.data.datasets[0].borderColor = [
-                    bordeSede
-                ];
-
-            }
+            grafico.data.datasets[0].borderColor = [
+                bordeSede
+            ];
 
 
             // ====================================================
@@ -725,6 +743,10 @@ function configurarFiltroGrafico(
 
             }
 
+
+            // ====================================================
+            // ACTUALIZAR
+            // ====================================================
 
             grafico.update();
 
