@@ -1,4 +1,3 @@
-
 // ============================================================
 // MÓDULO DASHBOARD
 // dashboard.js
@@ -151,27 +150,32 @@ function crearGraficoPie(
                 },
 
 
-             options: {
+                options: {
 
-    responsive: true,
+                    responsive: true,
 
-    maintainAspectRatio: false,
+                    maintainAspectRatio: false,
 
-    // ------------------------------------------------
-    // ANIMACIÓN DEL GRÁFICO
-    // ------------------------------------------------
 
-    animation: {
+                    // ------------------------------------------------
+                    // ANIMACIÓN
+                    // ------------------------------------------------
 
-        duration: 1500,
+                    animation: {
 
-        easing: "easeInOutQuart",
+                        duration: 1500,
 
-        animateRotate: true,
+                        easing:
+                            "easeInOutQuart",
 
-        animateScale: true
+                        animateRotate:
+                            true,
 
-    },
+                        animateScale:
+                            true
+
+                    },
+
 
                     // ------------------------------------------------
                     // INTERACCIÓN
@@ -222,15 +226,17 @@ function crearGraficoPie(
 
 
                                     // --------------------------------
-                                    // SI YA ESTÁ SELECCIONADO
-                                    // → QUITAR RESALTADO
+                                    // QUITAR RESALTADO
                                     // --------------------------------
 
                                     if (
                                         yaSeleccionado
                                     ) {
 
-                                        chart.setActiveElements([]);
+                                        chart.setActiveElements(
+                                            []
+                                        );
+
 
                                         if (
                                             chart.tooltip
@@ -245,6 +251,7 @@ function crearGraficoPie(
                                             );
 
                                         }
+
 
                                         chart.update();
 
@@ -266,8 +273,7 @@ function crearGraficoPie(
 
 
                                     // --------------------------------
-                                    // MOSTRAR INFORMACIÓN
-                                    // DEL DISTRITO SELECCIONADO
+                                    // MOSTRAR TOOLTIP
                                     // --------------------------------
 
                                     if (
@@ -275,13 +281,18 @@ function crearGraficoPie(
                                     ) {
 
                                         const meta =
-                                            chart.getDatasetMeta(0);
+                                            chart.getDatasetMeta(
+                                                0
+                                            );
+
 
                                         const elemento =
                                             meta.data[indice];
 
 
-                                        if (elemento) {
+                                        if (
+                                            elemento
+                                        ) {
 
                                             chart.tooltip.setActiveElements(
                                                 [
@@ -291,8 +302,11 @@ function crearGraficoPie(
                                                     }
                                                 ],
                                                 {
-                                                    x: elemento.x,
-                                                    y: elemento.y
+                                                    x:
+                                                        elemento.x,
+
+                                                    y:
+                                                        elemento.y
                                                 }
                                             );
 
@@ -330,35 +344,47 @@ function crearGraficoPie(
 
 }
 
+
 // ============================================================
-// CARGAR SEDES EN LOS FILTROS DE LOS GRÁFICOS
+// CARGAR SEDES EN CADA FILTRO
 // ============================================================
 
 function cargarSedesEnFiltros(
-    mantenimientos,
     datosPorTipo
 ) {
 
     const configuraciones = [
 
         {
-            filtro: "filtroCertificaciones",
-            datos: datosPorTipo.certificaciones
+            filtro:
+                "filtroCertificaciones",
+
+            datos:
+                datosPorTipo.certificaciones
         },
 
         {
-            filtro: "filtroAverias",
-            datos: datosPorTipo.averias
+            filtro:
+                "filtroAverias",
+
+            datos:
+                datosPorTipo.averias
         },
 
         {
-            filtro: "filtroSplitter",
-            datos: datosPorTipo.splitters
+            filtro:
+                "filtroSplitter",
+
+            datos:
+                datosPorTipo.splitters
         },
 
         {
-            filtro: "filtroTrabajoCampo",
-            datos: datosPorTipo.trabajoCampo
+            filtro:
+                "filtroTrabajoCampo",
+
+            datos:
+                datosPorTipo.trabajoCampo
         }
 
     ];
@@ -374,24 +400,36 @@ function cargarSedesEnFiltros(
 
 
             if (!select) {
+
                 return;
+
             }
 
 
-            // Limpiar opciones anteriores
+            // ------------------------------------------------
+            // LIMPIAR SELECT
+            // ------------------------------------------------
+
             select.innerHTML = "";
 
 
-            // Opción inicial
+            // ------------------------------------------------
+            // OPCIÓN INICIAL
+            // ------------------------------------------------
+
             const opcionInicial =
                 document.createElement(
                     "option"
                 );
 
-            opcionInicial.value = "";
+
+            opcionInicial.value =
+                "";
+
 
             opcionInicial.textContent =
                 "Seleccionar sede";
+
 
             select.appendChild(
                 opcionInicial
@@ -399,7 +437,8 @@ function cargarSedesEnFiltros(
 
 
             // ------------------------------------------------
-            // SOLO LAS SEDES QUE EXISTEN EN ESTE GRÁFICO
+            // OBTENER SOLO LAS SEDES
+            // DE ESTE TIPO DE MANTENIMIENTO
             // ------------------------------------------------
 
             const sedes =
@@ -424,6 +463,10 @@ function cargarSedesEnFiltros(
             );
 
 
+            // ------------------------------------------------
+            // AGREGAR SEDES
+            // ------------------------------------------------
+
             sedes.forEach(
                 function(sede) {
 
@@ -432,11 +475,14 @@ function cargarSedesEnFiltros(
                             "option"
                         );
 
+
                     opcion.value =
                         sede;
 
+
                     opcion.textContent =
                         sede;
+
 
                     select.appendChild(
                         opcion
@@ -449,6 +495,193 @@ function cargarSedesEnFiltros(
     );
 
 }
+
+
+// ============================================================
+// CONFIGURAR FILTRO DE UN GRÁFICO
+// ============================================================
+
+function configurarFiltroGrafico(
+    idSelect,
+    idCantidad,
+    grafico,
+    etiquetasOriginales,
+    valoresOriginales
+) {
+
+    const select =
+        document.getElementById(
+            idSelect
+        );
+
+
+    const cantidad =
+        document.getElementById(
+            idCantidad
+        );
+
+
+    if (
+        !select ||
+        !grafico
+    ) {
+
+        return;
+
+    }
+
+
+    // ========================================================
+    // EVENTO DEL SELECT
+    // ========================================================
+
+    select.onchange =
+        function() {
+
+            const sedeSeleccionada =
+                select.value;
+
+
+            // ------------------------------------------------
+            // SI NO SE SELECCIONÓ NADA
+            // MOSTRAR TODO EL GRÁFICO
+            // ------------------------------------------------
+
+            if (
+                sedeSeleccionada === ""
+            ) {
+
+                grafico.data.labels =
+                    etiquetasOriginales;
+
+                grafico.data.datasets[0].data =
+                    valoresOriginales;
+
+
+                grafico.setActiveElements(
+                    []
+                );
+
+
+                if (
+                    grafico.tooltip
+                ) {
+
+                    grafico.tooltip.setActiveElements(
+                        [],
+                        {
+                            x: 0,
+                            y: 0
+                        }
+                    );
+
+                }
+
+
+                if (cantidad) {
+
+                    cantidad.innerHTML =
+                        "";
+
+                }
+
+
+                grafico.update();
+
+                return;
+
+            }
+
+
+            // ------------------------------------------------
+            // BUSCAR LA SEDE
+            // ------------------------------------------------
+
+            const indice =
+                etiquetasOriginales.indexOf(
+                    sedeSeleccionada
+                );
+
+
+            if (
+                indice === -1
+            ) {
+
+                return;
+
+            }
+
+
+            const valor =
+                valoresOriginales[indice];
+
+
+            // ------------------------------------------------
+            // MOSTRAR SOLO LA SEDE SELECCIONADA
+            // ------------------------------------------------
+
+            grafico.data.labels = [
+                sedeSeleccionada
+            ];
+
+
+            grafico.data.datasets[0].data = [
+                valor
+            ];
+
+
+            // ------------------------------------------------
+            // MOSTRAR CANTIDAD
+            // ------------------------------------------------
+
+            if (cantidad) {
+
+                cantidad.innerHTML =
+                    `
+                    <strong>
+                        ${valor}
+                    </strong>
+                    registros
+                    `;
+
+            }
+
+
+            // ------------------------------------------------
+            // QUITAR SELECCIÓN ANTERIOR
+            // ------------------------------------------------
+
+            grafico.setActiveElements(
+                []
+            );
+
+
+            if (
+                grafico.tooltip
+            ) {
+
+                grafico.tooltip.setActiveElements(
+                    [],
+                    {
+                        x: 0,
+                        y: 0
+                    }
+                );
+
+            }
+
+
+            // ------------------------------------------------
+            // ACTUALIZAR GRÁFICO
+            // ------------------------------------------------
+
+            grafico.update();
+
+        };
+
+}
+
+
 // ============================================================
 // GRÁFICOS DEL DASHBOARD
 // ============================================================
@@ -475,7 +708,7 @@ async function cargarGraficosDashboard() {
         const mantenimientos =
             await respuesta.json();
 
-   
+
         // ====================================================
         // DATOS
         // ====================================================
@@ -497,13 +730,17 @@ async function cargarGraficosDashboard() {
             function(mantenimiento) {
 
                 const sede =
-                    mantenimiento.sede ||
-                    "Sin sede";
+                    (
+                        mantenimiento.sede ||
+                        "Sin sede"
+                    ).trim();
 
 
                 const tipo =
-                    mantenimiento.tipo_mantenimiento ||
-                    "";
+                    (
+                        mantenimiento.tipo_mantenimiento ||
+                        ""
+                    ).trim();
 
 
                 // --------------------------------------------
@@ -581,128 +818,34 @@ async function cargarGraficosDashboard() {
         );
 
 
+        // ====================================================
+        // CARGAR SEDES EN CADA SELECT
+        // ====================================================
+
+        cargarSedesEnFiltros({
+
+            certificaciones:
+                certificaciones,
+
+            averias:
+                averias,
+
+            splitters:
+                splitters,
+
+            trabajoCampo:
+                trabajoCampo
+
+        });
 
 
-        function cargarSedesEnFiltros(
-    mantenimientos,
-    datosPorTipo
-) {
-
-    const configuraciones = [
-
-        {
-            filtro: "filtroCertificaciones",
-            datos: datosPorTipo.certificaciones
-        },
-
-        {
-            filtro: "filtroAverias",
-            datos: datosPorTipo.averias
-        },
-
-        {
-            filtro: "filtroSplitter",
-            datos: datosPorTipo.splitters
-        },
-
-        {
-            filtro: "filtroTrabajoCampo",
-            datos: datosPorTipo.trabajoCampo
-        }
-
-    ];
-
-
-    configuraciones.forEach(
-        function(configuracion) {
-
-            const select =
-                document.getElementById(
-                    configuracion.filtro
-                );
-
-
-            if (!select) {
-                return;
-            }
-
-
-            // Limpiar opciones anteriores
-            select.innerHTML = "";
-
-
-            // Opción inicial
-            const opcionInicial =
-                document.createElement(
-                    "option"
-                );
-
-            opcionInicial.value = "";
-
-            opcionInicial.textContent =
-                "Seleccionar sede";
-
-            select.appendChild(
-                opcionInicial
-            );
-
-
-            // ------------------------------------------------
-            // SOLO LAS SEDES QUE EXISTEN EN ESTE GRÁFICO
-            // ------------------------------------------------
-
-            const sedes =
-                Object.keys(
-                    configuracion.datos
-                );
-
-
-            sedes.sort(
-                function(a, b) {
-
-                    return a.localeCompare(
-                        b,
-                        "es",
-                        {
-                            sensitivity:
-                                "base"
-                        }
-                    );
-
-                }
-            );
-
-
-            sedes.forEach(
-                function(sede) {
-
-                    const opcion =
-                        document.createElement(
-                            "option"
-                        );
-
-                    opcion.value =
-                        sede;
-
-                    opcion.textContent =
-                        sede;
-
-                    select.appendChild(
-                        opcion
-                    );
-
-                }
-            );
-
-        }
-    );
-
-}
         // ====================================================
         // DESTRUIR GRÁFICOS ANTERIORES
         // ====================================================
 
-        if (graficoCertificaciones) {
+        if (
+            graficoCertificaciones
+        ) {
 
             graficoCertificaciones.destroy();
 
@@ -712,7 +855,9 @@ async function cargarGraficosDashboard() {
         }
 
 
-        if (graficoAverias) {
+        if (
+            graficoAverias
+        ) {
 
             graficoAverias.destroy();
 
@@ -722,7 +867,9 @@ async function cargarGraficosDashboard() {
         }
 
 
-        if (graficoSplitters) {
+        if (
+            graficoSplitters
+        ) {
 
             graficoSplitters.destroy();
 
@@ -732,7 +879,9 @@ async function cargarGraficosDashboard() {
         }
 
 
-        if (graficoTrabajoCampo) {
+        if (
+            graficoTrabajoCampo
+        ) {
 
             graficoTrabajoCampo.destroy();
 
@@ -752,17 +901,25 @@ async function cargarGraficosDashboard() {
             );
 
 
+        const etiquetasCertificaciones =
+            Object.keys(
+                certificaciones
+            );
+
+
+        const valoresCertificaciones =
+            Object.values(
+                certificaciones
+            );
+
+
         graficoCertificaciones =
             crearGraficoPie(
                 canvasCertificaciones,
 
-                Object.keys(
-                    certificaciones
-                ),
+                etiquetasCertificaciones,
 
-                Object.values(
-                    certificaciones
-                )
+                valoresCertificaciones
             );
 
 
@@ -776,17 +933,25 @@ async function cargarGraficosDashboard() {
             );
 
 
+        const etiquetasAverias =
+            Object.keys(
+                averias
+            );
+
+
+        const valoresAverias =
+            Object.values(
+                averias
+            );
+
+
         graficoAverias =
             crearGraficoPie(
                 canvasAverias,
 
-                Object.keys(
-                    averias
-                ),
+                etiquetasAverias,
 
-                Object.values(
-                    averias
-                )
+                valoresAverias
             );
 
 
@@ -800,17 +965,25 @@ async function cargarGraficosDashboard() {
             );
 
 
+        const etiquetasSplitters =
+            Object.keys(
+                splitters
+            );
+
+
+        const valoresSplitters =
+            Object.values(
+                splitters
+            );
+
+
         graficoSplitters =
             crearGraficoPie(
                 canvasSplitter,
 
-                Object.keys(
-                    splitters
-                ),
+                etiquetasSplitters,
 
-                Object.values(
-                    splitters
-                )
+                valoresSplitters
             );
 
 
@@ -824,18 +997,102 @@ async function cargarGraficosDashboard() {
             );
 
 
+        const etiquetasTrabajoCampo =
+            Object.keys(
+                trabajoCampo
+            );
+
+
+        const valoresTrabajoCampo =
+            Object.values(
+                trabajoCampo
+            );
+
+
         graficoTrabajoCampo =
             crearGraficoPie(
                 canvasTrabajoCampo,
 
-                Object.keys(
-                    trabajoCampo
-                ),
+                etiquetasTrabajoCampo,
 
-                Object.values(
-                    trabajoCampo
-                )
+                valoresTrabajoCampo
             );
+
+
+        // ====================================================
+        // CONFIGURAR FILTRO CERTIFICACIONES
+        // ====================================================
+
+        configurarFiltroGrafico(
+
+            "filtroCertificaciones",
+
+            "cantidadCertificaciones",
+
+            graficoCertificaciones,
+
+            etiquetasCertificaciones,
+
+            valoresCertificaciones
+
+        );
+
+
+        // ====================================================
+        // CONFIGURAR FILTRO AVERÍAS
+        // ====================================================
+
+        configurarFiltroGrafico(
+
+            "filtroAverias",
+
+            "cantidadAverias",
+
+            graficoAverias,
+
+            etiquetasAverias,
+
+            valoresAverias
+
+        );
+
+
+        // ====================================================
+        // CONFIGURAR FILTRO SPLITTER
+        // ====================================================
+
+        configurarFiltroGrafico(
+
+            "filtroSplitter",
+
+            "cantidadSplitter",
+
+            graficoSplitters,
+
+            etiquetasSplitters,
+
+            valoresSplitters
+
+        );
+
+
+        // ====================================================
+        // CONFIGURAR FILTRO TRABAJO EN CAMPO
+        // ====================================================
+
+        configurarFiltroGrafico(
+
+            "filtroTrabajoCampo",
+
+            "cantidadTrabajoCampo",
+
+            graficoTrabajoCampo,
+
+            etiquetasTrabajoCampo,
+
+            valoresTrabajoCampo
+
+        );
 
     }
     catch (error) {
@@ -848,5 +1105,3 @@ async function cargarGraficosDashboard() {
     }
 
 }
-
-
