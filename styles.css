@@ -2667,4 +2667,50 @@ canvas {
 
     font-size: 13px;
 }
+/* ============================================================
+   TABLA DE MANTENIMIENTO
+   ORGANIZACIÓN DE COLUMNAS
+============================================================ */
 
+#tablaMantenimiento {
+    width: 100%;
+    min-width: 700px;
+    table-layout: fixed;
+}
+
+/* FECHA */
+#tablaMantenimiento th:nth-child(1),
+#tablaMantenimiento td:nth-child(1) {
+    width: 120px;
+}
+
+/* PROYECTO */
+#tablaMantenimiento th:nth-child(2),
+#tablaMantenimiento td:nth-child(2) {
+    width: 180px;
+}
+
+/* SEDE */
+#tablaMantenimiento th:nth-child(3),
+#tablaMantenimiento td:nth-child(3) {
+    width: 120px;
+}
+
+/* TRABAJO */
+#tablaMantenimiento th:nth-child(4),
+#tablaMantenimiento td:nth-child(4) {
+    width: 180px;
+}
+
+/* ESTADO */
+#tablaMantenimiento th:nth-child(5),
+#tablaMantenimiento td:nth-child(5) {
+    width: 120px;
+}
+
+/* Evita que los textos desorganicen la tabla */
+#tablaMantenimiento td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
