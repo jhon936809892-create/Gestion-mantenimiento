@@ -191,30 +191,31 @@ if (tituloModulo) {
     // MÓDULO MANTENIMIENTO
     // --------------------------------------------------------
 
-    if (seccion === "mantenimiento") {
+ if (seccion === "mantenimiento") {
 
-        cargarProyectos();
+    // Cargar proyectos
+    cargarProyectos();
 
-        cargarMantenimientos();
+    // Cargar mantenimientos existentes
+    cargarMantenimientos();
 
+    // Esperar un momento para asegurar que
+    // el módulo ya esté visible
+    setTimeout(function() {
 
-        setTimeout(function() {
+        inicializarCalendarioMantenimiento();
 
-            inicializarCalendarioMantenimiento();
+        if (calendarioMantenimiento) {
 
+            calendarioMantenimiento.updateSize();
 
-            if (calendarioMantenimiento) {
+            calendarioMantenimiento.refetchEvents();
 
-                calendarioMantenimiento.updateSize();
+        }
 
-                calendarioMantenimiento.refetchEvents();
+    }, 300);
 
-            }
-
-        }, 150);
-
-    }
-
+}
 
     // --------------------------------------------------------
     // MÓDULO PROYECTOS
