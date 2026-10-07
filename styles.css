@@ -64,24 +64,70 @@ body {
 }
 
 
-/* CABECERA SIDEBAR */
+```css
+/* ============================================================
+   CABECERA SIDEBAR - LOGO
+============================================================ */
 
 .sidebar-header {
-    padding: 22px 15px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px 15px;
+
+    min-height: 105px;
 
     text-align: center;
 
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: #1f2937;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
 }
+
+
+/* LOGO */
+
+.sidebar-header img {
+    display: block;
+
+    width: 135px;
+
+    height: 70px;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+/* EFECTO AL PASAR EL MOUSE */
+
+.sidebar-header img:hover {
+    transform: scale(1.04);
+}
+
+
+/* TÍTULO SI TAMBIÉN EXISTE */
 
 .sidebar-header h2 {
     margin: 0;
 
     font-size: 18px;
+
     font-weight: 700;
 
     color: white;
 }
+```
 
 
 /* MENÚ */
