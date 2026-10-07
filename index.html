@@ -590,25 +590,37 @@
 
         <h2>Trabajo en campo por Distrito</h2>
 
+       <!-- ============================================================
+     GRÁFICOS DEL DASHBOARD
+============================================================ -->
+
+<div class="graficos-dashboard">
+
+    <!-- ========================================================
+         CERTIFICACIONES
+    ========================================================= -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Certificaciones por Distrito</h2>
+
         <div class="controles-grafico">
 
+            <!-- Distrito -->
             <select
-                id="filtroTrabajoCampo"
+                id="filtroCertificaciones"
                 class="filtro-grafico"
             >
-
                 <option value="">
                     Seleccionar distrito
                 </option>
-
             </select>
 
-
+            <!-- Tipo de gráfico -->
             <select
-                id="tipoGraficoTrabajoCampo"
+                id="tipoGraficoCertificaciones"
                 class="tipo-grafico"
             >
-
                 <option value="pie">
                     Gráfico de ruleta
                 </option>
@@ -616,10 +628,262 @@
                 <option value="area">
                     Gráfico de área
                 </option>
-
             </select>
 
+            <!-- Fecha desde -->
+            <div class="filtro-fecha">
+                <label for="fechaDesdeCertificaciones">
+                    Desde
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaDesdeCertificaciones"
+                >
+            </div>
+
+            <!-- Fecha hasta -->
+            <div class="filtro-fecha">
+                <label for="fechaHastaCertificaciones">
+                    Hasta
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaHastaCertificaciones"
+                >
+            </div>
+
         </div>
+
+        <div
+            id="cantidadCertificaciones"
+            class="cantidad-grafico"
+        ></div>
+
+        <div class="grafico-ruleta">
+            <canvas id="graficoCertificaciones"></canvas>
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         AVERÍAS
+    ========================================================= -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Averías por Distrito</h2>
+
+        <div class="controles-grafico">
+
+            <!-- Distrito -->
+            <select
+                id="filtroAverias"
+                class="filtro-grafico"
+            >
+                <option value="">
+                    Seleccionar distrito
+                </option>
+            </select>
+
+            <!-- Tipo de gráfico -->
+            <select
+                id="tipoGraficoAverias"
+                class="tipo-grafico"
+            >
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
+
+                <option value="area">
+                    Gráfico de área
+                </option>
+            </select>
+
+            <!-- Fecha desde -->
+            <div class="filtro-fecha">
+                <label for="fechaDesdeAverias">
+                    Desde
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaDesdeAverias"
+                >
+            </div>
+
+            <!-- Fecha hasta -->
+            <div class="filtro-fecha">
+                <label for="fechaHastaAverias">
+                    Hasta
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaHastaAverias"
+                >
+            </div>
+
+        </div>
+
+        <div
+            id="cantidadAverias"
+            class="cantidad-grafico"
+        ></div>
+
+        <div class="grafico-ruleta">
+            <canvas id="graficoAverias"></canvas>
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         CAMBIO DE SPLITTER
+    ========================================================= -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Cambio de splitter por Distrito</h2>
+
+        <div class="controles-grafico">
+
+            <!-- Distrito -->
+            <select
+                id="filtroSplitter"
+                class="filtro-grafico"
+            >
+                <option value="">
+                    Seleccionar distrito
+                </option>
+            </select>
+
+            <!-- Tipo de gráfico -->
+            <select
+                id="tipoGraficoSplitter"
+                class="tipo-grafico"
+            >
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
+
+                <option value="area">
+                    Gráfico de área
+                </option>
+            </select>
+
+            <!-- Fecha desde -->
+            <div class="filtro-fecha">
+                <label for="fechaDesdeSplitter">
+                    Desde
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaDesdeSplitter"
+                >
+            </div>
+
+            <!-- Fecha hasta -->
+            <div class="filtro-fecha">
+                <label for="fechaHastaSplitter">
+                    Hasta
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaHastaSplitter"
+                >
+            </div>
+
+        </div>
+
+        <div
+            id="cantidadSplitter"
+            class="cantidad-grafico"
+        ></div>
+
+        <div class="grafico-ruleta">
+            <canvas id="graficoSplitter"></canvas>
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         TRABAJO EN CAMPO
+    ========================================================= -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Trabajo en campo por Distrito</h2>
+
+        <div class="controles-grafico">
+
+            <!-- Distrito -->
+            <select
+                id="filtroTrabajoCampo"
+                class="filtro-grafico"
+            >
+                <option value="">
+                    Seleccionar distrito
+                </option>
+            </select>
+
+            <!-- Tipo de gráfico -->
+            <select
+                id="tipoGraficoTrabajoCampo"
+                class="tipo-grafico"
+            >
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
+
+                <option value="area">
+                    Gráfico de área
+                </option>
+            </select>
+
+            <!-- Fecha desde -->
+            <div class="filtro-fecha">
+                <label for="fechaDesdeTrabajoCampo">
+                    Desde
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaDesdeTrabajoCampo"
+                >
+            </div>
+
+            <!-- Fecha hasta -->
+            <div class="filtro-fecha">
+                <label for="fechaHastaTrabajoCampo">
+                    Hasta
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaHastaTrabajoCampo"
+                >
+            </div>
+
+        </div>
+
+        <div
+            id="cantidadTrabajoCampo"
+            class="cantidad-grafico"
+        ></div>
+
+        <div class="grafico-ruleta">
+            <canvas id="graficoTrabajoCampo"></canvas>
+        </div>
+
+    </div>
+
+</div>
 
 
         <div
