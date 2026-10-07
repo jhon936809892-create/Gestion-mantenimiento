@@ -163,17 +163,17 @@ function crearGraficoPie(
                             // ----------------------------------------
 
 backgroundColor: [
-    "#E66647", // Coral
-    "#4E9F70", // Verde
-    "#E5B84B", // Amarillo
-    "#D9535B", // Rojo
-    "#8064A2", // Morado
-    "#3FA7A3", // Turquesa
-    "#D9853B", // Naranja
-    "#5B7DB1", // Azul
-    "#7FA64B", // Verde oliva
-    "#C85C82"  // Rosa
-],                     // ----------------------------------------
+    "#90FCC2", // Verde menta
+    "#90DFFC", // Azul cielo
+    "#A990FC", // Morado
+    "#FC90C8", // Rosa
+    "#FCB390", // Coral
+    "#FCDC90", // Amarillo
+    "#90FCE8", // Turquesa
+    "#B8FC90", // Verde lima
+    "#90B5FC", // Azul
+    "#E890FC"  // Violeta
+],                    // ----------------------------------------
                             // BORDES
                             // ----------------------------------------
 
