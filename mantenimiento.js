@@ -104,7 +104,7 @@ async function cargarMantenimientos() {
 
                     <td>
                         ${
-                            mantenimiento.trabajo ||
+                            
                             mantenimiento.tipo_mantenimiento||
                             ""
                         }
