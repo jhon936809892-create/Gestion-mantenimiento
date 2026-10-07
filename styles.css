@@ -33,6 +33,11 @@ body {
    CONTENEDOR PRINCIPAL
 ============================================================ */
 
+
+/* ============================================================
+   CONTENEDOR PRINCIPAL
+============================================================ */
+
 .app {
     display: flex;
     width: 100%;
@@ -40,26 +45,52 @@ body {
 }
 
 
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+.sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 240px;
+    min-width: 240px;
+
+    background: #1f2937;
+
+    color: white;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+    box-shadow:
+        3px 0 12px rgba(0, 0, 0, 0.08);
+}
+
 
 /* ============================================================
-   LOGO DEL SIDEBAR
+   LOGO
 ============================================================ */
 
 .logo {
     width: 100%;
-    height: 100px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    padding: 5px 0;
+    padding: 10px 0;
 
     background: #1f2937;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-    box-sizing: border-box;
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
 
     overflow: hidden;
 }
@@ -71,28 +102,20 @@ body {
     display: block;
 
     width: 100%;
-    height: 100%;
 
     max-width: 240px;
+
+    height: auto;
 
     object-fit: contain;
 
     margin: 0;
-
-    transition: transform 0.2s ease;
 }
 
 
-/* EFECTO AL PASAR EL MOUSE */
-
-.logo img:hover {
-    transform: scale(1.02);
-}
-
-
-
-
-/* TÍTULO SI TAMBIÉN EXISTE */
+/* ============================================================
+   TÍTULO SI EXISTE
+============================================================ */
 
 .sidebar-header h2 {
     margin: 0;
