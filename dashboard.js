@@ -136,16 +136,40 @@ function crearGraficoPie(
                     labels:
                         etiquetas,
 
-                    datasets: [{
+                datasets: [{
+    data:
+        valores,
 
-                        data:
-                            valores,
+    backgroundColor: [
+        "#2563eb",
+        "#16a34a",
+        "#f59e0b",
+        "#dc2626",
+        "#9333ea",
+        "#0891b2",
+        "#ea580c",
+        "#4f46e5",
+        "#65a30d",
+        "#db2777"
+    ],
 
-                        hoverOffset: 18,
+    borderColor: [
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff"
+    ],
 
-                        borderWidth: 2
+    hoverOffset: 18,
 
-                    }]
+    borderWidth: 2
+}]
 
                 },
 
@@ -510,30 +534,26 @@ function configurarFiltroGrafico(
 ) {
 
     const select =
-        document.getElementById(
-            idSelect
-        );
-
+        document.getElementById(idSelect);
 
     const cantidad =
-        document.getElementById(
-            idCantidad
-        );
-
+        document.getElementById(idCantidad);
 
     if (
         !select ||
         !grafico
     ) {
-
         return;
-
     }
 
 
-    // ========================================================
-    // EVENTO DEL SELECT
-    // ========================================================
+    // ============================================================
+    // GUARDAR LOS COLORES ORIGINALES DE CADA SEDE
+    // ============================================================
+
+    const coloresOriginales =
+        grafico.data.datasets[0].backgroundColor;
+
 
     select.onchange =
         function() {
@@ -542,10 +562,9 @@ function configurarFiltroGrafico(
                 select.value;
 
 
-            // ------------------------------------------------
-            // SI NO SE SELECCIONÓ NADA
-            // MOSTRAR TODO EL GRÁFICO
-            // ------------------------------------------------
+            // ====================================================
+            // MOSTRAR TODAS LAS SEDES
+            // ====================================================
 
             if (
                 sedeSeleccionada === ""
@@ -557,10 +576,11 @@ function configurarFiltroGrafico(
                 grafico.data.datasets[0].data =
                     valoresOriginales;
 
+                grafico.data.datasets[0].backgroundColor =
+                    coloresOriginales;
 
-                grafico.setActiveElements(
-                    []
-                );
+
+                grafico.setActiveElements([]);
 
 
                 if (
@@ -578,10 +598,11 @@ function configurarFiltroGrafico(
                 }
 
 
-                if (cantidad) {
+                if (
+                    cantidad
+                ) {
 
-                    cantidad.innerHTML =
-                        "";
+                    cantidad.innerHTML = "";
 
                 }
 
@@ -589,13 +610,12 @@ function configurarFiltroGrafico(
                 grafico.update();
 
                 return;
-
             }
 
 
-            // ------------------------------------------------
-            // BUSCAR LA SEDE
-            // ------------------------------------------------
+            // ====================================================
+            // BUSCAR LA SEDE SELECCIONADA
+            // ====================================================
 
             const indice =
                 etiquetasOriginales.indexOf(
@@ -616,44 +636,83 @@ function configurarFiltroGrafico(
                 valoresOriginales[indice];
 
 
-            // ------------------------------------------------
+            // ====================================================
+            // OBTENER EL COLOR ORIGINAL DE ESA SEDE
+            // ====================================================
+
+            const colorSede =
+                Array.isArray(
+                    coloresOriginales
+                )
+                    ? coloresOriginales[indice]
+                    : coloresOriginales;
+
+
+            // ====================================================
             // MOSTRAR SOLO LA SEDE SELECCIONADA
-            // ------------------------------------------------
+            // ====================================================
 
             grafico.data.labels = [
                 sedeSeleccionada
             ];
-
 
             grafico.data.datasets[0].data = [
                 valor
             ];
 
 
-            // ------------------------------------------------
-            // MOSTRAR CANTIDAD
-            // ------------------------------------------------
+            // IMPORTANTE:
+            // Mantiene el color que tenía originalmente
+            grafico.data.datasets[0].backgroundColor = [
+                colorSede
+            ];
 
-            if (cantidad) {
 
-                cantidad.innerHTML =
-                    `
-                    <strong>
-                        ${valor}
-                    </strong>
-                    registros
-                    `;
+            // Mantener también el borde correspondiente
+            if (
+                grafico.data.datasets[0].borderColor
+            ) {
+
+                const bordesOriginales =
+                    grafico.data.datasets[0].borderColor;
+
+                const bordeSede =
+                    Array.isArray(
+                        bordesOriginales
+                    )
+                        ? bordesOriginales[indice]
+                        : bordesOriginales;
+
+                grafico.data.datasets[0].borderColor = [
+                    bordeSede
+                ];
 
             }
 
 
-            // ------------------------------------------------
-            // QUITAR SELECCIÓN ANTERIOR
-            // ------------------------------------------------
+            // ====================================================
+            // MOSTRAR CANTIDAD
+            // ====================================================
 
-            grafico.setActiveElements(
-                []
-            );
+            if (
+                cantidad
+            ) {
+
+                cantidad.innerHTML = `
+                    <strong>
+                        ${valor}
+                    </strong>
+                    registros
+                `;
+
+            }
+
+
+            // ====================================================
+            // LIMPIAR SELECCIÓN DEL GRÁFICO
+            // ====================================================
+
+            grafico.setActiveElements([]);
 
 
             if (
@@ -671,16 +730,11 @@ function configurarFiltroGrafico(
             }
 
 
-            // ------------------------------------------------
-            // ACTUALIZAR GRÁFICO
-            // ------------------------------------------------
-
             grafico.update();
 
         };
 
 }
-
 
 // ============================================================
 // GRÁFICOS DEL DASHBOARD
