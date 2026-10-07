@@ -2805,3 +2805,82 @@ canvas {
 .grafico-panel:hover .grafico-ruleta {
     transform: scale(1.02);
 }
+
+
+
+
+
+
+
+
+
+/* ========================================
+   FILTROS DE LOS GRÁFICOS
+   ======================================== */
+
+.filtro-grafico {
+    width: 100%;
+    max-width: 280px;
+    margin: 5px auto 10px auto;
+
+    padding: 9px 12px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #111827;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.filtro-grafico:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* ========================================
+   CANTIDAD SELECCIONADA
+   ======================================== */
+
+.cantidad-grafico {
+    text-align: center;
+
+    margin: 5px auto 12px auto;
+
+    font-size: 14px;
+
+    color: #4b5563;
+
+    min-height: 20px;
+}
+
+.cantidad-grafico strong {
+    color: #111827;
+
+    font-size: 18px;
+}
+
+
+/* ========================================
+   MÓVIL
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    .filtro-grafico {
+        max-width: 100%;
+    }
+
+}
