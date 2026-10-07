@@ -330,6 +330,102 @@ function crearGraficoPie(
 
 }
 
+// ============================================================
+// CARGAR SEDES EN LOS FILTROS DE LOS GRÁFICOS
+// ============================================================
+
+function cargarSedesEnFiltros(mantenimientos) {
+
+    const sedes = [
+        ...new Set(
+            mantenimientos
+                .map(function(mantenimiento) {
+                    return (
+                        mantenimiento.sede ||
+                        ""
+                    ).trim();
+                })
+                .filter(function(sede) {
+                    return sede !== "";
+                })
+        )
+    ];
+
+    sedes.sort(function(a, b) {
+        return a.localeCompare(
+            b,
+            "es",
+            {
+                sensitivity: "base"
+            }
+        );
+    });
+
+
+    const filtros = [
+        "filtroCertificaciones",
+        "filtroAverias",
+        "filtroSplitter",
+        "filtroTrabajoCampo"
+    ];
+
+
+    filtros.forEach(function(idFiltro) {
+
+        const select =
+            document.getElementById(
+                idFiltro
+            );
+
+
+        if (!select) {
+            return;
+        }
+
+
+        // Limpiar opciones anteriores
+        select.innerHTML = "";
+
+
+        // Opción inicial
+        const opcionInicial =
+            document.createElement(
+                "option"
+            );
+
+        opcionInicial.value = "";
+
+        opcionInicial.textContent =
+            "Seleccionar sede";
+
+        select.appendChild(
+            opcionInicial
+        );
+
+
+        // Agregar sedes
+        sedes.forEach(
+            function(sede) {
+
+                const opcion =
+                    document.createElement(
+                        "option"
+                    );
+
+                opcion.value = sede;
+
+                opcion.textContent = sede;
+
+                select.appendChild(
+                    opcion
+                );
+
+            }
+        );
+
+    });
+
+}
 
 // ============================================================
 // GRÁFICOS DEL DASHBOARD
@@ -357,6 +453,13 @@ async function cargarGraficosDashboard() {
         const mantenimientos =
             await respuesta.json();
 
+        // ====================================================
+// CARGAR SEDES EN LOS FILTROS
+// ====================================================
+
+        cargarSedesEnFiltros(
+    mantenimientos
+);
 
         // ====================================================
         // DATOS
