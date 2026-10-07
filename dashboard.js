@@ -162,20 +162,18 @@ function crearGraficoPie(
                             // COLORES
                             // ----------------------------------------
 
-      backgroundColor: [
-    "#A9D6F5", // Azul claro
-    "#A8E6B0", // Verde claro
-    "#F9E39A", // Amarillo claro
-    "#F7BABA", // Rojo claro
-    "#CDB7F0", // Morado claro
-    "#A3E3DF", // Turquesa claro
-    "#F6C99A", // Naranja claro
-    "#B8C8F0", // Azul lavanda claro
-    "#CBE58F", // Verde lima claro
-    "#F0B6D2"  // Rosa claro
+ backgroundColor: [
+    "#D6ECFA", // Azul muy claro
+    "#D8F3DC", // Verde muy claro
+    "#FFF3C4", // Amarillo muy claro
+    "#FAD6D6", // Rojo muy claro
+    "#E7DDF7", // Morado muy claro
+    "#D5F2EF", // Turquesa muy claro
+    "#FBE2C7", // Naranja muy claro
+    "#DDE5F8", // Azul lavanda muy claro
+    "#E6F2C7", // Verde lima muy claro
+    "#F7DCE9"  // Rosa muy claro
 ],
-
-
                             // ----------------------------------------
                             // BORDES
                             // ----------------------------------------
