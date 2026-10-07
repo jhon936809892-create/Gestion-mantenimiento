@@ -1,4 +1,4 @@
-
+```css
 /* ============================================================
    SISTEMA DE GESTIÓN DE CUADRILLAS
    CSS COMPLETO
@@ -27,11 +27,6 @@ body {
     background: #f3f5f9;
     color: #1f2937;
 }
-
-
-/* ============================================================
-   CONTENEDOR PRINCIPAL
-============================================================ */
 
 
 /* ============================================================
@@ -95,9 +90,6 @@ body {
     overflow: hidden;
 }
 
-
-/* IMAGEN DEL LOGO */
-
 .logo img {
     display: block;
 
@@ -128,8 +120,9 @@ body {
 }
 
 
-
-/* MENÚ */
+/* ============================================================
+   MENÚ
+============================================================ */
 
 .sidebar-menu {
     padding: 16px 10px;
@@ -173,7 +166,62 @@ body {
 .menu.active {
     background: #2563eb;
     color: white;
-    box-shadow: 0 4px 10px rgba(37,99,235,0.25);
+
+    box-shadow:
+        0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+
+/* ============================================================
+   BOTÓN MENÚ MOBILE
+   OCULTO EN PC
+   SE MOSTRARÁ DENTRO DEL SIDEBAR EN CELULAR
+============================================================ */
+
+#btnMenuMobile {
+    display: none;
+
+    position: absolute;
+
+    top: 10px;
+
+    right: -42px;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius:
+        0 8px 8px 0;
+
+    background: #1f2937;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    z-index: 1100;
+
+    box-shadow:
+        3px 2px 8px rgba(0, 0, 0, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+#btnMenuMobile:hover {
+    background: #374151;
 }
 
 
@@ -204,7 +252,9 @@ body {
     min-height: 70px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     gap: 20px;
@@ -215,7 +265,8 @@ body {
 
     border-bottom: 1px solid #e5e7eb;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .topbar h1 {
@@ -230,32 +281,10 @@ body {
 
 #botonTopbar {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
-}
-
-
-/* ============================================================
-   BOTÓN MENÚ MOBILE
-============================================================ */
-
-#btnMenuMobile {
-    display: none;
-
-    border: none;
-
-    background: #2563eb;
-
-    color: white;
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-size: 20px;
 }
 
 
@@ -394,7 +423,7 @@ button {
     min-height: 125px;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,0.04);
+        0 3px 10px rgba(0, 0, 0, 0.04);
 
     transition:
         transform 0.2s ease,
@@ -407,7 +436,7 @@ button {
     transform: translateY(-2px);
 
     box-shadow:
-        0 7px 18px rgba(0,0,0,0.07);
+        0 7px 18px rgba(0, 0, 0, 0.07);
 }
 
 
@@ -418,9 +447,11 @@ button {
 .dashboard-card-icon {
     width: 48px;
     height: 48px;
+
     min-width: 48px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -505,9 +536,6 @@ button {
     background: #f5f3ff;
 }
 
-
-/* PROYECTOS */
-
 .card-proyectos::after {
     background: #059669;
 }
@@ -515,9 +543,6 @@ button {
 .card-proyectos .dashboard-card-icon {
     background: #ecfdf5;
 }
-
-
-/* MANTENIMIENTOS ACABADOS */
 
 .card-mantenimientos-acabados::after {
     background: #16a34a;
@@ -527,9 +552,6 @@ button {
     background: #dcfce7;
 }
 
-
-/* MANTENIMIENTOS PENDIENTES */
-
 .card-mantenimientos-pendientes::after {
     background: #f59e0b;
 }
@@ -537,9 +559,6 @@ button {
 .card-mantenimientos-pendientes .dashboard-card-icon {
     background: #fef3c7;
 }
-
-
-/* MANTENIMIENTOS EN PROCESO */
 
 .card-mantenimientos-proceso::after {
     background: #2563eb;
@@ -579,7 +598,7 @@ button {
     min-height: 100px;
 
     box-shadow:
-        0 2px 7px rgba(0,0,0,0.04);
+        0 2px 7px rgba(0, 0, 0, 0.04);
 }
 
 .mantenimiento-contador h3,
@@ -603,8 +622,6 @@ button {
 
 /* ============================================================
    GRÁFICOS DEL DASHBOARD
-   LOS 4 GRÁFICOS ESTÁN EN UNA SOLA SECCIÓN
-   DISTRIBUCIÓN: 2 ARRIBA + 2 ABAJO
 ============================================================ */
 
 .graficos-dashboard {
@@ -643,7 +660,7 @@ button {
     border-radius: 12px;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,0.04);
+        0 3px 10px rgba(0, 0, 0, 0.04);
 
     overflow: hidden;
 }
@@ -749,7 +766,7 @@ button {
     margin-bottom: 20px;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,0.04);
+        0 3px 10px rgba(0, 0, 0, 0.04);
 }
 
 
@@ -770,7 +787,7 @@ button {
     overflow-x: auto;
 
     box-shadow:
-        0 2px 7px rgba(0,0,0,0.04);
+        0 2px 7px rgba(0, 0, 0, 0.04);
 }
 
 table {
@@ -879,7 +896,7 @@ tbody tr:last-child td {
     margin-top: 20px;
 
     box-shadow:
-        0 2px 7px rgba(0,0,0,0.04);
+        0 2px 7px rgba(0, 0, 0, 0.04);
 
     overflow: hidden;
 }
@@ -1011,7 +1028,7 @@ tbody tr:last-child td {
     border-radius: 12px;
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,0.2);
+        0 20px 50px rgba(0, 0, 0, 0.2);
 
     padding: 25px;
 
@@ -1104,7 +1121,7 @@ textarea:focus {
 
     box-shadow:
         0 0 0 3px
-        rgba(37,99,235,0.10);
+        rgba(37, 99, 235, 0.10);
 }
 
 textarea {
@@ -1231,7 +1248,7 @@ textarea::placeholder {
     overflow-y: auto;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,0.12);
+        0 8px 20px rgba(0, 0, 0, 0.12);
 
     z-index: 3000;
 
@@ -1580,7 +1597,6 @@ canvas {
     background: #f5f3ff;
 }
 
-
 .card-proyectos::after {
     background: #059669;
 }
@@ -1588,7 +1604,6 @@ canvas {
 .card-proyectos .dashboard-card-icon {
     background: #ecfdf5;
 }
-
 
 .card-mantenimientos-acabados::after {
     background: #16a34a;
@@ -1598,7 +1613,6 @@ canvas {
     background: #dcfce7;
 }
 
-
 .card-mantenimientos-pendientes::after {
     background: #f59e0b;
 }
@@ -1606,7 +1620,6 @@ canvas {
 .card-mantenimientos-pendientes .dashboard-card-icon {
     background: #fef3c7;
 }
-
 
 .card-mantenimientos-proceso::after {
     background: #2563eb;
@@ -2125,7 +2138,6 @@ canvas {
         grid-column: span 2;
     }
 
-    /* LOS 4 GRÁFICOS SIGUEN EN 2 COLUMNAS */
     .graficos-dashboard {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
@@ -2163,12 +2175,6 @@ canvas {
             repeat(2, minmax(0, 1fr));
     }
 
-    /*
-       IMPORTANTE:
-       NO ponemos 1 columna aquí.
-       Los 4 gráficos permanecen 2 x 2.
-    */
-
     .graficos-dashboard {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
@@ -2195,11 +2201,6 @@ canvas {
         grid-template-columns: 1fr;
     }
 
-    /*
-       Los gráficos todavía permanecen juntos
-       en 2 columnas.
-    */
-
     .graficos-dashboard {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
@@ -2213,7 +2214,12 @@ canvas {
 
 @media (max-width: 768px) {
 
-    /* SIDEBAR */
+    /* ========================================================
+       SIDEBAR MOBILE
+
+       SE DEJA VISIBLE UNA PESTAÑA DE 42PX
+       PARA QUE EL BOTÓN ☰ SIEMPRE SEA ACCESIBLE
+    ======================================================== */
 
     .sidebar {
         width: 250px;
@@ -2221,14 +2227,14 @@ canvas {
         min-width: 250px;
 
         transform:
-            translateX(-100%);
+            translateX(-208px);
 
         transition:
             transform 0.25s ease;
 
         box-shadow:
             5px 0 20px
-            rgba(0,0,0,0.15);
+            rgba(0, 0, 0, 0.15);
     }
 
     .sidebar.mobile-open {
@@ -2237,7 +2243,60 @@ canvas {
     }
 
 
-    /* MAIN */
+    /* ========================================================
+       BOTÓN ☰ DENTRO DEL SIDEBAR
+    ======================================================== */
+
+    #btnMenuMobile {
+        display: flex;
+
+        position: absolute;
+
+        top: 10px;
+
+        right: -42px;
+
+        width: 42px;
+
+        height: 42px;
+
+        margin: 0;
+
+        padding: 0;
+
+        border-radius:
+            0 8px 8px 0;
+
+        background: #1f2937;
+
+        color: white;
+
+        box-shadow:
+            3px 2px 8px
+            rgba(0, 0, 0, 0.18);
+    }
+
+    #btnMenuMobile:hover {
+        background: #374151;
+    }
+
+
+    /* CUANDO EL MENÚ ESTÁ ABIERTO */
+
+    .sidebar.mobile-open #btnMenuMobile {
+        right: 10px;
+
+        border-radius: 8px;
+
+        background: #374151;
+
+        box-shadow: none;
+    }
+
+
+    /* ========================================================
+       MAIN
+    ======================================================== */
 
     .main {
         margin-left: 0;
@@ -2246,7 +2305,9 @@ canvas {
     }
 
 
-    /* TOPBAR */
+    /* ========================================================
+       TOPBAR
+    ======================================================== */
 
     .topbar {
         min-height: 65px;
@@ -2254,12 +2315,6 @@ canvas {
         padding: 10px 15px;
 
         gap: 10px;
-    }
-
-    #btnMenuMobile {
-        display: block;
-
-        flex-shrink: 0;
     }
 
     .topbar h1 {
@@ -2279,14 +2334,18 @@ canvas {
     }
 
 
-    /* SECCIÓN */
+    /* ========================================================
+       SECCIÓN
+    ======================================================== */
 
     .seccion {
         padding: 15px;
     }
 
 
-    /* ENCABEZADO DASHBOARD */
+    /* ========================================================
+       ENCABEZADO DASHBOARD
+    ======================================================== */
 
     .dashboard-encabezado {
         flex-direction: column;
@@ -2305,7 +2364,9 @@ canvas {
     }
 
 
-    /* TARJETAS */
+    /* ========================================================
+       TARJETAS
+    ======================================================== */
 
     .dashboard-cards {
         grid-template-columns:
@@ -2345,7 +2406,9 @@ canvas {
     }
 
 
-    /* CONTADORES */
+    /* ========================================================
+       CONTADORES
+    ======================================================== */
 
     .mantenimiento-contadores,
     .contadores-mantenimiento {
@@ -2368,7 +2431,9 @@ canvas {
     }
 
 
-    /* GRID DASHBOARD */
+    /* ========================================================
+       GRID DASHBOARD
+    ======================================================== */
 
     .dashboard-grid-tres {
         gap: 12px;
@@ -2383,7 +2448,6 @@ canvas {
 
     /* ========================================================
        GRÁFICOS EN CELULAR
-       AQUÍ SÍ PASAN A UNA COLUMNA
     ======================================================== */
 
     .graficos-dashboard {
@@ -2405,7 +2469,9 @@ canvas {
     }
 
 
-    /* COMPATIBILIDAD */
+    /* ========================================================
+       COMPATIBILIDAD
+    ======================================================== */
 
     .grafico-dashboard-grande {
         height: 220px;
@@ -2422,28 +2488,36 @@ canvas {
     }
 
 
-    /* TÍTULOS */
+    /* ========================================================
+       TÍTULOS
+    ======================================================== */
 
     .panel-titulo-dashboard {
         padding: 15px 15px 0;
     }
 
 
-    /* TABLA */
+    /* ========================================================
+       TABLA
+    ======================================================== */
 
     .tabla-responsive {
         padding: 0 15px 15px;
     }
 
 
-    /* RESUMEN */
+    /* ========================================================
+       RESUMEN
+    ======================================================== */
 
     .resumen-rapido-lista {
         padding: 8px 15px 15px;
     }
 
 
-    /* CALENDARIO */
+    /* ========================================================
+       CALENDARIO
+    ======================================================== */
 
     .calendario-contenedor {
         padding: 10px;
@@ -2482,7 +2556,9 @@ canvas {
     }
 
 
-    /* MODAL */
+    /* ========================================================
+       MODAL
+    ======================================================== */
 
     .modal {
         padding: 10px;
@@ -2502,7 +2578,9 @@ canvas {
     }
 
 
-    /* FORMULARIO */
+    /* ========================================================
+       FORMULARIO
+    ======================================================== */
 
     .form-row {
         grid-template-columns: 1fr;
@@ -2517,7 +2595,9 @@ canvas {
     }
 
 
-    /* BOTONES */
+    /* ========================================================
+       BOTONES
+    ======================================================== */
 
     .modal-buttons,
     .form-buttons {
@@ -2531,7 +2611,9 @@ canvas {
     }
 
 
-    /* TABLAS */
+    /* ========================================================
+       TABLAS
+    ======================================================== */
 
     .tabla-contenedor,
     .table-container {
@@ -2543,7 +2625,9 @@ canvas {
     }
 
 
-    /* GRÁFICOS ANTIGUOS */
+    /* ========================================================
+       GRÁFICOS ANTIGUOS
+    ======================================================== */
 
     .grafico-card {
         min-height: 280px;
@@ -2585,7 +2669,9 @@ canvas {
     }
 
 
-    /* DASHBOARD */
+    /* ========================================================
+       DASHBOARD
+    ======================================================== */
 
     .dashboard-cards {
         grid-template-columns: 1fr;
@@ -2608,7 +2694,9 @@ canvas {
     }
 
 
-    /* PANELES */
+    /* ========================================================
+       PANELES
+    ======================================================== */
 
     .panel-titulo-dashboard h2 {
         font-size: 14px;
@@ -2619,7 +2707,9 @@ canvas {
     }
 
 
-    /* CUADRILLAS */
+    /* ========================================================
+       CUADRILLAS
+    ======================================================== */
 
     .dashboard-cuadrillas-resumen {
         gap: 10px;
@@ -2630,7 +2720,9 @@ canvas {
     }
 
 
-    /* CONTADORES */
+    /* ========================================================
+       CONTADORES
+    ======================================================== */
 
     .mantenimiento-contadores,
     .contadores-mantenimiento {
@@ -2638,7 +2730,9 @@ canvas {
     }
 
 
-    /* GRÁFICOS */
+    /* ========================================================
+       GRÁFICOS
+    ======================================================== */
 
     .graficos-dashboard {
         grid-template-columns: 1fr;
@@ -2659,7 +2753,9 @@ canvas {
     }
 
 
-    /* MODAL */
+    /* ========================================================
+       MODAL
+    ======================================================== */
 
     .modal {
         padding: 5px;
@@ -2675,11 +2771,12 @@ canvas {
     }
 
 
-    /* CALENDARIO */
+    /* ========================================================
+       CALENDARIO
+    ======================================================== */
 
     .fc .fc-toolbar-title {
         font-size: 16px;
     }
 }
-
-
+```
