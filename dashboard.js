@@ -120,19 +120,18 @@ function crearGraficoPie(
 ) {
 
     // Paleta de colores para las sedes
-   const coloresSedes = [
-        "#FF6647",
-        "#FF8A70",
-        "#FFAA95",
-        "#E94F32",
-        "#C93D25",
-        "#FFB9A8",
-        "#D94A2B",
-        "#FF7A5C",
-        "#B93620",
-        "#FF9B85"
-    ];
-
+ const coloresSedes = [
+    "#1FD19F",
+    "#20B2AA",
+    "#2EC4B6",
+    "#3CCF91",
+    "#52B788",
+    "#38A3A5",
+    "#48CAE4",
+    "#00B4D8",
+    "#4CC9F0",
+    "#80ED99"
+];
     // Si ya existe un gráfico en ese canvas,
     // se elimina antes de crear el nuevo
     const graficoExistente =
