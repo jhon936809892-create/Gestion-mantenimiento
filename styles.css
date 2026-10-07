@@ -2667,50 +2667,114 @@ canvas {
 
     font-size: 13px;
 }
+
+
 /* ============================================================
    TABLA DE MANTENIMIENTO
-   ORGANIZACIÓN DE COLUMNAS
+   ORGANIZACIÓN COMPACTA Y CENTRADA
 ============================================================ */
 
 #tablaMantenimiento {
-    width: 100%;
-    min-width: 700px;
+    width: 95%;
+    min-width: 0;
+    margin: 0 auto;
     table-layout: fixed;
+    border-collapse: collapse;
 }
 
-/* FECHA */
+/* TODAS LAS CELDAS */
+#tablaMantenimiento th,
+#tablaMantenimiento td {
+    padding: 11px 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* ============================================================
+   FECHA
+============================================================ */
+
 #tablaMantenimiento th:nth-child(1),
 #tablaMantenimiento td:nth-child(1) {
-    width: 120px;
+    width: 15%;
 }
 
-/* PROYECTO */
+/* ============================================================
+   PROYECTO
+============================================================ */
+
 #tablaMantenimiento th:nth-child(2),
 #tablaMantenimiento td:nth-child(2) {
-    width: 180px;
+    width: 25%;
 }
 
-/* SEDE */
+/* ============================================================
+   SEDE
+============================================================ */
+
 #tablaMantenimiento th:nth-child(3),
 #tablaMantenimiento td:nth-child(3) {
-    width: 120px;
+    width: 15%;
 }
 
-/* TRABAJO */
+/* ============================================================
+   TRABAJO
+============================================================ */
+
 #tablaMantenimiento th:nth-child(4),
 #tablaMantenimiento td:nth-child(4) {
-    width: 180px;
+    width: 25%;
 }
 
-/* ESTADO */
+/* ============================================================
+   ESTADO
+============================================================ */
+
 #tablaMantenimiento th:nth-child(5),
 #tablaMantenimiento td:nth-child(5) {
-    width: 120px;
+    width: 20%;
 }
 
-/* Evita que los textos desorganicen la tabla */
+/* ============================================================
+   TEXTO
+============================================================ */
+
 #tablaMantenimiento td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+/* Encabezados */
+#tablaMantenimiento th {
+    white-space: nowrap;
+}
+
+/* ============================================================
+   CONTENEDOR DE LA TABLA
+============================================================ */
+
+#tablaMantenimiento {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================================
+   CELULAR
+============================================================ */
+
+@media (max-width: 768px) {
+
+    #tablaMantenimiento {
+        width: 100%;
+        min-width: 650px;
+    }
+
+    #tablaMantenimiento th,
+    #tablaMantenimiento td {
+        padding: 9px 7px;
+        font-size: 13px;
+    }
+}
+
+
