@@ -2669,7 +2669,6 @@ canvas {
 }
 
 
-```css
 /* ============================================================
    TABLA DE MANTENIMIENTO
    COMPACTA Y ALINEADA
@@ -2794,4 +2793,57 @@ canvas {
         font-size: 13px;
     }
 }
-```
+/* ============================================================
+   TABLA ÚLTIMOS MANTENIMIENTOS - DASHBOARD
+   MÁS ESPACIO ENTRE COLUMNAS
+============================================================ */
+
+.tabla-dashboard {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tabla-dashboard th,
+.tabla-dashboard td {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+/* Ancho de cada columna */
+
+.tabla-dashboard th:nth-child(1),
+.tabla-dashboard td:nth-child(1) {
+    width: 12%;
+}
+
+.tabla-dashboard th:nth-child(2),
+.tabla-dashboard td:nth-child(2) {
+    width: 13%;
+}
+
+.tabla-dashboard th:nth-child(3),
+.tabla-dashboard td:nth-child(3) {
+    width: 20%;
+}
+
+.tabla-dashboard th:nth-child(4),
+.tabla-dashboard td:nth-child(4) {
+    width: 15%;
+}
+
+.tabla-dashboard th:nth-child(5),
+.tabla-dashboard td:nth-child(5) {
+    width: 20%;
+}
+
+.tabla-dashboard th:nth-child(6),
+.tabla-dashboard td:nth-child(6) {
+    width: 10%;
+}
+
+.tabla-dashboard th:nth-child(7),
+.tabla-dashboard td:nth-child(7) {
+    width: 10%;
+}
