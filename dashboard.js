@@ -334,99 +334,121 @@ function crearGraficoPie(
 // CARGAR SEDES EN LOS FILTROS DE LOS GRÁFICOS
 // ============================================================
 
-function cargarSedesEnFiltros(mantenimientos) {
+function cargarSedesEnFiltros(
+    mantenimientos,
+    datosPorTipo
+) {
 
-    const sedes = [
-        ...new Set(
-            mantenimientos
-                .map(function(mantenimiento) {
-                    return (
-                        mantenimiento.sede ||
-                        ""
-                    ).trim();
-                })
-                .filter(function(sede) {
-                    return sede !== "";
-                })
-        )
-    ];
+    const configuraciones = [
 
-    sedes.sort(function(a, b) {
-        return a.localeCompare(
-            b,
-            "es",
-            {
-                sensitivity: "base"
-            }
-        );
-    });
+        {
+            filtro: "filtroCertificaciones",
+            datos: datosPorTipo.certificaciones
+        },
 
+        {
+            filtro: "filtroAverias",
+            datos: datosPorTipo.averias
+        },
 
-    const filtros = [
-        "filtroCertificaciones",
-        "filtroAverias",
-        "filtroSplitter",
-        "filtroTrabajoCampo"
-    ];
+        {
+            filtro: "filtroSplitter",
+            datos: datosPorTipo.splitters
+        },
 
-
-    filtros.forEach(function(idFiltro) {
-
-        const select =
-            document.getElementById(
-                idFiltro
-            );
-
-
-        if (!select) {
-            return;
+        {
+            filtro: "filtroTrabajoCampo",
+            datos: datosPorTipo.trabajoCampo
         }
 
-
-        // Limpiar opciones anteriores
-        select.innerHTML = "";
+    ];
 
 
-        // Opción inicial
-        const opcionInicial =
-            document.createElement(
-                "option"
-            );
+    configuraciones.forEach(
+        function(configuracion) {
 
-        opcionInicial.value = "";
-
-        opcionInicial.textContent =
-            "Seleccionar sede";
-
-        select.appendChild(
-            opcionInicial
-        );
-
-
-        // Agregar sedes
-        sedes.forEach(
-            function(sede) {
-
-                const opcion =
-                    document.createElement(
-                        "option"
-                    );
-
-                opcion.value = sede;
-
-                opcion.textContent = sede;
-
-                select.appendChild(
-                    opcion
+            const select =
+                document.getElementById(
+                    configuracion.filtro
                 );
 
-            }
-        );
 
-    });
+            if (!select) {
+                return;
+            }
+
+
+            // Limpiar opciones anteriores
+            select.innerHTML = "";
+
+
+            // Opción inicial
+            const opcionInicial =
+                document.createElement(
+                    "option"
+                );
+
+            opcionInicial.value = "";
+
+            opcionInicial.textContent =
+                "Seleccionar sede";
+
+            select.appendChild(
+                opcionInicial
+            );
+
+
+            // ------------------------------------------------
+            // SOLO LAS SEDES QUE EXISTEN EN ESTE GRÁFICO
+            // ------------------------------------------------
+
+            const sedes =
+                Object.keys(
+                    configuracion.datos
+                );
+
+
+            sedes.sort(
+                function(a, b) {
+
+                    return a.localeCompare(
+                        b,
+                        "es",
+                        {
+                            sensitivity:
+                                "base"
+                        }
+                    );
+
+                }
+            );
+
+
+            sedes.forEach(
+                function(sede) {
+
+                    const opcion =
+                        document.createElement(
+                            "option"
+                        );
+
+                    opcion.value =
+                        sede;
+
+                    opcion.textContent =
+                        sede;
+
+                    select.appendChild(
+                        opcion
+                    );
+
+                }
+            );
+
+        }
+    );
 
 }
-
 // ============================================================
 // GRÁFICOS DEL DASHBOARD
 // ============================================================
@@ -453,14 +475,7 @@ async function cargarGraficosDashboard() {
         const mantenimientos =
             await respuesta.json();
 
-        // ====================================================
-// CARGAR SEDES EN LOS FILTROS
-// ====================================================
-
-        cargarSedesEnFiltros(
-    mantenimientos
-);
-
+   
         // ====================================================
         // DATOS
         // ====================================================
@@ -566,6 +581,123 @@ async function cargarGraficosDashboard() {
         );
 
 
+
+
+        function cargarSedesEnFiltros(
+    mantenimientos,
+    datosPorTipo
+) {
+
+    const configuraciones = [
+
+        {
+            filtro: "filtroCertificaciones",
+            datos: datosPorTipo.certificaciones
+        },
+
+        {
+            filtro: "filtroAverias",
+            datos: datosPorTipo.averias
+        },
+
+        {
+            filtro: "filtroSplitter",
+            datos: datosPorTipo.splitters
+        },
+
+        {
+            filtro: "filtroTrabajoCampo",
+            datos: datosPorTipo.trabajoCampo
+        }
+
+    ];
+
+
+    configuraciones.forEach(
+        function(configuracion) {
+
+            const select =
+                document.getElementById(
+                    configuracion.filtro
+                );
+
+
+            if (!select) {
+                return;
+            }
+
+
+            // Limpiar opciones anteriores
+            select.innerHTML = "";
+
+
+            // Opción inicial
+            const opcionInicial =
+                document.createElement(
+                    "option"
+                );
+
+            opcionInicial.value = "";
+
+            opcionInicial.textContent =
+                "Seleccionar sede";
+
+            select.appendChild(
+                opcionInicial
+            );
+
+
+            // ------------------------------------------------
+            // SOLO LAS SEDES QUE EXISTEN EN ESTE GRÁFICO
+            // ------------------------------------------------
+
+            const sedes =
+                Object.keys(
+                    configuracion.datos
+                );
+
+
+            sedes.sort(
+                function(a, b) {
+
+                    return a.localeCompare(
+                        b,
+                        "es",
+                        {
+                            sensitivity:
+                                "base"
+                        }
+                    );
+
+                }
+            );
+
+
+            sedes.forEach(
+                function(sede) {
+
+                    const opcion =
+                        document.createElement(
+                            "option"
+                        );
+
+                    opcion.value =
+                        sede;
+
+                    opcion.textContent =
+                        sede;
+
+                    select.appendChild(
+                        opcion
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
         // ====================================================
         // DESTRUIR GRÁFICOS ANTERIORES
         // ====================================================
