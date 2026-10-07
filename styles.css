@@ -1,4 +1,3 @@
-
 /* ============================================================
    SISTEMA DE GESTIÓN DE CUADRILLAS
    CSS COMPLETO
@@ -77,7 +76,6 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 10px 0;
@@ -106,7 +104,7 @@ body {
 
 
 /* ============================================================
-   TÍTULO SI EXISTE
+   TÍTULO SIDEBAR
 ============================================================ */
 
 .sidebar-header h2 {
@@ -174,8 +172,6 @@ body {
 
 /* ============================================================
    BOTÓN MENÚ MOBILE
-   OCULTO EN PC
-   SE MOSTRARÁ DENTRO DEL SIDEBAR EN CELULAR
 ============================================================ */
 
 #btnMenuMobile {
@@ -184,7 +180,6 @@ body {
     position: absolute;
 
     top: 10px;
-
     right: -42px;
 
     align-items: center;
@@ -402,15 +397,18 @@ button {
     margin-bottom: 25px;
 }
 
-
-/* ============================================================
-   TARJETA ESTADÍSTICA
-============================================================ */
-
-.dashboard-card,
-.stat-card,
-.tarjeta-dashboard {
+.dashboard-card {
     position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 125px;
+
+    padding: 20px;
 
     background: white;
 
@@ -418,31 +416,34 @@ button {
 
     border-radius: 12px;
 
-    padding: 20px;
-
-    min-height: 125px;
-
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.04);
+
+    overflow: hidden;
 
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 }
 
-.dashboard-card:hover,
-.stat-card:hover,
-.tarjeta-dashboard:hover {
+.dashboard-card:hover {
     transform: translateY(-2px);
 
     box-shadow:
         0 7px 18px rgba(0, 0, 0, 0.07);
 }
 
+.dashboard-card::after {
+    content: "";
 
-/* ============================================================
-   CONTENIDO TARJETA
-============================================================ */
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+}
 
 .dashboard-card-icon {
     width: 48px;
@@ -498,34 +499,7 @@ button {
 
 
 /* ============================================================
-   ESTILO GENERAL DE TARJETAS
-============================================================ */
-
-.dashboard-card {
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    overflow: hidden;
-}
-
-.dashboard-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 4px;
-}
-
-
-/* ============================================================
-   COLORES DE LAS NUEVAS TARJETAS
+   COLORES DE TARJETAS
 ============================================================ */
 
 .card-cuadrillas::after {
@@ -641,10 +615,11 @@ button {
 
 
 /* ============================================================
-   TARJETA DE CADA GRÁFICO
+   PANEL DE GRÁFICO
 ============================================================ */
 
-.graficos-dashboard .grafico-panel {
+.graficos-dashboard .grafico-panel,
+.grafico-panel {
     width: 100%;
 
     min-width: 0;
@@ -663,14 +638,26 @@ button {
         0 3px 10px rgba(0, 0, 0, 0.04);
 
     overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.grafico-panel:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.10);
 }
 
 
 /* ============================================================
-   TÍTULO DE CADA GRÁFICO
+   TÍTULO DE GRÁFICO
 ============================================================ */
 
-.graficos-dashboard .grafico-panel h2 {
+.graficos-dashboard .grafico-panel h2,
+.grafico-panel h2 {
     margin: 0 0 15px;
 
     color: #1f2937;
@@ -684,10 +671,83 @@ button {
 
 
 /* ============================================================
+   CONTROLES DE GRÁFICOS
+============================================================ */
+
+.controles-grafico {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin: 0 0 12px 0;
+}
+
+.controles-grafico select {
+    flex: 1;
+
+    width: 100%;
+
+    min-width: 0;
+
+    height: 42px;
+
+    margin: 0;
+
+    padding: 0 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.controles-grafico select:hover {
+    border-color: #9ca3af;
+}
+
+.controles-grafico select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.12);
+}
+
+.controles-grafico .filtro-grafico,
+.controles-grafico .tipo-grafico {
+    flex: 1;
+
+    width: 100%;
+
+    max-width: none;
+}
+
+
+/* ============================================================
    CONTENEDOR DEL GRÁFICO
 ============================================================ */
 
-.graficos-dashboard .grafico-ruleta {
+.graficos-dashboard .grafico-ruleta,
+.grafico-ruleta {
     position: relative;
 
     width: 100%;
@@ -695,14 +755,23 @@ button {
     height: 270px;
 
     min-width: 0;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.grafico-panel:hover .grafico-ruleta {
+    transform: scale(1.02);
 }
 
 
 /* ============================================================
-   CANVAS DE LOS GRÁFICOS
+   CANVAS
 ============================================================ */
 
-.graficos-dashboard .grafico-ruleta canvas {
+.graficos-dashboard .grafico-ruleta canvas,
+.grafico-ruleta canvas {
     display: block;
 
     width: 100% !important;
@@ -714,43 +783,42 @@ button {
 
 
 /* ============================================================
-   COMPATIBILIDAD CON .GRAFICO-PANEL
+   CANTIDAD / INFORMACIÓN DEL GRÁFICO
 ============================================================ */
 
-.grafico-panel {
-    padding: 20px;
+.cantidad-grafico {
+    min-height: 24px;
 
-    overflow: hidden;
+    margin: 5px auto 10px auto;
+
+    text-align: center;
+
+    color: #4b5563;
+
+    font-size: 14px;
 }
 
-.grafico-panel h2 {
-    margin: 0 0 15px;
+.cantidad-grafico strong {
+    color: #111827;
 
-    color: #1f2937;
-
-    font-size: 16px;
-}
-
-.grafico-ruleta {
-    position: relative;
-
-    width: 100%;
-
-    height: 270px;
-}
-
-.grafico-ruleta canvas {
-    width: 100% !important;
-
-    height: 100% !important;
-
-    max-width: 100%;
+    font-size: 18px;
 }
 
 
 /* ============================================================
-   CONTENEDOR GENERAL DE DASHBOARD
+   PANELES GENERALES
 ============================================================ */
+
+.panel {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
 
 .dashboard-panel,
 .dashboard-contenedor,
@@ -767,6 +835,466 @@ button {
 
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ============================================================
+   GRID DE TRES PANELES
+============================================================ */
+
+.dashboard-grid-tres {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ============================================================
+   TÍTULOS DE PANELES
+============================================================ */
+
+.panel-titulo-dashboard {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 18px 20px 0;
+}
+
+.panel-titulo-dashboard h2 {
+    margin: 0;
+
+    color: #1f2937;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+.panel-titulo-dashboard p {
+    margin: 5px 0 0;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+.panel-icono {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f4f6;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+}
+
+
+/* ============================================================
+   GRÁFICOS GRANDES
+============================================================ */
+
+.grafico-dashboard-grande {
+    position: relative;
+
+    width: 100%;
+
+    height: 230px;
+
+    padding: 15px 20px;
+}
+
+.grafico-dashboard-grande canvas {
+    width: 100% !important;
+
+    height: 100% !important;
+
+    max-width: 100%;
+}
+
+
+/* ============================================================
+   LISTA DE ESTADOS
+============================================================ */
+
+.estado-lista {
+    padding: 5px 20px 18px;
+}
+
+.estado-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 35px;
+
+    border-bottom:
+        1px solid #f1f5f9;
+
+    color: #4b5563;
+
+    font-size: 13px;
+}
+
+.estado-item:last-child {
+    border-bottom: none;
+}
+
+.estado-item strong {
+    margin-left: auto;
+
+    color: #111827;
+
+    font-size: 13px;
+}
+
+.estado-punto {
+    width: 9px;
+    height: 9px;
+
+    min-width: 9px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.estado-pendiente {
+    background: #f59e0b;
+}
+
+.estado-proceso {
+    background: #3b82f6;
+}
+
+.estado-terminado {
+    background: #22c55e;
+
+
+/* ============================================================
+   ESTADOS DE PROYECTOS
+============================================================ */
+
+.estado-proyecto-activo {
+    background: #3b82f6;
+}
+
+.estado-proyecto-pendiente {
+    background: #f59e0b;
+}
+
+.estado-proyecto-terminado {
+    background: #22c55e;
+}
+
+
+/* ============================================================
+   RESUMEN DE CUADRILLAS
+============================================================ */
+
+.resumen-cuadrillas-panel {
+    margin-bottom: 20px;
+
+    padding-bottom: 20px;
+}
+
+.dashboard-cuadrillas-resumen {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    padding: 20px;
+}
+
+.cuadrilla-resumen-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 15px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    transition: 0.2s;
+}
+
+.cuadrilla-resumen-card:hover {
+    background: #f1f5f9;
+
+    transform: translateY(-1px);
+}
+
+.cuadrilla-resumen-icono {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 9px;
+
+    font-size: 18px;
+}
+
+.cuadrilla-resumen-card strong {
+    display: block;
+
+    color: #1f2937;
+
+    font-size: 14px;
+}
+
+.cuadrilla-resumen-card span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   GRID INFERIOR
+============================================================ */
+
+.dashboard-grid-inferior {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(280px, 1fr);
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+
+/* ============================================================
+   ÚLTIMOS MANTENIMIENTOS
+============================================================ */
+
+.ultimos-mantenimientos {
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+.tabla-responsive {
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding: 0 20px 20px;
+}
+
+.tabla-dashboard {
+    width: 100%;
+
+    min-width: 750px;
+
+    border-collapse: collapse;
+}
+
+.tabla-dashboard th {
+    padding: 12px 10px;
+
+    background: #f8fafc;
+
+    color: #6b7280;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+.tabla-dashboard td {
+    padding: 12px 10px;
+
+    color: #4b5563;
+
+    border-bottom:
+        1px solid #f1f5f9;
+
+    font-size: 12px;
+}
+
+.tabla-dashboard tbody tr:hover {
+    background: #f8fafc;
+}
+
+.tabla-dashboard tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ============================================================
+   BOTÓN VER TODOS
+============================================================ */
+
+.btn-ver-todos {
+    border: none;
+
+    background: transparent;
+
+    color: #2563eb;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    padding: 6px 0;
+}
+
+.btn-ver-todos:hover {
+    color: #1d4ed8;
+
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   RESUMEN RÁPIDO
+============================================================ */
+
+.resumen-rapido {
+    overflow: hidden;
+}
+
+.resumen-rapido-lista {
+    padding: 10px 20px 20px;
+}
+
+.resumen-rapido-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #f1f5f9;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.resumen-rapido-item:last-child {
+    border-bottom: none;
+}
+
+.resumen-rapido-item:hover {
+    transform: translateX(3px);
+}
+
+.resumen-rapido-icono {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+}
+
+.resumen-rapido-item > div:nth-child(2) {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.resumen-rapido-item strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 12px;
+}
+
+.resumen-rapido-item span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+.resumen-rapido-item b {
+    color: #9ca3af;
+
+    font-size: 18px;
+}
+
+.resumen-personal .resumen-rapido-icono {
+    background: #eff6ff;
+}
+
+.resumen-proyectos .resumen-rapido-icono {
+    background: #ecfdf5;
+}
+
+.resumen-mantenimiento .resumen-rapido-icono {
+    background: #fff7ed;
+}
+
+.resumen-materiales .resumen-rapido-icono {
+    background: #ecfeff;
 }
 
 
@@ -847,7 +1375,6 @@ tbody tr:last-child td {
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 5px 10px;
@@ -857,24 +1384,6 @@ tbody tr:last-child td {
     font-size: 12px;
 
     font-weight: 600;
-}
-
-.estado-pendiente {
-    background: #fef3c7;
-
-    color: #92400e;
-}
-
-.estado-proceso {
-    background: #dbeafe;
-
-    color: #1e40af;
-}
-
-.estado-terminado {
-    background: #dcfce7;
-
-    color: #166534;
 }
 
 
@@ -997,7 +1506,6 @@ tbody tr:last-child td {
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
@@ -1201,7 +1709,6 @@ textarea::placeholder {
         translateY(-50%);
 
     width: 35px;
-
     height: 35px;
 
     border: none;
@@ -1231,7 +1738,6 @@ textarea::placeholder {
     position: absolute;
 
     left: 0;
-
     right: 0;
 
     top:
@@ -1371,754 +1877,6 @@ canvas {
 
 
 /* ============================================================
-   DISEÑO COMPLETO DEL DASHBOARD
-============================================================ */
-
-
-/* ============================================================
-   ENCABEZADO
-============================================================ */
-
-.dashboard-encabezado {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-bottom: 25px;
-}
-
-.dashboard-encabezado h1 {
-    margin: 0;
-
-    font-size: 28px;
-
-    font-weight: 700;
-
-    color: #1f2937;
-}
-
-.dashboard-encabezado p {
-    margin: 7px 0 0;
-
-    color: #6b7280;
-
-    font-size: 14px;
-}
-
-.dashboard-fecha {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    background: white;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 10px;
-
-    padding: 12px 16px;
-
-    box-shadow:
-        0 2px 7px rgba(0, 0, 0, 0.04);
-}
-
-.dashboard-fecha > span {
-    width: 40px;
-
-    height: 40px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #eff6ff;
-
-    border-radius: 8px;
-
-    font-size: 20px;
-}
-
-.dashboard-fecha strong {
-    display: block;
-
-    color: #1f2937;
-
-    font-size: 14px;
-}
-
-.dashboard-fecha small {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #6b7280;
-
-    font-size: 12px;
-}
-
-
-/* ============================================================
-   TARJETAS PRINCIPALES DEL DASHBOARD
-============================================================ */
-
-.dashboard-cards {
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr));
-
-    gap: 16px;
-
-    margin-bottom: 22px;
-}
-
-.dashboard-card {
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    min-height: 125px;
-
-    padding: 18px;
-
-    background: white;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.04);
-
-    overflow: hidden;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.dashboard-card:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 18px rgba(0, 0, 0, 0.08);
-}
-
-.dashboard-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    top: 0;
-
-    bottom: 0;
-
-    width: 4px;
-}
-
-.dashboard-card-icon {
-    width: 48px;
-
-    height: 48px;
-
-    min-width: 48px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 10px;
-
-    font-size: 22px;
-}
-
-.dashboard-card-contenido {
-    min-width: 0;
-}
-
-.dashboard-card-contenido span {
-    display: block;
-
-    color: #6b7280;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    line-height: 1.3;
-}
-
-.dashboard-card-contenido strong {
-    display: block;
-
-    margin: 5px 0;
-
-    color: #111827;
-
-    font-size: 28px;
-
-    line-height: 1;
-}
-
-.dashboard-card-contenido small {
-    display: block;
-
-    color: #9ca3af;
-
-    font-size: 11px;
-}
-
-
-/* ============================================================
-   COLORES NUEVAS TARJETAS
-============================================================ */
-
-.card-cuadrillas::after {
-    background: #7c3aed;
-}
-
-.card-cuadrillas .dashboard-card-icon {
-    background: #f5f3ff;
-}
-
-.card-proyectos::after {
-    background: #059669;
-}
-
-.card-proyectos .dashboard-card-icon {
-    background: #ecfdf5;
-}
-
-.card-mantenimientos-acabados::after {
-    background: #16a34a;
-}
-
-.card-mantenimientos-acabados .dashboard-card-icon {
-    background: #dcfce7;
-}
-
-.card-mantenimientos-pendientes::after {
-    background: #f59e0b;
-}
-
-.card-mantenimientos-pendientes .dashboard-card-icon {
-    background: #fef3c7;
-}
-
-.card-mantenimientos-proceso::after {
-    background: #2563eb;
-}
-
-.card-mantenimientos-proceso .dashboard-card-icon {
-    background: #dbeafe;
-}
-
-
-/* ============================================================
-   PANELES GENERALES
-============================================================ */
-
-.panel {
-    background: white;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.dashboard-panel {
-    background: white;
-}
-
-
-/* ============================================================
-   GRID DE TRES PANELES
-============================================================ */
-
-.dashboard-grid-tres {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 18px;
-
-    margin-bottom: 20px;
-}
-
-
-/* ============================================================
-   TÍTULOS
-============================================================ */
-
-.panel-titulo-dashboard {
-    display: flex;
-
-    align-items: flex-start;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    padding: 18px 20px 0;
-}
-
-.panel-titulo-dashboard h2 {
-    margin: 0;
-
-    color: #1f2937;
-
-    font-size: 16px;
-
-    font-weight: 700;
-}
-
-.panel-titulo-dashboard p {
-    margin: 5px 0 0;
-
-    color: #9ca3af;
-
-    font-size: 12px;
-}
-
-.panel-icono {
-    width: 38px;
-
-    height: 38px;
-
-    min-width: 38px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #f3f4f6;
-
-    border-radius: 8px;
-
-    font-size: 18px;
-}
-
-
-/* ============================================================
-   GRÁFICOS GRANDES
-============================================================ */
-
-.grafico-dashboard-grande {
-    position: relative;
-
-    width: 100%;
-
-    height: 230px;
-
-    padding: 15px 20px;
-}
-
-.grafico-dashboard-grande canvas {
-    width: 100% !important;
-
-    height: 100% !important;
-
-    max-width: 100%;
-}
-
-
-/* ============================================================
-   LISTA DE ESTADOS
-============================================================ */
-
-.estado-lista {
-    padding: 5px 20px 18px;
-}
-
-.estado-item {
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    min-height: 35px;
-
-    border-bottom:
-        1px solid #f1f5f9;
-
-    color: #4b5563;
-
-    font-size: 13px;
-}
-
-.estado-item:last-child {
-    border-bottom: none;
-}
-
-.estado-item strong {
-    margin-left: auto;
-
-    color: #111827;
-
-    font-size: 13px;
-}
-
-.estado-punto {
-    width: 9px;
-
-    height: 9px;
-
-    min-width: 9px;
-
-    border-radius: 50%;
-
-    display: inline-block;
-}
-
-.estado-pendiente {
-    background: #f59e0b;
-}
-
-.estado-proceso {
-    background: #3b82f6;
-}
-
-.estado-terminado {
-    background: #22c55e;
-}
-
-
-/* ============================================================
-   ESTADOS DE PROYECTOS
-============================================================ */
-
-.estado-proyecto-activo {
-    background: #3b82f6;
-}
-
-.estado-proyecto-pendiente {
-    background: #f59e0b;
-}
-
-.estado-proyecto-terminado {
-    background: #22c55e;
-}
-
-
-/* ============================================================
-   RESUMEN DE CUADRILLAS
-============================================================ */
-
-.resumen-cuadrillas-panel {
-    margin-bottom: 20px;
-
-    padding-bottom: 20px;
-}
-
-.dashboard-cuadrillas-resumen {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 15px;
-
-    padding: 20px;
-}
-
-.cuadrilla-resumen-card {
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    padding: 15px;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 10px;
-
-    background: #f8fafc;
-
-    transition: 0.2s;
-}
-
-.cuadrilla-resumen-card:hover {
-    background: #f1f5f9;
-
-    transform: translateY(-1px);
-}
-
-.cuadrilla-resumen-icono {
-    width: 42px;
-
-    height: 42px;
-
-    min-width: 42px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #eff6ff;
-
-    border-radius: 9px;
-
-    font-size: 18px;
-}
-
-.cuadrilla-resumen-card strong {
-    display: block;
-
-    color: #1f2937;
-
-    font-size: 14px;
-}
-
-.cuadrilla-resumen-card span {
-    display: block;
-
-    margin-top: 4px;
-
-    color: #6b7280;
-
-    font-size: 12px;
-}
-
-
-/* ============================================================
-   GRID INFERIOR
-============================================================ */
-
-.dashboard-grid-inferior {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 2fr)
-        minmax(280px, 1fr);
-
-    gap: 20px;
-
-    margin-top: 20px;
-}
-
-
-/* ============================================================
-   ÚLTIMOS MANTENIMIENTOS
-============================================================ */
-
-.ultimos-mantenimientos {
-    min-width: 0;
-
-    overflow: hidden;
-}
-
-.tabla-responsive {
-    width: 100%;
-
-    overflow-x: auto;
-
-    padding: 0 20px 20px;
-}
-
-.tabla-dashboard {
-    width: 100%;
-
-    min-width: 750px;
-
-    border-collapse: collapse;
-}
-
-.tabla-dashboard th {
-    padding: 12px 10px;
-
-    background: #f8fafc;
-
-    color: #6b7280;
-
-    border-bottom:
-        1px solid #e5e7eb;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    text-align: left;
-
-    white-space: nowrap;
-}
-
-.tabla-dashboard td {
-    padding: 12px 10px;
-
-    color: #4b5563;
-
-    border-bottom:
-        1px solid #f1f5f9;
-
-    font-size: 12px;
-}
-
-.tabla-dashboard tbody tr:hover {
-    background: #f8fafc;
-}
-
-.tabla-dashboard tbody tr:last-child td {
-    border-bottom: none;
-}
-
-
-/* ============================================================
-   BOTÓN VER TODOS
-============================================================ */
-
-.btn-ver-todos {
-    border: none;
-
-    background: transparent;
-
-    color: #2563eb;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    padding: 6px 0;
-}
-
-.btn-ver-todos:hover {
-    color: #1d4ed8;
-
-    text-decoration: underline;
-}
-
-
-/* ============================================================
-   RESUMEN RÁPIDO
-============================================================ */
-
-.resumen-rapido {
-    overflow: hidden;
-}
-
-.resumen-rapido-lista {
-    padding: 10px 20px 20px;
-}
-
-.resumen-rapido-item {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 13px 0;
-
-    border-bottom:
-        1px solid #f1f5f9;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.resumen-rapido-item:last-child {
-    border-bottom: none;
-}
-
-.resumen-rapido-item:hover {
-    transform: translateX(3px);
-}
-
-.resumen-rapido-icono {
-    width: 38px;
-
-    height: 38px;
-
-    min-width: 38px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 8px;
-
-    font-size: 17px;
-}
-
-.resumen-rapido-item > div:nth-child(2) {
-    min-width: 0;
-
-    flex: 1;
-}
-
-.resumen-rapido-item strong {
-    display: block;
-
-    color: #374151;
-
-    font-size: 12px;
-}
-
-.resumen-rapido-item span {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #9ca3af;
-
-    font-size: 11px;
-}
-
-.resumen-rapido-item b {
-    color: #9ca3af;
-
-    font-size: 18px;
-}
-
-.resumen-personal .resumen-rapido-icono {
-    background: #eff6ff;
-}
-
-.resumen-proyectos .resumen-rapido-icono {
-    background: #ecfdf5;
-}
-
-.resumen-mantenimiento .resumen-rapido-icono {
-    background: #fff7ed;
-}
-
-.resumen-materiales .resumen-rapido-icono {
-    background: #ecfeff;
-}
-
-
-/* ============================================================
    RESPONSIVE TABLET
 ============================================================ */
 
@@ -2182,6 +1940,10 @@ canvas {
 }
 
 
+/* ============================================================
+   RESPONSIVE 900PX
+============================================================ */
+
 @media (max-width: 900px) {
 
     .dashboard-cards {
@@ -2214,12 +1976,7 @@ canvas {
 
 @media (max-width: 768px) {
 
-    /* ========================================================
-       SIDEBAR MOBILE
-
-       SE DEJA VISIBLE UNA PESTAÑA DE 42PX
-       PARA QUE EL BOTÓN ☰ SIEMPRE SEA ACCESIBLE
-    ======================================================== */
+    /* SIDEBAR */
 
     .sidebar {
         width: 250px;
@@ -2243,9 +2000,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       BOTÓN ☰ DENTRO DEL SIDEBAR
-    ======================================================== */
+    /* BOTÓN MOBILE */
 
     #btnMenuMobile {
         display: flex;
@@ -2253,15 +2008,12 @@ canvas {
         position: absolute;
 
         top: 10px;
-
         right: -42px;
 
         width: 42px;
-
         height: 42px;
 
         margin: 0;
-
         padding: 0;
 
         border-radius:
@@ -2280,9 +2032,6 @@ canvas {
         background: #374151;
     }
 
-
-    /* CUANDO EL MENÚ ESTÁ ABIERTO */
-
     .sidebar.mobile-open #btnMenuMobile {
         right: 10px;
 
@@ -2294,9 +2043,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       MAIN
-    ======================================================== */
+    /* MAIN */
 
     .main {
         margin-left: 0;
@@ -2305,9 +2052,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       TOPBAR
-    ======================================================== */
+    /* TOPBAR */
 
     .topbar {
         min-height: 65px;
@@ -2334,18 +2079,14 @@ canvas {
     }
 
 
-    /* ========================================================
-       SECCIÓN
-    ======================================================== */
+    /* SECCIÓN */
 
     .seccion {
         padding: 15px;
     }
 
 
-    /* ========================================================
-       ENCABEZADO DASHBOARD
-    ======================================================== */
+    /* ENCABEZADO */
 
     .dashboard-encabezado {
         flex-direction: column;
@@ -2364,9 +2105,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       TARJETAS
-    ======================================================== */
+    /* TARJETAS */
 
     .dashboard-cards {
         grid-template-columns:
@@ -2385,7 +2124,6 @@ canvas {
 
     .dashboard-card-icon {
         width: 40px;
-
         height: 40px;
 
         min-width: 40px;
@@ -2406,9 +2144,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       CONTADORES
-    ======================================================== */
+    /* CONTADORES */
 
     .mantenimiento-contadores,
     .contadores-mantenimiento {
@@ -2431,9 +2167,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       GRID DASHBOARD
-    ======================================================== */
+    /* GRID DASHBOARD */
 
     .dashboard-grid-tres {
         gap: 12px;
@@ -2446,9 +2180,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       GRÁFICOS EN CELULAR
-    ======================================================== */
+    /* GRÁFICOS */
 
     .graficos-dashboard {
         grid-template-columns: 1fr;
@@ -2460,6 +2192,22 @@ canvas {
         padding: 15px;
     }
 
+    .controles-grafico {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 8px;
+    }
+
+    .controles-grafico select {
+        width: 100%;
+
+        max-width: none;
+
+        flex: none;
+    }
+
     .graficos-dashboard .grafico-ruleta {
         height: 250px;
     }
@@ -2469,9 +2217,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       COMPATIBILIDAD
-    ======================================================== */
+    /* COMPATIBILIDAD */
 
     .grafico-dashboard-grande {
         height: 220px;
@@ -2479,45 +2225,29 @@ canvas {
         padding: 10px 15px;
     }
 
-    .grafico-ruleta {
-        height: 230px;
-    }
 
-    .grafico-panel {
-        padding: 15px;
-    }
-
-
-    /* ========================================================
-       TÍTULOS
-    ======================================================== */
+    /* TÍTULOS */
 
     .panel-titulo-dashboard {
         padding: 15px 15px 0;
     }
 
 
-    /* ========================================================
-       TABLA
-    ======================================================== */
+    /* TABLA */
 
     .tabla-responsive {
         padding: 0 15px 15px;
     }
 
 
-    /* ========================================================
-       RESUMEN
-    ======================================================== */
+    /* RESUMEN */
 
     .resumen-rapido-lista {
         padding: 8px 15px 15px;
     }
 
 
-    /* ========================================================
-       CALENDARIO
-    ======================================================== */
+    /* CALENDARIO */
 
     .calendario-contenedor {
         padding: 10px;
@@ -2556,9 +2286,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       MODAL
-    ======================================================== */
+    /* MODAL */
 
     .modal {
         padding: 10px;
@@ -2578,9 +2306,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       FORMULARIO
-    ======================================================== */
+    /* FORMULARIO */
 
     .form-row {
         grid-template-columns: 1fr;
@@ -2595,9 +2321,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       BOTONES
-    ======================================================== */
+    /* BOTONES */
 
     .modal-buttons,
     .form-buttons {
@@ -2611,9 +2335,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       TABLAS
-    ======================================================== */
+    /* TABLAS */
 
     .tabla-contenedor,
     .table-container {
@@ -2625,9 +2347,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       GRÁFICOS ANTIGUOS
-    ======================================================== */
+    /* GRÁFICOS ANTIGUOS */
 
     .grafico-card {
         min-height: 280px;
@@ -2669,9 +2389,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       DASHBOARD
-    ======================================================== */
+    /* DASHBOARD */
 
     .dashboard-cards {
         grid-template-columns: 1fr;
@@ -2694,9 +2412,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       PANELES
-    ======================================================== */
+    /* PANELES */
 
     .panel-titulo-dashboard h2 {
         font-size: 14px;
@@ -2707,9 +2423,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       CUADRILLAS
-    ======================================================== */
+    /* CUADRILLAS */
 
     .dashboard-cuadrillas-resumen {
         gap: 10px;
@@ -2720,9 +2434,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       CONTADORES
-    ======================================================== */
+    /* CONTADORES */
 
     .mantenimiento-contadores,
     .contadores-mantenimiento {
@@ -2730,9 +2442,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       GRÁFICOS
-    ======================================================== */
+    /* GRÁFICOS */
 
     .graficos-dashboard {
         grid-template-columns: 1fr;
@@ -2753,9 +2463,7 @@ canvas {
     }
 
 
-    /* ========================================================
-       MODAL
-    ======================================================== */
+    /* MODAL */
 
     .modal {
         padding: 5px;
@@ -2771,116 +2479,63 @@ canvas {
     }
 
 
-    /* ========================================================
-       CALENDARIO
-    ======================================================== */
+    /* CALENDARIO */
 
     .fc .fc-toolbar-title {
         font-size: 16px;
     }
 }
-/* ========================================
-   TRANSICIÓN DE LOS GRÁFICOS DEL DASHBOARD
-   ======================================== */
 
-.grafico-panel {
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+
+/* ============================================================
+   ESTILOS DE ESTADOS
+============================================================ */
+
+.estado-pendiente {
+    background: #fef3c7;
+
+    color: #92400e;
 }
 
-.grafico-panel:hover {
-    transform: translateY(-4px);
+.estado-proceso {
+    background: #dbeafe;
 
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.10);
+    color: #1e40af;
 }
 
-.grafico-ruleta {
-    transition:
-        transform 0.3s ease,
-        opacity 0.3s ease;
-}
+.estado-terminado {
+    background: #dcfce7;
 
-.grafico-panel:hover .grafico-ruleta {
-    transform: scale(1.02);
+    color: #166534;
 }
 
 
+/* ============================================================
+   CALENDARIO
+============================================================ */
 
+.calendario-panel {
+    padding: 20px;
 
-
-
-
-
-
-/* ========================================
-   FILTROS DE LOS GRÁFICOS
-   ======================================== */
-
-.filtro-grafico {
-    width: 100%;
-    max-width: 280px;
-    margin: 5px auto 10px auto;
-
-    padding: 9px 12px;
-
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-
-    background: #ffffff;
-    color: #111827;
-
-    font-size: 14px;
-
-    cursor: pointer;
-
-    outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    margin-top: 20px;
 }
 
-.filtro-grafico:focus {
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.12);
+.calendario-header {
+    margin-bottom: 15px;
 }
 
+.calendario-header h2 {
+    margin: 0;
 
-/* ========================================
-   CANTIDAD SELECCIONADA
-   ======================================== */
-
-.cantidad-grafico {
-    text-align: center;
-
-    margin: 5px auto 12px auto;
-
-    font-size: 14px;
-
-    color: #4b5563;
-
-    min-height: 20px;
-}
-
-.cantidad-grafico strong {
-    color: #111827;
+    color: #1f2937;
 
     font-size: 18px;
 }
 
+.calendario-header p {
+    margin: 5px 0 0;
 
-/* ========================================
-   MÓVIL
-   ======================================== */
+    color: #6b7280;
 
-@media (max-width: 768px) {
-
-    .filtro-grafico {
-        max-width: 100%;
-    }
-
+    font-size: 13px;
 }
