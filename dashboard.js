@@ -108,289 +108,109 @@ const COLORES_GRAFICOS = [
 // CREAR GRÁFICO DE TIPO PIE / RULETA
 // ============================================================
 
+// ============================================================
+// CREAR GRÁFICO DE RULETA / PIE
+// CADA SEDE TIENE UN COLOR DIFERENTE
+// ============================================================
+
 function crearGraficoPie(
     canvas,
     etiquetas,
     valores
 ) {
 
-    if (
-        !canvas ||
-        typeof Chart === "undefined"
-    ) {
+    // Paleta de colores para las sedes
+    const coloresSedes = [
+        "#2563eb", // Azul
+        "#16a34a", // Verde
+        "#f59e0b", // Amarillo
+        "#dc2626", // Rojo
+        "#9333ea", // Morado
+        "#0891b2", // Celeste
+        "#ea580c", // Naranja
+        "#db2777", // Rosado
+        "#65a30d", // Verde lima
+        "#475569"  // Gris
+    ];
 
-        console.error(
-            "No se puede crear el gráfico: canvas o Chart no disponible."
-        );
+    // Si ya existe un gráfico en ese canvas,
+    // se elimina antes de crear el nuevo
+    const graficoExistente =
+        Chart.getChart(canvas);
 
-        return null;
-
+    if (graficoExistente) {
+        graficoExistente.destroy();
     }
 
+    return new Chart(
+        canvas,
+        {
+            type: "pie",
 
-    const grafico =
-        new Chart(
-            canvas,
-            {
+            data: {
+                labels: etiquetas,
 
-                // ====================================================
-                // TIPO
-                // ====================================================
+                datasets: [
+                    {
+                        label: "Registros",
 
-                type: "pie",
+                        data: valores,
 
-
-                // ====================================================
-                // DATOS
-                // ====================================================
-
-                data: {
-
-                    labels:
-                        etiquetas,
-
-                    datasets: [
-
-                        {
-
-                            data:
-                                valores,
-
-                            backgroundColor:
-                                COLORES_GRAFICOS.slice(
-                                    0,
-                                    Math.max(
-                                        etiquetas.length,
-                                        1
-                                    )
-                                ),
-
-                            borderColor:
-                                etiquetas.map(
-                                    function() {
-
-                                        return "#FFFFFF";
-
-                                    }
-                                ),
-
-                            hoverOffset:
-                                18,
-
-                            borderWidth:
-                                2
-
-                        }
-
-                    ]
-
-                },
-
-
-                // ====================================================
-                // OPCIONES
-                // ====================================================
-
-                options: {
-
-                    responsive: true,
-
-                    maintainAspectRatio: false,
-
-
-                    // ==================================================
-                    // ANIMACIÓN
-                    // ==================================================
-
-                    animation: {
-
-                        duration: 1500,
-
-                        easing:
-                            "easeInOutQuart",
-
-                        animateRotate:
-                            true,
-
-                        animateScale:
-                            true
-
-                    },
-
-
-                    // ==================================================
-                    // INTERACCIÓN
-                    // ==================================================
-
-                    interaction: {
-
-                        mode: "nearest",
-
-                        intersect: true
-
-                    },
-
-
-                    // ==================================================
-                    // PLUGINS
-                    // ==================================================
-
-                    plugins: {
-
-                        // ==============================================
-                        // LEYENDA
-                        // ==============================================
-
-                        legend: {
-
-                            position:
-                                "bottom",
-
-                            onClick:
+                        backgroundColor:
+                            etiquetas.map(
                                 function(
-                                    evento,
-                                    legendItem,
-                                    legend
+                                    sede,
+                                    indice
                                 ) {
-
-                                    const chart =
-                                        legend.chart;
-
-                                    const indice =
-                                        legendItem.index;
-
-                                    const elementosActivos =
-                                        chart.getActiveElements();
-
-                                    const yaSeleccionado =
-                                        elementosActivos.length > 0 &&
-                                        elementosActivos[0].index === indice;
-
-
-                                    // ==================================
-                                    // QUITAR RESALTADO
-                                    // ==================================
-
-                                    if (
-                                        yaSeleccionado
-                                    ) {
-
-                                        chart.setActiveElements(
-                                            []
-                                        );
-
-                                        if (
-                                            chart.tooltip
-                                        ) {
-
-                                            chart.tooltip.setActiveElements(
-                                                [],
-                                                {
-                                                    x: 0,
-                                                    y: 0
-                                                }
-                                            );
-
-                                        }
-
-                                        chart.update();
-
-                                        return;
-
-                                    }
-
-
-                                    // ==================================
-                                    // SELECCIONAR SEDE
-                                    // ==================================
-
-                                    chart.setActiveElements(
-                                        [
-                                            {
-                                                datasetIndex:
-                                                    0,
-
-                                                index:
-                                                    indice
-                                            }
-                                        ]
-                                    );
-
-
-                                    // ==================================
-                                    // MOSTRAR TOOLTIP
-                                    // ==================================
-
-                                    if (
-                                        chart.tooltip
-                                    ) {
-
-                                        const meta =
-                                            chart.getDatasetMeta(
-                                                0
-                                            );
-
-                                        const elemento =
-                                            meta.data[
-                                                indice
-                                            ];
-
-                                        if (
-                                            elemento
-                                        ) {
-
-                                            chart.tooltip.setActiveElements(
-                                                [
-                                                    {
-                                                        datasetIndex:
-                                                            0,
-
-                                                        index:
-                                                            indice
-                                                    }
-                                                ],
-                                                {
-                                                    x:
-                                                        elemento.x,
-
-                                                    y:
-                                                        elemento.y
-                                                }
-                                            );
-
-                                        }
-
-                                    }
-
-
-                                    chart.update();
-
+                                    return coloresSedes[
+                                        indice %
+                                        coloresSedes.length
+                                    ];
                                 }
+                            ),
 
-                        },
+                        borderColor: "#ffffff",
 
-
-                        // ==============================================
-                        // TOOLTIP
-                        // ==============================================
-
-                        tooltip: {
-
-                            enabled:
-                                true
-
-                        }
-
+                        borderWidth: 2
                     }
+                ]
+            },
 
+            options: {
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    },
+
+                    tooltip: {
+                        callbacks: {
+                            label: function(
+                                contexto
+                            ) {
+
+                                const sede =
+                                    contexto.label;
+
+                                const cantidad =
+                                    contexto.raw;
+
+                                return (
+                                    " " +
+                                    sede +
+                                    ": " +
+                                    cantidad
+                                );
+                            }
+                        }
+                    }
                 }
-
             }
-        );
-
-
-    return grafico;
-
+        }
+    );
 }
 
 
