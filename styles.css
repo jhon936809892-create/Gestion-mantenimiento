@@ -1,3 +1,4 @@
+
 /* ============================================================
    SISTEMA DE GESTIÓN DE CUADRILLAS
    CSS COMPLETO
@@ -45,7 +46,6 @@ body {
 
 .sidebar {
     position: fixed;
-
     left: 0;
     top: 0;
     bottom: 0;
@@ -54,7 +54,6 @@ body {
     min-width: 240px;
 
     background: #1f2937;
-
     color: white;
 
     z-index: 1000;
@@ -74,7 +73,6 @@ body {
     width: 100%;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -92,7 +90,6 @@ body {
     display: block;
 
     width: 100%;
-
     max-width: 240px;
 
     height: auto;
@@ -111,7 +108,6 @@ body {
     margin: 0;
 
     font-size: 18px;
-
     font-weight: 700;
 
     color: white;
@@ -202,7 +198,6 @@ body {
     cursor: pointer;
 
     font-size: 24px;
-
     line-height: 1;
 
     z-index: 1100;
@@ -675,11 +670,15 @@ button {
 ============================================================ */
 
 .controles-grafico {
-    display: flex;
+    display: grid;
 
-    align-items: center;
+    grid-template-columns:
+        minmax(150px, 1fr)
+        minmax(150px, 1fr)
+        minmax(120px, 0.8fr)
+        minmax(120px, 0.8fr);
 
-    justify-content: center;
+    align-items: end;
 
     gap: 10px;
 
@@ -688,9 +687,12 @@ button {
     margin: 0 0 12px 0;
 }
 
-.controles-grafico select {
-    flex: 1;
 
+/* ============================================================
+   SELECTS DE LOS GRÁFICOS
+============================================================ */
+
+.controles-grafico select {
     width: 100%;
 
     min-width: 0;
@@ -732,13 +734,113 @@ button {
         rgba(37, 99, 235, 0.12);
 }
 
-.controles-grafico .filtro-grafico,
-.controles-grafico .tipo-grafico {
-    flex: 1;
+
+/* ============================================================
+   FILTROS DE FECHA
+============================================================ */
+
+.filtro-fecha {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
 
     width: 100%;
 
-    max-width: none;
+    min-width: 0;
+}
+
+.filtro-fecha label {
+    color: #6b7280;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+.filtro-fecha input[type="date"] {
+    width: 100%;
+
+    height: 42px;
+
+    min-width: 0;
+
+    margin: 0;
+
+    padding: 0 10px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.filtro-fecha input[type="date"]:hover {
+    border-color: #9ca3af;
+}
+
+.filtro-fecha input[type="date"]:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.12);
+}
+
+
+/* ============================================================
+   SELECT DE DISTRITO Y TIPO DE GRÁFICO
+============================================================ */
+
+.controles-grafico .filtro-grafico,
+.controles-grafico .tipo-grafico {
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* ============================================================
+   INFORMACIÓN DEL GRÁFICO
+============================================================ */
+
+.cantidad-grafico {
+    min-height: 24px;
+
+    margin: 5px auto 10px auto;
+
+    text-align: center;
+
+    color: #4b5563;
+
+    font-size: 14px;
+}
+
+.cantidad-grafico strong {
+    color: #111827;
+
+    font-size: 18px;
 }
 
 
@@ -779,29 +881,6 @@ button {
     height: 270px !important;
 
     max-width: 100%;
-}
-
-
-/* ============================================================
-   CANTIDAD / INFORMACIÓN DEL GRÁFICO
-============================================================ */
-
-.cantidad-grafico {
-    min-height: 24px;
-
-    margin: 5px auto 10px auto;
-
-    text-align: center;
-
-    color: #4b5563;
-
-    font-size: 14px;
-}
-
-.cantidad-grafico strong {
-    color: #111827;
-
-    font-size: 18px;
 }
 
 
@@ -988,6 +1067,7 @@ button {
 
 .estado-terminado {
     background: #22c55e;
+}
 
 
 /* ============================================================
@@ -1559,7 +1639,6 @@ tbody tr:last-child td {
         transform:
             translateY(0);
     }
-
 }
 
 
@@ -2180,7 +2259,9 @@ canvas {
     }
 
 
-    /* GRÁFICOS */
+    /* ========================================================
+       GRÁFICOS
+    ======================================================== */
 
     .graficos-dashboard {
         grid-template-columns: 1fr;
@@ -2192,10 +2273,19 @@ canvas {
         padding: 15px;
     }
 
-    .controles-grafico {
-        flex-direction: column;
 
-        align-items: stretch;
+    /* CONTROLES:
+       DISTRITO + TIPO
+       FECHA DESDE + FECHA HASTA
+    */
+
+    .controles-grafico {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        align-items: end;
 
         gap: 8px;
     }
@@ -2207,6 +2297,17 @@ canvas {
 
         flex: none;
     }
+
+    .filtro-fecha {
+        width: 100%;
+    }
+
+    .filtro-fecha input[type="date"] {
+        width: 100%;
+    }
+
+
+    /* ALTURA GRÁFICO */
 
     .graficos-dashboard .grafico-ruleta {
         height: 250px;
@@ -2442,7 +2543,9 @@ canvas {
     }
 
 
-    /* GRÁFICOS */
+    /* ========================================================
+       GRÁFICOS
+    ======================================================== */
 
     .graficos-dashboard {
         grid-template-columns: 1fr;
@@ -2453,6 +2556,31 @@ canvas {
     .graficos-dashboard .grafico-panel {
         padding: 12px;
     }
+
+
+    /* En celular pequeño:
+       cada control ocupa una línea */
+
+    .controles-grafico {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .controles-grafico select {
+        width: 100%;
+    }
+
+    .filtro-fecha {
+        width: 100%;
+    }
+
+    .filtro-fecha input[type="date"] {
+        width: 100%;
+    }
+
+
+    /* GRÁFICO */
 
     .graficos-dashboard .grafico-ruleta {
         height: 230px;
@@ -2539,3 +2667,4 @@ canvas {
 
     font-size: 13px;
 }
+
