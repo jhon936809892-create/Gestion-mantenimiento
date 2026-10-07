@@ -135,7 +135,11 @@ function crearGraficoPie(
 
                     labels:
                         etiquetas,
-backgroundColor: [
+datasets: [{
+    data:
+        valores,
+
+  backgroundColor: [
     "#BFD7EA", // Azul pastel
     "#CDECCF", // Verde pastel
     "#F8E7A2", // Amarillo pastel
@@ -160,7 +164,10 @@ borderColor: [
     "#FFFFFF",
     "#FFFFFF"
 ],
-                
+
+    hoverOffset: 18,
+    borderWidth: 2
+}]       
 
 
                 options: {
