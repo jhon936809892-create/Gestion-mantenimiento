@@ -777,60 +777,21 @@ function obtenerInicioSemanaActual() {
 // OBTENER DATOS SEMANALES
 // ============================================================
 
+// ============================================================
+// OBTENER DATOS DEL GRÁFICO DE ÁREA SEGÚN FECHA
+// ============================================================
+
 function obtenerDatosSemanales(
     mantenimientos,
     tipoBuscado,
     sedeSeleccionada
 ) {
 
-    const etiquetas = [
+    const fechas = {};
 
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-        "Domingo"
-
-    ];
-
-
-    const valores = [
-
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-
-    ];
-
-
-    const lunes =
-        obtenerInicioSemanaActual();
-
-
-    const domingo =
-        new Date(
-            lunes
-        );
-
-
-    domingo.setDate(
-        lunes.getDate() + 6
-    );
-
-
-    domingo.setHours(
-        23,
-        59,
-        59,
-        999
-    );
-
+    // ========================================================
+    // RECORRER MANTENIMIENTOS
+    // ========================================================
 
     mantenimientos.forEach(
         function(mantenimiento) {
@@ -887,7 +848,7 @@ function obtenerDatosSemanales(
 
 
             // ==================================================
-            // FECHA
+            // FECHA DEL MANTENIMIENTO
             // ==================================================
 
             const fecha =
@@ -896,9 +857,7 @@ function obtenerDatosSemanales(
                 );
 
 
-            if (
-                !fecha
-            ) {
+            if (!fecha) {
 
                 return;
 
@@ -906,43 +865,121 @@ function obtenerDatosSemanales(
 
 
             // ==================================================
-            // VERIFICAR SI ESTÁ DENTRO DE LA SEMANA
+            // CREAR FECHA SIN HORA
+            // ==================================================
+
+            const anio =
+                fecha.getFullYear();
+
+            const mes =
+                String(
+                    fecha.getMonth() + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const dia =
+                String(
+                    fecha.getDate()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            const clave =
+                `${anio}-${mes}-${dia}`;
+
+
+            // ==================================================
+            // CONTAR MANTENIMIENTOS POR FECHA
             // ==================================================
 
             if (
-                fecha < lunes ||
-                fecha > domingo
+                !fechas[clave]
             ) {
 
-                return;
+                fechas[clave] = 0;
 
             }
 
 
-            // ==================================================
-            // OBTENER DÍA
-            // ==================================================
-
-            let dia =
-                fecha.getDay();
-
-
-            // Convertir:
-            // Lunes = 0
-            // Martes = 1
-            // ...
-            // Domingo = 6
-
-            dia =
-                dia === 0
-                    ? 6
-                    : dia - 1;
-
-
-            valores[dia]++;
+            fechas[clave]++;
 
         }
     );
+
+
+    // ========================================================
+    // ORDENAR FECHAS
+    // ========================================================
+
+    const fechasOrdenadas =
+        Object.keys(
+            fechas
+        ).sort();
+
+
+    // ========================================================
+    // ETIQUETAS
+    // ========================================================
+
+    const etiquetas =
+        fechasOrdenadas.map(
+            function(fecha) {
+
+                const partes =
+                    fecha.split("-");
+
+                const anio =
+                    Number(
+                        partes[0]
+                    );
+
+                const mes =
+                    Number(
+                        partes[1]
+                    ) - 1;
+
+                const dia =
+                    Number(
+                        partes[2]
+                    );
+
+
+                const fechaLocal =
+                    new Date(
+                        anio,
+                        mes,
+                        dia
+                    );
+
+
+                return fechaLocal.toLocaleDateString(
+                    "es-PE",
+                    {
+                        day: "2-digit",
+                        month: "2-digit"
+                    }
+                );
+
+            }
+        );
+
+
+    // ========================================================
+    // VALORES
+    // ========================================================
+
+    const valores =
+        fechasOrdenadas.map(
+            function(fecha) {
+
+                return fechas[fecha];
+
+            }
+        );
 
 
     return {
