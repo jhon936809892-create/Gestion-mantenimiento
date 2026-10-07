@@ -1,4 +1,3 @@
-
 // ============================================================
 // MÓDULO DASHBOARD
 // dashboard.js
@@ -81,6 +80,13 @@ function actualizarDashboard() {
             datosMaterialesDashboard.length;
 
     }
+
+
+    // --------------------------------------------------------
+    // ÚLTIMOS 6 MANTENIMIENTOS
+    // --------------------------------------------------------
+
+    cargarUltimosMantenimientosDashboard();
 
 }
 
@@ -595,12 +601,6 @@ function obtenerFechaLocal(
 
 // ============================================================
 // OBTENER DATOS SEGÚN RANGO DE FECHAS
-// PARA EL GRÁFICO DE ÁREA
-// ============================================================
-
-
-// ============================================================
-// OBTENER DATOS SEGÚN RANGO DE FECHAS
 // INCLUYE TODOS LOS DÍAS DEL RANGO
 // ============================================================
 
@@ -719,10 +719,6 @@ function obtenerDatosSemanales(
     mantenimientos.forEach(
         function(mantenimiento) {
 
-            // ------------------------------------------------
-            // TIPO
-            // ------------------------------------------------
-
             const tipo =
                 (
                     mantenimiento.tipo_mantenimiento ||
@@ -747,10 +743,6 @@ function obtenerDatosSemanales(
             }
 
 
-            // ------------------------------------------------
-            // SEDE
-            // ------------------------------------------------
-
             const sede =
                 (
                     mantenimiento.sede ||
@@ -770,10 +762,6 @@ function obtenerDatosSemanales(
             }
 
 
-            // ------------------------------------------------
-            // FECHA
-            // ------------------------------------------------
-
             const fecha =
                 obtenerFechaLocal(
                     mantenimiento.fecha
@@ -789,10 +777,6 @@ function obtenerDatosSemanales(
             }
 
 
-            // ------------------------------------------------
-            // FILTRO DESDE
-            // ------------------------------------------------
-
             if (
                 inicio &&
                 fecha < inicio
@@ -803,10 +787,6 @@ function obtenerDatosSemanales(
             }
 
 
-            // ------------------------------------------------
-            // FILTRO HASTA
-            // ------------------------------------------------
-
             if (
                 fin &&
                 fecha > fin
@@ -816,10 +796,6 @@ function obtenerDatosSemanales(
 
             }
 
-
-            // ------------------------------------------------
-            // CLAVE YYYY-MM-DD
-            // ------------------------------------------------
 
             const anio =
                 fecha.getFullYear();
@@ -998,7 +974,6 @@ function obtenerDatosSemanales(
 
     // ========================================================
     // VALORES
-    // SI NO HAY REGISTROS ESE DÍA = 0
     // ========================================================
 
     const valores =
@@ -1024,10 +999,8 @@ function obtenerDatosSemanales(
 }
 
 
-
 // ============================================================
-// FILTRAR MANTENIMIENTOS POR FECHA
-// TIPO Y SEDE
+// FILTRAR MANTENIMIENTOS POR FECHA, TIPO Y SEDE
 // ============================================================
 
 function filtrarMantenimientosDashboard(
@@ -1117,10 +1090,6 @@ function filtrarMantenimientosDashboard(
     return mantenimientos.filter(
         function(mantenimiento) {
 
-            // ------------------------------------------------
-            // TIPO
-            // ------------------------------------------------
-
             const tipo =
                 (
                     mantenimiento.tipo_mantenimiento ||
@@ -1145,10 +1114,6 @@ function filtrarMantenimientosDashboard(
             }
 
 
-            // ------------------------------------------------
-            // SEDE
-            // ------------------------------------------------
-
             const sede =
                 (
                     mantenimiento.sede ||
@@ -1168,10 +1133,6 @@ function filtrarMantenimientosDashboard(
             }
 
 
-            // ------------------------------------------------
-            // FECHA
-            // ------------------------------------------------
-
             const fecha =
                 obtenerFechaLocal(
                     mantenimiento.fecha
@@ -1187,10 +1148,6 @@ function filtrarMantenimientosDashboard(
             }
 
 
-            // ------------------------------------------------
-            // DESDE
-            // ------------------------------------------------
-
             if (
                 inicio &&
                 fecha < inicio
@@ -1200,10 +1157,6 @@ function filtrarMantenimientosDashboard(
 
             }
 
-
-            // ------------------------------------------------
-            // HASTA
-            // ------------------------------------------------
 
             if (
                 fin &&
@@ -2395,3 +2348,314 @@ async function cargarGraficosDashboard() {
 
 }
 
+
+// ============================================================
+// CARGAR ÚLTIMOS 6 MANTENIMIENTOS
+// ============================================================
+
+async function cargarUltimosMantenimientosDashboard() {
+
+    try {
+
+        // --------------------------------------------------------
+        // OBTENER MANTENIMIENTOS
+        // --------------------------------------------------------
+
+        const respuesta =
+            await fetch(
+                "/api/mantenimientos"
+            );
+
+
+        if (
+            !respuesta.ok
+        ) {
+
+            throw new Error(
+                "Error al obtener los mantenimientos"
+            );
+
+        }
+
+
+        const mantenimientos =
+            await respuesta.json();
+
+
+        // --------------------------------------------------------
+        // TABLA DEL DASHBOARD
+        // --------------------------------------------------------
+
+        const tabla =
+            document.getElementById(
+                "tablaUltimosMantenimientos"
+            );
+
+
+        if (
+            !tabla
+        ) {
+
+            console.warn(
+                "No se encontró #tablaUltimosMantenimientos"
+            );
+
+            return;
+
+        }
+
+
+        // --------------------------------------------------------
+        // ORDENAR DEL MÁS RECIENTE AL MÁS ANTIGUO
+        // --------------------------------------------------------
+
+        const mantenimientosOrdenados =
+            [...mantenimientos].sort(
+                function(a, b) {
+
+                    const fechaA =
+                        obtenerFechaLocal(
+                            a.fecha
+                        );
+
+
+                    const fechaB =
+                        obtenerFechaLocal(
+                            b.fecha
+                        );
+
+
+                    if (
+                        !fechaA &&
+                        !fechaB
+                    ) {
+
+                        return 0;
+
+                    }
+
+
+                    if (
+                        !fechaA
+                    ) {
+
+                        return 1;
+
+                    }
+
+
+                    if (
+                        !fechaB
+                    ) {
+
+                        return -1;
+
+                    }
+
+
+                    return (
+                        fechaB.getTime() -
+                        fechaA.getTime()
+                    );
+
+                }
+            );
+
+
+        // --------------------------------------------------------
+        // TOMAR SOLAMENTE LOS 6 MÁS RECIENTES
+        // --------------------------------------------------------
+
+        const ultimosSeis =
+            mantenimientosOrdenados.slice(
+                0,
+                6
+            );
+
+
+        // --------------------------------------------------------
+        // LIMPIAR TABLA
+        // --------------------------------------------------------
+
+        tabla.innerHTML =
+            "";
+
+
+        // --------------------------------------------------------
+        // SI NO EXISTEN MANTENIMIENTOS
+        // --------------------------------------------------------
+
+        if (
+            ultimosSeis.length === 0
+        ) {
+
+            tabla.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="text-align:center;"
+                    >
+                        No hay mantenimientos registrados
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        // --------------------------------------------------------
+        // CREAR FILAS
+        // --------------------------------------------------------
+
+        ultimosSeis.forEach(
+            function(mantenimiento) {
+
+                const fila =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                // ------------------------------------------------
+                // FECHA
+                // ------------------------------------------------
+
+                const fecha =
+                    obtenerFechaLocal(
+                        mantenimiento.fecha
+                    );
+
+
+                const fechaTexto =
+                    fecha
+                        ? fecha.toLocaleDateString(
+                            "es-PE"
+                        )
+                        : "Sin fecha";
+
+
+                // ------------------------------------------------
+                // CÓDIGO
+                // ------------------------------------------------
+
+                const codigo =
+                    mantenimiento.codigo ||
+                    mantenimiento.codigo_proyecto ||
+                    "Sin código";
+
+
+                // ------------------------------------------------
+                // PROYECTO
+                // ------------------------------------------------
+
+                const proyecto =
+                    mantenimiento.proyecto ||
+                    mantenimiento.nombre_proyecto ||
+                    mantenimiento.proyecto_nombre ||
+                    "Sin proyecto";
+
+
+                // ------------------------------------------------
+                // CUADRILLA
+                // ------------------------------------------------
+
+                const cuadrilla =
+                    mantenimiento.cuadrilla ||
+                    "Sin cuadrilla";
+
+
+                // ------------------------------------------------
+                // TRABAJO
+                // ------------------------------------------------
+
+                const trabajo =
+                    mantenimiento.trabajo ||
+                    mantenimiento.descripcion ||
+                    "Sin descripción";
+
+
+                // ------------------------------------------------
+                // ESTADO
+                // ------------------------------------------------
+
+                const estado =
+                    mantenimiento.estado ||
+                    "Sin estado";
+
+
+                // ------------------------------------------------
+                // TIPO
+                // ------------------------------------------------
+
+                const tipo =
+                    mantenimiento.tipo_mantenimiento ||
+                    mantenimiento.tipo ||
+                    "Sin tipo";
+
+
+                // ------------------------------------------------
+                // CREAR FILA
+                // ------------------------------------------------
+
+                fila.innerHTML = `
+
+                    <td>
+                        ${fechaTexto}
+                    </td>
+
+                    <td>
+                        ${codigo}
+                    </td>
+
+                    <td>
+                        ${proyecto}
+                    </td>
+
+                    <td>
+                        ${cuadrilla}
+                    </td>
+
+                    <td>
+                        ${trabajo}
+                    </td>
+
+                    <td>
+                        ${estado}
+                    </td>
+
+                    <td>
+                        ${tipo}
+                    </td>
+
+                `;
+
+
+                tabla.appendChild(
+                    fila
+                );
+
+            }
+        );
+
+
+        console.log(
+            "Últimos 6 mantenimientos cargados correctamente."
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error cargando últimos mantenimientos:",
+            error
+        );
+
+    }
+
+}
