@@ -1,3 +1,4 @@
+
 // ============================================================
 // MÓDULO DASHBOARD
 // dashboard.js
@@ -90,28 +91,19 @@ function actualizarDashboard() {
 
 const COLORES_GRAFICOS = [
 
-    "#5FD998", // Verde
-    "#5FB9D9", // Azul
-    "#7A5FD9", // Morado
-    "#D95F98", // Rosa
-    "#D97A5F", // Coral
-    "#D9B85F", // Amarillo
-    "#5FD9C7", // Turquesa
-    "#8FD95F", // Verde lima
-    "#5F7FD9", // Azul índigo
-    "#B85FD9"  // Violeta
+    "#5FD998",
+    "#5FB9D9",
+    "#7A5FD9",
+    "#D95F98",
+    "#D97A5F",
+    "#D9B85F",
+    "#5FD9C7",
+    "#8FD95F",
+    "#5F7FD9",
+    "#B85FD9"
 
 ];
 
-
-// ============================================================
-// CREAR GRÁFICO DE TIPO PIE / RULETA
-// ============================================================
-
-// ============================================================
-// CREAR GRÁFICO DE RULETA / PIE
-// CADA SEDE TIENE UN COLOR DIFERENTE
-// ============================================================
 
 // ============================================================
 // CREAR GRÁFICO DE RULETA / PIE
@@ -124,39 +116,24 @@ function crearGraficoPie(
     valores
 ) {
 
-    // ========================================================
-    // COLORES FIJOS POR SEDE
-    // ========================================================
-
     const coloresPorSede = {
 
         "LIMA": "#1FD19F",
-
         "AREQUIPA": "#FF4D6D",
-
         "CUSCO": "#4361EE",
-
         "TRUJILLO": "#FFB703",
-
         "PIURA": "#8338EC",
-
         "CHICLAYO": "#00B4D8",
-
         "ICA": "#FB5607",
-
         "HUANCAYO": "#E639A5",
-
         "JULIACA": "#3A0CA3",
-
         "TACNA": "#2A9D8F"
+
     };
 
 
-    // ========================================================
-    // COLOR PARA SEDES NO REGISTRADAS
-    // ========================================================
-
     const coloresAdicionales = [
+
         "#FF6B6B",
         "#5B5FEF",
         "#F7B731",
@@ -165,66 +142,61 @@ function crearGraficoPie(
         "#FF8C42",
         "#E84393",
         "#3742FA"
+
     ];
 
     let indiceColorAdicional = 0;
 
 
-    // ========================================================
-    // OBTENER COLOR DE CADA SEDE
-    // ========================================================
+    const colores =
+        etiquetas.map(
+            function(sede) {
 
-    const colores = etiquetas.map(
-        function(sede) {
+                const nombreSede =
+                    sede
+                        .toString()
+                        .trim()
+                        .toUpperCase();
 
-            const nombreSede =
-                sede
-                    .toString()
-                    .trim()
-                    .toUpperCase();
 
-            // Si la sede tiene un color asignado
-            if (
-                coloresPorSede[
-                    nombreSede
-                ]
-            ) {
+                if (
+                    coloresPorSede[
+                        nombreSede
+                    ]
+                ) {
 
-                return coloresPorSede[
-                    nombreSede
-                ];
+                    return coloresPorSede[
+                        nombreSede
+                    ];
+
+                }
+
+
+                const color =
+                    coloresAdicionales[
+                        indiceColorAdicional %
+                        coloresAdicionales.length
+                    ];
+
+                indiceColorAdicional++;
+
+                return color;
+
             }
+        );
 
-            // Si aparece una sede nueva
-            const color =
-                coloresAdicionales[
-                    indiceColorAdicional %
-                    coloresAdicionales.length
-                ];
-
-            indiceColorAdicional++;
-
-            return color;
-        }
-    );
-
-
-    // ========================================================
-    // ELIMINAR GRÁFICO ANTERIOR
-    // ========================================================
 
     const graficoExistente =
         Chart.getChart(canvas);
 
-    if (graficoExistente) {
+    if (
+        graficoExistente
+    ) {
 
         graficoExistente.destroy();
+
     }
 
-
-    // ========================================================
-    // CREAR GRÁFICO
-    // ========================================================
 
     return new Chart(
         canvas,
@@ -234,64 +206,103 @@ function crearGraficoPie(
 
             data: {
 
-                labels: etiquetas,
+                labels:
+                    etiquetas,
 
                 datasets: [
+
                     {
 
-                        label: "Registros",
+                        label:
+                            "Registros",
 
-                        data: valores,
+                        data:
+                            valores,
 
-                        backgroundColor: colores,
+                        backgroundColor:
+                            colores,
 
-                        borderColor: "#ffffff",
+                        borderColor:
+                            "#ffffff",
 
-                        borderWidth: 2
+                        borderWidth:
+                            2,
+
+                        offset:
+                            0,
+
+                        hoverOffset:
+                            18,
+
+                        hoverBorderWidth:
+                            4
+
                     }
+
                 ]
+
             },
 
             options: {
 
-                responsive: true,
+                responsive:
+                    true,
 
-                maintainAspectRatio: false,
+                maintainAspectRatio:
+                    false,
+
+                interaction: {
+
+                    mode:
+                        "nearest",
+
+                    intersect:
+                        true
+
+                },
 
                 plugins: {
 
                     legend: {
 
-                        position: "bottom"
+                        position:
+                            "bottom"
+
                     },
 
                     tooltip: {
 
                         callbacks: {
 
-                            label: function(
-                                contexto
-                            ) {
+                            label:
+                                function(contexto) {
 
-                                const sede =
-                                    contexto.label;
+                                    const sede =
+                                        contexto.label;
 
-                                const cantidad =
-                                    contexto.raw;
+                                    const cantidad =
+                                        contexto.raw;
 
-                                return (
-                                    " " +
-                                    sede +
-                                    ": " +
-                                    cantidad
-                                );
-                            }
+                                    return (
+                                        " " +
+                                        sede +
+                                        ": " +
+                                        cantidad
+                                    );
+
+                                }
+
                         }
+
                     }
+
                 }
+
             }
+
         }
     );
+
 }
 
 
@@ -324,16 +335,8 @@ function crearGraficoArea(
             canvas,
             {
 
-                // ====================================================
-                // TIPO LINEA
-                // ====================================================
-
-                type: "line",
-
-
-                // ====================================================
-                // DATOS
-                // ====================================================
+                type:
+                    "line",
 
                 data: {
 
@@ -386,11 +389,6 @@ function crearGraficoArea(
 
                 },
 
-
-                // ====================================================
-                // OPCIONES
-                // ====================================================
-
                 options: {
 
                     responsive:
@@ -398,11 +396,6 @@ function crearGraficoArea(
 
                     maintainAspectRatio:
                         false,
-
-
-                    // ==================================================
-                    // ANIMACIÓN
-                    // ==================================================
 
                     animation: {
 
@@ -414,11 +407,6 @@ function crearGraficoArea(
 
                     },
 
-
-                    // ==================================================
-                    // INTERACCIÓN
-                    // ==================================================
-
                     interaction: {
 
                         mode:
@@ -428,11 +416,6 @@ function crearGraficoArea(
                             false
 
                     },
-
-
-                    // ==================================================
-                    // ESCALAS
-                    // ==================================================
 
                     scales: {
 
@@ -457,7 +440,6 @@ function crearGraficoArea(
                             }
 
                         },
-
 
                         y: {
 
@@ -485,11 +467,6 @@ function crearGraficoArea(
 
                     },
 
-
-                    // ==================================================
-                    // PLUGINS
-                    // ==================================================
-
                     plugins: {
 
                         legend: {
@@ -498,7 +475,6 @@ function crearGraficoArea(
                                 false
 
                         },
-
 
                         tooltip: {
 
@@ -558,9 +534,9 @@ function obtenerFechaLocal(
             .trim();
 
 
-    // ========================================================
+    // --------------------------------------------------------
     // FECHA YYYY-MM-DD
-    // ========================================================
+    // --------------------------------------------------------
 
     const coincidencia =
         texto.match(
@@ -573,6 +549,7 @@ function obtenerFechaLocal(
     ) {
 
         return new Date(
+
             Number(
                 coincidencia[1]
             ),
@@ -584,14 +561,15 @@ function obtenerFechaLocal(
             Number(
                 coincidencia[3]
             )
+
         );
 
     }
 
 
-    // ========================================================
+    // --------------------------------------------------------
     // OTROS FORMATOS
-    // ========================================================
+    // --------------------------------------------------------
 
     const fechaConvertida =
         new Date(
@@ -616,79 +594,95 @@ function obtenerFechaLocal(
 
 
 // ============================================================
-// OBTENER LUNES DE LA SEMANA ACTUAL
-// ============================================================
-
-function obtenerInicioSemanaActual() {
-
-    const hoy =
-        new Date();
-
-
-    hoy.setHours(
-        0,
-        0,
-        0,
-        0
-    );
-
-
-    const dia =
-        hoy.getDay();
-
-
-    // Domingo = 0
-    // Lunes = 1
-    // Martes = 2
-    // ...
-    // Sábado = 6
-
-    const diferencia =
-        dia === 0
-            ? -6
-            : 1 - dia;
-
-
-    const lunes =
-        new Date(
-            hoy
-        );
-
-
-    lunes.setDate(
-        hoy.getDate() +
-        diferencia
-    );
-
-
-    lunes.setHours(
-        0,
-        0,
-        0,
-        0
-    );
-
-
-    return lunes;
-
-}
-
-
-// ============================================================
-// OBTENER DATOS SEMANALES
-// ============================================================
-
-// ============================================================
-// OBTENER DATOS DEL GRÁFICO DE ÁREA SEGÚN FECHA
+// OBTENER DATOS SEGÚN RANGO DE FECHAS
+// PARA EL GRÁFICO DE ÁREA
 // ============================================================
 
 function obtenerDatosSemanales(
     mantenimientos,
     tipoBuscado,
-    sedeSeleccionada
+    sedeSeleccionada,
+    fechaDesde,
+    fechaHasta
 ) {
 
     const fechas = {};
+
+    let inicio = null;
+    let fin = null;
+
+
+    // ========================================================
+    // FECHA INICIAL
+    // ========================================================
+
+    if (
+        fechaDesde
+    ) {
+
+        const partes =
+            fechaDesde.split("-");
+
+        inicio =
+            new Date(
+
+                Number(
+                    partes[0]
+                ),
+
+                Number(
+                    partes[1]
+                ) - 1,
+
+                Number(
+                    partes[2]
+                ),
+
+                0,
+                0,
+                0,
+                0
+
+            );
+
+    }
+
+
+    // ========================================================
+    // FECHA FINAL
+    // ========================================================
+
+    if (
+        fechaHasta
+    ) {
+
+        const partes =
+            fechaHasta.split("-");
+
+        fin =
+            new Date(
+
+                Number(
+                    partes[0]
+                ),
+
+                Number(
+                    partes[1]
+                ) - 1,
+
+                Number(
+                    partes[2]
+                ),
+
+                23,
+                59,
+                59,
+                999
+
+            );
+
+    }
+
 
     // ========================================================
     // RECORRER MANTENIMIENTOS
@@ -696,10 +690,6 @@ function obtenerDatosSemanales(
 
     mantenimientos.forEach(
         function(mantenimiento) {
-
-            // ==================================================
-            // TIPO
-            // ==================================================
 
             const tipo =
                 (
@@ -725,9 +715,9 @@ function obtenerDatosSemanales(
             }
 
 
-            // ==================================================
-            // SEDE
-            // ==================================================
+            // ------------------------------------------------
+            // FILTRO POR SEDE
+            // ------------------------------------------------
 
             const sede =
                 (
@@ -748,9 +738,9 @@ function obtenerDatosSemanales(
             }
 
 
-            // ==================================================
+            // ------------------------------------------------
             // FECHA DEL MANTENIMIENTO
-            // ==================================================
+            // ------------------------------------------------
 
             const fecha =
                 obtenerFechaLocal(
@@ -758,16 +748,46 @@ function obtenerDatosSemanales(
                 );
 
 
-            if (!fecha) {
+            if (
+                !fecha
+            ) {
 
                 return;
 
             }
 
 
-            // ==================================================
-            // CREAR FECHA SIN HORA
-            // ==================================================
+            // ------------------------------------------------
+            // FILTRO FECHA DESDE
+            // ------------------------------------------------
+
+            if (
+                inicio &&
+                fecha < inicio
+            ) {
+
+                return;
+
+            }
+
+
+            // ------------------------------------------------
+            // FILTRO FECHA HASTA
+            // ------------------------------------------------
+
+            if (
+                fin &&
+                fecha > fin
+            ) {
+
+                return;
+
+            }
+
+
+            // ------------------------------------------------
+            // CREAR CLAVE YYYY-MM-DD
+            // ------------------------------------------------
 
             const anio =
                 fecha.getFullYear();
@@ -792,10 +812,6 @@ function obtenerDatosSemanales(
             const clave =
                 `${anio}-${mes}-${dia}`;
 
-
-            // ==================================================
-            // CONTAR MANTENIMIENTOS POR FECHA
-            // ==================================================
 
             if (
                 !fechas[clave]
@@ -833,35 +849,35 @@ function obtenerDatosSemanales(
                 const partes =
                     fecha.split("-");
 
-                const anio =
-                    Number(
-                        partes[0]
-                    );
-
-                const mes =
-                    Number(
-                        partes[1]
-                    ) - 1;
-
-                const dia =
-                    Number(
-                        partes[2]
-                    );
-
 
                 const fechaLocal =
                     new Date(
-                        anio,
-                        mes,
-                        dia
+
+                        Number(
+                            partes[0]
+                        ),
+
+                        Number(
+                            partes[1]
+                        ) - 1,
+
+                        Number(
+                            partes[2]
+                        )
+
                     );
 
 
                 return fechaLocal.toLocaleDateString(
                     "es-PE",
                     {
-                        day: "2-digit",
-                        month: "2-digit"
+
+                        day:
+                            "2-digit",
+
+                        month:
+                            "2-digit"
+
                     }
                 );
 
@@ -877,7 +893,9 @@ function obtenerDatosSemanales(
         fechasOrdenadas.map(
             function(fecha) {
 
-                return fechas[fecha];
+                return fechas[
+                    fecha
+                ];
 
             }
         );
@@ -892,6 +910,204 @@ function obtenerDatosSemanales(
             valores
 
     };
+
+}
+
+
+// ============================================================
+// FILTRAR MANTENIMIENTOS POR FECHA
+// TIPO Y SEDE
+// ============================================================
+
+function filtrarMantenimientosDashboard(
+    mantenimientos,
+    tipoBuscado,
+    sedeSeleccionada,
+    fechaDesde,
+    fechaHasta
+) {
+
+    let inicio = null;
+    let fin = null;
+
+
+    // ========================================================
+    // FECHA DESDE
+    // ========================================================
+
+    if (
+        fechaDesde
+    ) {
+
+        const partes =
+            fechaDesde.split("-");
+
+        inicio =
+            new Date(
+
+                Number(
+                    partes[0]
+                ),
+
+                Number(
+                    partes[1]
+                ) - 1,
+
+                Number(
+                    partes[2]
+                ),
+
+                0,
+                0,
+                0,
+                0
+
+            );
+
+    }
+
+
+    // ========================================================
+    // FECHA HASTA
+    // ========================================================
+
+    if (
+        fechaHasta
+    ) {
+
+        const partes =
+            fechaHasta.split("-");
+
+        fin =
+            new Date(
+
+                Number(
+                    partes[0]
+                ),
+
+                Number(
+                    partes[1]
+                ) - 1,
+
+                Number(
+                    partes[2]
+                ),
+
+                23,
+                59,
+                59,
+                999
+
+            );
+
+    }
+
+
+    return mantenimientos.filter(
+        function(mantenimiento) {
+
+            // ------------------------------------------------
+            // TIPO
+            // ------------------------------------------------
+
+            const tipo =
+                (
+                    mantenimiento.tipo_mantenimiento ||
+                    ""
+                )
+                .toString()
+                .trim()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(
+                    /[\u0300-\u036f]/g,
+                    ""
+                );
+
+
+            if (
+                tipo !== tipoBuscado
+            ) {
+
+                return false;
+
+            }
+
+
+            // ------------------------------------------------
+            // SEDE
+            // ------------------------------------------------
+
+            const sede =
+                (
+                    mantenimiento.sede ||
+                    "Sin sede"
+                )
+                .toString()
+                .trim();
+
+
+            if (
+                sedeSeleccionada &&
+                sede !== sedeSeleccionada
+            ) {
+
+                return false;
+
+            }
+
+
+            // ------------------------------------------------
+            // FECHA
+            // ------------------------------------------------
+
+            const fecha =
+                obtenerFechaLocal(
+                    mantenimiento.fecha
+                );
+
+
+            if (
+                !fecha
+            ) {
+
+                return false;
+
+            }
+
+
+            // ------------------------------------------------
+            // DESDE
+            // ------------------------------------------------
+
+            if (
+                inicio &&
+                fecha < inicio
+            ) {
+
+                return false;
+
+            }
+
+
+            // ------------------------------------------------
+            // HASTA
+            // ------------------------------------------------
+
+            if (
+                fin &&
+                fecha > fin
+            ) {
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+    );
 
 }
 
@@ -915,6 +1131,18 @@ function mostrarMayorActividad(
     }
 
 
+    if (
+        valores.length === 0
+    ) {
+
+        cantidad.innerHTML =
+            "Sin registros en el rango seleccionado";
+
+        return;
+
+    }
+
+
     const mayor =
         Math.max(
             ...valores
@@ -926,7 +1154,7 @@ function mostrarMayorActividad(
     ) {
 
         cantidad.innerHTML =
-            "Sin registros esta semana";
+            "Sin registros en el rango seleccionado";
 
         return;
 
@@ -978,7 +1206,6 @@ function cargarSedesEnFiltros(
 
         },
 
-
         {
 
             filtro:
@@ -989,7 +1216,6 @@ function cargarSedesEnFiltros(
 
         },
 
-
         {
 
             filtro:
@@ -999,7 +1225,6 @@ function cargarSedesEnFiltros(
                 datosPorTipo.splitters
 
         },
-
 
         {
 
@@ -1032,17 +1257,9 @@ function cargarSedesEnFiltros(
             }
 
 
-            // ====================================================
-            // LIMPIAR SELECT
-            // ====================================================
-
             select.innerHTML =
                 "";
 
-
-            // ====================================================
-            // OPCIÓN INICIAL
-            // ====================================================
 
             const opcionInicial =
                 document.createElement(
@@ -1063,19 +1280,11 @@ function cargarSedesEnFiltros(
             );
 
 
-            // ====================================================
-            // OBTENER SEDES
-            // ====================================================
-
             const sedes =
                 Object.keys(
                     configuracion.datos
                 );
 
-
-            // ====================================================
-            // ORDENAR SEDES
-            // ====================================================
 
             sedes.sort(
                 function(
@@ -1095,10 +1304,6 @@ function cargarSedesEnFiltros(
                 }
             );
 
-
-            // ====================================================
-            // AGREGAR SEDES
-            // ====================================================
 
             sedes.forEach(
                 function(sede) {
@@ -1146,6 +1351,10 @@ function configurarGraficoDashboard(
 
         idCantidad,
 
+        idFechaDesde,
+
+        idFechaHasta,
+
         canvas,
 
         mantenimientos,
@@ -1182,6 +1391,18 @@ function configurarGraficoDashboard(
         );
 
 
+    const inputFechaDesde =
+        document.getElementById(
+            idFechaDesde
+        );
+
+
+    const inputFechaHasta =
+        document.getElementById(
+            idFechaHasta
+        );
+
+
     if (
         !selectSede ||
         !canvas
@@ -1192,9 +1413,9 @@ function configurarGraficoDashboard(
     }
 
 
-    // ==========================================================
-    // FUNCIÓN PARA ACTUALIZAR
-    // ==========================================================
+    // ========================================================
+    // ACTUALIZAR GRÁFICO
+    // ========================================================
 
     function actualizarGrafico() {
 
@@ -1208,9 +1429,46 @@ function configurarGraficoDashboard(
                 : "pie";
 
 
-        // ======================================================
+        const fechaDesde =
+            inputFechaDesde
+                ? inputFechaDesde.value
+                : "";
+
+
+        const fechaHasta =
+            inputFechaHasta
+                ? inputFechaHasta.value
+                : "";
+
+
+        // ====================================================
+        // VALIDAR RANGO
+        // ====================================================
+
+        if (
+            fechaDesde &&
+            fechaHasta &&
+            fechaDesde > fechaHasta
+        ) {
+
+            if (
+                cantidad
+            ) {
+
+                cantidad.innerHTML =
+                    "La fecha inicial no puede ser mayor que la fecha final.";
+
+            }
+
+
+            return;
+
+        }
+
+
+        // ====================================================
         // DESTRUIR GRÁFICO ACTUAL
-        // ======================================================
+        // ====================================================
 
         const graficoActual =
             obtenerGrafico();
@@ -1225,9 +1483,29 @@ function configurarGraficoDashboard(
         }
 
 
-        // ======================================================
+        // ====================================================
+        // OBTENER MANTENIMIENTOS FILTRADOS
+        // ====================================================
+
+        const mantenimientosFiltrados =
+            filtrarMantenimientosDashboard(
+
+                mantenimientos,
+
+                tipoMantenimiento,
+
+                sedeSeleccionada,
+
+                fechaDesde,
+
+                fechaHasta
+
+            );
+
+
+        // ====================================================
         // GRÁFICO DE ÁREA
-        // ======================================================
+        // ====================================================
 
         if (
             tipoGrafico === "area"
@@ -1240,7 +1518,11 @@ function configurarGraficoDashboard(
 
                     tipoMantenimiento,
 
-                    sedeSeleccionada
+                    sedeSeleccionada,
+
+                    fechaDesde,
+
+                    fechaHasta
 
                 );
 
@@ -1262,10 +1544,6 @@ function configurarGraficoDashboard(
             );
 
 
-            // ==================================================
-            // MOSTRAR DÍA CON MAYOR ACTIVIDAD
-            // ==================================================
-
             mostrarMayorActividad(
 
                 cantidad,
@@ -1282,55 +1560,107 @@ function configurarGraficoDashboard(
         }
 
 
-        // ======================================================
+        // ====================================================
         // GRÁFICO DE RULETA
-        // ======================================================
+        // ====================================================
+
+        const datosPorSede = {};
+
+
+        mantenimientosFiltrados.forEach(
+            function(mantenimiento) {
+
+                const sede =
+                    (
+                        mantenimiento.sede ||
+                        "Sin sede"
+                    )
+                    .toString()
+                    .trim();
+
+
+                datosPorSede[sede] =
+                    (
+                        datosPorSede[sede] ||
+                        0
+                    ) + 1;
+
+            }
+        );
+
 
         let etiquetas =
-            [
-                ...etiquetasOriginales
-            ];
+            Object.keys(
+                datosPorSede
+            );
 
 
         let valores =
-            [
-                ...valoresOriginales
-            ];
+            Object.values(
+                datosPorSede
+            );
 
 
-        if (
-            sedeSeleccionada !== ""
-        ) {
+        // ====================================================
+        // ORDENAR SEDES
+        // ====================================================
 
-            const indice =
-                etiquetasOriginales.indexOf(
-                    sedeSeleccionada
+        const datosOrdenados =
+            etiquetas
+                .map(
+                    function(sede, indice) {
+
+                        return {
+
+                            sede:
+                                sede,
+
+                            valor:
+                                valores[indice]
+
+                        };
+
+                    }
+                )
+                .sort(
+                    function(a, b) {
+
+                        return a.sede.localeCompare(
+                            b.sede,
+                            "es",
+                            {
+                                sensitivity:
+                                    "base"
+                            }
+                        );
+
+                    }
                 );
 
 
-            if (
-                indice !== -1
-            ) {
+        etiquetas =
+            datosOrdenados.map(
+                function(item) {
 
-                etiquetas = [
+                    return item.sede;
 
-                    sedeSeleccionada
+                }
+            );
 
-                ];
+
+        valores =
+            datosOrdenados.map(
+                function(item) {
+
+                    return item.valor;
+
+                }
+            );
 
 
-                valores = [
-
-                    valoresOriginales[
-                        indice
-                    ]
-
-                ];
-
-            }
-
-        }
-
+        // ====================================================
+        // CREAR RULETA
+        // ====================================================
 
         const nuevoGrafico =
             crearGraficoPie(
@@ -1349,45 +1679,37 @@ function configurarGraficoDashboard(
         );
 
 
-        // ======================================================
-        // CANTIDAD
-        // ======================================================
+        // ====================================================
+        // MOSTRAR CANTIDAD
+        // ====================================================
 
         if (
             cantidad
         ) {
 
+            const total =
+                mantenimientosFiltrados.length;
+
+
             if (
-                sedeSeleccionada !== ""
+                total > 0
             ) {
 
-                const indice =
-                    etiquetasOriginales.indexOf(
-                        sedeSeleccionada
-                    );
+                cantidad.innerHTML = `
 
+                    <strong>
+                        ${total}
+                    </strong>
 
-                if (
-                    indice !== -1
-                ) {
+                    registros
 
-                    cantidad.innerHTML = `
-
-                        <strong>
-                            ${valoresOriginales[indice]}
-                        </strong>
-
-                        registros
-
-                    `;
-
-                }
+                `;
 
             }
             else {
 
                 cantidad.innerHTML =
-                    "";
+                    "Sin registros en el rango seleccionado";
 
             }
 
@@ -1396,9 +1718,9 @@ function configurarGraficoDashboard(
     }
 
 
-    // ==========================================================
+    // ========================================================
     // CAMBIO DE SEDE
-    // ==========================================================
+    // ========================================================
 
     selectSede.onchange =
         function() {
@@ -1408,9 +1730,9 @@ function configurarGraficoDashboard(
         };
 
 
-    // ==========================================================
+    // ========================================================
     // CAMBIO DE TIPO DE GRÁFICO
-    // ==========================================================
+    // ========================================================
 
     if (
         selectTipo
@@ -1426,9 +1748,41 @@ function configurarGraficoDashboard(
     }
 
 
-    // ==========================================================
+    // ========================================================
+    // CAMBIO DE FECHA DESDE
+    // ========================================================
+
+    if (
+        inputFechaDesde
+    ) {
+
+        inputFechaDesde.addEventListener(
+            "change",
+            actualizarGrafico
+        );
+
+    }
+
+
+    // ========================================================
+    // CAMBIO DE FECHA HASTA
+    // ========================================================
+
+    if (
+        inputFechaHasta
+    ) {
+
+        inputFechaHasta.addEventListener(
+            "change",
+            actualizarGrafico
+        );
+
+    }
+
+
+    // ========================================================
     // CONFIGURACIÓN INICIAL
-    // ==========================================================
+    // ========================================================
 
     actualizarGrafico();
 
@@ -1498,10 +1852,6 @@ async function cargarGraficosDashboard() {
         mantenimientos.forEach(
             function(mantenimiento) {
 
-                // ==================================================
-                // SEDE
-                // ==================================================
-
                 const sede =
                     (
                         mantenimiento.sede ||
@@ -1510,10 +1860,6 @@ async function cargarGraficosDashboard() {
                     .toString()
                     .trim();
 
-
-                // ==================================================
-                // TIPO
-                // ==================================================
 
                 const tipo =
                     (
@@ -1530,26 +1876,9 @@ async function cargarGraficosDashboard() {
                     );
 
 
-                console.log(
-                    "Mantenimiento:",
-                    {
-
-                        sede:
-                            sede,
-
-                        tipoOriginal:
-                            mantenimiento.tipo_mantenimiento,
-
-                        tipoNormalizado:
-                            tipo
-
-                    }
-                );
-
-
-                // ==================================================
+                // ------------------------------------------------
                 // CERTIFICACIONES
-                // ==================================================
+                // ------------------------------------------------
 
                 if (
                     tipo ===
@@ -1565,9 +1894,9 @@ async function cargarGraficosDashboard() {
                 }
 
 
-                // ==================================================
+                // ------------------------------------------------
                 // AVERÍAS
-                // ==================================================
+                // ------------------------------------------------
 
                 if (
                     tipo ===
@@ -1583,9 +1912,9 @@ async function cargarGraficosDashboard() {
                 }
 
 
-                // ==================================================
+                // ------------------------------------------------
                 // CAMBIO DE SPLITTER
-                // ==================================================
+                // ------------------------------------------------
 
                 if (
                     tipo ===
@@ -1601,9 +1930,9 @@ async function cargarGraficosDashboard() {
                 }
 
 
-                // ==================================================
+                // ------------------------------------------------
                 // TRABAJO EN CAMPO
-                // ==================================================
+                // ------------------------------------------------
 
                 if (
                     tipo ===
@@ -1619,31 +1948,6 @@ async function cargarGraficosDashboard() {
                 }
 
             }
-        );
-
-
-        // ========================================================
-        // CONSOLA
-        // ========================================================
-
-        console.log(
-            "CERTIFICACIONES:",
-            certificaciones
-        );
-
-        console.log(
-            "AVERÍAS:",
-            averias
-        );
-
-        console.log(
-            "SPLITTERS:",
-            splitters
-        );
-
-        console.log(
-            "TRABAJO EN CAMPO:",
-            trabajoCampo
         );
 
 
@@ -1724,24 +2028,6 @@ async function cargarGraficosDashboard() {
         // CERTIFICACIONES
         // ========================================================
 
-        const canvasCertificaciones =
-            document.getElementById(
-                "graficoCertificaciones"
-            );
-
-
-        const etiquetasCertificaciones =
-            Object.keys(
-                certificaciones
-            );
-
-
-        const valoresCertificaciones =
-            Object.values(
-                certificaciones
-            );
-
-
         configurarGraficoDashboard({
 
             idSelectSede:
@@ -1753,8 +2039,16 @@ async function cargarGraficosDashboard() {
             idCantidad:
                 "cantidadCertificaciones",
 
+            idFechaDesde:
+                "fechaDesdeCertificaciones",
+
+            idFechaHasta:
+                "fechaHastaCertificaciones",
+
             canvas:
-                canvasCertificaciones,
+                document.getElementById(
+                    "graficoCertificaciones"
+                ),
 
             mantenimientos:
                 mantenimientos,
@@ -1763,10 +2057,14 @@ async function cargarGraficosDashboard() {
                 "certificacion",
 
             etiquetasOriginales:
-                etiquetasCertificaciones,
+                Object.keys(
+                    certificaciones
+                ),
 
             valoresOriginales:
-                valoresCertificaciones,
+                Object.values(
+                    certificaciones
+                ),
 
             obtenerGrafico:
                 function() {
@@ -1790,24 +2088,6 @@ async function cargarGraficosDashboard() {
         // AVERÍAS
         // ========================================================
 
-        const canvasAverias =
-            document.getElementById(
-                "graficoAverias"
-            );
-
-
-        const etiquetasAverias =
-            Object.keys(
-                averias
-            );
-
-
-        const valoresAverias =
-            Object.values(
-                averias
-            );
-
-
         configurarGraficoDashboard({
 
             idSelectSede:
@@ -1819,8 +2099,16 @@ async function cargarGraficosDashboard() {
             idCantidad:
                 "cantidadAverias",
 
+            idFechaDesde:
+                "fechaDesdeAverias",
+
+            idFechaHasta:
+                "fechaHastaAverias",
+
             canvas:
-                canvasAverias,
+                document.getElementById(
+                    "graficoAverias"
+                ),
 
             mantenimientos:
                 mantenimientos,
@@ -1829,10 +2117,14 @@ async function cargarGraficosDashboard() {
                 "averia",
 
             etiquetasOriginales:
-                etiquetasAverias,
+                Object.keys(
+                    averias
+                ),
 
             valoresOriginales:
-                valoresAverias,
+                Object.values(
+                    averias
+                ),
 
             obtenerGrafico:
                 function() {
@@ -1856,24 +2148,6 @@ async function cargarGraficosDashboard() {
         // CAMBIO DE SPLITTER
         // ========================================================
 
-        const canvasSplitter =
-            document.getElementById(
-                "graficoSplitter"
-            );
-
-
-        const etiquetasSplitters =
-            Object.keys(
-                splitters
-            );
-
-
-        const valoresSplitters =
-            Object.values(
-                splitters
-            );
-
-
         configurarGraficoDashboard({
 
             idSelectSede:
@@ -1885,8 +2159,16 @@ async function cargarGraficosDashboard() {
             idCantidad:
                 "cantidadSplitter",
 
+            idFechaDesde:
+                "fechaDesdeSplitter",
+
+            idFechaHasta:
+                "fechaHastaSplitter",
+
             canvas:
-                canvasSplitter,
+                document.getElementById(
+                    "graficoSplitter"
+                ),
 
             mantenimientos:
                 mantenimientos,
@@ -1895,10 +2177,14 @@ async function cargarGraficosDashboard() {
                 "cambio de splitter",
 
             etiquetasOriginales:
-                etiquetasSplitters,
+                Object.keys(
+                    splitters
+                ),
 
             valoresOriginales:
-                valoresSplitters,
+                Object.values(
+                    splitters
+                ),
 
             obtenerGrafico:
                 function() {
@@ -1922,24 +2208,6 @@ async function cargarGraficosDashboard() {
         // TRABAJO EN CAMPO
         // ========================================================
 
-        const canvasTrabajoCampo =
-            document.getElementById(
-                "graficoTrabajoCampo"
-            );
-
-
-        const etiquetasTrabajoCampo =
-            Object.keys(
-                trabajoCampo
-            );
-
-
-        const valoresTrabajoCampo =
-            Object.values(
-                trabajoCampo
-            );
-
-
         configurarGraficoDashboard({
 
             idSelectSede:
@@ -1951,8 +2219,16 @@ async function cargarGraficosDashboard() {
             idCantidad:
                 "cantidadTrabajoCampo",
 
+            idFechaDesde:
+                "fechaDesdeTrabajoCampo",
+
+            idFechaHasta:
+                "fechaHastaTrabajoCampo",
+
             canvas:
-                canvasTrabajoCampo,
+                document.getElementById(
+                    "graficoTrabajoCampo"
+                ),
 
             mantenimientos:
                 mantenimientos,
@@ -1961,10 +2237,14 @@ async function cargarGraficosDashboard() {
                 "trabajo en campo",
 
             etiquetasOriginales:
-                etiquetasTrabajoCampo,
+                Object.keys(
+                    trabajoCampo
+                ),
 
             valoresOriginales:
-                valoresTrabajoCampo,
+                Object.values(
+                    trabajoCampo
+                ),
 
             obtenerGrafico:
                 function() {
@@ -2003,3 +2283,4 @@ async function cargarGraficosDashboard() {
     }
 
 }
+
