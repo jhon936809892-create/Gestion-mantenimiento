@@ -77,44 +77,47 @@ function mostrarSeccion(seccion, boton) {
     }
 
 
-    // --------------------------------------------------------
-    // TÍTULO
-    // --------------------------------------------------------
+ // --------------------------------------------------------
+// TÍTULO DEL MÓDULO
+// --------------------------------------------------------
 
-    const titulo =
-        document.getElementById("titulo");
-
-
-    const titulos = {
-
-        dashboard:
-            "Dashboard",
-
-        personal:
-            "Personal",
-
-        cuadrillas:
-            "Cuadrillas",
-
-        proyectos:
-            "Lista de Proyectos",
-
-        mantenimiento:
-            "Lista de Mantenimiento",
-
-        materiales:
-            "Lista de Materiales"
-
-    };
+const tituloModulo =
+    document.getElementById("tituloModulo");
 
 
-    if (titulo) {
+const titulosModulos = {
 
-        titulo.textContent =
-            titulos[seccion] || seccion;
+    dashboard:
+        "Gestión de mantenimiento general",
 
-    }
+    personal:
+        "Gestión de personal",
 
+    cuadrillas:
+        "Gestión de cuadrillas",
+
+    proyectos:
+        "Lista de Proyectos",
+
+    mantenimiento:
+        "Lista de mantenimiento",
+
+    materiales:
+        "Lista de materiales",
+
+    usuarios:
+        "Lista de Usuarios"
+
+};
+
+
+if (tituloModulo) {
+
+    tituloModulo.textContent =
+        titulosModulos[seccion] ||
+        "Sistema de Gestión";
+
+}
 
     // --------------------------------------------------------
     // BOTÓN DE LA TOPBAR
