@@ -135,39 +135,31 @@ function crearGraficoPie(
 
                     labels:
                         etiquetas,
-datasets: [{
-    data:
-        valores,
+backgroundColor: [
+    "#BFD7EA", // Azul pastel
+    "#CDECCF", // Verde pastel
+    "#F8E7A2", // Amarillo pastel
+    "#F4C2C2", // Rojo pastel
+    "#D8C7F1", // Morado pastel
+    "#BFE8E5", // Turquesa pastel
+    "#F6D5B3", // Naranja pastel
+    "#C9D2F0", // Azul lavanda
+    "#D9E8B2", // Verde lima pastel
+    "#F2C6DE"  // Rosa pastel
+],
 
-    backgroundColor: [
-        "#93c5fd",
-        "#86efac",
-        "#fde68a",
-        "#fca5a5",
-        "#c4b5fd",
-        "#67e8f9",
-        "#fdba74",
-        "#a5b4fc",
-        "#bef264",
-        "#f9a8d4"
-    ],
-
-    borderColor: [
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff",
-        "#ffffff"
-    ],
-
-    hoverOffset: 18,
-    borderWidth: 2
-}]
+borderColor: [
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF",
+    "#FFFFFF"
+],
                 },
 
 
