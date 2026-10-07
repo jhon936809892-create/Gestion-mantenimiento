@@ -2688,7 +2688,7 @@ canvas {
 ============================================================ */
 
 #tablaMantenimiento thead th {
-    padding: 12px 10px;
+    padding: 14px 14px;
 
     text-align: center;
 
@@ -2710,7 +2710,7 @@ canvas {
 ============================================================ */
 
 #tablaMantenimiento tbody td {
-    padding: 11px 10px;
+    padding: 13px 14px;
 
     text-align: center;
 
@@ -2730,19 +2730,19 @@ canvas {
 /* FECHA */
 #tablaMantenimiento th:nth-child(1),
 #tablaMantenimiento td:nth-child(1) {
-    width: 15%;
+    width: 16%;
 }
 
 /* PROYECTO */
 #tablaMantenimiento th:nth-child(2),
 #tablaMantenimiento td:nth-child(2) {
-    width: 25%;
+    width: 24%;
 }
 
 /* SEDE */
 #tablaMantenimiento th:nth-child(3),
 #tablaMantenimiento td:nth-child(3) {
-    width: 15%;
+    width: 16%;
 }
 
 /* TRABAJO */
@@ -2754,7 +2754,7 @@ canvas {
 /* ESTADO */
 #tablaMantenimiento th:nth-child(5),
 #tablaMantenimiento td:nth-child(5) {
-    width: 20%;
+    width: 19%;
 }
 
 /* ============================================================
