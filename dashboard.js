@@ -809,10 +809,14 @@ async function cargarGraficosDashboard() {
 
 
                 const tipo =
-                    (
-                        mantenimiento.tipo_mantenimiento ||
-                        ""
-                    ).trim();
+    (
+        mantenimiento.tipo_mantenimiento ||
+        ""
+    )
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
 
                 // --------------------------------------------
