@@ -113,60 +113,137 @@ const COLORES_GRAFICOS = [
 // CADA SEDE TIENE UN COLOR DIFERENTE
 // ============================================================
 
+// ============================================================
+// CREAR GRÁFICO DE RULETA / PIE
+// CADA SEDE TIENE UN COLOR FIJO
+// ============================================================
+
 function crearGraficoPie(
     canvas,
     etiquetas,
     valores
 ) {
 
-    // Paleta de colores para las sedes
-const coloresSedes = [
-    "#1FD19F", // Verde turquesa
-    "#FF6B6B", // Rojo coral
-    "#5B5FEF", // Azul violeta
-    "#F7B731", // Amarillo dorado
-    "#A855F7", // Morado
-    "#00A8CC", // Azul turquesa
-    "#FF8C42", // Naranja
-    "#E84393", // Rosa
-    "#3742FA", // Azul intenso
-    "#10AC84"  // Verde oscuro
-];
-    // Si ya existe un gráfico en ese canvas,
-    // se elimina antes de crear el nuevo
+    // ========================================================
+    // COLORES FIJOS POR SEDE
+    // ========================================================
+
+    const coloresPorSede = {
+
+        "LIMA": "#1FD19F",
+
+        "AREQUIPA": "#FF4D6D",
+
+        "CUSCO": "#4361EE",
+
+        "TRUJILLO": "#FFB703",
+
+        "PIURA": "#8338EC",
+
+        "CHICLAYO": "#00B4D8",
+
+        "ICA": "#FB5607",
+
+        "HUANCAYO": "#E639A5",
+
+        "JULIACA": "#3A0CA3",
+
+        "TACNA": "#2A9D8F"
+    };
+
+
+    // ========================================================
+    // COLOR PARA SEDES NO REGISTRADAS
+    // ========================================================
+
+    const coloresAdicionales = [
+        "#FF6B6B",
+        "#5B5FEF",
+        "#F7B731",
+        "#A855F7",
+        "#00A8CC",
+        "#FF8C42",
+        "#E84393",
+        "#3742FA"
+    ];
+
+    let indiceColorAdicional = 0;
+
+
+    // ========================================================
+    // OBTENER COLOR DE CADA SEDE
+    // ========================================================
+
+    const colores = etiquetas.map(
+        function(sede) {
+
+            const nombreSede =
+                sede
+                    .toString()
+                    .trim()
+                    .toUpperCase();
+
+            // Si la sede tiene un color asignado
+            if (
+                coloresPorSede[
+                    nombreSede
+                ]
+            ) {
+
+                return coloresPorSede[
+                    nombreSede
+                ];
+            }
+
+            // Si aparece una sede nueva
+            const color =
+                coloresAdicionales[
+                    indiceColorAdicional %
+                    coloresAdicionales.length
+                ];
+
+            indiceColorAdicional++;
+
+            return color;
+        }
+    );
+
+
+    // ========================================================
+    // ELIMINAR GRÁFICO ANTERIOR
+    // ========================================================
+
     const graficoExistente =
         Chart.getChart(canvas);
 
     if (graficoExistente) {
+
         graficoExistente.destroy();
     }
+
+
+    // ========================================================
+    // CREAR GRÁFICO
+    // ========================================================
 
     return new Chart(
         canvas,
         {
+
             type: "pie",
 
             data: {
+
                 labels: etiquetas,
 
                 datasets: [
                     {
+
                         label: "Registros",
 
                         data: valores,
 
-                        backgroundColor:
-                            etiquetas.map(
-                                function(
-                                    sede,
-                                    indice
-                                ) {
-                                    return coloresSedes[
-                                        indice %
-                                        coloresSedes.length
-                                    ];
-                                }
-                            ),
+                        backgroundColor: colores,
 
                         borderColor: "#ffffff",
 
@@ -176,17 +253,22 @@ const coloresSedes = [
             },
 
             options: {
+
                 responsive: true,
 
                 maintainAspectRatio: false,
 
                 plugins: {
+
                     legend: {
+
                         position: "bottom"
                     },
 
                     tooltip: {
+
                         callbacks: {
+
                             label: function(
                                 contexto
                             ) {
