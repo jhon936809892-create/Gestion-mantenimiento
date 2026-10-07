@@ -119,6 +119,10 @@ function crearGraficoPie(
         typeof Chart === "undefined"
     ) {
 
+        console.error(
+            "No se puede crear el gráfico: canvas o Chart no disponible."
+        );
+
         return null;
 
     }
@@ -129,46 +133,103 @@ function crearGraficoPie(
             canvas,
             {
 
+                // ====================================================
+                // TIPO
+                // ====================================================
+
                 type: "pie",
+
+
+                // ====================================================
+                // DATOS
+                // ====================================================
 
                 data: {
 
                     labels:
                         etiquetas,
-datasets: [{
-    data:
-        valores,
 
-  backgroundColor: [
-    "#BFD7EA", // Azul pastel
-    "#CDECCF", // Verde pastel
-    "#F8E7A2", // Amarillo pastel
-    "#F4C2C2", // Rojo pastel
-    "#D8C7F1", // Morado pastel
-    "#BFE8E5", // Turquesa pastel
-    "#F6D5B3", // Naranja pastel
-    "#C9D2F0", // Azul lavanda
-    "#D9E8B2", // Verde lima pastel
-    "#F2C6DE"  // Rosa pastel
-],
 
-borderColor: [
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF",
-    "#FFFFFF"
-],
+                    datasets: [
 
-    hoverOffset: 18,
-    borderWidth: 2
-}],
+                        {
 
+                            data:
+                                valores,
+
+
+                            // ----------------------------------------
+                            // COLORES
+                            // ----------------------------------------
+
+                            backgroundColor: [
+
+                                "#BFD7EA",
+
+                                "#CDECCF",
+
+                                "#F8E7A2",
+
+                                "#F4C2C2",
+
+                                "#D8C7F1",
+
+                                "#BFE8E5",
+
+                                "#F6D5B3",
+
+                                "#C9D2F0",
+
+                                "#D9E8B2",
+
+                                "#F2C6DE"
+
+                            ],
+
+
+                            // ----------------------------------------
+                            // BORDES
+                            // ----------------------------------------
+
+                            borderColor: [
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF",
+
+                                "#FFFFFF"
+
+                            ],
+
+
+                            hoverOffset: 18,
+
+                            borderWidth: 2
+
+                        }
+
+                    ]
+
+                },
+
+
+                // ====================================================
+                // OPCIONES
+                // ====================================================
 
                 options: {
 
@@ -177,9 +238,9 @@ borderColor: [
                     maintainAspectRatio: false,
 
 
-                    // ------------------------------------------------
+                    // ==================================================
                     // ANIMACIÓN
-                    // ------------------------------------------------
+                    // ==================================================
 
                     animation: {
 
@@ -197,9 +258,9 @@ borderColor: [
                     },
 
 
-                    // ------------------------------------------------
+                    // ==================================================
                     // INTERACCIÓN
-                    // ------------------------------------------------
+                    // ==================================================
 
                     interaction: {
 
@@ -210,15 +271,21 @@ borderColor: [
                     },
 
 
-                    // ------------------------------------------------
-                    // LEYENDA
-                    // ------------------------------------------------
+                    // ==================================================
+                    // PLUGINS
+                    // ==================================================
 
                     plugins: {
 
+
+                        // ==============================================
+                        // LEYENDA
+                        // ==============================================
+
                         legend: {
 
-                            position: "bottom",
+                            position:
+                                "bottom",
 
 
                             onClick:
@@ -245,9 +312,9 @@ borderColor: [
                                         elementosActivos[0].index === indice;
 
 
-                                    // --------------------------------
+                                    // ==================================
                                     // QUITAR RESALTADO
-                                    // --------------------------------
+                                    // ==================================
 
                                     if (
                                         yaSeleccionado
@@ -264,9 +331,12 @@ borderColor: [
 
                                             chart.tooltip.setActiveElements(
                                                 [],
+
                                                 {
                                                     x: 0,
+
                                                     y: 0
+
                                                 }
                                             );
 
@@ -275,26 +345,36 @@ borderColor: [
 
                                         chart.update();
 
+
                                         return;
 
                                     }
 
 
-                                    // --------------------------------
-                                    // SELECCIONAR DISTRITO
-                                    // --------------------------------
+                                    // ==================================
+                                    // SELECCIONAR SEDE
+                                    // ==================================
 
-                                    chart.setActiveElements([
-                                        {
-                                            datasetIndex: 0,
-                                            index: indice
-                                        }
-                                    ]);
+                                    chart.setActiveElements(
+                                        [
+
+                                            {
+
+                                                datasetIndex:
+                                                    0,
+
+                                                index:
+                                                    indice
+
+                                            }
+
+                                        ]
+                                    );
 
 
-                                    // --------------------------------
+                                    // ==================================
                                     // MOSTRAR TOOLTIP
-                                    // --------------------------------
+                                    // ==================================
 
                                     if (
                                         chart.tooltip
@@ -307,7 +387,9 @@ borderColor: [
 
 
                                         const elemento =
-                                            meta.data[indice];
+                                            meta.data[
+                                                indice
+                                            ];
 
 
                                         if (
@@ -316,17 +398,27 @@ borderColor: [
 
                                             chart.tooltip.setActiveElements(
                                                 [
+
                                                     {
-                                                        datasetIndex: 0,
-                                                        index: indice
+
+                                                        datasetIndex:
+                                                            0,
+
+                                                        index:
+                                                            indice
+
                                                     }
+
                                                 ],
+
                                                 {
+
                                                     x:
                                                         elemento.x,
 
                                                     y:
                                                         elemento.y
+
                                                 }
                                             );
 
@@ -342,13 +434,14 @@ borderColor: [
                         },
 
 
-                        // ------------------------------------------------
+                        // ==============================================
                         // TOOLTIP
-                        // ------------------------------------------------
+                        // ==============================================
 
                         tooltip: {
 
-                            enabled: true
+                            enabled:
+                                true
 
                         }
 
@@ -376,35 +469,46 @@ function cargarSedesEnFiltros(
     const configuraciones = [
 
         {
+
             filtro:
                 "filtroCertificaciones",
 
             datos:
                 datosPorTipo.certificaciones
+
         },
 
+
         {
+
             filtro:
                 "filtroAverias",
 
             datos:
                 datosPorTipo.averias
+
         },
 
+
         {
+
             filtro:
                 "filtroSplitter",
 
             datos:
                 datosPorTipo.splitters
+
         },
 
+
         {
+
             filtro:
                 "filtroTrabajoCampo",
 
             datos:
                 datosPorTipo.trabajoCampo
+
         }
 
     ];
@@ -419,23 +523,26 @@ function cargarSedesEnFiltros(
                 );
 
 
-            if (!select) {
+            if (
+                !select
+            ) {
 
                 return;
 
             }
 
 
-            // ------------------------------------------------
+            // ====================================================
             // LIMPIAR SELECT
-            // ------------------------------------------------
+            // ====================================================
 
-            select.innerHTML = "";
+            select.innerHTML =
+                "";
 
 
-            // ------------------------------------------------
+            // ====================================================
             // OPCIÓN INICIAL
-            // ------------------------------------------------
+            // ====================================================
 
             const opcionInicial =
                 document.createElement(
@@ -456,10 +563,9 @@ function cargarSedesEnFiltros(
             );
 
 
-            // ------------------------------------------------
-            // OBTENER SOLO LAS SEDES
-            // DE ESTE TIPO DE MANTENIMIENTO
-            // ------------------------------------------------
+            // ====================================================
+            // OBTENER SEDES
+            // ====================================================
 
             const sedes =
                 Object.keys(
@@ -467,12 +573,21 @@ function cargarSedesEnFiltros(
                 );
 
 
+            // ====================================================
+            // ORDENAR SEDES
+            // ====================================================
+
             sedes.sort(
-                function(a, b) {
+                function(
+                    a,
+                    b
+                ) {
 
                     return a.localeCompare(
                         b,
+
                         "es",
+
                         {
                             sensitivity:
                                 "base"
@@ -483,9 +598,9 @@ function cargarSedesEnFiltros(
             );
 
 
-            // ------------------------------------------------
+            // ====================================================
             // AGREGAR SEDES
-            // ------------------------------------------------
+            // ====================================================
 
             sedes.forEach(
                 function(sede) {
@@ -521,10 +636,6 @@ function cargarSedesEnFiltros(
 // CONFIGURAR FILTRO DE UN GRÁFICO
 // ============================================================
 
-// ============================================================
-// CONFIGURAR FILTRO DE UN GRÁFICO
-// ============================================================
-
 function configurarFiltroGrafico(
     idSelect,
     idCantidad,
@@ -534,10 +645,15 @@ function configurarFiltroGrafico(
 ) {
 
     const select =
-        document.getElementById(idSelect);
+        document.getElementById(
+            idSelect
+        );
+
 
     const cantidad =
-        document.getElementById(idCantidad);
+        document.getElementById(
+            idCantidad
+        );
 
 
     if (
@@ -555,12 +671,22 @@ function configurarFiltroGrafico(
     // ============================================================
 
     const coloresOriginales = [
-        ...grafico.data.datasets[0].backgroundColor
+
+        ...grafico
+            .data
+            .datasets[0]
+            .backgroundColor
+
     ];
 
 
     const bordesOriginales = [
-        ...grafico.data.datasets[0].borderColor
+
+        ...grafico
+            .data
+            .datasets[0]
+            .borderColor
+
     ];
 
 
@@ -584,26 +710,36 @@ function configurarFiltroGrafico(
             ) {
 
                 grafico.data.labels = [
+
                     ...etiquetasOriginales
+
                 ];
 
 
                 grafico.data.datasets[0].data = [
+
                     ...valoresOriginales
+
                 ];
 
 
                 grafico.data.datasets[0].backgroundColor = [
+
                     ...coloresOriginales
+
                 ];
 
 
                 grafico.data.datasets[0].borderColor = [
+
                     ...bordesOriginales
+
                 ];
 
 
-                grafico.setActiveElements([]);
+                grafico.setActiveElements(
+                    []
+                );
 
 
                 if (
@@ -612,9 +748,13 @@ function configurarFiltroGrafico(
 
                     grafico.tooltip.setActiveElements(
                         [],
+
                         {
+
                             x: 0,
+
                             y: 0
+
                         }
                     );
 
@@ -625,12 +765,14 @@ function configurarFiltroGrafico(
                     cantidad
                 ) {
 
-                    cantidad.innerHTML = "";
+                    cantidad.innerHTML =
+                        "";
 
                 }
 
 
                 grafico.update();
+
 
                 return;
 
@@ -661,7 +803,9 @@ function configurarFiltroGrafico(
             // ====================================================
 
             const valor =
-                valoresOriginales[indice];
+                valoresOriginales[
+                    indice
+                ];
 
 
             // ====================================================
@@ -669,11 +813,15 @@ function configurarFiltroGrafico(
             // ====================================================
 
             const colorSede =
-                coloresOriginales[indice];
+                coloresOriginales[
+                    indice
+                ];
 
 
             const bordeSede =
-                bordesOriginales[indice];
+                bordesOriginales[
+                    indice
+                ];
 
 
             // ====================================================
@@ -681,26 +829,34 @@ function configurarFiltroGrafico(
             // ====================================================
 
             grafico.data.labels = [
+
                 sedeSeleccionada
+
             ];
 
 
             grafico.data.datasets[0].data = [
+
                 valor
+
             ];
 
 
             // ====================================================
-            // CONSERVAR COLOR DE LA SEDE
+            // CONSERVAR COLOR
             // ====================================================
 
             grafico.data.datasets[0].backgroundColor = [
+
                 colorSede
+
             ];
 
 
             grafico.data.datasets[0].borderColor = [
+
                 bordeSede
+
             ];
 
 
@@ -713,20 +869,25 @@ function configurarFiltroGrafico(
             ) {
 
                 cantidad.innerHTML = `
+
                     <strong>
                         ${valor}
                     </strong>
+
                     registros
+
                 `;
 
             }
 
 
             // ====================================================
-            // LIMPIAR SELECCIÓN DEL GRÁFICO
+            // LIMPIAR SELECCIÓN
             // ====================================================
 
-            grafico.setActiveElements([]);
+            grafico.setActiveElements(
+                []
+            );
 
 
             if (
@@ -735,9 +896,13 @@ function configurarFiltroGrafico(
 
                 grafico.tooltip.setActiveElements(
                     [],
+
                     {
+
                         x: 0,
+
                         y: 0
+
                     }
                 );
 
@@ -754,6 +919,7 @@ function configurarFiltroGrafico(
 
 }
 
+
 // ============================================================
 // GRÁFICOS DEL DASHBOARD
 // ============================================================
@@ -762,13 +928,19 @@ async function cargarGraficosDashboard() {
 
     try {
 
+        // ========================================================
+        // OBTENER MANTENIMIENTOS
+        // ========================================================
+
         const respuesta =
             await fetch(
                 "/api/mantenimientos"
             );
 
 
-        if (!respuesta.ok) {
+        if (
+            !respuesta.ok
+        ) {
 
             throw new Error(
                 "Error al obtener mantenimientos"
@@ -781,9 +953,19 @@ async function cargarGraficosDashboard() {
             await respuesta.json();
 
 
-        // ====================================================
-        // DATOS
-        // ====================================================
+        // ========================================================
+        // VERIFICAR DATOS RECIBIDOS
+        // ========================================================
+
+        console.log(
+            "MANTENIMIENTOS RECIBIDOS:",
+            mantenimientos
+        );
+
+
+        // ========================================================
+        // DATOS POR TIPO
+        // ========================================================
 
         const certificaciones = {};
 
@@ -794,38 +976,67 @@ async function cargarGraficosDashboard() {
         const trabajoCampo = {};
 
 
-        // ====================================================
+        // ========================================================
         // RECORRER MANTENIMIENTOS
-        // ====================================================
+        // ========================================================
 
         mantenimientos.forEach(
             function(mantenimiento) {
+
+                // ==================================================
+                // SEDE
+                // ==================================================
 
                 const sede =
                     (
                         mantenimiento.sede ||
                         "Sin sede"
-                    ).trim();
+                    )
+                    .toString()
+                    .trim();
 
+
+                // ==================================================
+                // TIPO DE MANTENIMIENTO
+                // ==================================================
 
                 const tipo =
-    (
-        mantenimiento.tipo_mantenimiento ||
-        ""
-    )
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+                    (
+                        mantenimiento.tipo_mantenimiento ||
+                        ""
+                    )
+                    .toString()
+                    .trim()
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(
+                        /[\u0300-\u036f]/g,
+                        ""
+                    );
 
 
-                // --------------------------------------------
+                console.log(
+                    "Mantenimiento:",
+                    {
+                        sede:
+                            sede,
+
+                        tipoOriginal:
+                            mantenimiento.tipo_mantenimiento,
+
+                        tipoNormalizado:
+                            tipo
+                    }
+                );
+
+
+                // ==================================================
                 // CERTIFICACIONES
-                // --------------------------------------------
+                // ==================================================
 
                 if (
                     tipo ===
-                    "Certificación"
+                    "certificacion"
                 ) {
 
                     certificaciones[sede] =
@@ -837,13 +1048,13 @@ async function cargarGraficosDashboard() {
                 }
 
 
-                // --------------------------------------------
+                // ==================================================
                 // AVERÍAS
-                // --------------------------------------------
+                // ==================================================
 
                 if (
                     tipo ===
-                    "Avería"
+                    "averia"
                 ) {
 
                     averias[sede] =
@@ -855,13 +1066,13 @@ async function cargarGraficosDashboard() {
                 }
 
 
-                // --------------------------------------------
+                // ==================================================
                 // CAMBIO DE SPLITTER
-                // --------------------------------------------
+                // ==================================================
 
                 if (
                     tipo ===
-                    "Cambio de splitter"
+                    "cambio de splitter"
                 ) {
 
                     splitters[sede] =
@@ -873,13 +1084,13 @@ async function cargarGraficosDashboard() {
                 }
 
 
-                // --------------------------------------------
+                // ==================================================
                 // TRABAJO EN CAMPO
-                // --------------------------------------------
+                // ==================================================
 
                 if (
                     tipo ===
-                    "Trabajo en campo"
+                    "trabajo en campo"
                 ) {
 
                     trabajoCampo[sede] =
@@ -894,9 +1105,37 @@ async function cargarGraficosDashboard() {
         );
 
 
-        // ====================================================
-        // CARGAR SEDES EN CADA SELECT
-        // ====================================================
+        // ========================================================
+        // MOSTRAR RESULTADOS EN CONSOLA
+        // ========================================================
+
+        console.log(
+            "CERTIFICACIONES:",
+            certificaciones
+        );
+
+
+        console.log(
+            "AVERÍAS:",
+            averias
+        );
+
+
+        console.log(
+            "SPLITTERS:",
+            splitters
+        );
+
+
+        console.log(
+            "TRABAJO EN CAMPO:",
+            trabajoCampo
+        );
+
+
+        // ========================================================
+        // CARGAR SEDES EN LOS FILTROS
+        // ========================================================
 
         cargarSedesEnFiltros({
 
@@ -915,9 +1154,9 @@ async function cargarGraficosDashboard() {
         });
 
 
-        // ====================================================
+        // ========================================================
         // DESTRUIR GRÁFICOS ANTERIORES
-        // ====================================================
+        // ========================================================
 
         if (
             graficoCertificaciones
@@ -967,9 +1206,9 @@ async function cargarGraficosDashboard() {
         }
 
 
-        // ====================================================
+        // ========================================================
         // GRÁFICO CERTIFICACIONES
-        // ====================================================
+        // ========================================================
 
         const canvasCertificaciones =
             document.getElementById(
@@ -991,17 +1230,19 @@ async function cargarGraficosDashboard() {
 
         graficoCertificaciones =
             crearGraficoPie(
+
                 canvasCertificaciones,
 
                 etiquetasCertificaciones,
 
                 valoresCertificaciones
+
             );
 
 
-        // ====================================================
+        // ========================================================
         // GRÁFICO AVERÍAS
-        // ====================================================
+        // ========================================================
 
         const canvasAverias =
             document.getElementById(
@@ -1023,17 +1264,19 @@ async function cargarGraficosDashboard() {
 
         graficoAverias =
             crearGraficoPie(
+
                 canvasAverias,
 
                 etiquetasAverias,
 
                 valoresAverias
+
             );
 
 
-        // ====================================================
+        // ========================================================
         // GRÁFICO CAMBIO DE SPLITTER
-        // ====================================================
+        // ========================================================
 
         const canvasSplitter =
             document.getElementById(
@@ -1055,17 +1298,19 @@ async function cargarGraficosDashboard() {
 
         graficoSplitters =
             crearGraficoPie(
+
                 canvasSplitter,
 
                 etiquetasSplitters,
 
                 valoresSplitters
+
             );
 
 
-        // ====================================================
+        // ========================================================
         // GRÁFICO TRABAJO EN CAMPO
-        // ====================================================
+        // ========================================================
 
         const canvasTrabajoCampo =
             document.getElementById(
@@ -1087,17 +1332,19 @@ async function cargarGraficosDashboard() {
 
         graficoTrabajoCampo =
             crearGraficoPie(
+
                 canvasTrabajoCampo,
 
                 etiquetasTrabajoCampo,
 
                 valoresTrabajoCampo
+
             );
 
 
-        // ====================================================
-        // CONFIGURAR FILTRO CERTIFICACIONES
-        // ====================================================
+        // ========================================================
+        // FILTRO CERTIFICACIONES
+        // ========================================================
 
         configurarFiltroGrafico(
 
@@ -1114,9 +1361,9 @@ async function cargarGraficosDashboard() {
         );
 
 
-        // ====================================================
-        // CONFIGURAR FILTRO AVERÍAS
-        // ====================================================
+        // ========================================================
+        // FILTRO AVERÍAS
+        // ========================================================
 
         configurarFiltroGrafico(
 
@@ -1133,9 +1380,9 @@ async function cargarGraficosDashboard() {
         );
 
 
-        // ====================================================
-        // CONFIGURAR FILTRO SPLITTER
-        // ====================================================
+        // ========================================================
+        // FILTRO SPLITTER
+        // ========================================================
 
         configurarFiltroGrafico(
 
@@ -1152,9 +1399,9 @@ async function cargarGraficosDashboard() {
         );
 
 
-        // ====================================================
-        // CONFIGURAR FILTRO TRABAJO EN CAMPO
-        // ====================================================
+        // ========================================================
+        // FILTRO TRABAJO EN CAMPO
+        // ========================================================
 
         configurarFiltroGrafico(
 
@@ -1168,6 +1415,15 @@ async function cargarGraficosDashboard() {
 
             valoresTrabajoCampo
 
+        );
+
+
+        // ========================================================
+        // FINALIZADO
+        // ========================================================
+
+        console.log(
+            "Gráficos del dashboard cargados correctamente."
         );
 
     }
