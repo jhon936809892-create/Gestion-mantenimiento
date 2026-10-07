@@ -122,15 +122,15 @@ function crearGraficoPie(
     // Paleta de colores para las sedes
 const coloresSedes = [
     "#1FD19F", // Verde turquesa
-    "#FF6647", // Coral
-    "#4C6FFF", // Azul
-    "#FFC857", // Amarillo
-    "#9B59B6", // Morado
-    "#F06292", // Rosado
-    "#00A8E8", // Celeste
+    "#FF6B6B", // Rojo coral
+    "#5B5FEF", // Azul violeta
+    "#F7B731", // Amarillo dorado
+    "#A855F7", // Morado
+    "#00A8CC", // Azul turquesa
     "#FF8C42", // Naranja
-    "#6C757D", // Gris
-    "#20C997"  // Verde complementario
+    "#E84393", // Rosa
+    "#3742FA", // Azul intenso
+    "#10AC84"  // Verde oscuro
 ];
     // Si ya existe un gráfico en ese canvas,
     // se elimina antes de crear el nuevo
