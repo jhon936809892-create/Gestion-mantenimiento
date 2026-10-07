@@ -1,4 +1,4 @@
-```css
+
 /* ============================================================
    SISTEMA DE GESTIÓN DE CUADRILLAS
    CSS COMPLETO
@@ -2779,4 +2779,29 @@ canvas {
         font-size: 16px;
     }
 }
-```
+/* ========================================
+   TRANSICIÓN DE LOS GRÁFICOS DEL DASHBOARD
+   ======================================== */
+
+.grafico-panel {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.grafico-panel:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.grafico-ruleta {
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.grafico-panel:hover .grafico-ruleta {
+    transform: scale(1.02);
+}
