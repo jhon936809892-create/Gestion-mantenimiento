@@ -403,112 +403,242 @@
      GRÁFICOS
 ================================================== -->
 
+<!-- =================================================
+     GRÁFICOS
+================================================== -->
+
 <div class="graficos-dashboard">
 
 
-    <!-- CERTIFICACIONES -->
+    <!-- =================================================
+         CERTIFICACIONES
+    ================================================== -->
 
-<div class="panel grafico-panel">
+    <div class="panel grafico-panel">
 
-    <h2>Certificaciones por Distrito</h2>
+        <h2>Certificaciones por Distrito</h2>
 
-    <select
-        id="filtroCertificaciones"
-        class="filtro-grafico"
-    >
-        <option value="">Seleccionar distrito</option>
-    </select>
+        <div class="controles-grafico">
 
-    <div
-        id="cantidadCertificaciones"
-        class="cantidad-grafico"
-    >
-       
+            <select
+                id="filtroCertificaciones"
+                class="filtro-grafico"
+            >
+                <option value="">
+                    Seleccionar distrito
+                </option>
+            </select>
+
+
+            <select
+                id="tipoGraficoCertificaciones"
+                class="tipo-grafico"
+            >
+
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
+
+                <option value="area">
+                    Gráfico de área
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="cantidadCertificaciones"
+            class="cantidad-grafico"
+        >
+        </div>
+
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoCertificaciones"
+            ></canvas>
+
+        </div>
+
     </div>
 
-    <div class="grafico-ruleta">
-        <canvas id="graficoCertificaciones"></canvas>
+
+    <!-- =================================================
+         AVERÍAS
+    ================================================== -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Averías por Distrito</h2>
+
+        <div class="controles-grafico">
+
+            <select
+                id="filtroAverias"
+                class="filtro-grafico"
+            >
+
+                <option value="">
+                    Seleccionar distrito
+                </option>
+
+            </select>
+
+
+            <select
+                id="tipoGraficoAverias"
+                class="tipo-grafico"
+            >
+
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
+
+                <option value="area">
+                    Gráfico de área
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="cantidadAverias"
+            class="cantidad-grafico"
+        >
+        </div>
+
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoAverias"
+            ></canvas>
+
+        </div>
+
     </div>
 
-</div>
+
+    <!-- =================================================
+         CAMBIO DE SPLITTER
+    ================================================== -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Cambio de splitter por Distrito</h2>
+
+        <div class="controles-grafico">
+
+            <select
+                id="filtroSplitter"
+                class="filtro-grafico"
+            >
+
+                <option value="">
+                    Seleccionar distrito
+                </option>
+
+            </select>
 
 
-    <!-- AVERÍAS -->
+            <select
+                id="tipoGraficoSplitter"
+                class="tipo-grafico"
+            >
 
-<div class="panel grafico-panel">
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
 
-    <h2>Averías por Distrito</h2>
+                <option value="area">
+                    Gráfico de área
+                </option>
 
-    <select
-        id="filtroAverias"
-        class="filtro-grafico"
-    >
-        <option value="">Seleccionar distrito</option>
-    </select>
+            </select>
 
-    <div
-        id="cantidadAverias"
-        class="cantidad-grafico"
-    >
-       
+        </div>
+
+
+        <div
+            id="cantidadSplitter"
+            class="cantidad-grafico"
+        >
+        </div>
+
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoSplitter"
+            ></canvas>
+
+        </div>
+
     </div>
 
-    <div class="grafico-ruleta">
-        <canvas id="graficoAverias"></canvas>
+
+    <!-- =================================================
+         TRABAJO EN CAMPO
+    ================================================== -->
+
+    <div class="panel grafico-panel">
+
+        <h2>Trabajo en campo por Distrito</h2>
+
+        <div class="controles-grafico">
+
+            <select
+                id="filtroTrabajoCampo"
+                class="filtro-grafico"
+            >
+
+                <option value="">
+                    Seleccionar distrito
+                </option>
+
+            </select>
+
+
+            <select
+                id="tipoGraficoTrabajoCampo"
+                class="tipo-grafico"
+            >
+
+                <option value="pie">
+                    Gráfico de ruleta
+                </option>
+
+                <option value="area">
+                    Gráfico de área
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="cantidadTrabajoCampo"
+            class="cantidad-grafico"
+        >
+        </div>
+
+
+        <div class="grafico-ruleta">
+
+            <canvas
+                id="graficoTrabajoCampo"
+            ></canvas>
+
+        </div>
+
     </div>
 
-</div>
-
-
-   <div class="panel grafico-panel">
-
-    <h2>Cambio de splitter por Distrito</h2>
-
-    <select
-        id="filtroSplitter"
-        class="filtro-grafico"
-    >
-        <option value="">Seleccionar distrito</option>
-    </select>
-
-    <div
-        id="cantidadSplitter"
-        class="cantidad-grafico"
-    >
-        
-    </div>
-
-    <div class="grafico-ruleta">
-        <canvas id="graficoSplitter"></canvas>
-    </div>
-
-</div>
-
-    <!-- TRABAJO EN CAMPO -->
-<div class="panel grafico-panel">
-
-    <h2>Trabajo en campo por Distrito</h2>
-
-    <select
-        id="filtroTrabajoCampo"
-        class="filtro-grafico"
-    >
-        <option value="">Seleccionar distrito</option>
-    </select>
-
-    <div
-        id="cantidadTrabajoCampo"
-        class="cantidad-grafico"
-    >
-        
-    </div>
-
-    <div class="grafico-ruleta">
-        <canvas id="graficoTrabajoCampo"></canvas>
-    </div>
-
-</div>
-    
 
 </div>
 
