@@ -2638,72 +2638,47 @@ canvas {
 }
 
 
-/* ============================================================
+/* =========================================================
    BOTÓN MENÚ MÓVIL
-============================================================ */
+   ========================================================= */
 
-/* En PC no se muestra */
-
+/* En computadora está oculto */
 .btn-menu-mobile {
     display: none;
 }
 
 
-/* ============================================================
-   MENÚ SOLO PARA CELULAR
-============================================================ */
+/* =========================================================
+   SOLO EN CELULAR
+   ========================================================= */
 
-@media screen and (max-width: 768px) {
-
-    /* Mostrar las 3 rayas */
+@media (max-width: 768px) {
 
     .btn-menu-mobile {
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
-        width: 42px;
-
-        height: 42px;
+        width: 45px;
+        height: 45px;
 
         border: none;
+        border-radius: 8px;
 
-        background: transparent;
+        background: #1f2937;
+        color: white;
 
-        font-size: 28px;
-
+        font-size: 25px;
         cursor: pointer;
 
-        padding: 0;
-    }
-
-
-    /* Sidebar cerrado */
-
-    .sidebar {
         position: fixed;
+        top: 15px;
+        left: 15px;
 
-        top: 0;
-
-        left: -280px;
-
-        width: 280px;
-
-        height: 100vh;
-
-        z-index: 1000;
-
-        transition:
-            left 0.3s ease;
+        z-index: 2000;
     }
 
-
-    /* Sidebar abierto */
-
-    .sidebar.mobile-open {
-        left: 0;
+    .btn-menu-mobile:hover {
+        opacity: 0.9;
     }
-
 }
