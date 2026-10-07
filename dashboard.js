@@ -160,7 +160,7 @@ borderColor: [
     "#FFFFFF",
     "#FFFFFF"
 ],
-                },
+                
 
 
                 options: {
