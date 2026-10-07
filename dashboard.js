@@ -167,7 +167,7 @@ borderColor: [
 
     hoverOffset: 18,
     borderWidth: 2
-}]       
+}],
 
 
                 options: {
