@@ -598,6 +598,12 @@ function obtenerFechaLocal(
 // PARA EL GRÁFICO DE ÁREA
 // ============================================================
 
+
+// ============================================================
+// OBTENER DATOS SEGÚN RANGO DE FECHAS
+// INCLUYE TODOS LOS DÍAS DEL RANGO
+// ============================================================
+
 function obtenerDatosSemanales(
     mantenimientos,
     tipoBuscado,
@@ -613,73 +619,95 @@ function obtenerDatosSemanales(
 
 
     // ========================================================
-    // FECHA INICIAL
+    // FECHA DESDE
     // ========================================================
 
-    if (
-        fechaDesde
-    ) {
+    if (fechaDesde) {
 
         const partes =
             fechaDesde.split("-");
 
         inicio =
             new Date(
-
-                Number(
-                    partes[0]
-                ),
-
-                Number(
-                    partes[1]
-                ) - 1,
-
-                Number(
-                    partes[2]
-                ),
-
+                Number(partes[0]),
+                Number(partes[1]) - 1,
+                Number(partes[2]),
                 0,
                 0,
                 0,
                 0
-
             );
 
     }
 
 
     // ========================================================
-    // FECHA FINAL
+    // FECHA HASTA
     // ========================================================
 
-    if (
-        fechaHasta
-    ) {
+    if (fechaHasta) {
 
         const partes =
             fechaHasta.split("-");
 
         fin =
             new Date(
-
-                Number(
-                    partes[0]
-                ),
-
-                Number(
-                    partes[1]
-                ) - 1,
-
-                Number(
-                    partes[2]
-                ),
-
+                Number(partes[0]),
+                Number(partes[1]) - 1,
+                Number(partes[2]),
                 23,
                 59,
                 59,
                 999
-
             );
+
+    }
+
+
+    // ========================================================
+    // SI SOLO HAY UNA FECHA
+    // ========================================================
+
+    if (
+        inicio &&
+        !fin
+    ) {
+
+        fin =
+            new Date(
+                inicio
+            );
+
+        fin.setHours(
+            23,
+            59,
+            59,
+            999
+        );
+
+    }
+
+
+    // ========================================================
+    // SI SOLO HAY FECHA HASTA
+    // ========================================================
+
+    if (
+        !inicio &&
+        fin
+    ) {
+
+        inicio =
+            new Date(
+                fin
+            );
+
+        inicio.setHours(
+            0,
+            0,
+            0,
+            0
+        );
 
     }
 
@@ -690,6 +718,10 @@ function obtenerDatosSemanales(
 
     mantenimientos.forEach(
         function(mantenimiento) {
+
+            // ------------------------------------------------
+            // TIPO
+            // ------------------------------------------------
 
             const tipo =
                 (
@@ -716,7 +748,7 @@ function obtenerDatosSemanales(
 
 
             // ------------------------------------------------
-            // FILTRO POR SEDE
+            // SEDE
             // ------------------------------------------------
 
             const sede =
@@ -739,7 +771,7 @@ function obtenerDatosSemanales(
 
 
             // ------------------------------------------------
-            // FECHA DEL MANTENIMIENTO
+            // FECHA
             // ------------------------------------------------
 
             const fecha =
@@ -758,7 +790,7 @@ function obtenerDatosSemanales(
 
 
             // ------------------------------------------------
-            // FILTRO FECHA DESDE
+            // FILTRO DESDE
             // ------------------------------------------------
 
             if (
@@ -772,7 +804,7 @@ function obtenerDatosSemanales(
 
 
             // ------------------------------------------------
-            // FILTRO FECHA HASTA
+            // FILTRO HASTA
             // ------------------------------------------------
 
             if (
@@ -786,7 +818,7 @@ function obtenerDatosSemanales(
 
 
             // ------------------------------------------------
-            // CREAR CLAVE YYYY-MM-DD
+            // CLAVE YYYY-MM-DD
             // ------------------------------------------------
 
             const anio =
@@ -829,13 +861,92 @@ function obtenerDatosSemanales(
 
 
     // ========================================================
-    // ORDENAR FECHAS
+    // CREAR TODOS LOS DÍAS DEL RANGO
     // ========================================================
 
-    const fechasOrdenadas =
-        Object.keys(
-            fechas
-        ).sort();
+    const fechasOrdenadas = [];
+
+
+    if (
+        inicio &&
+        fin
+    ) {
+
+        const fechaActual =
+            new Date(
+                inicio
+            );
+
+        fechaActual.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        const fechaFinal =
+            new Date(
+                fin
+            );
+
+        fechaFinal.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        while (
+            fechaActual <= fechaFinal
+        ) {
+
+            const anio =
+                fechaActual.getFullYear();
+
+            const mes =
+                String(
+                    fechaActual.getMonth() + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const dia =
+                String(
+                    fechaActual.getDate()
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            const clave =
+                `${anio}-${mes}-${dia}`;
+
+
+            fechasOrdenadas.push(
+                clave
+            );
+
+
+            fechaActual.setDate(
+                fechaActual.getDate() + 1
+            );
+
+        }
+
+    }
+    else {
+
+        fechasOrdenadas.push(
+            ...Object.keys(
+                fechas
+            ).sort()
+        );
+
+    }
 
 
     // ========================================================
@@ -887,15 +998,14 @@ function obtenerDatosSemanales(
 
     // ========================================================
     // VALORES
+    // SI NO HAY REGISTROS ESE DÍA = 0
     // ========================================================
 
     const valores =
         fechasOrdenadas.map(
             function(fecha) {
 
-                return fechas[
-                    fecha
-                ];
+                return fechas[fecha] || 0;
 
             }
         );
@@ -912,6 +1022,7 @@ function obtenerDatosSemanales(
     };
 
 }
+
 
 
 // ============================================================
