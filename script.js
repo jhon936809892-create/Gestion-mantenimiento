@@ -165,8 +165,24 @@ function mostrarSeccion(seccion, boton) {
 
         }
 
-    }
+        
 
+    }
+if (seccion === "personal") {
+
+    botonTopbar.innerHTML = `
+
+        <button
+            type="button"
+            class="btn-primary"
+            onclick="abrirModalPersonal()"
+        >
+            + Registrar personal
+        </button>
+
+    `;
+
+}
 
     // --------------------------------------------------------
     // DASHBOARD
