@@ -936,44 +936,62 @@
      PERSONAL
 ===================================================== -->
 
+```html
+<!-- =====================================================
+     PERSONAL
+===================================================== -->
+
 <section
     id="personal"
     class="seccion"
 >
 
+    <div class="panel">
 
-    
-<div class="panel">
+        <!-- ENCABEZADO Y BOTÓN -->
+        <div class="panel-titulo-dashboard">
 
-    <div class="tabla-responsive">
+            <div>
+                <h2>Personal registrado</h2>
+                <p>Gestión del personal de las cuadrillas</p>
+            </div>
 
-        <table>
+            <button
+                type="button"
+                class="btn-primary"
+                onclick="abrirModalPersonal()"
+            >
+                + Registrar personal
+            </button>
 
-            <thead>
+        </div>
 
-                <tr>
+        <!-- TABLA DE PERSONAL -->
+        <div class="tabla-responsive">
 
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>DNI / CE</th>
-                    <th>Celular</th>
-                    <th>Cargo</th>
-                    <th>Cuadrilla</th>
+            <table>
 
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>DNI / CE</th>
+                        <th>Celular</th>
+                        <th>Cargo</th>
+                        <th>Cuadrilla</th>
+                    </tr>
+                </thead>
 
-            </thead>
+                <tbody id="tablaPersonal"></tbody>
 
-            <tbody id="tablaPersonal"></tbody>
+            </table>
 
-        </table>
+        </div>
 
     </div>
 
-</div>
-
-
 </section>
+```
 
 <!-- =====================================================
      CUADRILLAS
