@@ -2847,3 +2847,60 @@ canvas {
 .tabla-dashboard td:nth-child(7) {
     width: 10%;
 }
+
+
+
+/* ============================================================
+   ENCABEZADO DEL MÓDULO PERSONAL
+============================================================ */
+
+.encabezado-personal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px 20px 15px;
+    width: 100%;
+}
+
+.encabezado-personal h2 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.encabezado-personal p {
+    margin: 5px 0 0;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   BOTÓN REGISTRAR PERSONAL
+============================================================ */
+
+.btn-agregar-personal {
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   PERSONAL EN CELULAR
+============================================================ */
+
+@media (max-width: 768px) {
+
+    .encabezado-personal {
+        align-items: flex-start;
+    }
+
+    .btn-agregar-personal {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+}
