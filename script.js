@@ -164,10 +164,6 @@ function mostrarSeccion(seccion, boton) {
             `;
 
         }
-
-        
-
-    }
 if (seccion === "personal") {
 
     botonTopbar.innerHTML = `
@@ -183,6 +179,10 @@ if (seccion === "personal") {
     `;
 
 }
+        
+
+    }
+
 
     // --------------------------------------------------------
     // DASHBOARD
