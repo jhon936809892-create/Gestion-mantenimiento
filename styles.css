@@ -2881,11 +2881,7 @@ canvas {
    BOTÓN REGISTRAR PERSONAL
 ============================================================ */
 
-.btn-agregar-personal {
-    margin-left: auto;
-    flex-shrink: 0;
-    white-space: nowrap;
-}
+
 
 
 /* ============================================================
@@ -2898,9 +2894,6 @@ canvas {
         align-items: flex-start;
     }
 
-    .btn-agregar-personal {
-        padding: 9px 12px;
-        font-size: 12px;
-    }
+   
 
 }
