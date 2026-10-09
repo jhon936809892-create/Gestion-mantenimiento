@@ -118,6 +118,8 @@ async function cargarPersonal() {
         const personal =
             await respuesta.json();
 
+       personalActual = personal;
+
 
         // Guardamos para Dashboard
 
@@ -145,44 +147,41 @@ async function cargarPersonal() {
 
         personal.forEach(function(persona) {
 
-            const fila =
-                document.createElement("tr");
+        
+const fila = document.createElement("tr");
 
+fila.innerHTML = `
 
-            fila.innerHTML = `
+    <td>${persona.nombres || ""}</td>
 
-                <td>
-                    ${persona.nombres || ""}
-                </td>
+    <td>${persona.apellidos || ""}</td>
 
-                <td>
-                    ${persona.apellidos || ""}
-                </td>
+    <td>${persona.documento || persona.dni || ""}</td>
 
-                <td>
-                    ${
-                        persona.documento ||
-                        persona.dni ||
-                        ""
-                    }
-                </td>
+    <td>${persona.celular || ""}</td>
 
-                <td>
-                    ${persona.celular || ""}
-                </td>
+    <td>${persona.cargo || ""}</td>
 
-                <td>
-                    ${persona.cargo || ""}
-                </td>
+    <td>${persona.cuadrilla || ""}</td>
 
-                <td>
-                    ${
-                        persona.cuadrilla ||
-                        ""
-                    }
-                </td>
+    ${
+        modoEdicionPersonal
+        ? `
+            <td>
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="editarPersonal('${persona.id}')"
+                >
+                    ✏️ Editar
+                </button>
+            </td>
+        `
+        : ""
+    }
 
-            `;
+`;
+
 
 
             tabla.appendChild(fila);
