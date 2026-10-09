@@ -2996,3 +2996,36 @@ td.celda-acciones-personal {
     background: #b45309;
 }
 
+/* Mantener la altura de las filas de Personal */
+#tablaPersonal tr {
+    height: 46px;
+}
+
+#tablaPersonal td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Mantener cuadrilla y botones en una sola línea */
+#tablaPersonal td.celda-acciones-personal {
+    white-space: nowrap;
+}
+
+/* Evitar que los botones aumenten la altura de la fila */
+#tablaPersonal .acciones-personal {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    vertical-align: middle;
+}
+
+#tablaPersonal .acciones-personal button {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    flex: 0 0 24px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
