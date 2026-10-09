@@ -3056,26 +3056,37 @@ canvas {
     background-color: #1d4ed8;
 }
 
-/* Botón Eliminar: mismo tamaño que Editar */
-.btn-eliminar-personal {
-width: 34px;
-height: 34px;
-padding: 0;
-margin-left: 4px;
+/* Acciones de la tabla Personal: no modificar el tamaño de la fila */
+#personal #tablaPersonal td:last-child {
+white-space: nowrap;
+vertical-align: middle;
+}
+
+#personal #tablaPersonal td:last-child .btn-editar-personal,
+#personal #tablaPersonal td:last-child .btn-eliminar-personal {
+box-sizing: border-box;
 display: inline-flex;
 align-items: center;
 justify-content: center;
-background-color: #dc2626;
-color: #ffffff;
-border: none;
-border-radius: 6px;
-font-size: 15px;
-cursor: pointer;
+width: 30px;
+height: 30px;
+min-width: 30px;
+padding: 0;
+margin: 0 2px;
+line-height: 1;
+font-size: 14px;
 vertical-align: middle;
 flex-shrink: 0;
 }
 
-.btn-eliminar-personal:hover {
-background-color: #b91c1c;
+#personal #tablaPersonal td:last-child .btn-eliminar-personal {
+background-color: #dc2626;
+color: #fff;
+border: none;
+border-radius: 6px;
+cursor: pointer;
 }
 
+#personal #tablaPersonal td:last-child .btn-eliminar-personal:hover {
+background-color: #b91c1c;
+}
