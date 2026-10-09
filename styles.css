@@ -2990,12 +2990,44 @@ canvas {
 }
 
 
-/* BOTÓN CANCELAR DENTRO DEL MÓDULO PERSONAL */
-#personal .btn-secondary,
-#personal .btn-cancelar,
-#personal .btn-cancelar-personal,
-#personal button[onclick*="cancelar"],
-#personal button[onclick*="Cancelar"] {
+/* ============================================================
+   BOTONES DEL MODAL PERSONAL
+============================================================ */
+
+/* BOTÓN GUARDAR PERSONAL: AZUL */
+#modalPersonal .btn-guardar-personal {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#modalPersonal .btn-guardar-personal:hover {
+    background-color: #1d4ed8;
+}
+
+/* BOTÓN CANCELAR DEL FORMULARIO: ROJO */
+#modalPersonal .btn-cancelar-personal {
+    background-color: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#modalPersonal .btn-cancelar-personal:hover {
+    background-color: #b91c1c;
+}
+
+/* BOTÓN CANCELAR DE LA CONFIRMACIÓN */
+#modalConfirmarCancelarPersonal .btn-confirmar-no {
     background-color: #dc2626;
     color: #ffffff;
     border: none;
@@ -3005,10 +3037,21 @@ canvas {
     cursor: pointer;
 }
 
-#personal .btn-secondary:hover,
-#personal .btn-cancelar:hover,
-#personal .btn-cancelar-personal:hover,
-#personal button[onclick*="cancelar"]:hover,
-#personal button[onclick*="Cancelar"]:hover {
+#modalConfirmarCancelarPersonal .btn-confirmar-no:hover {
     background-color: #b91c1c;
+}
+
+/* BOTÓN SÍ, CANCELAR DE LA CONFIRMACIÓN */
+#modalConfirmarCancelarPersonal .btn-confirmar-si {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#modalConfirmarCancelarPersonal .btn-confirmar-si:hover {
+    background-color: #1d4ed8;
 }
