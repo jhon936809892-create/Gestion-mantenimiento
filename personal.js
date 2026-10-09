@@ -5,6 +5,95 @@
 // ============================================================
 
 
+/* ============================================================
+   MODO DE EDICIÓN DEL MÓDULO PERSONAL
+   ============================================================ */
+
+let modoEdicionPersonal = false;
+let personalActual = [];
+
+// Activar o desactivar el modo de edición
+function alternarModoEdicionPersonal() {
+
+    modoEdicionPersonal = !modoEdicionPersonal;
+
+    const boton = document.getElementById(
+        "btnModoEdicionPersonal"
+    );
+
+    if (boton) {
+        boton.textContent = modoEdicionPersonal
+            ? "✖ Cancelar edición"
+            : "✏️ Editar";
+
+        boton.classList.toggle(
+            "modo-activo",
+            modoEdicionPersonal
+        );
+    }
+
+    // Volver a dibujar la tabla
+    cargarPersonal();
+}
+
+// Abrir el formulario con los datos del trabajador
+function editarPersonal(id) {
+
+    const persona = personalActual.find(
+        p => String(p.id) === String(id)
+    );
+
+    if (!persona) {
+        alert("No se encontró el trabajador seleccionado.");
+        return;
+    }
+
+    const formulario = document.getElementById(
+        "formPersonal"
+    );
+
+    if (formulario) {
+        formulario.reset();
+    }
+
+    // Cargar los datos en el formulario existente
+    document.getElementById("idPersonal").value =
+        persona.id ?? "";
+
+    document.getElementById("nombresPersonal").value =
+        persona.nombres ?? "";
+
+    document.getElementById("apellidosPersonal").value =
+        persona.apellidos ?? "";
+
+    document.getElementById("tipoDocumentoPersonal").value =
+        persona.tipo_documento ?? "";
+
+    document.getElementById("documentoPersonal").value =
+        persona.documento ?? persona.dni ?? "";
+
+    document.getElementById("celularPersonal").value =
+        persona.celular ?? "";
+
+    document.getElementById("cargoPersonal").value =
+        persona.cargo ?? "";
+
+    document.getElementById("cuadrillaPersonal").value =
+        persona.cuadrilla ?? "";
+
+    const titulo = document.getElementById(
+        "tituloModalPersonal"
+    );
+
+    if (titulo) {
+        titulo.textContent = "Editar personal";
+    }
+
+    document.getElementById("modalPersonal")
+        .classList.add("active");
+}
+
+
 // ============================================================
 // CARGAR PERSONAL
 // ============================================================
