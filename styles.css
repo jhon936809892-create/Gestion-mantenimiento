@@ -2897,3 +2897,43 @@ canvas {
    
 
 }
+
+/* Acciones del personal: sin columna adicional */
+.celda-acciones-personal {
+    position: relative;
+}
+
+.acciones-personal {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
+}
+
+.icono-editar-personal,
+.icono-eliminar-personal {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 17px;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.icono-editar-personal:hover,
+.icono-eliminar-personal:hover {
+    background: #e5e7eb;
+}
+
+.btn-editar-personal {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #475569;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-editar-personal.modo-activo {
+    background: #b45309;
+}
