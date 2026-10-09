@@ -176,7 +176,37 @@ if (seccion === "personal") {
             + Registrar personal
         </button>
 
+        <button
+            type="button"
+            id="btnModoEdicionPersonal"
+            class="btn-editar-personal"
+            onclick="alternarModoEdicionPersonal()"
+        >
+            ✏️ Editar
+        </button>
+
     `;
+
+    // Mantener el estado del modo de edición
+    if (
+        typeof modoEdicionPersonal !== "undefined" &&
+        modoEdicionPersonal
+    ) {
+
+        const botonEditar =
+            document.getElementById(
+                "btnModoEdicionPersonal"
+            );
+
+        if (botonEditar) {
+
+            botonEditar.innerHTML = "✖ Cancelar edición";
+
+            botonEditar.classList.add("modo-activo");
+
+        }
+
+    }
 
 }
         
