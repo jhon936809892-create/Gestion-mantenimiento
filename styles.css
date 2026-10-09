@@ -3055,3 +3055,27 @@ canvas {
 #modalConfirmarCancelarPersonal .btn-confirmar-si:hover {
     background-color: #1d4ed8;
 }
+
+/* Botón Eliminar: mismo tamaño que Editar */
+.btn-eliminar-personal {
+width: 34px;
+height: 34px;
+padding: 0;
+margin-left: 4px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+background-color: #dc2626;
+color: #ffffff;
+border: none;
+border-radius: 6px;
+font-size: 15px;
+cursor: pointer;
+vertical-align: middle;
+flex-shrink: 0;
+}
+
+.btn-eliminar-personal:hover {
+background-color: #b91c1c;
+}
+
