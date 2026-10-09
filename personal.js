@@ -164,12 +164,20 @@ fila.innerHTML = `
             modoEdicionPersonal
             ? `
                 <button
-                    type="button"
-                    class="icono-editar-personal"
-                    title="Editar personal"
-                    onclick="editarPersonal('${persona.id}')">
-                    ✏️
-                </button>
+    type="button"
+    class="btn-editar-personal"
+    onclick="editarPersonal(${persona.id})"
+    title="Editar">
+    ✏️
+</button>
+
+<button
+    type="button"
+    class="btn-eliminar-personal"
+    onclick="eliminarPersonal(${persona.id})"
+    title="Eliminar">
+    🗑️
+</button>
             `
             : ""
         }
