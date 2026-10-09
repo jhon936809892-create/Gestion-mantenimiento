@@ -2894,51 +2894,95 @@ canvas {
     }
 }
 
-/* Celda donde se ubican la cuadrilla y el lápiz */
-.celda-acciones-personal {
+
+/* ============================================================
+   TABLA PERSONAL: BOTONES EDITAR Y ELIMINAR
+============================================================ */
+
+/* Celda de la cuadrilla */
+#tablaPersonal td.celda-acciones-personal {
     position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
-/* Botones de acciones */
-.acciones-personal {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 12px;
+/* Texto de la cuadrilla */
+#tablaPersonal .texto-cuadrilla-personal {
+    display: inline-block;
+    vertical-align: middle;
 }
 
-/* Botón lápiz */
-#tablaPersonal .icono-editar-personal {
+/* Grupo de botones: permanece a la derecha */
+#tablaPersonal .acciones-personal {
     position: absolute;
-    right: 8px;
     top: 50%;
+    right: 8px;
     transform: translateY(-50%);
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 3px;
 
-    width: 26px;
-    height: 26px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+/* Reservar espacio para los botones al editar */
+#tablaPersonal.modo-edicion-personal
+td.celda-acciones-personal {
+    padding-right: 68px;
+}
+
+/* Botones dentro de la tabla */
+#tablaPersonal .acciones-personal button {
+    box-sizing: border-box;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    flex: 0 0 25px;
+
     margin: 0;
     padding: 0;
 
     border: none;
     border-radius: 5px;
-    background: transparent;
 
-    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
     line-height: 1;
     cursor: pointer;
 }
 
-#tablaPersonal .icono-editar-personal:hover {
+/* Lápiz */
+#tablaPersonal .acciones-personal .btn-editar-personal {
+    background: transparent;
+    color: #374151;
+}
+
+#tablaPersonal .acciones-personal .btn-editar-personal:hover {
     background: #dbeafe;
     color: #1d4ed8;
 }
 
-/* Botón Editar de la parte superior */
-.btn-editar-personal {
+/* Papelera */
+#tablaPersonal .acciones-personal .btn-eliminar-personal {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+#tablaPersonal .acciones-personal .btn-eliminar-personal:hover {
+    background: #b91c1c;
+}
+
+/* Botón superior para activar el modo de edición */
+#btnModoEdicionPersonal {
     padding: 10px 16px;
     border: none;
     border-radius: 6px;
@@ -2948,197 +2992,7 @@ canvas {
     white-space: nowrap;
 }
 
-.btn-editar-personal.modo-activo {
+#btnModoEdicionPersonal.modo-activo {
     background: #b45309;
 }
 
-
-/* ============================================================
-   BOTONES DEL FORMULARIO DE PERSONAL
-============================================================ */
-
-/* GUARDAR PERSONAL: AZUL */
-#modalPersonal button[type="submit"] {
-    background-color: #2563eb;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#modalPersonal button[type="submit"]:hover {
-    background-color: #1d4ed8;
-}
-
-/* CANCELAR: ROJO */
-#modalPersonal .btn-secondary {
-    background-color: #dc2626;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#modalPersonal .btn-secondary:hover {
-    background-color: #b91c1c;
-}
-
-
-/* ============================================================
-   BOTONES DEL MODAL PERSONAL
-============================================================ */
-
-/* BOTÓN GUARDAR PERSONAL: AZUL */
-#modalPersonal .btn-guardar-personal {
-    background-color: #2563eb;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#modalPersonal .btn-guardar-personal:hover {
-    background-color: #1d4ed8;
-}
-
-/* BOTÓN CANCELAR DEL FORMULARIO: ROJO */
-#modalPersonal .btn-cancelar-personal {
-    background-color: #dc2626;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#modalPersonal .btn-cancelar-personal:hover {
-    background-color: #b91c1c;
-}
-
-/* BOTÓN CANCELAR DE LA CONFIRMACIÓN */
-#modalConfirmarCancelarPersonal .btn-confirmar-no {
-    background-color: #dc2626;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 10px 16px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-#modalConfirmarCancelarPersonal .btn-confirmar-no:hover {
-    background-color: #b91c1c;
-}
-
-/* BOTÓN SÍ, CANCELAR DE LA CONFIRMACIÓN */
-#modalConfirmarCancelarPersonal .btn-confirmar-si {
-    background-color: #2563eb;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 10px 16px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-#modalConfirmarCancelarPersonal .btn-confirmar-si:hover {
-    background-color: #1d4ed8;
-}
-
-/* ============================================================
-BOTONES DE ACCIONES - TABLA PERSONAL
-TAMAÑO COMPACTO SIN AGRANDAR LAS FILAS
-============================================================ */
-
-#tablaPersonal .celda-acciones-personal {
-position: relative;
-vertical-align: middle;
-white-space: nowrap;
-}
-
-#tablaPersonal .acciones-personal {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 4px;
-margin: 0;
-padding: 0;
-vertical-align: middle;
-}
-
-/* EDITAR: LÁPIZ */
-#tablaPersonal .icono-editar-personal {
-position: static;
-transform: none;
-
-```
-display: inline-flex;
-align-items: center;
-justify-content: center;
-
-width: 26px;
-height: 26px;
-min-width: 26px;
-flex: 0 0 26px;
-
-margin: 0;
-padding: 0;
-
-border: none;
-border-radius: 5px;
-background: transparent;
-
-font-size: 14px;
-line-height: 1;
-cursor: pointer;
-```
-
-}
-
-/* ELIMINAR */
-#tablaPersonal .btn-eliminar-personal {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-
-```
-width: 26px;
-height: 26px;
-min-width: 26px;
-flex: 0 0 26px;
-
-margin: 0;
-padding: 0;
-
-border: none;
-border-radius: 5px;
-
-background: #dc2626;
-color: #ffffff;
-
-font-size: 13px;
-line-height: 1;
-cursor: pointer;
-```
-
-}
-
-#tablaPersonal .icono-editar-personal:hover {
-background: #dbeafe;
-color: #1d4ed8;
-}
-
-#tablaPersonal .btn-eliminar-personal:hover {
-background: #b91c1c;
-}
