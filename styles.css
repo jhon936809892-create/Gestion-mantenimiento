@@ -2940,19 +2940,6 @@ canvas {
 
 
 
-/* Icono de edición junto al nombre, sin ampliar la tabla */
-.icono-editar-personal {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    margin-left: 6px;
-    padding: 3px;
-    vertical-align: middle;
-    font-size: 14px;
-    line-height: 1;
-}
 
 .icono-editar-personal:hover {
     background: #dbeafe;
@@ -2963,3 +2950,43 @@ canvas {
 #botonTopbar .btn-editar-personal {
     white-space: nowrap;
 }
+
+/* ============================================================
+   ICONO EDITAR PERSONAL
+   ALINEADO A LA DERECHA SIN AGRANDAR LAS FILAS
+============================================================ */
+
+#tablaPersonal tbody td:last-child {
+    position: relative;
+    padding-right: 40px;
+}
+
+#tablaPersonal .icono-editar-personal {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 26px;
+    height: 26px;
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#tablaPersonal .icono-editar-personal:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
