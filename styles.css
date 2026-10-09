@@ -2889,20 +2889,17 @@ canvas {
 ============================================================ */
 
 @media (max-width: 768px) {
-
     .encabezado-personal {
         align-items: flex-start;
     }
-
-   
-
 }
 
-/* Acciones del personal: sin columna adicional */
+/* Celda donde se ubican la cuadrilla y el lápiz */
 .celda-acciones-personal {
     position: relative;
 }
 
+/* Botones de acciones */
 .acciones-personal {
     display: inline-flex;
     align-items: center;
@@ -2910,57 +2907,7 @@ canvas {
     margin-left: 12px;
 }
 
-.icono-editar-personal,
-.icono-eliminar-personal {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-size: 17px;
-    padding: 4px;
-    border-radius: 5px;
-}
-
-.icono-editar-personal:hover,
-.icono-eliminar-personal:hover {
-    background: #e5e7eb;
-}
-
-.btn-editar-personal {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 6px;
-    background: #475569;
-    color: white;
-    cursor: pointer;
-}
-
-.btn-editar-personal.modo-activo {
-    background: #b45309;
-}
-
-
-
-
-.icono-editar-personal:hover {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
-
-/* Evitar que el botón superior se desordene */
-#botonTopbar .btn-editar-personal {
-    white-space: nowrap;
-}
-
-/* ============================================================
-   ICONO EDITAR PERSONAL
-   ALINEADO A LA DERECHA SIN AGRANDAR LAS FILAS
-============================================================ */
-
-#tablaPersonal tbody td:last-child {
-    position: relative;
-    padding-right: 40px;
-}
-
+/* Botón lápiz */
 #tablaPersonal .icono-editar-personal {
     position: absolute;
     right: 8px;
@@ -2990,3 +2937,17 @@ canvas {
     color: #1d4ed8;
 }
 
+/* Botón Editar de la parte superior */
+.btn-editar-personal {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #475569;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-editar-personal.modo-activo {
+    background: #b45309;
+}
