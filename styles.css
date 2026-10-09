@@ -2988,3 +2988,27 @@ canvas {
 #modalPersonal .btn-secondary:hover {
     background-color: #b91c1c;
 }
+
+
+/* BOTÓN CANCELAR DENTRO DEL MÓDULO PERSONAL */
+#personal .btn-secondary,
+#personal .btn-cancelar,
+#personal .btn-cancelar-personal,
+#personal button[onclick*="cancelar"],
+#personal button[onclick*="Cancelar"] {
+    background-color: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#personal .btn-secondary:hover,
+#personal .btn-cancelar:hover,
+#personal .btn-cancelar-personal:hover,
+#personal button[onclick*="cancelar"]:hover,
+#personal button[onclick*="Cancelar"]:hover {
+    background-color: #b91c1c;
+}
