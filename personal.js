@@ -152,9 +152,13 @@ const fila = document.createElement("tr");
 
 
 fila.innerHTML = `
-
+    <td>${persona.nombres || ""}</td>
+    <td>${persona.apellidos || ""}</td>
+    <td>${persona.documento || persona.dni || ""}</td>
+    <td>${persona.celular || ""}</td>
+    <td>${persona.cargo || ""}</td>
     <td>
-        ${persona.nombres || ""}
+        ${persona.cuadrilla || ""}
 
         ${
             modoEdicionPersonal
@@ -164,31 +168,16 @@ fila.innerHTML = `
                     class="icono-editar-personal"
                     title="Editar personal"
                     aria-label="Editar personal"
-                    onclick="editarPersonal('${persona.id}')"
-                >
+                    onclick="editarPersonal('${persona.id}')">
                     ✏️
                 </button>
             `
             : ""
         }
     </td>
-
-    <td>${persona.apellidos || ""}</td>
-
-    <td>${persona.documento || persona.dni || ""}</td>
-
-    <td>${persona.celular || ""}</td>
-
-    <td>${persona.cargo || ""}</td>
-
-    <td>${persona.cuadrilla || ""}</td>
-
 `;
 
-
-
-
-            tabla.appendChild(fila);
+tabla.appendChild(fila);
 
         });
 
