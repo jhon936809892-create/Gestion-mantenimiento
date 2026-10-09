@@ -148,7 +148,7 @@ async function cargarPersonal() {
         personal.forEach(function(persona) {
 
         
-```javascript
+
 const fila = document.createElement("tr");
 
 fila.innerHTML = `
@@ -192,7 +192,7 @@ fila.innerHTML = `
 `;
 
 tabla.appendChild(fila);
-```
+
 
 
         });
