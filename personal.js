@@ -150,9 +150,28 @@ async function cargarPersonal() {
         
 const fila = document.createElement("tr");
 
+
 fila.innerHTML = `
 
-    <td>${persona.nombres || ""}</td>
+    <td>
+        ${persona.nombres || ""}
+
+        ${
+            modoEdicionPersonal
+            ? `
+                <button
+                    type="button"
+                    class="icono-editar-personal"
+                    title="Editar personal"
+                    aria-label="Editar personal"
+                    onclick="editarPersonal('${persona.id}')"
+                >
+                    ✏️
+                </button>
+            `
+            : ""
+        }
+    </td>
 
     <td>${persona.apellidos || ""}</td>
 
@@ -164,23 +183,8 @@ fila.innerHTML = `
 
     <td>${persona.cuadrilla || ""}</td>
 
-    ${
-        modoEdicionPersonal
-        ? `
-            <td>
-                <button
-                    type="button"
-                    class="btn-primary"
-                    onclick="editarPersonal('${persona.id}')"
-                >
-                    ✏️ Editar
-                </button>
-            </td>
-        `
-        : ""
-    }
-
 `;
+
 
 
 
