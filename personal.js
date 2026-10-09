@@ -157,8 +157,8 @@ fila.innerHTML = `
     <td>${persona.documento || persona.dni || ""}</td>
     <td>${persona.celular || ""}</td>
     <td>${persona.cargo || ""}</td>
-    <td>
-        ${persona.cuadrilla || ""}
+    <td class="celda-acciones-personal">
+        <span>${persona.cuadrilla || ""}</span>
 
         ${
             modoEdicionPersonal
@@ -167,7 +167,6 @@ fila.innerHTML = `
                     type="button"
                     class="icono-editar-personal"
                     title="Editar personal"
-                    aria-label="Editar personal"
                     onclick="editarPersonal('${persona.id}')">
                     ✏️
                 </button>
