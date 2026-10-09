@@ -148,8 +148,8 @@ async function cargarPersonal() {
         personal.forEach(function(persona) {
 
         
+```javascript
 const fila = document.createElement("tr");
-
 
 fila.innerHTML = `
     <td>${persona.nombres || ""}</td>
@@ -157,27 +157,34 @@ fila.innerHTML = `
     <td>${persona.documento || persona.dni || ""}</td>
     <td>${persona.celular || ""}</td>
     <td>${persona.cargo || ""}</td>
+
     <td class="celda-acciones-personal">
-        <span>${persona.cuadrilla || ""}</span>
+        <span class="texto-cuadrilla-personal">
+            ${persona.cuadrilla || ""}
+        </span>
 
         ${
             modoEdicionPersonal
             ? `
-                <button
-    type="button"
-    class="btn-editar-personal"
-    onclick="editarPersonal(${persona.id})"
-    title="Editar">
-    ✏️
-</button>
+                <div class="acciones-personal">
+                    <button
+                        type="button"
+                        class="btn-editar-personal"
+                        onclick="editarPersonal(${persona.id})"
+                        title="Editar"
+                        aria-label="Editar personal">
+                        ✏️
+                    </button>
 
-<button
-    type="button"
-    class="btn-eliminar-personal"
-    onclick="eliminarPersonal(${persona.id})"
-    title="Eliminar">
-    🗑️
-</button>
+                    <button
+                        type="button"
+                        class="btn-eliminar-personal"
+                        onclick="eliminarPersonal(${persona.id})"
+                        title="Eliminar"
+                        aria-label="Eliminar personal">
+                        🗑️
+                    </button>
+                </div>
             `
             : ""
         }
@@ -185,6 +192,8 @@ fila.innerHTML = `
 `;
 
 tabla.appendChild(fila);
+```
+
 
         });
 
