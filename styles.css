@@ -2951,3 +2951,40 @@ canvas {
 .btn-editar-personal.modo-activo {
     background: #b45309;
 }
+
+
+/* ============================================================
+   BOTONES DEL FORMULARIO DE PERSONAL
+============================================================ */
+
+/* GUARDAR PERSONAL: AZUL */
+#modalPersonal button[type="submit"] {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#modalPersonal button[type="submit"]:hover {
+    background-color: #1d4ed8;
+}
+
+/* CANCELAR: ROJO */
+#modalPersonal .btn-secondary {
+    background-color: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#modalPersonal .btn-secondary:hover {
+    background-color: #b91c1c;
+}
