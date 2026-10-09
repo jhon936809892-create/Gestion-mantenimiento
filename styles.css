@@ -3056,37 +3056,89 @@ canvas {
     background-color: #1d4ed8;
 }
 
-/* Acciones de la tabla Personal: no modificar el tamaño de la fila */
-#personal #tablaPersonal td:last-child {
-white-space: nowrap;
+/* ============================================================
+BOTONES DE ACCIONES - TABLA PERSONAL
+TAMAÑO COMPACTO SIN AGRANDAR LAS FILAS
+============================================================ */
+
+#tablaPersonal .celda-acciones-personal {
+position: relative;
 vertical-align: middle;
+white-space: nowrap;
 }
 
-#personal #tablaPersonal td:last-child .btn-editar-personal,
-#personal #tablaPersonal td:last-child .btn-eliminar-personal {
-box-sizing: border-box;
+#tablaPersonal .acciones-personal {
 display: inline-flex;
 align-items: center;
 justify-content: center;
-width: 30px;
-height: 30px;
-min-width: 30px;
+gap: 4px;
+margin: 0;
 padding: 0;
-margin: 0 2px;
-line-height: 1;
-font-size: 14px;
 vertical-align: middle;
-flex-shrink: 0;
 }
 
-#personal #tablaPersonal td:last-child .btn-eliminar-personal {
-background-color: #dc2626;
-color: #fff;
+/* EDITAR: LÁPIZ */
+#tablaPersonal .icono-editar-personal {
+position: static;
+transform: none;
+
+```
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+width: 26px;
+height: 26px;
+min-width: 26px;
+flex: 0 0 26px;
+
+margin: 0;
+padding: 0;
+
 border: none;
-border-radius: 6px;
+border-radius: 5px;
+background: transparent;
+
+font-size: 14px;
+line-height: 1;
 cursor: pointer;
+```
+
 }
 
-#personal #tablaPersonal td:last-child .btn-eliminar-personal:hover {
-background-color: #b91c1c;
+/* ELIMINAR */
+#tablaPersonal .btn-eliminar-personal {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+```
+width: 26px;
+height: 26px;
+min-width: 26px;
+flex: 0 0 26px;
+
+margin: 0;
+padding: 0;
+
+border: none;
+border-radius: 5px;
+
+background: #dc2626;
+color: #ffffff;
+
+font-size: 13px;
+line-height: 1;
+cursor: pointer;
+```
+
+}
+
+#tablaPersonal .icono-editar-personal:hover {
+background: #dbeafe;
+color: #1d4ed8;
+}
+
+#tablaPersonal .btn-eliminar-personal:hover {
+background: #b91c1c;
 }
