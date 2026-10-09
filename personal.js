@@ -98,134 +98,93 @@ function editarPersonal(id) {
 // CARGAR PERSONAL
 // ============================================================
 
+
 async function cargarPersonal() {
-
     try {
-
-        const respuesta =
-            await fetch("/api/personal");
-
+        const respuesta = await fetch("/api/personal");
 
         if (!respuesta.ok) {
-
-            throw new Error(
-                "Error al cargar personal"
-            );
-
+            throw new Error("Error al cargar personal");
         }
 
+        const personal = await respuesta.json();
 
-        const personal =
-            await respuesta.json();
+        personalActual = personal;
+        datosPersonalDashboard = personal;
 
-       personalActual = personal;
-
-
-        // Guardamos para Dashboard
-
-        datosPersonalDashboard =
-            personal;
-
-
-        const tabla =
-            document.getElementById(
-                "tablaPersonal"
-            );
-
+        const tabla = document.getElementById("tablaPersonal");
 
         if (!tabla) {
-
             actualizarDashboard();
-
             return;
-
         }
 
+        // Activar la clase sin modificar la estructura de la tabla.
+        tabla.classList.toggle(
+            "modo-edicion-personal",
+            modoEdicionPersonal
+        );
 
         tabla.innerHTML = "";
 
-
         personal.forEach(function(persona) {
+            const fila = document.createElement("tr");
 
-        
+            fila.innerHTML = `
+                <td>${persona.nombres || ""}</td>
+                <td>${persona.apellidos || ""}</td>
+                <td>${persona.documento || persona.dni || ""}</td>
+                <td>${persona.celular || ""}</td>
+                <td>${persona.cargo || ""}</td>
 
-const fila = document.createElement("tr");
+                <td class="celda-acciones-personal">
+                    <span class="texto-cuadrilla-personal">
+                        ${persona.cuadrilla || ""}
+                    </span>
 
-fila.innerHTML = `
-    <td>${persona.nombres || ""}</td>
-    <td>${persona.apellidos || ""}</td>
-    <td>${persona.documento || persona.dni || ""}</td>
-    <td>${persona.celular || ""}</td>
-    <td>${persona.cargo || ""}</td>
+                    ${
+                        modoEdicionPersonal
+                        ? `
+                            <span class="acciones-personal">
+                                <button
+                                    type="button"
+                                    class="btn-editar-personal"
+                                    onclick="editarPersonal(${Number(persona.id)})"
+                                    title="Editar personal"
+                                    aria-label="Editar personal">
+                                    ✏️
+                                </button>
 
-    <td class="celda-acciones-personal">
-        <span class="texto-cuadrilla-personal">
-            ${persona.cuadrilla || ""}
-        </span>
+                                <button
+                                    type="button"
+                                    class="btn-eliminar-personal"
+                                    onclick="eliminarPersonal(${Number(persona.id)})"
+                                    title="Eliminar personal"
+                                    aria-label="Eliminar personal">
+                                    🗑️
+                                </button>
+                            </span>
+                        `
+                        : ""
+                    }
+                </td>
+            `;
 
-        ${
-            modoEdicionPersonal
-            ? `
-                <div class="acciones-personal">
-                    <button
-                        type="button"
-                        class="btn-editar-personal"
-                        onclick="editarPersonal(${persona.id})"
-                        title="Editar"
-                        aria-label="Editar personal">
-                        ✏️
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn-eliminar-personal"
-                        onclick="eliminarPersonal(${persona.id})"
-                        title="Eliminar"
-                        aria-label="Eliminar personal">
-                        🗑️
-                    </button>
-                </div>
-            `
-            : ""
-        }
-    </td>
-`;
-
-tabla.appendChild(fila);
-
-
-
+            tabla.appendChild(fila);
         });
 
-
-        const total =
-            document.getElementById(
-                "totalPersonal"
-            );
-
+        const total = document.getElementById("totalPersonal");
 
         if (total) {
-
-            total.textContent =
-                personal.length;
-
+            total.textContent = personal.length;
         }
-
 
         actualizarDashboard();
 
+    } catch (error) {
+        console.error("Error cargando personal:", error);
     }
-    catch (error) {
-
-        console.error(
-            "Error cargando personal:",
-            error
-        );
-
-    }
-
 }
-
 
 // ============================================================
 // ABRIR MODAL PERSONAL
