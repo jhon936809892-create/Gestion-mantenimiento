@@ -496,5 +496,54 @@
     #materiales .mat-panel-encabezado > .mat-btn {
         max-width: 100%;
     }
+   
+/* Ajustes adicionales del módulo Materiales */
+
+#materiales .mat-encabezado {
+    flex-wrap: wrap;
+}
+
+#materiales .mat-btn-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 11px 17px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#materiales .mat-btn-principal:active {
+    transform: translateY(1px);
+}
+
+#materiales .mat-vista {
+    min-width: 0;
+    animation: matAparecer 0.2s ease;
+}
+
+@keyframes matAparecer {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    #materiales .mat-encabezado .mat-btn-principal {
+        width: 100%;
+    }
+}
+
 
 }
