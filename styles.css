@@ -2893,117 +2893,68 @@ canvas {
         align-items: flex-start;
     }
 }
+
 /* ============================================================
-   CORRECCIÓN DEFINITIVA: BOTONES DEL MÓDULO PERSONAL
+   PERSONAL: MOSTRAR ICONOS SIN MOVER LAS FILAS
 ============================================================ */
 
-/* Contenedor de los botones */
-#tablaPersonal .acciones-personal {
-    position: absolute !important;
-    top: 50% !important;
-    right: 8px !important;
-    transform: translateY(-50%) !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 5px !important;
-
-    width: auto !important;
-    height: 27px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-
-    z-index: 5 !important;
-}
-
-/* Base común de ambos botones */
-#tablaPersonal .acciones-personal button.btn-editar-personal,
-#tablaPersonal .acciones-personal button.btn-eliminar-personal {
-    appearance: none !important;
-    -webkit-appearance: none !important;
-
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    width: 27px !important;
-    min-width: 27px !important;
-    max-width: 27px !important;
-
-    height: 27px !important;
-    min-height: 27px !important;
-    max-height: 27px !important;
-
-    flex: 0 0 27px !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    border: none !important;
-    border-radius: 6px !important;
-
-    color: #ffffff !important;
-    font-size: 14px !important;
-    line-height: 1 !important;
-
-    opacity: 1 !important;
-    box-shadow: none !important;
-    text-decoration: none !important;
-    text-transform: none !important;
-
-    cursor: pointer !important;
-}
-
-/* EDITAR: AZUL */
-#tablaPersonal .acciones-personal button.btn-editar-personal {
-    background: #2563eb !important;
-    background-color: #2563eb !important;
-}
-
-/* ELIMINAR: ROJO */
-#tablaPersonal .acciones-personal button.btn-eliminar-personal {
-    background: #dc2626 !important;
-    background-color: #dc2626 !important;
-}
-
-/* Hover azul */
-#tablaPersonal .acciones-personal button.btn-editar-personal:hover {
-    background: #1d4ed8 !important;
-    background-color: #1d4ed8 !important;
-}
-
-/* Hover rojo */
-#tablaPersonal .acciones-personal button.btn-eliminar-personal:hover {
-    background: #b91c1c !important;
-    background-color: #b91c1c !important;
-}
-
-/* Evitar animaciones que cambien la posición */
-#tablaPersonal .acciones-personal button:hover,
-#tablaPersonal .acciones-personal button:focus,
-#tablaPersonal .acciones-personal button:active {
-    transform: none !important;
-    color: #ffffff !important;
-}
-
-/* Mantener fija la altura de las filas */
+/* Mantener estable la altura de las filas */
 #tablaPersonal tbody tr {
     height: 46px !important;
 }
 
 #tablaPersonal tbody td {
     height: 46px !important;
+    max-height: 46px !important;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+    white-space: nowrap !important;
+}
+
+/* La última columna sirve de referencia para los iconos */
+#tablaPersonal td.celda-acciones-personal {
+    position: relative !important;
+    height: 46px !important;
+    padding-right: 72px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+/* Reservar siempre el espacio, incluso antes de editar */
+#tablaPersonal .texto-cuadrilla-personal {
+    display: inline-block !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     vertical-align: middle !important;
 }
 
-/* Reservar espacio para los iconos en la columna Cuadrilla */
-#tablaPersonal td.celda-acciones-personal {
-    position: relative !important;
-    overflow: hidden;
-    white-space: nowrap;
+/* Los iconos aparecen encima de la celda, sin empujar el texto */
+#tablaPersonal .acciones-personal {
+    position: absolute !important;
+    top: 50% !important;
+    right: 6px !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    width: auto !important;
+    height: 26px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 2 !important;
 }
 
-#tablaPersonal.modo-edicion-personal .texto-cuadrilla-personal {
-    padding-right: 65px !important;
+/* No cambiar el diseño original de los botones */
+#tablaPersonal .acciones-personal button {
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    line-height: 1 !important;
+    transform: none !important;
+}
+
+/* Evitar cambios de posición al pasar el cursor */
+#tablaPersonal .acciones-personal button:hover {
+    transform: none !important;
 }
