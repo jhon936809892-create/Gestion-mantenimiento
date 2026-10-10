@@ -2994,7 +2994,7 @@ canvas {
 
 /* Lápiz: botón para editar una persona */
 #tablaPersonal .acciones-personal .btn-editar-personal {
-    background-color: #f59e0b;
+    background-color: #ffffff;
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -3007,7 +3007,7 @@ canvas {
 
 /* Tacho: botón para eliminar una persona */
 #tablaPersonal .acciones-personal .btn-eliminar-personal {
-    background-color: #ef4444;
+    background-color: #ffffff;
     color: #ffffff;
     border: none;
     border-radius: 6px;
