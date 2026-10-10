@@ -3067,7 +3067,7 @@ canvas {
 
 /* Botón CANCELAR - ROJO */
 #modalConfirmarCancelarPersonal .btn-confirmar-no {
-    background-color: #2563eb !important;
+    background-color: #ef4444 !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 7px;
