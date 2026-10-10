@@ -2970,3 +2970,57 @@ canvas {
 #tablaPersonal .acciones-personal button:active {
     transform: none !important;
 }
+
+
+/* ============================================================
+   COLORES DE BOTONES - MÓDULO PERSONAL
+============================================================ */
+
+/* Botón EDITAR de la parte superior */
+#btnModoEdicionPersonal {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#btnModoEdicionPersonal:hover {
+    background-color: #1d4ed8;
+}
+
+/* Lápiz: botón para editar una persona */
+#tablaPersonal .acciones-personal .btn-editar-personal {
+    background-color: #f59e0b;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#tablaPersonal .acciones-personal .btn-editar-personal:hover {
+    background-color: #d97706;
+}
+
+/* Tacho: botón para eliminar una persona */
+#tablaPersonal .acciones-personal .btn-eliminar-personal {
+    background-color: #ef4444;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#tablaPersonal .acciones-personal .btn-eliminar-personal:hover {
+    background-color: #dc2626;
+}
+
+/* Evitar que los iconos cambien de tamaño o muevan las filas */
+#tablaPersonal .acciones-personal button:hover,
+#tablaPersonal .acciones-personal button:focus,
+#tablaPersonal .acciones-personal button:active {
+    transform: none !important;
+}
