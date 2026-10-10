@@ -3047,7 +3047,7 @@ canvas {
 
 /* Botón CANCELAR - ROJO */
 #btnCancelarPersonal {
-    background-color: #2563eb !important;
+    background-color: #ef4444 !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 7px;
@@ -3067,7 +3067,7 @@ canvas {
 
 /* Botón CANCELAR - ROJO */
 #modalConfirmarCancelarPersonal .btn-confirmar-no {
-    background-color: #ef4444 !important;
+    background-color: #2563eb !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 7px;
@@ -3077,7 +3077,7 @@ canvas {
 }
 
 #modalConfirmarCancelarPersonal .btn-confirmar-no:hover {
-    background-color: #ef4444 !important;
+    background-color: #2563eb !important;
 }
 
 
