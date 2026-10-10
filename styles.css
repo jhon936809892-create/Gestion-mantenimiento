@@ -3063,24 +3063,102 @@ td.celda-acciones-personal {
     transform: none;
 }
 
-/* BOTÓN EDITAR: AZUL */
+
+/* ==========================================
+   PERSONAL: ICONOS SIN MODIFICAR LAS FILAS
+========================================== */
+
+#tablaPersonal {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#tablaPersonal tbody tr {
+    height: 46px;
+}
+
+#tablaPersonal tbody td {
+    height: 46px;
+    padding: 8px 15px;
+    vertical-align: middle;
+}
+
+/* Celda de Cuadrilla */
+#tablaPersonal td.celda-acciones-personal {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Texto de la cuadrilla */
+#tablaPersonal .texto-cuadrilla-personal {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 0;
+}
+
+/* Cuando aparecen los iconos, reservarles espacio */
+#tablaPersonal.modo-edicion-personal
+td.celda-acciones-personal .texto-cuadrilla-personal {
+    padding-right: 60px;
+}
+
+/* Iconos superpuestos: no ocupan espacio adicional */
+#tablaPersonal .acciones-personal {
+    position: absolute !important;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%) !important;
+
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 4px;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1;
+}
+
+/* Tamaño fijo de los iconos */
+#tablaPersonal .acciones-personal button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    flex: 0 0 24px;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 5px;
+
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Editar: azul */
 #tablaPersonal .acciones-personal .btn-editar-personal {
-    background-color: #2563eb !important;
-    color: #ffffff !important;
+    background: #2563eb !important;
+    color: #fff !important;
+}
+
+/* Eliminar: rojo */
+#tablaPersonal .acciones-personal .btn-eliminar-personal {
+    background: #dc2626 !important;
+    color: #fff !important;
 }
 
 #tablaPersonal .acciones-personal .btn-editar-personal:hover {
-    background-color: #1d4ed8 !important;
-    color: #ffffff !important;
-}
-
-/* BOTÓN ELIMINAR: ROJO */
-#tablaPersonal .acciones-personal .btn-eliminar-personal {
-    background-color: #dc2626 !important;
-    color: #ffffff !important;
+    background: #1d4ed8 !important;
 }
 
 #tablaPersonal .acciones-personal .btn-eliminar-personal:hover {
-    background-color: #b91c1c !important;
-    color: #ffffff !important;
+    background: #b91c1c !important;
 }
