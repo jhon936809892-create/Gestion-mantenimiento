@@ -1,499 +1,282 @@
 
-/* =========================================================
-   MÓDULO MATERIALES
-   Estilos aislados para no afectar otros módulos
-========================================================= */
+"use strict";
 
-#materiales {
-    padding-bottom: 30px;
-    color: #243247;
-    min-width: 0;
-}
+// ============================================================
+// MÓDULO MATERIALES
+// ============================================================
 
-#materiales,
-#materiales * {
-    box-sizing: border-box;
-}
+// Datos temporales. Después los conectaremos con PostgreSQL.
+let materiales = [];
+let movimientosMateriales = [];
+let graficoMovimientosMateriales = null;
+let graficoGruposMateriales = null;
 
-/* Ocultar las vistas internas inactivas */
-#materiales .mat-vista[hidden] {
-    display: none !important;
-}
 
-/* =========================================================
-   ENCABEZADO
-========================================================= */
+// ============================================================
+// CAMBIAR ENTRE LAS VISTAS DEL MÓDULO
+// ============================================================
 
-#materiales .mat-encabezado {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin: 10px 0 22px;
-}
+function mostrarVistaMateriales(vista, boton) {
+    const seccion = document.getElementById("materiales");
 
-#materiales .mat-encabezado h2 {
-    margin: 0 0 7px;
-    font-size: 24px;
-    font-weight: 700;
-    color: #1e293b;
-}
-
-#materiales .mat-encabezado p {
-    margin: 0;
-    color: #718096;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-/* =========================================================
-   MENÚ INTERNO
-========================================================= */
-
-#materiales .mat-menu {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 12px;
-    margin-bottom: 22px;
-    background: #ffffff;
-    border: 1px solid #e5eaf1;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(25, 42, 70, 0.04);
-}
-
-#materiales .mat-menu-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    min-height: 40px;
-    padding: 9px 13px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background: transparent;
-    color: #536176;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-#materiales .mat-menu-btn:hover {
-    background: #f0f5ff;
-    color: #2459b5;
-}
-
-#materiales .mat-menu-btn.activo {
-    background: #eaf1ff;
-    color: #2459b5;
-    border-color: #d5e3ff;
-}
-
-/* =========================================================
-   TARJETAS DEL DASHBOARD
-========================================================= */
-
-#materiales .mat-tarjetas {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-#materiales .mat-tarjeta {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    min-width: 0;
-    min-height: 125px;
-    padding: 20px 17px;
-    background: #ffffff;
-    border: 1px solid #e7ebf2;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(25, 42, 70, 0.045);
-}
-
-#materiales .mat-tarjeta-icono {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 47px;
-    height: 47px;
-    border-radius: 12px;
-    background: #edf3ff;
-    font-size: 23px;
-}
-
-#materiales .mat-tarjeta > div:last-child {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    gap: 5px;
-}
-
-#materiales .mat-tarjeta span {
-    color: #65748b;
-    font-size: 12px;
-    line-height: 1.4;
-}
-
-#materiales .mat-tarjeta strong {
-    color: #1e293b;
-    font-size: 27px;
-    line-height: 1.1;
-    font-weight: 750;
-}
-
-#materiales .mat-tarjeta small {
-    color: #8a96a8;
-    font-size: 11px;
-    line-height: 1.4;
-}
-
-#materiales .mat-tarjeta-alerta .mat-tarjeta-icono {
-    background: #fff3df;
-}
-
-/* =========================================================
-   BOTONES Y ACCIONES
-========================================================= */
-
-#materiales .mat-acciones {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 22px;
-}
-
-#materiales .mat-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    min-height: 39px;
-    padding: 10px 15px;
-    border: 1px solid #d9e1ed;
-    border-radius: 8px;
-    background: #ffffff;
-    color: #334155;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-}
-
-#materiales .mat-btn:hover {
-    background: #f5f8fc;
-    border-color: #aebed4;
-}
-
-#materiales .mat-btn:active {
-    transform: translateY(1px);
-}
-
-#materiales .mat-btn-principal {
-    background: #2459b5;
-    border-color: #2459b5;
-    color: #ffffff;
-}
-
-#materiales .mat-btn-principal:hover {
-    background: #1c478f;
-    border-color: #1c478f;
-}
-
-/* =========================================================
-   PANELES
-========================================================= */
-
-#materiales .mat-panel {
-    min-width: 0;
-    padding: 20px;
-    margin-bottom: 20px;
-    background: #ffffff;
-    border: 1px solid #e7ebf2;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(25, 42, 70, 0.04);
-}
-
-#materiales .mat-panel-encabezado {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 20px;
-}
-
-#materiales .mat-panel-encabezado h3 {
-    margin: 0 0 6px;
-    color: #253247;
-    font-size: 17px;
-    font-weight: 700;
-}
-
-#materiales .mat-panel-encabezado p {
-    margin: 0;
-    color: #8290a3;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-/* =========================================================
-   DOS GRÁFICOS EN PARALELO
-========================================================= */
-
-#materiales .mat-graficos {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
-    gap: 20px;
-    margin-bottom: 22px;
-}
-
-#materiales .mat-graficos .mat-panel {
-    min-width: 0;
-    margin-bottom: 0;
-}
-
-#materiales .mat-grafico-contenedor {
-    position: relative;
-    width: 100%;
-    height: 290px;
-    min-width: 0;
-}
-
-#materiales .mat-grafico-contenedor canvas {
-    display: block;
-    width: 100% !important;
-    max-width: 100%;
-}
-
-/* =========================================================
-   TABLAS
-========================================================= */
-
-#materiales .mat-tabla-contenedor {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-#materiales .mat-tabla {
-    width: 100%;
-    min-width: 720px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    text-align: left;
-}
-
-#materiales .mat-tabla thead {
-    background: #f5f7fb;
-}
-
-#materiales .mat-tabla th {
-    padding: 13px 14px;
-    color: #56657a;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: nowrap;
-    border-bottom: 1px solid #e5eaf1;
-}
-
-#materiales .mat-tabla td {
-    padding: 13px 14px;
-    color: #46546a;
-    font-size: 13px;
-    line-height: 1.5;
-    border-bottom: 1px solid #edf0f5;
-    vertical-align: middle;
-}
-
-#materiales .mat-tabla tbody tr:hover {
-    background: #f9fbfe;
-}
-
-#materiales .mat-tabla tbody tr:last-child td {
-    border-bottom: none;
-}
-
-#materiales .mat-tabla td[colspan] {
-    padding: 25px 14px;
-    color: #8491a3;
-    text-align: center;
-}
-
-/* =========================================================
-   BUSCADORES Y FILTROS
-========================================================= */
-
-#materiales .mat-filtros {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-#materiales .mat-filtros > input,
-#materiales .mat-filtros > select,
-#materiales .mat-filtros label input,
-#materiales .mat-filtros label select {
-    min-width: 180px;
-    min-height: 40px;
-    padding: 9px 11px;
-    border: 1px solid #d8e0eb;
-    border-radius: 7px;
-    background: #ffffff;
-    color: #334155;
-    font-family: inherit;
-    font-size: 13px;
-}
-
-#materiales .mat-filtros > input[type="search"] {
-    flex: 1 1 240px;
-}
-
-#materiales .mat-filtros label {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    color: #56657a;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-#materiales .mat-filtros input:focus,
-#materiales .mat-filtros select:focus {
-    outline: 2px solid #c7d9ff;
-    border-color: #638de0;
-}
-
-/* =========================================================
-   NOTA INFORMATIVA
-========================================================= */
-
-#materiales .mat-nota {
-    margin: 0 0 20px;
-    padding: 14px 16px;
-    border-left: 4px solid #4e80d8;
-    border-radius: 5px;
-    background: #f0f5ff;
-    color: #435777;
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-/* =========================================================
-   ACCESIBILIDAD
-========================================================= */
-
-#materiales button:focus-visible {
-    outline: 2px solid #477bd3;
-    outline-offset: 3px;
-}
-
-/* =========================================================
-   RESPONSIVE: TABLETS
-========================================================= */
-
-@media (max-width: 1100px) {
-
-    #materiales .mat-tarjetas {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    if (!seccion) {
+        console.error("No se encontró la sección Materiales.");
+        return;
     }
 
-    #materiales .mat-menu-btn {
-        flex: 1 1 auto;
+    // Ocultar todas las vistas.
+    seccion.querySelectorAll(".mat-vista").forEach(elemento => {
+        elemento.style.display = "none";
+    });
+
+    // Mostrar la vista seleccionada.
+    const vistaSeleccionada = document.getElementById(
+        "mat-vista-" + vista
+    );
+
+    if (!vistaSeleccionada) {
+        console.error("No se encontró la vista:", vista);
+        return;
     }
 
+    vistaSeleccionada.style.display = "block";
+
+    // Actualizar el botón seleccionado.
+    seccion.querySelectorAll(".mat-menu-btn").forEach(elemento => {
+        elemento.classList.remove("activo");
+    });
+
+    if (boton) {
+        boton.classList.add("activo");
+    }
 }
 
-/* =========================================================
-   RESPONSIVE: MÓVILES
-========================================================= */
 
-@media (max-width: 700px) {
+// ============================================================
+// INICIALIZAR EL MÓDULO
+// ============================================================
 
-    #materiales .mat-encabezado {
-        align-items: flex-start;
+function iniciarModuloMateriales() {
+    const seccion = document.getElementById("materiales");
+
+    if (!seccion) return;
+
+    const botonDashboard = seccion.querySelector(".mat-menu-btn");
+
+    mostrarVistaMateriales("dashboard", botonDashboard);
+
+    actualizarDashboardMateriales();
+    actualizarTablaInventarioMateriales();
+}
+
+
+// ============================================================
+// ACTUALIZAR TARJETAS DEL DASHBOARD
+// ============================================================
+
+function actualizarDashboardMateriales() {
+    establecerTexto("matTotalMateriales", materiales.length);
+
+    establecerTexto(
+        "matTotalEntradas",
+        movimientosMateriales.filter(m => m.tipo === "Entrada").length
+    );
+
+    establecerTexto(
+        "matTotalEntregas",
+        movimientosMateriales.filter(m => m.tipo === "Entrega").length
+    );
+
+    const stockBajo = materiales.filter(material =>
+        Number(material.stock) <= Number(material.stockMinimo)
+    ).length;
+
+    establecerTexto("matTotalStockBajo", stockBajo);
+}
+
+
+// ============================================================
+// ACTUALIZAR TABLA DE INVENTARIO
+// ============================================================
+
+function actualizarTablaInventarioMateriales() {
+    const tabla = document.getElementById("matTablaInventario");
+
+    if (!tabla) return;
+
+    tabla.innerHTML = "";
+
+    if (materiales.length === 0) {
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="6" class="mat-sin-datos">
+                    Todavía no hay materiales registrados.
+                </td>
+            </tr>
+        `;
+        return;
     }
 
-    #materiales .mat-encabezado h2 {
-        font-size: 21px;
+    materiales.forEach(material => {
+        const stock = Number(material.stock) || 0;
+        const minimo = Number(material.stockMinimo) || 0;
+
+        let estado = "Disponible";
+        let claseEstado = "mat-estado-disponible";
+
+        if (stock <= 0) {
+            estado = "Agotado";
+            claseEstado = "mat-estado-agotado";
+        } else if (stock <= minimo) {
+            estado = "Stock bajo";
+            claseEstado = "mat-estado-bajo";
+        }
+
+        const fila = document.createElement("tr");
+
+        [
+            material.codigo,
+            material.nombre,
+            material.unidad,
+            stock,
+            minimo
+        ].forEach(valor => {
+            const celda = document.createElement("td");
+            celda.textContent = valor ?? "";
+            fila.appendChild(celda);
+        });
+
+        const celdaEstado = document.createElement("td");
+        const etiqueta = document.createElement("span");
+
+        etiqueta.className = claseEstado;
+        etiqueta.textContent = estado;
+
+        celdaEstado.appendChild(etiqueta);
+        fila.appendChild(celdaEstado);
+
+        tabla.appendChild(fila);
+    });
+}
+
+
+// ============================================================
+// BUSCAR MATERIALES
+// ============================================================
+
+function buscarMateriales() {
+    const buscador = document.getElementById("matBuscarInventario");
+
+    if (!buscador) return;
+
+    const texto = buscador.value.trim().toLowerCase();
+    const tabla = document.getElementById("matTablaInventario");
+
+    if (!tabla) return;
+
+    const filas = tabla.querySelectorAll("tr");
+
+    filas.forEach(fila => {
+        const contenido = fila.textContent.toLowerCase();
+        fila.style.display = contenido.includes(texto) ? "" : "none";
+    });
+}
+
+
+// ============================================================
+// FILTRAR MOVIMIENTOS
+// ============================================================
+
+function actualizarTablaMovimientosMateriales() {
+    const tabla = document.getElementById(
+        "matTablaMovimientosRecientes"
+    );
+
+    if (!tabla) return;
+
+    tabla.innerHTML = "";
+
+    if (movimientosMateriales.length === 0) {
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="5" class="mat-sin-datos">
+                    No hay movimientos registrados.
+                </td>
+            </tr>
+        `;
+        return;
     }
 
-    #materiales .mat-menu {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 7px;
-        padding: 9px;
-    }
+    movimientosMateriales.slice(-10).reverse().forEach(movimiento => {
+        const fila = document.createElement("tr");
 
-    #materiales .mat-menu-btn {
-        width: 100%;
-        padding: 10px 6px;
-        font-size: 12px;
-    }
+        [
+            movimiento.fecha,
+            movimiento.tipo,
+            movimiento.material,
+            movimiento.cantidad,
+            movimiento.responsable || "-"
+        ].forEach(valor => {
+            const celda = document.createElement("td");
+            celda.textContent = valor ?? "";
+            fila.appendChild(celda);
+        });
 
-    #materiales .mat-tarjetas {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
+        tabla.appendChild(fila);
+    });
+}
 
-    #materiales .mat-tarjeta {
-        min-height: 100px;
-        padding: 16px;
-    }
 
-    #materiales .mat-graficos {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 15px;
-    }
+// ============================================================
+// FUNCIONES PROVISIONALES PARA LOS BOTONES
+// ============================================================
 
-    #materiales .mat-grafico-contenedor {
-        height: 250px;
-    }
+// Aún no guardan información. Las implementaremos junto con
+// los formularios y la conexión a la base de datos.
 
-    #materiales .mat-panel {
-        padding: 14px;
-        margin-bottom: 15px;
-    }
+function abrirFormularioMaterial() {
+    alert("El formulario para registrar materiales se implementará en el siguiente paso.");
+}
 
-    #materiales .mat-panel-encabezado {
-        align-items: flex-start;
-    }
+function abrirFormularioEntrada() {
+    alert("El formulario de entradas se implementará en el siguiente paso.");
+}
 
-    #materiales .mat-acciones {
-        flex-direction: column;
-    }
+function abrirFormularioEntrega() {
+    alert("El formulario de entregas se implementará en el siguiente paso.");
+}
 
-    #materiales .mat-acciones .mat-btn {
-        width: 100%;
-    }
+function abrirFormularioDevolucion() {
+    alert("El formulario de devoluciones se implementará en el siguiente paso.");
+}
 
-    #materiales .mat-filtros {
-        align-items: stretch;
-        flex-direction: column;
-    }
+function generarReporteMateriales() {
+    alert("Los reportes se implementarán después de conectar los movimientos.");
+}
 
-    #materiales .mat-filtros > input,
-    #materiales .mat-filtros > select,
-    #materiales .mat-filtros label,
-    #materiales .mat-filtros label input,
-    #materiales .mat-filtros label select {
-        width: 100%;
-        min-width: 0;
-    }
 
-    #materiales .mat-panel-encabezado > .mat-btn {
-        max-width: 100%;
-    }
+// ============================================================
+// UTILIDAD
+// ============================================================
 
+function establecerTexto(id, valor) {
+    const elemento = document.getElementById(id);
+
+    if (elemento) {
+        elemento.textContent = valor;
+    }
+}
+
+
+// ============================================================
+// INICIO
+// ============================================================
+
+if (document.readyState === "loading") {
+    document.addEventListener(
+        "DOMContentLoaded",
+        iniciarModuloMateriales
+    );
+} else {
+    iniciarModuloMateriales();
 }
