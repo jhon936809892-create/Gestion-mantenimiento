@@ -154,19 +154,617 @@
         </button>
 
 
-        <!-- MATERIALES -->
+       
+<!-- =====================================================
+     MÓDULO MATERIALES
+===================================================== -->
 
-        <button
-            type="button"
-            class="menu"
-            onclick="mostrarSeccion('materiales', this)"
-        >
+<section id="materiales" class="seccion">
 
-            <span class="menu-icon">📦</span>
+    <!-- ENCABEZADO DEL MÓDULO -->
+    <div class="mat-encabezado">
 
-            <span>Materiales</span>
+        <div>
+            <h2>Gestión de materiales</h2>
+            <p>Control de inventario, entregas y consumo de materiales.</p>
+        </div>
 
+    </div>
+
+    <!-- NAVEGACIÓN INTERNA DE MATERIALES -->
+    <nav class="mat-menu" aria-label="Menú de materiales">
+
+        <button type="button"
+                class="mat-menu-btn activo"
+                onclick="mostrarVistaMateriales('dashboard', this)">
+            📊 Dashboard
         </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('inventario', this)">
+            📦 Inventario
+        </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('entradas', this)">
+            📥 Entradas
+        </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('entregas', this)">
+            🚚 Entregas
+        </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('consumos', this)">
+            🧰 Consumos
+        </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('devoluciones', this)">
+            ↩️ Devoluciones
+        </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('kardex', this)">
+            📋 Kardex
+        </button>
+
+        <button type="button"
+                class="mat-menu-btn"
+                onclick="mostrarVistaMateriales('reportes', this)">
+            📈 Reportes
+        </button>
+
+    </nav>
+
+    <!-- =================================================
+         VISTA 1: DASHBOARD DE MATERIALES
+    ================================================== -->
+
+    <div id="mat-vista-dashboard" class="mat-vista">
+
+        <!-- TARJETAS RESUMEN -->
+        <div class="mat-tarjetas">
+
+            <article class="mat-tarjeta">
+                <div class="mat-tarjeta-icono">📦</div>
+                <div>
+                    <span>Tipos de materiales</span>
+                    <strong id="matTotalMateriales">0</strong>
+                    <small>Materiales registrados</small>
+                </div>
+            </article>
+
+            <article class="mat-tarjeta">
+                <div class="mat-tarjeta-icono">📥</div>
+                <div>
+                    <span>Entradas del mes</span>
+                    <strong id="matTotalEntradas">0</strong>
+                    <small>Registros de entrada</small>
+                </div>
+            </article>
+
+            <article class="mat-tarjeta">
+                <div class="mat-tarjeta-icono">🚚</div>
+                <div>
+                    <span>Entregas del mes</span>
+                    <strong id="matTotalEntregas">0</strong>
+                    <small>Registros de entrega</small>
+                </div>
+            </article>
+
+            <article class="mat-tarjeta mat-tarjeta-alerta">
+                <div class="mat-tarjeta-icono">⚠️</div>
+                <div>
+                    <span>Stock bajo</span>
+                    <strong id="matTotalStockBajo">0</strong>
+                    <small>Materiales por reponer</small>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ACCIONES RÁPIDAS -->
+        <div class="mat-acciones">
+
+            <button type="button"
+                    class="mat-btn mat-btn-principal"
+                    onclick="mostrarVistaMateriales('inventario')">
+                + Registrar material
+            </button>
+
+            <button type="button"
+                    class="mat-btn"
+                    onclick="mostrarVistaMateriales('entradas')">
+                + Registrar entrada
+            </button>
+
+            <button type="button"
+                    class="mat-btn"
+                    onclick="mostrarVistaMateriales('entregas')">
+                + Registrar entrega
+            </button>
+
+        </div>
+
+        <!-- GRÁFICOS -->
+        <div class="mat-graficos">
+
+            <article class="mat-panel">
+                <div class="mat-panel-encabezado">
+                    <div>
+                        <h3>Movimientos por mes</h3>
+                        <p>Entradas, entregas y consumos</p>
+                    </div>
+                </div>
+
+                <div class="mat-grafico-contenedor">
+                    <canvas id="matGraficoMovimientos"></canvas>
+                </div>
+            </article>
+
+            <article class="mat-panel">
+                <div class="mat-panel-encabezado">
+                    <div>
+                        <h3>Entregas por grupo</h3>
+                        <p>Distribución entre cuadrillas y contratas</p>
+                    </div>
+                </div>
+
+                <div class="mat-grafico-contenedor">
+                    <canvas id="matGraficoGrupos"></canvas>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- MOVIMIENTOS RECIENTES -->
+        <article class="mat-panel mat-panel-tabla">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Movimientos recientes</h3>
+                    <p>Últimas operaciones registradas</p>
+                </div>
+
+                <button type="button"
+                        class="mat-btn"
+                        onclick="mostrarVistaMateriales('kardex')">
+                    Ver Kardex →
+                </button>
+            </div>
+
+            <div class="mat-tabla-contenedor">
+
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Material</th>
+                            <th>Movimiento</th>
+                            <th>Grupo</th>
+                            <th>Cantidad</th>
+                            <th>Responsable</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaMovimientosRecientes">
+                        <tr>
+                            <td colspan="6">
+                                Todavía no hay movimientos registrados.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 2: INVENTARIO
+    ================================================== -->
+
+    <div id="mat-vista-inventario" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Inventario de materiales</h3>
+                    <p>Catálogo y existencias disponibles en almacén.</p>
+                </div>
+
+                <button type="button"
+                        class="mat-btn mat-btn-principal"
+                        onclick="abrirFormularioMaterial()">
+                    + Nuevo material
+                </button>
+            </div>
+
+            <div class="mat-filtros">
+                <input type="search"
+                       id="matBuscarInventario"
+                       placeholder="Buscar por código o nombre..."
+                       aria-label="Buscar material">
+
+                <select id="matFiltroStock"
+                        aria-label="Filtrar por stock">
+                    <option value="">Todos los materiales</option>
+                    <option value="disponible">Stock disponible</option>
+                    <option value="bajo">Stock bajo</option>
+                    <option value="agotado">Agotados</option>
+                </select>
+            </div>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Material</th>
+                            <th>Unidad</th>
+                            <th>Stock actual</th>
+                            <th>Stock mínimo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaInventario">
+                        <tr>
+                            <td colspan="7">
+                                Aún no hay materiales registrados.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 3: ENTRADAS
+    ================================================== -->
+
+    <div id="mat-vista-entradas" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Entradas de almacén</h3>
+                    <p>Registro de materiales recibidos.</p>
+                </div>
+
+                <button type="button"
+                        class="mat-btn mat-btn-principal"
+                        onclick="abrirFormularioEntrada()">
+                    + Registrar entrada
+                </button>
+            </div>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Material</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>Origen</th>
+                            <th>Responsable</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaEntradas">
+                        <tr>
+                            <td colspan="6">No hay entradas registradas.</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 4: ENTREGAS
+    ================================================== -->
+
+    <div id="mat-vista-entregas" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Entregas a cuadrillas y contratas</h3>
+                    <p>Control de materiales asignados a cada grupo.</p>
+                </div>
+
+                <button type="button"
+                        class="mat-btn mat-btn-principal"
+                        onclick="abrirFormularioEntrega()">
+                    + Registrar entrega
+                </button>
+            </div>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Grupo</th>
+                            <th>Material</th>
+                            <th>Cantidad</th>
+                            <th>Unidad</th>
+                            <th>Responsable</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaEntregas">
+                        <tr>
+                            <td colspan="6">No hay entregas registradas.</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 5: CONSUMOS
+    ================================================== -->
+
+    <div id="mat-vista-consumos" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Consumo de materiales</h3>
+                    <p>Materiales utilizados en mantenimientos y averías.</p>
+                </div>
+            </div>
+
+            <p class="mat-nota">
+                Los consumos se vincularán con los mantenimientos y averías
+                existentes. El registro de consumo descontará el saldo
+                asignado al grupo, sin descontar dos veces el almacén.
+            </p>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Trabajo / Avería</th>
+                            <th>Grupo</th>
+                            <th>Material</th>
+                            <th>Cantidad</th>
+                            <th>Responsable</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaConsumos">
+                        <tr>
+                            <td colspan="6">No hay consumos registrados.</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 6: DEVOLUCIONES
+    ================================================== -->
+
+    <div id="mat-vista-devoluciones" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Devoluciones de materiales</h3>
+                    <p>Retorno de materiales no utilizados al almacén.</p>
+                </div>
+
+                <button type="button"
+                        class="mat-btn mat-btn-principal"
+                        onclick="abrirFormularioDevolucion()">
+                    + Registrar devolución
+                </button>
+            </div>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Grupo</th>
+                            <th>Material</th>
+                            <th>Cantidad</th>
+                            <th>Motivo</th>
+                            <th>Responsable</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaDevoluciones">
+                        <tr>
+                            <td colspan="6">No hay devoluciones registradas.</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 7: KARDEX
+    ================================================== -->
+
+    <div id="mat-vista-kardex" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Kardex de materiales</h3>
+                    <p>Historial de entradas, entregas, consumos y devoluciones.</p>
+                </div>
+            </div>
+
+            <div class="mat-filtros">
+                <input type="date"
+                       id="matKardexDesde"
+                       aria-label="Fecha inicial">
+
+                <input type="date"
+                       id="matKardexHasta"
+                       aria-label="Fecha final">
+
+                <input type="search"
+                       id="matBuscarKardex"
+                       placeholder="Buscar material o movimiento..."
+                       aria-label="Buscar en Kardex">
+            </div>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Material</th>
+                            <th>Movimiento</th>
+                            <th>Entrada</th>
+                            <th>Salida</th>
+                            <th>Saldo</th>
+                            <th>Referencia</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaKardex">
+                        <tr>
+                            <td colspan="7">No hay movimientos registrados.</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- =================================================
+         VISTA 8: REPORTES
+    ================================================== -->
+
+    <div id="mat-vista-reportes" class="mat-vista" hidden>
+
+        <article class="mat-panel">
+
+            <div class="mat-panel-encabezado">
+                <div>
+                    <h3>Reportes de materiales</h3>
+                    <p>Consulta movimientos y consumo por periodo o grupo.</p>
+                </div>
+            </div>
+
+            <div class="mat-filtros mat-filtros-reportes">
+
+                <label>
+                    Desde
+                    <input type="date" id="matReporteDesde">
+                </label>
+
+                <label>
+                    Hasta
+                    <input type="date" id="matReporteHasta">
+                </label>
+
+                <label>
+                    Tipo de movimiento
+                    <select id="matReporteTipo">
+                        <option value="">Todos</option>
+                        <option value="entrada">Entradas</option>
+                        <option value="entrega">Entregas</option>
+                        <option value="consumo">Consumos</option>
+                        <option value="devolucion">Devoluciones</option>
+                    </select>
+                </label>
+
+                <button type="button"
+                        class="mat-btn"
+                        onclick="generarReporteMateriales()">
+                    Consultar reporte
+                </button>
+
+            </div>
+
+            <div class="mat-tabla-contenedor">
+                <table class="mat-tabla">
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Movimiento</th>
+                            <th>Material</th>
+                            <th>Grupo</th>
+                            <th>Cantidad</th>
+                            <th>Referencia</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="matTablaReportes">
+                        <tr>
+                            <td colspan="6">
+                                Selecciona los filtros y consulta el reporte.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
 
 
         <!-- USUARIOS -->
