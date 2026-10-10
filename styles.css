@@ -2893,123 +2893,117 @@ canvas {
         align-items: flex-start;
     }
 }
-
-
 /* ============================================================
-   PERSONAL: BOTONES EDITAR Y ELIMINAR CON COLORES
+   CORRECCIÓN DEFINITIVA: BOTONES DEL MÓDULO PERSONAL
 ============================================================ */
 
-/* Tabla de personal: conservar su distribución */
-#tablaPersonal {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
-
-/* Mantener las filas de altura fija */
-#tablaPersonal tbody tr {
-    height: 46px;
-}
-
-#tablaPersonal tbody td {
-    height: 46px;
-    padding: 8px 15px;
-    vertical-align: middle;
-}
-
-/* Celda que contiene la cuadrilla y los iconos */
-#tablaPersonal td.celda-acciones-personal {
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-/* Nombre de la cuadrilla */
-#tablaPersonal .texto-cuadrilla-personal {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Reservar espacio únicamente cuando aparecen los iconos */
-#tablaPersonal.modo-edicion-personal
-.texto-cuadrilla-personal {
-    padding-right: 62px;
-}
-
-/* Iconos superpuestos: no agrandan las filas */
+/* Contenedor de los botones */
 #tablaPersonal .acciones-personal {
     position: absolute !important;
     top: 50% !important;
     right: 8px !important;
     transform: translateY(-50%) !important;
 
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    flex-wrap: nowrap !important;
     gap: 5px !important;
 
+    width: auto !important;
+    height: 27px !important;
     margin: 0 !important;
     padding: 0 !important;
-    line-height: 1 !important;
+
+    z-index: 5 !important;
 }
 
-/* Tamaño fijo de los botones */
-#tablaPersonal .acciones-personal button {
+/* Base común de ambos botones */
+#tablaPersonal .acciones-personal button.btn-editar-personal,
+#tablaPersonal .acciones-personal button.btn-eliminar-personal {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
 
     width: 27px !important;
-    height: 27px !important;
     min-width: 27px !important;
     max-width: 27px !important;
+
+    height: 27px !important;
+    min-height: 27px !important;
+    max-height: 27px !important;
+
     flex: 0 0 27px !important;
 
-    margin: 0 !important;
     padding: 0 !important;
+    margin: 0 !important;
 
     border: none !important;
     border-radius: 6px !important;
 
+    color: #ffffff !important;
     font-size: 14px !important;
     line-height: 1 !important;
-    cursor: pointer !important;
 
+    opacity: 1 !important;
     box-shadow: none !important;
-    transform: none !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+
+    cursor: pointer !important;
 }
 
-/* EDITAR: fondo azul e icono blanco */
+/* EDITAR: AZUL */
 #tablaPersonal .acciones-personal button.btn-editar-personal {
+    background: #2563eb !important;
     background-color: #2563eb !important;
-    color: #ffffff !important;
 }
 
-/* ELIMINAR: fondo rojo e icono blanco */
+/* ELIMINAR: ROJO */
 #tablaPersonal .acciones-personal button.btn-eliminar-personal {
+    background: #dc2626 !important;
     background-color: #dc2626 !important;
-    color: #ffffff !important;
 }
 
-/* Hover de Editar */
+/* Hover azul */
 #tablaPersonal .acciones-personal button.btn-editar-personal:hover {
+    background: #1d4ed8 !important;
     background-color: #1d4ed8 !important;
-    color: #ffffff !important;
 }
 
-/* Hover de Eliminar */
+/* Hover rojo */
 #tablaPersonal .acciones-personal button.btn-eliminar-personal:hover {
+    background: #b91c1c !important;
     background-color: #b91c1c !important;
-    color: #ffffff !important;
 }
 
-/* Evitar que otros estilos globales alteren los iconos */
+/* Evitar animaciones que cambien la posición */
+#tablaPersonal .acciones-personal button:hover,
 #tablaPersonal .acciones-personal button:focus,
 #tablaPersonal .acciones-personal button:active {
-    color: #ffffff !important;
     transform: none !important;
-    box-shadow: none !important;
+    color: #ffffff !important;
+}
+
+/* Mantener fija la altura de las filas */
+#tablaPersonal tbody tr {
+    height: 46px !important;
+}
+
+#tablaPersonal tbody td {
+    height: 46px !important;
+    vertical-align: middle !important;
+}
+
+/* Reservar espacio para los iconos en la columna Cuadrilla */
+#tablaPersonal td.celda-acciones-personal {
+    position: relative !important;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#tablaPersonal.modo-edicion-personal .texto-cuadrilla-personal {
+    padding-right: 65px !important;
 }
