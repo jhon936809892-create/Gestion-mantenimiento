@@ -3047,7 +3047,7 @@ canvas {
 
 /* Botón CANCELAR - ROJO */
 #btnCancelarPersonal {
-    background-color: #ef4444 !important;
+    background-color: #2563eb !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 7px;
@@ -3057,7 +3057,7 @@ canvas {
 }
 
 #btnCancelarPersonal:hover {
-    background-color: #dc2626 !important;
+    background-color: #2563eb !important;
 }
 
 
