@@ -3024,3 +3024,74 @@ canvas {
 #tablaPersonal .acciones-personal button:active {
     transform: none !important;
 }
+
+/* ============================================================
+   BOTONES DEL MODAL PERSONAL
+============================================================ */
+
+/* Botón GUARDAR PERSONAL - AZUL */
+#btnGuardarPersonal {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 7px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#btnGuardarPersonal:hover {
+    background-color: #1d4ed8 !important;
+}
+
+
+/* Botón CANCELAR - ROJO */
+#btnCancelarPersonal {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 7px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#btnCancelarPersonal:hover {
+    background-color: #dc2626 !important;
+}
+
+
+/* ============================================================
+   BOTONES DE CONFIRMACIÓN DE CANCELACIÓN PERSONAL
+============================================================ */
+
+/* Botón CANCELAR - ROJO */
+#modalConfirmarCancelarPersonal .btn-confirmar-no {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 7px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#modalConfirmarCancelarPersonal .btn-confirmar-no:hover {
+    background-color: #dc2626 !important;
+}
+
+
+/* Botón SÍ, CANCELAR - ROJO */
+#modalConfirmarCancelarPersonal .btn-confirmar-si {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 7px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#modalConfirmarCancelarPersonal .btn-confirmar-si:hover {
+    background-color: #dc2626 !important;
+}
