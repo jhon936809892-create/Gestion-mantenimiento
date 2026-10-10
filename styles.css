@@ -3077,7 +3077,7 @@ canvas {
 }
 
 #modalConfirmarCancelarPersonal .btn-confirmar-no:hover {
-    background-color: #dc2626 !important;
+    background-color: #2563eb !important;
 }
 
 
@@ -3093,5 +3093,5 @@ canvas {
 }
 
 #modalConfirmarCancelarPersonal .btn-confirmar-si:hover {
-    background-color: #dc2626 !important;
+    background-color: #2563eb !important;
 }
