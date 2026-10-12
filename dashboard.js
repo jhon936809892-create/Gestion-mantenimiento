@@ -375,6 +375,57 @@ function crearGraficoPie(
         }
     );
 
+    return new Chart(
+        canvas,
+        {
+            type: "pie",
+            data: {
+                labels: etiquetas,
+                datasets: [
+                    {
+                        label: "Registros",
+                        data: valores,
+                        backgroundColor: colores,
+                        borderColor: "#ffffff",
+                        borderWidth: 2,
+                        hoverOffset: 18
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    },
+                    // --- CONFIGURACIÓN DE LOS NÚMEROS DENTRO DEL GRÁFICO ---
+                    datalabels: {
+                        color: "#ffffff", // Color del número (blanco para queresalte)
+                        font: {
+                            weight: "bold",
+                            size: 14
+                        },
+                        formatter: function(value) {
+                            // Muestra el número solo si es mayor a 0
+                            return value > 0 ? value : "";
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(contexto) {
+                                const sede = contexto.label;
+                                const cantidad = contexto.raw;
+                                return " " + sede + ": " + cantidad;
+                            }
+                        }
+                    }
+                }
+            },
+            // Asegúrate de registrar el plugin si usas register global o local
+            plugins: [ChartDataLabels] 
+        }
+    );
 }
 
 
